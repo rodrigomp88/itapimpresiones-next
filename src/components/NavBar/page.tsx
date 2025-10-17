@@ -56,10 +56,6 @@ const Navbar = () => {
             Tienda
             <span className="underline-hover" />
           </Link>
-          <Link href="/contact" className="group">
-            Contacto
-            <span className="underline-hover" />
-          </Link>
 
           {status === "authenticated" && (
             <Link href="/orders" className="group">
@@ -158,9 +154,6 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
         </Link>
         <Link href="/shop" className="sidebar-link" onClick={closeSidebar}>
           Tienda
-        </Link>
-        <Link href="/contact" className="sidebar-link" onClick={closeSidebar}>
-          Contacto
         </Link>
 
         {status === "authenticated" ? (
