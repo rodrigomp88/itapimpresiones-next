@@ -23,6 +23,7 @@ export default async function AdminLayout({
       <nav className="p-4 bg-gray-100 dark:bg-gray-800">
         <h2 className="text-xl font-bold">Panel de Administración</h2>
         <div className="flex gap-4 mt-2">
+          <Link href="/">Volver al sitio</Link>
           <Link href="/admin">Dashboard</Link>
           <Link href="/admin/products">Productos</Link>
           <Link href="/admin/orders">Órdenes</Link>

@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
-import { auth } from "@/src/fireabase/config";
+import { auth } from "@/src/firebase/config";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");

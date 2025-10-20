@@ -1,5 +1,5 @@
 import ProductDetailsClient from "@/src/components/ProductDetailsClient";
-import { db } from "@/src/fireabase/config";
+import { db } from "@/src/firebase/config";
 import { Product } from "@/src/types";
 import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";

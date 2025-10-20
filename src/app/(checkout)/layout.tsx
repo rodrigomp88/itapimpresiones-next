@@ -8,11 +8,11 @@ export default function CheckoutLayout({
 }) {
   return (
     <section>
-      <header className="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <Link href="/">
           <h1 className="text-2xl font-bold">Itap Impresiones</h1>
         </Link>
-      </header>
+      </div>
       <main className="p-4 md:p-8">{children}</main>
     </section>
   );
