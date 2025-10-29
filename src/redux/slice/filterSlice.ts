@@ -19,7 +19,7 @@ const filterSlice = createSlice({
       action: PayloadAction<{ products: Product[]; category: string }>
     ) {
       const { products, category } = action.payload;
-      if (category === "All") {
+      if (category === "Todas") {
         state.filteredProducts = products;
       } else {
         state.filteredProducts = products.filter(

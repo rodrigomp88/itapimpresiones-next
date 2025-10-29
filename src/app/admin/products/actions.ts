@@ -116,7 +116,7 @@ export async function editProductAction(productId: string, formData: FormData) {
   }
 
   revalidatePath("/admin/products");
-  revalidatePath(`/product-details/${productId}`);
+  revalidatePath(`/producto-detalle/${productId}`);
   return { success: true };
 }
 

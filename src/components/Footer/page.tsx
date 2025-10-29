@@ -19,11 +19,8 @@ const Footer = () => {
               <Link href="/nosotros" className="underline">
                 Nosotros
               </Link>
-              <Link href="/shop" className="underline">
+              <Link href="/tienda" className="underline">
                 Tienda
-              </Link>
-              <Link href="/contact" className="underline">
-                Contacto
               </Link>
             </div>
           </div>

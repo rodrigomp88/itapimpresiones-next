@@ -33,7 +33,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
 
   return (
     <div className="py-8">
-      <Link href="/shop" className="btn mb-6 inline-flex items-center gap-2">
+      <Link href="/tienda" className="link">
         <FaAngleDoubleLeft />
         Volver a la tienda
       </Link>

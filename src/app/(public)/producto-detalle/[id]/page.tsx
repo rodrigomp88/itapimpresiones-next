@@ -41,8 +41,6 @@ async function getProduct(id: string): Promise<Product | null> {
 
 const ProductDetailsPage = async ({ params }: { params: { id: string } }) => {
   const productId = params.id;
-  console.log(`Servidor: Recibido ID de producto: ${productId}`);
-
   const product = await getProduct(productId);
 
   if (!product) {

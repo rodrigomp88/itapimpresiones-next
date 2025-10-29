@@ -54,7 +54,7 @@ const LoginPage = () => {
           Ingresar con Google
         </button>
       </div>
-      <div className="divider my-4">O</div>
+      <div className="divider my-4 text-center">O</div>
       <h2 className="text-center mb-6 text-xl text-gray-500 font-black">
         Correo y contraseña
       </h2>
@@ -83,18 +83,12 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="flex justify-between mb-6 text-sm">
+        <div className="flex justify-between space-x-2 mb-6 text-sm">
           <Link
             href="/auth/register"
             className="text-violet-900 hover:underline"
           >
             ¿No tienes cuenta? Regístrate
-          </Link>
-          <Link
-            href="/auth/reset-password"
-            className="text-violet-900 hover:underline"
-          >
-            Olvidé contraseña
           </Link>
         </div>
 

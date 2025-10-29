@@ -52,7 +52,7 @@ const Navbar = () => {
             Inicio
             <span className="underline-hover" />
           </Link>
-          <Link href="/shop" className="group">
+          <Link href="/tienda" className="group">
             Tienda
             <span className="underline-hover" />
           </Link>
@@ -152,7 +152,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
         <Link href="/" className="sidebar-link" onClick={closeSidebar}>
           Inicio
         </Link>
-        <Link href="/shop" className="sidebar-link" onClick={closeSidebar}>
+        <Link href="/tienda" className="sidebar-link" onClick={closeSidebar}>
           Tienda
         </Link>
 

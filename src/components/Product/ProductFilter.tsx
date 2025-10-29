@@ -22,14 +22,14 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   onPriceChange,
 }) => {
   const handleClearFilter = () => {
-    onCategoryChange("All");
+    onCategoryChange("Todas");
     onPriceChange(maxPrice);
   };
 
   return (
-    <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 space-y-6">
+    <div className="p-4 rounded-lg border sticky top-14 border-gray-200 dark:border-gray-700 space-y-6">
       <div>
-        <h3 className="font-semibold mb-3">Categorías</h3>
+        <h3 className="font-semibold mb-3">Flitrar</h3>
         <div className="flex flex-col gap-2">
           {categories.map((cat, index) => (
             <button
@@ -66,9 +66,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
       <button
         onClick={handleClearFilter}
-        className="w-full p-2 rounded-md border border-red-500 text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-200"
+        className="w-full p-2 rounded-md cursor-pointer"
       >
-        Limpiar Filtros
+        X Limpiar Filtros
       </button>
     </div>
   );

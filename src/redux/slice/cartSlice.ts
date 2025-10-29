@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { CartItem, Product } from "@/src/types";
+import {
+  NotiflixFailure,
+  NotiflixSuccess,
+  NotiflixWarning,
+} from "@/src/components/Notiflix/Notiflix";
 
 interface CartState {
   cartItems: CartItem[];
@@ -38,14 +43,16 @@ const cartSlice = createSlice({
 
       if (productIndex >= 0) {
         state.cartItems[productIndex].cartQuantity += 1;
-        alert(`Agregó 1 item de "${action.payload.name}" al carrito`);
+        NotiflixSuccess(`Agregó 1 item de "${action.payload.name}" al carrito`);
       } else {
         const tempProduct: CartItem = {
           ...action.payload,
           cartQuantity: unity,
         };
         state.cartItems.push(tempProduct);
-        alert(`Agregó ${unity} items de "${action.payload.name}" al carrito`);
+        NotiflixSuccess(
+          `Agregó ${unity} items de "${action.payload.name}" al carrito`
+        );
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
@@ -59,9 +66,13 @@ const cartSlice = createSlice({
 
       if (state.cartItems[productIndex].cartQuantity > unity) {
         state.cartItems[productIndex].cartQuantity -= 1;
-        alert(`Quitó un item de "${action.payload.name}" del carrito`);
+        NotiflixFailure(
+          `Quitó un item de "${action.payload.name}" del carrito`
+        );
       } else {
-        alert(`La cantidad mínima de "${action.payload.name}" es ${unity}`);
+        NotiflixWarning(
+          `La cantidad mínima de "${action.payload.name}" es ${unity}`
+        );
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
@@ -71,13 +82,13 @@ const cartSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
       state.cartItems = newCartItem;
-      alert(`Eliminó "${action.payload.name}" del carrito`);
+      NotiflixFailure(`Eliminó "${action.payload.name}" del carrito`);
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
     CLEAR_CART(state) {
       state.cartItems = [];
-      alert("El carrito fue vaciado");
+      NotiflixWarning("El carrito fue vaciado");
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 

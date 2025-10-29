@@ -14,18 +14,18 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
 }) => {
   const [filteredProducts, setFilteredProducts] =
     useState<Product[]>(initialProducts);
-  const [category, setCategory] = useState<string>("All");
+  const [category, setCategory] = useState<string>("Todas");
   const [price, setPrice] = useState<number>(0);
 
   const { minPrice, maxPrice, allCategories } = useMemo(() => {
     if (initialProducts.length === 0) {
-      return { minPrice: 0, maxPrice: 0, allCategories: ["All"] };
+      return { minPrice: 0, maxPrice: 0, allCategories: ["Todas"] };
     }
     const prices = initialProducts.map((p) => p.price);
     const min = Math.min(...prices);
     const max = Math.max(...prices);
     const categories = [
-      "All",
+      "Todas",
       ...new Set(initialProducts.map((p) => p.category)),
     ];
     return { minPrice: min, maxPrice: max, allCategories: categories };
@@ -38,7 +38,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   useEffect(() => {
     let tempProducts = [...initialProducts];
 
-    if (category !== "All") {
+    if (category !== "Todas") {
       tempProducts = tempProducts.filter((p) => p.category === category);
     }
 

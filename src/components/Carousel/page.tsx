@@ -72,7 +72,7 @@ const Carousel: React.FC = () => {
           </button>
         </div>
 
-        <Link href="/shop" className="btn-primary">
+        <Link href="/tienda" className="btn-primary">
           Mira nuestra tienda
         </Link>
       </div>

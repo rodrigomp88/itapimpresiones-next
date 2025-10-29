@@ -55,7 +55,7 @@ const CartPage: React.FC = () => {
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
         <p className="text-3xl font-thin">Tu carrito está vacío</p>
         <Link
-          href="/shop"
+          href="/tienda"
           className="flex items-center justify-center my-6 gap-2 underline text-violet-500 hover:text-violet-700"
         >
           <FaArrowLeft />
@@ -96,7 +96,7 @@ const CartPage: React.FC = () => {
               </div>
               <div className="ml-4 flex-grow">
                 <Link
-                  href={`/product-details/${cart.id}`}
+                  href={`/producto-detalle/${cart.id}`}
                   className="font-semibold hover:underline"
                 >
                   {cart.name}
@@ -143,7 +143,7 @@ const CartPage: React.FC = () => {
             Continuar con la Compra
           </button>
           <Link
-            href="/shop"
+            href="/tienda"
             className="flex items-center justify-center mt-4 gap-2 text-sm text-violet-500 hover:underline"
           >
             <FaArrowLeft />
