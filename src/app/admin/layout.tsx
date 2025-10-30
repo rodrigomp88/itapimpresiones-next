@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import AdminNotificationBell from "@/src/components/Notifications/AdminNotificationBell";
 
 export default async function AdminLayout({
   children,
@@ -21,7 +22,10 @@ export default async function AdminLayout({
   return (
     <div>
       <nav className="p-4 bg-gray-100 dark:bg-gray-800">
-        <h2 className="text-xl font-bold">Panel de Administración</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-bold">Panel de Administración</h2>
+          <AdminNotificationBell />
+        </div>
         <div className="flex gap-4 mt-2">
           <Link href="/">Volver al sitio</Link>
           <Link href="/admin">Dashboard</Link>

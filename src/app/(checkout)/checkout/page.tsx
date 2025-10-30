@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import { ShippingAddress } from "@/src/redux/slice/checkoutSlice";
 import {
+  CALCULATE_SUBTOTAL,
+  CALCULATE_TOTAL_QUANTITY,
   CLEAR_CART,
   selectCartItems,
   selectCartTotalAmount,
@@ -22,7 +24,8 @@ import {
   NotiflixFailure,
   NotiflixSuccess,
 } from "@/src/components/Notiflix/Notiflix";
-import { db } from "@/src/firebase/config";
+import { auth, db } from "@/src/firebase/config";
+import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import CheckoutSummary from "@/src/components/CheckoutSummary/CheckoutSummary";
 
 const initialAddressState: ShippingAddress = {
@@ -34,7 +37,10 @@ const initialAddressState: ShippingAddress = {
 const CheckoutPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { data: session, status } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
+
+  const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
+  const [isFirebaseLoading, setIsFirebaseLoading] = useState(true);
 
   const [shippingAddress, setShippingAddress] = useState(initialAddressState);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,35 +49,46 @@ const CheckoutPage: React.FC = () => {
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
 
   useEffect(() => {
-    if (status === "loading") return;
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setFirebaseUser(user);
+      setIsFirebaseLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
-    if (status === "unauthenticated") {
+  useEffect(() => {
+    dispatch(CALCULATE_SUBTOTAL());
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  }, [dispatch, cartItems]);
+
+  useEffect(() => {
+    if (sessionStatus === "loading" || isFirebaseLoading) return;
+    if (sessionStatus === "unauthenticated") {
       router.push("/auth/login");
       return;
     }
-
-    const fetchUserData = async () => {
-      if (session?.user?.id) {
-        const userRef = doc(db, "users", session.user.id);
+    if (firebaseUser) {
+      const fetchUserData = async () => {
+        const userRef = doc(db, "users", firebaseUser.uid);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
           const userData = docSnap.data();
           setShippingAddress({
-            name: userData.name || session.user.name || "",
-            mail: userData.mail || session.user.email || "",
+            name: userData.name || session?.user?.name || "",
+            mail: userData.mail || session?.user?.email || "",
             phone: userData.phone || "",
           });
         } else {
           setShippingAddress({
-            name: session.user.name || "",
-            mail: session.user.email || "",
+            name: session?.user?.name || "",
+            mail: session?.user?.email || "",
             phone: "",
           });
         }
-      }
-    };
-    fetchUserData();
-  }, [status, session, router]);
+      };
+      fetchUserData();
+    }
+  }, [sessionStatus, session, firebaseUser, isFirebaseLoading, router]);
 
   const handleShippingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -80,8 +97,8 @@ const CheckoutPage: React.FC = () => {
 
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!session?.user?.id) {
-      NotiflixFailure("Error: No se ha encontrado el ID del usuario.");
+    if (!firebaseUser) {
+      NotiflixFailure("Error: La sesión de usuario no está disponible.");
       return;
     }
     if (
@@ -93,21 +110,32 @@ const CheckoutPage: React.FC = () => {
       return;
     }
     setIsSubmitting(true);
-
     try {
+      const orderItems = cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        cartQuantity: item.cartQuantity,
+        imageURL: item.images[0] || "",
+      }));
+
       const orderData = {
-        userID: session.user.id,
-        userEmail: session.user.email,
+        userID: firebaseUser.uid,
+        userEmail: firebaseUser.email,
         shippingAddress,
-        cartItems,
+        orderItems: orderItems,
         orderAmount: cartTotalAmount,
         orderStatus: "Orden Recibida",
         createdAt: Timestamp.now().toDate(),
+        lastUpdatedBy: "cliente",
+        hasUnreadAdminMessage: true,
+        hasUnreadClientMessage: false,
       };
+
       await addDoc(collection(db, "orders"), orderData);
 
       await setDoc(
-        doc(db, "users", session.user.id),
+        doc(db, "users", firebaseUser.uid),
         {
           name: shippingAddress.name,
           mail: shippingAddress.mail,
@@ -127,8 +155,10 @@ const CheckoutPage: React.FC = () => {
     }
   };
 
-  if (status === "loading") {
-    return <div className="text-center p-8">Cargando...</div>;
+  if (sessionStatus === "loading" || isFirebaseLoading) {
+    return (
+      <div className="text-center p-8">Sincronizando sesión segura...</div>
+    );
   }
 
   return (
@@ -173,7 +203,6 @@ const CheckoutPage: React.FC = () => {
             />
           </div>
         </div>
-
         <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 space-y-4">
           <CheckoutSummary />
           <button

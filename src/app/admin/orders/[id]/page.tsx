@@ -21,9 +21,13 @@ async function getOrderAndMessages(
   }
 
   const orderData = orderSnap.data()!;
+
+  const items = orderData.orderItems || orderData.cartItems || [];
+
   const order = {
     id: orderSnap.id,
     ...orderData,
+    orderItems: items,
     createdAt: orderData.createdAt.toDate().toISOString(),
   } as Order;
 
@@ -44,9 +48,12 @@ const AdminOrderDetailsPage = async ({
 }: {
   params: { id: string };
 }) => {
+  console.log(`[Admin Server] Fetching order details for ID: ${params.id}`);
+
   const { order, messages } = await getOrderAndMessages(params.id);
 
   if (!order) {
+    console.log(`[Admin Server] Order with ID: ${params.id} not found.`);
     notFound();
   }
 

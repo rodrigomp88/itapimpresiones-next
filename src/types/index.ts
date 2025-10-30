@@ -32,15 +32,26 @@ export interface SlideData {
   desc: string;
 }
 
+export interface OrderItem {
+  id: string;
+  name: string;
+  price: number;
+  cartQuantity: number;
+  imageURL: string;
+}
+
 export interface Order {
   id: string;
   userID: string;
   userEmail: string;
   orderAmount: number;
   orderStatus: string;
-  cartItems: CartItem[];
+  orderItems: OrderItem[];
   shippingAddress: ShippingAddress;
   createdAt: string;
+  lastUpdatedBy?: "cliente" | "tienda";
+  hasUnreadAdminMessage?: boolean;
+  hasUnreadClientMessage?: boolean;
 }
 
 export interface Message {

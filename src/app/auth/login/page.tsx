@@ -5,6 +5,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FaGoogle, FaAngleRight } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { selectPreviousURL, SAVE_URL } from "@/src/redux/slice/cartSlice";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +14,15 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  const previousURL = useAppSelector(selectPreviousURL);
+  const dispatch = useAppDispatch();
+
+  const redirectUser = () => {
+    const redirectPath = previousURL || "/";
+    router.push(redirectPath);
+    dispatch(SAVE_URL(""));
+  };
 
   const loginWithCredentials = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +38,7 @@ const LoginPage = () => {
     setIsLoading(false);
 
     if (result?.ok) {
-      router.push("/admin");
+      redirectUser();
     } else {
       setError(
         "Correo o contraseña incorrectos. Por favor, inténtelo de nuevo."
@@ -39,7 +50,11 @@ const LoginPage = () => {
     setIsLoading(true);
     setError(null);
 
-    signIn("google", { callbackUrl: "/admin" });
+    const callbackUrl = previousURL || "/";
+
+    dispatch(SAVE_URL(""));
+
+    signIn("google", { callbackUrl });
   };
 
   return (

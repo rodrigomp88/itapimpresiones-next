@@ -45,7 +45,7 @@ const CartPage: React.FC = () => {
     if (status === "authenticated") {
       router.push("/checkout");
     } else {
-      dispatch(SAVE_URL(pathname));
+      dispatch(SAVE_URL("/checkout"));
       router.push("/auth/login");
     }
   };

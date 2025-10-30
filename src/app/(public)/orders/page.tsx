@@ -18,9 +18,13 @@ async function getUserOrders(userId: string): Promise<Order[]> {
 
   const orders = querySnapshot.docs.map((doc) => {
     const data = doc.data();
+
+    const items = data.orderItems || data.cartItems || [];
+
     return {
       id: doc.id,
       ...data,
+      orderItems: items,
       createdAt: data.createdAt.toDate().toISOString(),
     } as Order;
   });

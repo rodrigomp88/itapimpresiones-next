@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
 import { auth } from "@/src/firebase/config";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { selectPreviousURL, SAVE_URL } from "@/src/redux/slice/cartSlice";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +17,15 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+
+  const previousURL = useAppSelector(selectPreviousURL);
+  const dispatch = useAppDispatch();
+
+  const redirectUser = () => {
+    const redirectPath = previousURL || "/";
+    router.push(redirectPath);
+    dispatch(SAVE_URL(""));
+  };
 
   const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +48,7 @@ const RegisterPage = () => {
       });
 
       if (result?.ok) {
-        router.push("/admin");
+        redirectUser();
       } else {
         setError(
           "No se pudo iniciar sesión después del registro. Por favor, intente ingresar manualmente."

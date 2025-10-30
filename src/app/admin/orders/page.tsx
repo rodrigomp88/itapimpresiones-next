@@ -1,7 +1,6 @@
 import { adminDb } from "@/src/firebase/admin";
 import { Order } from "@/src/types";
 import Link from "next/link";
-import { FaCheckCircle, FaClock, FaTruck } from "react-icons/fa";
 
 async function getAllOrders(): Promise<Order[]> {
   const ordersRef = adminDb.collection("orders").orderBy("createdAt", "desc");
@@ -10,9 +9,13 @@ async function getAllOrders(): Promise<Order[]> {
 
   return snapshot.docs.map((doc) => {
     const data = doc.data();
+
+    const items = data.orderItems || data.cartItems || [];
+
     return {
       id: doc.id,
       ...data,
+      orderItems: items,
       createdAt: data.createdAt.toDate().toISOString(),
     } as Order;
   });
