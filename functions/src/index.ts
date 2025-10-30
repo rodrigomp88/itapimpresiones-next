@@ -4,9 +4,7 @@ import * as admin from "firebase-admin";
 admin.initializeApp();
 const db = admin.firestore();
 const messaging = admin.messaging();
-// Este secreto ahora puede ser una lista separada por comas, o simplemente lo quitamos
-// y nos basamos en la colección 'admins'. Por simplicidad, nos basaremos
-// en la colección 'admins' que ya usas para tus reglas de seguridad.
+
 export const onNewOrderCreated = onDocumentCreated(
   "orders/{orderId}",
   async (event) => {
@@ -20,7 +18,6 @@ export const onNewOrderCreated = onDocumentCreated(
     const orderAmount = orderData.orderAmount;
 
     try {
-      // 1. Obtener los UIDs de TODOS los administradores
       const adminsSnapshot = await db.collection("admins").get();
       const adminUIDs = adminsSnapshot.docs.map((doc) => doc.id);
 
@@ -29,7 +26,6 @@ export const onNewOrderCreated = onDocumentCreated(
         return;
       }
 
-      // 2. Obtener los tokens de FCM para esos UIDs
       const tokensSnapshot = await db
         .collection("fcmTokens")
         .where(admin.firestore.FieldPath.documentId(), "in", adminUIDs)
@@ -46,7 +42,6 @@ export const onNewOrderCreated = onDocumentCreated(
         `Found ${tokens.length} admin tokens to send notification to.`
       );
 
-      // 3. Preparar y enviar la notificación a TODOS los tokens
       const payload = {
         notification: {
           title: "¡Nueva Orden Recibida! 🛍️",
@@ -61,7 +56,6 @@ export const onNewOrderCreated = onDocumentCreated(
         },
       };
 
-      // Usamos 'sendToDevice' que acepta un array de tokens
       await messaging.sendToDevice(tokens, payload);
 
       logger.log("Push notification sent successfully to all admin devices.");

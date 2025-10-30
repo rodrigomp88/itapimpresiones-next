@@ -6,12 +6,12 @@ importScripts(
 );
 
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_MESSAGING_SENDER_ID",
-  appId: "TU_APP_ID",
+  apiKey: "AIzaSyCjUL-d5WPuuFpHy8PA6Fw8EMMxhY6nxzU",
+  authDomain: "itap-shop.firebaseapp.com",
+  projectId: "itap-shop",
+  storageBucket: "itap-shop.appspot.com",
+  messagingSenderId: "1032996797049",
+  appId: "1:1032996797049:web:6fbba04368cced914272a8",
 };
 
 firebase.initializeApp(firebaseConfig);
