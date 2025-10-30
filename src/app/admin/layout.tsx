@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import AdminNotificationBell from "@/src/components/Notifications/AdminNotificationBell";
+import FirebaseMessagingProvider from "@/src/components/Notifications/FirebaseMessagingProvider";
 
 export default async function AdminLayout({
   children,
@@ -21,6 +22,7 @@ export default async function AdminLayout({
 
   return (
     <div>
+      <FirebaseMessagingProvider />
       <nav className="p-4 bg-gray-100 dark:bg-gray-800">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-bold">Panel de Administración</h2>
