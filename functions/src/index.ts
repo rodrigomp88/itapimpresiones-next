@@ -1,15 +1,17 @@
+// Importar los módulos necesarios
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
-import * as functions from "firebase-functions";
+import { defineString } from "firebase-functions/params"; // Importar para leer secretos
 import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
 
-// Inicializar Firebase Admin SDK
 admin.initializeApp();
-
 const db = admin.firestore();
 const messaging = admin.messaging();
 
-// Sintaxis v2 correcta para el disparador de Firestore
+// --- LECTURA DE LA VARIABLE DE ENTORNO (SINTAXIS V2) ---
+// Definimos el parámetro que esperamos. Coincide con el nombre del secreto.
+const adminUID = defineString("ADMIN_UID");
+
 export const onNewOrderCreated = onDocumentCreated(
   "orders/{orderId}",
   async (event) => {
@@ -23,34 +25,32 @@ export const onNewOrderCreated = onDocumentCreated(
     const clientName = orderData.shippingAddress.name;
     const orderAmount = orderData.orderAmount;
 
-    // Acceso correcto a la variable de entorno de Firebase
-    const adminUID = functions.config().config.admin_uid;
-    if (!adminUID) {
-      logger.error(
-        "'firebase functions:config:set config.admin_uid=\"YOUR_UID\"'"
-      );
+    // Usamos el valor del parámetro definido arriba
+    const targetUID = adminUID.value();
+    if (!targetUID) {
+      logger.error("ADMIN_UID secret is not available.");
       return;
     }
 
     try {
-      const tokenRef = db.collection("fcmTokens").doc(adminUID);
+      const tokenRef = db.collection("fcmTokens").doc(targetUID);
       const tokenDoc = await tokenRef.get();
 
       if (!tokenDoc.exists) {
-        logger.log("Admin FCM token not found for UID:", adminUID);
+        logger.log("Admin FCM token not found for UID:", targetUID);
         return;
       }
 
       const fcmToken = tokenDoc.data()?.token;
       if (!fcmToken) {
-        logger.log("Token field is empty for admin:", adminUID);
+        logger.log("Token field is empty for admin:", targetUID);
         return;
       }
 
       const payload = {
         notification: {
           title: "¡Nueva Orden Recibida! 🛍️",
-          body: `${clientName} hay pedido de $${orderAmount.toLocaleString(
+          body: `${clientName} ha realizado un pedido de $${orderAmount.toLocaleString(
             "es-AR"
           )}.`,
           sound: "default",
@@ -68,7 +68,7 @@ export const onNewOrderCreated = onDocumentCreated(
         webpush: payload.webpush,
       });
 
-      logger.log("Push notification sent successfully to admin:", adminUID);
+      logger.log("Push notification sent successfully to admin:", targetUID);
     } catch (error) {
       logger.error("Error sending push notification:", error);
     }
