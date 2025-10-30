@@ -15,8 +15,14 @@ export async function saveFCMTokenAction(token: string) {
   }
 
   try {
-    const tokenRef = adminDb.collection("fcmTokens").doc(session.user.id);
-    await tokenRef.set({ token: token, lastUpdated: new Date() });
+    const tokenRef = adminDb
+      .collection("fcmTokens")
+      .doc(session.user.id)
+      .collection("tokens")
+      .doc(token);
+
+    await tokenRef.set({ createdAt: new Date() }, { merge: true });
+
     console.log("FCM Token saved for admin:", session.user.id);
     return { success: true };
   } catch (error) {

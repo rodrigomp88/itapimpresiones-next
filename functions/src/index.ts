@@ -1,6 +1,7 @@
 import { onDocumentCreated } from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
+
 admin.initializeApp();
 const db = admin.firestore();
 const messaging = admin.messaging();
@@ -26,20 +27,35 @@ export const onNewOrderCreated = onDocumentCreated(
         return;
       }
 
-      const tokensSnapshot = await db
-        .collection("fcmTokens")
-        .where(admin.firestore.FieldPath.documentId(), "in", adminUIDs)
-        .get();
+      // --- INICIO DE LA MODIFICACIÓN ---
+      const allTokens: string[] = [];
 
-      const tokens = tokensSnapshot.docs.map((doc) => doc.data().token);
+      // Creamos un array de promesas. Cada promesa buscará los tokens de un admin.
+      const tokenPromises = adminUIDs.map((uid) =>
+        db.collection("fcmTokens").doc(uid).collection("tokens").get()
+      );
 
-      if (tokens.length === 0) {
+      // Ejecutamos todas las búsquedas de tokens en paralelo para mayor eficiencia.
+      const results = await Promise.all(tokenPromises);
+
+      // Recorremos los resultados de cada búsqueda.
+      results.forEach((snapshot) => {
+        if (!snapshot.empty) {
+          snapshot.forEach((doc) => {
+            // El ID de cada documento en la subcolección 'tokens' es el propio token.
+            allTokens.push(doc.id);
+          });
+        }
+      });
+      // --- FIN DE LA MODIFICACIÓN ---
+
+      if (allTokens.length === 0) {
         logger.log("No FCM tokens found for any admins.");
         return;
       }
 
       logger.log(
-        `Found ${tokens.length} admin tokens to send notification to.`
+        `Found ${allTokens.length} admin tokens to send notification to.`
       );
 
       const payload = {
@@ -56,7 +72,8 @@ export const onNewOrderCreated = onDocumentCreated(
         },
       };
 
-      await messaging.sendToDevice(tokens, payload);
+      // No se necesitan cambios aquí, 'sendToDevice' ya acepta un array de tokens.
+      await messaging.sendToDevice(allTokens, payload);
 
       logger.log("Push notification sent successfully to all admin devices.");
     } catch (error) {
