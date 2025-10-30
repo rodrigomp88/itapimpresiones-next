@@ -15,12 +15,12 @@ const FirebaseMessagingProvider = () => {
         if (permission === "granted") {
           console.log("Notification permission granted.");
           const currentToken = await getToken(messaging, {
-            vapidKey: "TU_VAPID_KEY_DE_FIREBASE",
+            vapidKey:
+              "BD3w1xu_n1dGoEQdigybHptkcejOX4Zl0VJP4h9I9_Npb0HVRgjnp57IcCCB0_8KKIW1TGr3em4Jd79LxnfmK7I",
           });
 
           if (currentToken) {
             console.log("FCM Token:", currentToken);
-            // Guarda el token en el servidor
             await saveFCMTokenAction(currentToken);
           } else {
             console.log(
