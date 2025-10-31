@@ -75,6 +75,11 @@ export async function sendAdminMessageAction(orderId: string, text: string) {
       hasUnreadClientMessage: true,
     });
 
+    await adminDb.collection("orders").doc(orderId).update({
+      lastUpdatedBy: "tienda",
+      hasUnreadClientMessage: true,
+    });
+
     return { success: true };
   } catch (error) {
     console.error("Error sending admin message:", error);

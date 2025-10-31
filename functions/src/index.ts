@@ -113,7 +113,6 @@ export const onOrderStatusUpdated = onDocumentUpdated(
     const beforeData = event.data?.before.data();
     const afterData = event.data?.after.data();
 
-    // Si no hay datos o el estado no cambió, no hacemos nada.
     if (
       !beforeData ||
       !afterData ||
@@ -122,9 +121,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
       return;
     }
 
-    // Solo enviar notificación si el cambio fue hecho por la tienda.
     if (afterData.lastUpdatedBy !== "tienda") {
-      logger.log("Update was not made by the store. No notification sent.");
       return;
     }
 
@@ -137,7 +134,6 @@ export const onOrderStatusUpdated = onDocumentUpdated(
     );
 
     try {
-      // Buscar los tokens del usuario específico
       const tokensSnapshot = await db
         .collection("fcmTokens")
         .doc(userId)
@@ -151,7 +147,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
 
       const tokens = tokensSnapshot.docs.map((doc) => doc.id);
 
-      const payload = {
+      const message = {
         notification: {
           title: "Actualización de tu Pedido 📦",
           body: `El estado de tu orden #${orderId.slice(
@@ -164,15 +160,146 @@ export const onOrderStatusUpdated = onDocumentUpdated(
             link: `https://itapimpresiones.vercel.app/orders/${orderId}`,
           },
         },
+        tokens: tokens,
       };
 
-      await messaging.sendToDevice(tokens, payload);
-      logger.log(`Notification sent successfully to user ${userId}.`);
+      const response = await messaging.sendEachForMulticast(message);
 
-      // Aquí también puedes añadir la lógica para limpiar tokens inválidos si lo deseas.
+      logger.log(
+        response.successCount +
+          ` status update messages were sent successfully to user ${userId}.`
+      );
+
+      if (response.failureCount > 0) {
+        const tokensToRemove: Promise<any>[] = [];
+        response.responses.forEach((resp, idx) => {
+          if (!resp.success) {
+            const error = resp.error!;
+            if (
+              error.code === "messaging/invalid-registration-token" ||
+              error.code === "messaging/registration-token-not-registered"
+            ) {
+              const invalidToken = tokens[idx];
+              tokensToRemove.push(
+                db
+                  .collection("fcmTokens")
+                  .doc(userId)
+                  .collection("tokens")
+                  .doc(invalidToken)
+                  .delete()
+              );
+            }
+          }
+        });
+        await Promise.all(tokensToRemove);
+      }
     } catch (error) {
       logger.error(
         `Error sending status update notification to user ${userId}:`,
+        error
+      );
+    }
+  }
+);
+
+export const onNewChatMessage = onDocumentCreated(
+  "orders/{orderId}/messages/{messageId}",
+  async (event) => {
+    const messageData = event.data?.data();
+    const orderId = event.params.orderId;
+
+    if (!messageData) {
+      logger.log("No message data found.");
+      return;
+    }
+
+    try {
+      const orderDoc = await db.collection("orders").doc(orderId).get();
+      if (!orderDoc.exists) {
+        logger.log(`Order ${orderId} not found.`);
+        return;
+      }
+      const orderData = orderDoc.data()!;
+
+      if (messageData.sender === "usuario") {
+        const clientName = orderData.shippingAddress.name;
+        logger.log(
+          `New message from client ${clientName} on order ${orderId}. Notifying admins.`
+        );
+
+        const adminsSnapshot = await db.collection("admins").get();
+        const adminUIDs = adminsSnapshot.docs.map((doc) => doc.id);
+        if (adminUIDs.length === 0) return;
+
+        const allAdminTokens: string[] = [];
+        const tokenPromises = adminUIDs.map((uid) =>
+          db.collection("fcmTokens").doc(uid).collection("tokens").get()
+        );
+        const results = await Promise.all(tokenPromises);
+        results.forEach((snapshot) => {
+          if (!snapshot.empty) {
+            snapshot.forEach((doc) => allAdminTokens.push(doc.id));
+          }
+        });
+
+        if (allAdminTokens.length > 0) {
+          const message = {
+            notification: {
+              title: "Nuevo Mensaje de Cliente 💬",
+              body: `${clientName} ha enviado un mensaje en la orden #${orderId.slice(
+                0,
+                6
+              )}.`,
+            },
+            webpush: {
+              fcmOptions: {
+                link: `https://itapimpresiones.vercel.app/admin/orders/${orderId}`,
+              },
+            },
+            tokens: allAdminTokens,
+          };
+          await messaging.sendEachForMulticast(message);
+        }
+      } else if (messageData.sender === "tienda") {
+        const userId = orderData.userID;
+        logger.log(
+          `New message from store on order ${orderId}. Notifying user ${userId}.`
+        );
+
+        const tokensSnapshot = await db
+          .collection("fcmTokens")
+          .doc(userId)
+          .collection("tokens")
+          .get();
+        if (tokensSnapshot.empty) {
+          logger.log(`No FCM tokens found for user ${userId}.`);
+          return;
+        }
+
+        const userTokens = tokensSnapshot.docs.map((doc) => doc.id);
+
+        if (userTokens.length > 0) {
+          const message = {
+            notification: {
+              title: "Nuevo Mensaje de Itap Impresiones 📬",
+              body: `Tienes una nueva respuesta en tu orden #${orderId.slice(
+                0,
+                6
+              )}.`,
+            },
+            webpush: {
+              fcmOptions: {
+                link: `https://itapimpresiones.vercel.app/orders/${orderId}`,
+              },
+            },
+            tokens: userTokens,
+          };
+          await messaging.sendEachForMulticast(message);
+        }
+      }
+    } catch (error) {
+      logger.error(
+        `Error sending chat notification for order ${orderId}:`,
         error
       );
     }
