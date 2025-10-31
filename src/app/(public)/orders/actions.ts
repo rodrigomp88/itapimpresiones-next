@@ -2,6 +2,8 @@
 
 import { adminDb } from "@/src/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export async function sendUserMessageAction(
   orderId: string,
@@ -53,5 +55,28 @@ export async function markOrderAsReadAction(
   } catch (error) {
     console.error("Error marking order as read:", error);
     return { success: false, error: "No se pudo marcar como leído." };
+  }
+}
+
+export async function saveUserFCMTokenAction(token: string) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return { success: false, error: "Usuario no autenticado." };
+  }
+
+  try {
+    const tokenRef = adminDb
+      .collection("fcmTokens")
+      .doc(session.user.id)
+      .collection("tokens")
+      .doc(token);
+
+    await tokenRef.set({ createdAt: new Date() }, { merge: true });
+
+    console.log("FCM Token saved for user:", session.user.id);
+    return { success: true };
+  } catch (error) {
+    console.error("Error saving user FCM token:", error);
+    return { success: false, error: "No se pudo guardar el token." };
   }
 }

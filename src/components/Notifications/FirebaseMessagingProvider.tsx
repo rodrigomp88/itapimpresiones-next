@@ -9,7 +9,6 @@ const FirebaseMessagingProvider = () => {
   useEffect(() => {
     const setupMessaging = async () => {
       try {
-        // PASO A: ¿El navegador es compatible?
         const isMessagingSupported = await isSupported();
         if (!isMessagingSupported) {
           console.error(
@@ -19,9 +18,6 @@ const FirebaseMessagingProvider = () => {
         }
         console.log("Paso A: Firebase Messaging es compatible.");
 
-        // --- INICIO DE LA SOLUCIÓN ---
-        // PASO B: Registrar manualmente el Service Worker.
-        // Esto fuerza su activación, especialmente en entornos de desarrollo.
         console.log("Paso B: Intentando registrar el Service Worker...");
         const swRegistration = await navigator.serviceWorker.register(
           "/firebase-messaging-sw.js"
@@ -30,23 +26,20 @@ const FirebaseMessagingProvider = () => {
           "Paso B: Service Worker registrado con éxito.",
           swRegistration
         );
-        // --- FIN DE LA SOLUCIÓN ---
 
         const messaging = getMessaging(app);
 
-        // PASO C: Pedir permiso al usuario.
         console.log("Paso C: Solicitando permiso de notificación...");
         const permission = await Notification.requestPermission();
 
         if (permission === "granted") {
           console.log("Paso C: ¡Permiso concedido!");
 
-          // PASO D: Obtener el token.
           console.log("Paso D: Intentando obtener el token de FCM...");
           const currentToken = await getToken(messaging, {
             vapidKey:
               "BD3w1xu_n1dGoEQdigybHptkcejOX4Zl0VJP4h9I9_Npb0HVRgjnp57IcCCB0_8KKIW1TGr3em4Jd79LxnfmK7I",
-            serviceWorkerRegistration: swRegistration, // Usamos el registro que acabamos de obtener
+            serviceWorkerRegistration: swRegistration,
           });
 
           if (currentToken) {
@@ -70,7 +63,6 @@ const FirebaseMessagingProvider = () => {
       }
     };
 
-    // Solo ejecutar en el cliente
     if (typeof window !== "undefined" && "serviceWorker" in navigator) {
       setupMessaging();
     }

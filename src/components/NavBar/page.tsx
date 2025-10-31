@@ -12,6 +12,7 @@ import {
 } from "@/src/redux/slice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import UserNotificationBell from "../Notifications/UserNotificationBell";
+import UserNotificationProvider from "../Notifications/UserNotificationProvider";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -36,6 +37,7 @@ const Navbar = () => {
 
   return (
     <>
+      {status === "authenticated" && !isAdmin && <UserNotificationProvider />}
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
         <Link href="/">
           <h1 className="text-2xl font-bold">
