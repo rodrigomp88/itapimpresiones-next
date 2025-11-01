@@ -94,7 +94,7 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
           Gestionar Orden #{order.id.slice(0, 8)}
         </h1>
 
-        <div className="p-4 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg">
+        <div className="p-4 bg-white dark:bg-black border dark:border-gray-700 rounded-lg">
           <h3 className="font-semibold mb-2 text-lg">
             Información del Cliente
           </h3>
@@ -109,7 +109,7 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
           </p>
         </div>
 
-        <div className="p-4 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg">
+        <div className="p-4 bg-white dark:bg-black border dark:border-gray-700 rounded-lg">
           <h3 className="font-semibold mb-3 text-lg">Gestionar Estado</h3>
           <div className="flex items-center gap-4">
             <select
@@ -140,7 +140,7 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
           </p>
         </div>
 
-        <div className="p-4 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg">
+        <div className="p-4 bg-white dark:bg-black border dark:border-gray-700 rounded-lg">
           <h3 className="font-semibold mb-3 text-lg">
             Productos en la Orden ({order.orderItems.length})
           </h3>
@@ -174,7 +174,7 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
       </div>
 
       {isChatActive && (
-        <div className="md:col-span-1 border dark:border-gray-700 rounded-lg flex flex-col h-[80vh] sticky top-24 bg-white dark:bg-gray-800">
+        <div className="md:col-span-1 border dark:border-gray-700 rounded-lg flex flex-col h-[80vh] sticky top-24 bg-white dark:bg-black">
           <h2 className="p-4 font-semibold border-b dark:border-gray-700">
             Chat con {order.shippingAddress.name}
           </h2>

@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { db } from "@/src/firebase/config";
+import { auth, db } from "@/src/firebase/config";
 import { useSession } from "next-auth/react";
 import { Order } from "@/src/types";
 import { FaBell } from "react-icons/fa";
 import NotificationDropdown from "./NotificationDropdown";
+import { onAuthStateChanged } from "firebase/auth";
 
 const UserNotificationBell = () => {
   const { data: session } = useSession();
@@ -17,20 +18,26 @@ const UserNotificationBell = () => {
   useEffect(() => {
     if (!session?.user?.id) return;
 
-    const q = query(
-      collection(db, "orders"),
-      where("userID", "==", session.user.id),
-      where("hasUnreadClientMessage", "==", true)
-    );
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
+      if (user && user.uid === session.user.id) {
+        const q = query(
+          collection(db, "orders"),
+          where("userID", "==", session.user.id),
+          where("hasUnreadClientMessage", "==", true)
+        );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const unreadOrders = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Order)
-      );
-      setNotifications(unreadOrders);
+        const unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+          const unreadOrders = snapshot.docs.map(
+            (doc) => ({ id: doc.id, ...doc.data() } as Order)
+          );
+          setNotifications(unreadOrders);
+        });
+
+        return () => unsubscribeSnapshot();
+      }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribeAuth();
   }, [session]);
 
   useEffect(() => {

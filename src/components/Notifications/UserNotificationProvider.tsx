@@ -24,7 +24,6 @@ const UserNotificationProvider = () => {
             });
 
             if (currentToken) {
-              console.log("Client FCM Token:", currentToken);
               await saveUserFCMTokenAction(currentToken);
             }
           }

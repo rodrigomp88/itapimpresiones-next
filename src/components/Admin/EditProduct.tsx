@@ -55,17 +55,19 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
+    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+      <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
         <h2 className="text-xl font-bold mb-4">Editar Producto</h2>
         <form key={product.id} action={handleSubmit}>
           <div className="space-y-4">
+            <label htmlFor="name">Nombre del Producto</label>
             <input
               name="name"
               defaultValue={product.name}
               className="input"
               required
             />
+            <label htmlFor="price">Precio</label>
             <input
               name="price"
               type="number"
@@ -74,18 +76,21 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input"
               required
             />
+            <label htmlFor="category">Categoría</label>
             <input
               name="category"
               defaultValue={product.category}
               className="input"
               required
             />
+            <label htmlFor="desc">Descripción</label>
             <textarea
               name="desc"
               defaultValue={product.desc}
               className="input"
               required
             />
+            <label htmlFor="unity">Mínimo de Unidades</label>
             <input
               name="unity"
               type="number"
@@ -93,7 +98,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input"
               required
             />
+            <label htmlFor="size">Tamaño/Medidas</label>
             <input name="size" defaultValue={product.size} className="input" />
+            <label htmlFor="brand">Marca</label>
             <input
               name="brand"
               defaultValue={product.brand}
@@ -126,7 +133,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                 type="file"
                 multiple
                 accept="image/*"
-                className="input"
+                className="btn"
                 onChange={handleNewImageChange}
               />
               <div className="flex flex-wrap gap-2 mt-2">

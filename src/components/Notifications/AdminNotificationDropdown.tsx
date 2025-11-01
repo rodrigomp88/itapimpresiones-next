@@ -38,7 +38,7 @@ const AdminNotificationDropdown: React.FC<AdminNotificationDropdownProps> = ({
   };
 
   return (
-    <div className="absolute top-full right-0 mt-2 w-72 md:w-80 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-xl z-50">
+    <div className="absolute top-full right-0 mt-2 w-72 md:w-80 bg-white dark:bg-black border dark:border-gray-700 rounded-lg shadow-xl z-50">
       <div className="p-3 border-b dark:border-gray-700">
         <h3 className="font-semibold text-gray-800 dark:text-gray-100">
           Notificaciones

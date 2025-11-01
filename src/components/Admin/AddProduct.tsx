@@ -44,17 +44,19 @@ const AddProduct = () => {
         Añadir Producto
       </button>
       {isOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-lg">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
             <h2 className="text-xl font-bold mb-4">Añadir Nuevo Producto</h2>
             <form ref={formRef} action={handleSubmit}>
               <div className="space-y-4">
+                <label htmlFor="name">Nombre del Producto</label>
                 <input
                   name="name"
                   placeholder="Nombre del Producto"
                   className="input"
                   required
                 />
+                <label htmlFor="price">Precio</label>
                 <input
                   name="price"
                   type="number"
@@ -62,41 +64,23 @@ const AddProduct = () => {
                   className="input"
                   required
                 />
-                <div>
-                  <label htmlFor="images">Imágenes</label>
-                  <input
-                    id="images"
-                    name="images"
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    className="input"
-                    onChange={handleImageChange}
-                  />
-                  <div className="mt-2 flex gap-2">
-                    {previewImages.map((src, i) => (
-                      <img
-                        key={i}
-                        src={src}
-                        alt="Preview"
-                        className="w-24 h-24 object-cover rounded"
-                      />
-                    ))}
-                  </div>
-                </div>
+                <label htmlFor="category">Categoría</label>
                 <input
                   name="category"
                   placeholder="Categoría"
                   className="input"
                   required
                 />
+                <label htmlFor="brand">Marca</label>
                 <input name="brand" placeholder="Marca" className="input" />
+                <label htmlFor="desc">Descripción</label>
                 <textarea
                   name="desc"
                   placeholder="Descripción"
                   className="input"
                   required
                 />
+                <label htmlFor="unity">Mínimo de Unidades</label>
                 <input
                   name="unity"
                   type="number"
@@ -104,11 +88,34 @@ const AddProduct = () => {
                   className="input"
                   required
                 />
+                <label htmlFor="size">Tamaño/Medidas</label>
                 <input
                   name="size"
                   placeholder="Tamaño/Medidas"
                   className="input"
                 />
+              </div>
+              <div className="p-4 space-x-2">
+                <label htmlFor="images">Imágenes</label>
+                <input
+                  id="images"
+                  name="images"
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  className="btn"
+                  onChange={handleImageChange}
+                />
+                <div className="mt-2 flex gap-2">
+                  {previewImages.map((src, i) => (
+                    <img
+                      key={i}
+                      src={src}
+                      alt="Preview"
+                      className="w-24 h-24 object-cover rounded"
+                    />
+                  ))}
+                </div>
               </div>
               <div className="flex justify-end gap-4 mt-6">
                 <button

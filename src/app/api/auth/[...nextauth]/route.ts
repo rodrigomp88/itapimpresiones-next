@@ -2,8 +2,8 @@ import NextAuth, { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/src/firebase/config";
+import { auth } from "@/src/firebase/config";
+import { adminAuth } from "@/src/firebase/admin";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -21,17 +21,14 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Faltan credenciales");
         }
-
         try {
           const userCredential = await signInWithEmailAndPassword(
             auth,
             credentials.email,
             credentials.password
           );
-
           if (userCredential.user) {
             const firebaseUser = userCredential.user;
-
             return {
               id: firebaseUser.uid,
               email: firebaseUser.email,
@@ -39,11 +36,9 @@ export const authOptions: AuthOptions = {
               image: firebaseUser.photoURL,
             };
           }
-
           return null;
         } catch (error: any) {
           console.error("Error de autenticación de Firebase:", error.code);
-
           return null;
         }
       },
@@ -54,6 +49,49 @@ export const authOptions: AuthOptions = {
   },
 
   callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === "google") {
+        try {
+          const firebaseUser = await adminAuth.getUser(user.id);
+
+          if (firebaseUser) {
+            await adminAuth.updateUser(user.id, {
+              email: user.email ?? undefined,
+              displayName: user.name ?? undefined,
+              photoURL: user.image ?? undefined,
+            });
+            console.log("¡Usuario actualizado con éxito!");
+          }
+        } catch (error: any) {
+          console.error(
+            "Error al intentar obtener/actualizar usuario:",
+            error.code
+          );
+          if (error.code === "auth/user-not-found") {
+            console.log(
+              `Usuario con UID ${user.id} no encontrado. Creando nuevo usuario...`
+            );
+            await adminAuth.createUser({
+              uid: user.id,
+              email: user.email ?? undefined,
+              displayName: user.name ?? undefined,
+              photoURL: user.image ?? undefined,
+            });
+            console.log(
+              "¡Nuevo usuario de Google creado con éxito en Firebase!"
+            );
+          } else {
+            console.error(
+              "Ocurrió un error inesperado en el callback signIn:",
+              error
+            );
+          }
+        }
+      }
+      console.log("--- Callback signIn FINALIZADO ---");
+      return true;
+    },
+
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;

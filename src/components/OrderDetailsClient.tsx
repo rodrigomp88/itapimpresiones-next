@@ -98,7 +98,7 @@ const OrderDetailsClient: React.FC<OrderDetailsClientProps> = ({
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-black/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-semibold mb-4">Productos</h2>
           <div className="space-y-4">
             {order.orderItems.map((item) => (
@@ -125,7 +125,7 @@ const OrderDetailsClient: React.FC<OrderDetailsClientProps> = ({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-black/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h2 className="text-xl font-semibold mb-4">Resumen y Envío</h2>
           <div className="space-y-3">
             <div className="flex justify-between">
