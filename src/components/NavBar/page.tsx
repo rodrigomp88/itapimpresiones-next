@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import UserNotificationBell from "../Notifications/UserNotificationBell";
 import UserNotificationProvider from "../Notifications/UserNotificationProvider";
 import InAppNotificationHandler from "../Notifications/InAppNotificationHandler";
+import Image from "next/image";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -45,11 +46,14 @@ const Navbar = () => {
         </>
       )}
 
-      <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
-        <Link href="/">
-          <h1 className="text-2xl font-bold">
-            Itap<span className="text-violet-500">Impresiones</span>
-          </h1>
+      <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
+        <Link href="/" className="bg-white rounded-b-2xl p-1">
+          <Image
+            src="/itap-logo.png"
+            alt="Itap Impresiones"
+            width={90}
+            height={50}
+          />
         </Link>
 
         <div className="hidden md:flex items-center gap-6">

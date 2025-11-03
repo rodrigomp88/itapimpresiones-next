@@ -27,7 +27,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   };
 
   return (
-    <div className="p-4 rounded-lg border sticky top-14 border-gray-200 dark:border-gray-700 space-y-6">
+    <div className="p-4 rounded-lg border sticky top-20 border-gray-200 dark:border-gray-700 space-y-6">
       <div>
         <h3 className="font-semibold mb-3">Flitrar</h3>
         <div className="flex flex-col gap-2">

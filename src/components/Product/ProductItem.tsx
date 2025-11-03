@@ -30,11 +30,11 @@ const ProductItem: React.FC<Product> = ({
   return (
     <Link href={`/producto-detalle/${id}`} className="block group">
       <div
-        className="flex flex-col h-full bg-white dark:bg-black rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1"
+        className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative w-full h-64 flex items-center justify-center bg-gray-100 dark:bg-gray-700">
+        <div className="relative w-full h-64 flex items-center justify-center">
           {!imageLoaded && (
             <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
           )}
