@@ -69,10 +69,11 @@ const Home = () => {
               </h1>
               <div className="mt-1 text-center mx-4 px-4 py-3 hover:cursor-crosshair">
                 <p className="text-xl lg:px-8 py-3">
-                  Somos emprendedores especializados en bolsas de friselina,
-                  remeras de algodón y gorras traquet en Mendoza. Ofrecemos
-                  productos de alta calidad y personalización, con envío a nivel
-                  nacional. Contáctanos para tus necesidades de personalización.
+                  Somos ITAP impresiones, desde hace mas de una decada,nos
+                  dedicamos a Bolsas de friselina, Remeras, Buzos,cargos y
+                  gorras tracker en Mendoza. Ofrecemos productos de alta calidad
+                  y personalización, con envío a nivel nacional. Contáctanos
+                  para tus necesidades de personalización.
                 </p>
               </div>
             </div>

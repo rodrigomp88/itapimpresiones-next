@@ -45,7 +45,7 @@ const Footer = () => {
 
         <div className="grid justify-center text-center text-sm py-4">
           <h1>&copy; Itap-Impresiones</h1>
-          <p>2015 - {year}</p>
+          <p>2012 - {year}</p>
         </div>
       </section>
     </>

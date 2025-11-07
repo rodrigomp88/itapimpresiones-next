@@ -4,7 +4,7 @@ export const sliderData: SlideData[] = [
   {
     image: "/images/bg-1.png",
     heading: "Bolsas Termo-sellada de Friselina",
-    desc: "Con tu logo, a 3 colores, varias medidas.",
+    desc: "Con tu logo, varias medidas.",
   },
   {
     image: "/images/bg-2.png",
