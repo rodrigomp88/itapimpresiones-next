@@ -47,12 +47,20 @@ const Navbar = () => {
       )}
 
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
-        <Link href="/" className="bg-white rounded-b-2xl p-1">
+        <Link href="/">
           <Image
-            src="/itap-logo.png"
-            alt="Itap Impresiones"
-            width={90}
-            height={50}
+            src="/itap-logodark.png"
+            alt="Itap Impresiones Logo"
+            width={100}
+            height={40}
+            className="dark:hidden"
+          />
+          <Image
+            src="/itap-logowhite.png"
+            alt="Itap Impresiones Logo"
+            width={100}
+            height={40}
+            className="hidden dark:block"
           />
         </Link>
 
