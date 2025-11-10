@@ -49,17 +49,16 @@ const Navbar = () => {
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
         <Link href="/" className="relative h-10 w-[100px]">
           <Image
-            src="/itap-logoblack.png"
+            src="/images/itap-logoblack.png"
             alt="Itap Impresiones Logo"
-            width={100} // Le damos el tamaño base
+            width={100}
             height={40}
-            className="h-10 w-auto dark:hidden" // Clases para asegurar el tamaño visual
+            className="h-10 w-auto dark:hidden"
             priority
           />
 
-          {/* Logo para el tema oscuro */}
           <Image
-            src="/itap-logowhite.png"
+            src="/images/itap-logowhite.png"
             alt="Itap Impresiones Logo"
             width={100}
             height={40}

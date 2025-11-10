@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
@@ -7,26 +6,10 @@ const Footer = () => {
   return (
     <>
       <section className="bg-gradient-to-b border-t px-5 md:px-20 lg:px-48 mt-14">
-        <div className="grid md:grid-cols-3 md:place-items-center gap-8 py-5">
+        <div className="grid place-items-center gap-8 py-5">
           <div>
             <div className="py-3">
-              <h3 className="text-2xl">Pagina</h3>
-            </div>
-            <div className="grid">
-              <Link href="/" className="underline">
-                Inicio
-              </Link>
-              <Link href="/nosotros" className="underline">
-                Nosotros
-              </Link>
-              <Link href="/tienda" className="underline">
-                Tienda
-              </Link>
-            </div>
-          </div>
-          <div>
-            <div className="py-3">
-              <h3 className="text-2xl">Seguinos</h3>
+              <h3>Seguinos en nuestras redes</h3>
             </div>
             <div className="flex md:justify-center text-2xl gap-3 py-3">
               <p>
