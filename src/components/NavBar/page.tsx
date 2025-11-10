@@ -49,7 +49,7 @@ const Navbar = () => {
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
         <Link href="/" className="relative h-10 w-[100px]">
           <Image
-            src="/images/itap.png"
+            src="/images/about-2.jpg"
             alt="Itap Impresiones Logo"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
