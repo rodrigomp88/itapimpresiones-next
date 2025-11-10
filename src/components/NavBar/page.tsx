@@ -51,18 +51,18 @@ const Navbar = () => {
           <Image
             src="/images/itap-logoblack.png"
             alt="Itap Impresiones Logo"
-            width={100}
-            height={40}
-            className="h-10 w-auto dark:hidden"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-contain dark:hidden"
             priority
           />
 
           <Image
             src="/images/itap-logowhite.png"
             alt="Itap Impresiones Logo"
-            width={100}
-            height={40}
-            className="h-10 w-auto hidden dark:block"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="hidden object-contain dark:block"
             priority
           />
         </Link>
