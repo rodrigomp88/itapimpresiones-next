@@ -47,19 +47,21 @@ const Navbar = () => {
       )}
 
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
-        <Link href="/">
+        <Link href="/" className="relative h-10 w-[100px]">
           <Image
             src="/itap-logodark.png"
             alt="Itap Impresiones Logo"
-            width={100}
-            height={40}
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="dark:hidden"
           />
           <Image
             src="/itap-logowhite.png"
             alt="Itap Impresiones Logo"
-            width={100}
-            height={40}
+            fill
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="hidden dark:block"
           />
         </Link>
