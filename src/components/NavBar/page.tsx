@@ -49,20 +49,11 @@ const Navbar = () => {
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
         <Link href="/" className="relative h-10 w-[100px]">
           <Image
-            src="/images/itap-logoblack.png"
+            src="/images/itap.png"
             alt="Itap Impresiones Logo"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-contain dark:hidden"
-            priority
-          />
-
-          <Image
-            src="/images/itap-logowhite.png"
-            alt="Itap Impresiones Logo"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="hidden object-contain dark:block"
+            className="object-contain"
             priority
           />
         </Link>
@@ -92,7 +83,6 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-
         <div className="flex items-center gap-4">
           {status === "authenticated" && (
             <div className="hidden md:block">
