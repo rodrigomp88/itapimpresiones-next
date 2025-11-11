@@ -1,6 +1,6 @@
 "use server";
 
-import { adminDb } from "@/src/firebase/admin";
+import { adminDb } from "@/firebase/admin";
 import { Timestamp } from "firebase-admin/firestore";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";

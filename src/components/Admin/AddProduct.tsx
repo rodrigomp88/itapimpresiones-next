@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useRef, useTransition, FormEvent } from "react";
-import { addProductAction } from "@/src/app/admin/products/actions";
+import { addProductAction } from "@/app/admin/products/actions";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
-import { storage } from "@/src/firebase/config";
+import { storage } from "@/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 

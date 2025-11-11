@@ -1,6 +1,6 @@
 "use server";
 
-import { adminDb, adminStorage } from "@/src/firebase/admin";
+import { adminDb, adminStorage } from "@/firebase/admin";
 import { revalidatePath } from "next/cache";
 
 export async function addProductAction(formData: FormData, productId?: string) {

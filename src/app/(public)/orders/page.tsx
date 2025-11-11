@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Order } from "@/src/types";
+import { Order } from "@/types";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
-import { adminDb } from "@/src/firebase/admin";
+import { adminDb } from "@/firebase/admin";
 
 async function getUserOrders(userId: string): Promise<Order[]> {
   const ordersRef = adminDb.collection("orders");

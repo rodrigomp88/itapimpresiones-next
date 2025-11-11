@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Product } from "@/src/types";
 import Link from "next/link";
 import { FaRuler } from "react-icons/fa";
+import { Product } from "@/types";
 
 const ProductItem: React.FC<Product> = ({
   id,

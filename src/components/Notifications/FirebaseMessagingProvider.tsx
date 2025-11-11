@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { getMessaging, getToken, isSupported } from "firebase/messaging";
-import { app } from "@/src/firebase/config";
-import { saveFCMTokenAction } from "@/src/app/admin/actions";
+import app from "@/firebase/config";
+import { saveFCMTokenAction } from "@/app/admin/actions";
 
 const FirebaseMessagingProvider = () => {
   useEffect(() => {

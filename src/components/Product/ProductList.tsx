@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Product } from "@/src/types";
 import ProductItem from "./ProductItem";
+import { Product } from "@/types";
 
 interface ProductListProps {
   products: Product[];

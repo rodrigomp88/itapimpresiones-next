@@ -1,9 +1,8 @@
 "use client";
 
+import { markOrderAsReadAction } from "@/app/(public)/orders/actions";
+import { Order } from "@/types";
 import Link from "next/link";
-import { Order } from "@/src/types";
-import { markOrderAsReadAction } from "@/src/app/(public)/orders/actions";
-import { Timestamp } from "firebase/firestore";
 
 interface NotificationDropdownProps {
   notifications: Order[];

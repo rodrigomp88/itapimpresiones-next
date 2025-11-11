@@ -5,8 +5,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FaGoogle, FaAngleRight } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { selectPreviousURL, SAVE_URL } from "@/src/redux/slice/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectPreviousURL, SAVE_URL } from "@/redux/slice/cartSlice";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

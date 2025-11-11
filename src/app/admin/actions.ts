@@ -1,7 +1,7 @@
 "use server";
 
-import { adminDb } from "@/src/firebase/admin";
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
+import { adminDb } from "@/firebase/admin";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 export async function saveFCMTokenAction(token: string) {

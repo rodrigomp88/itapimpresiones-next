@@ -1,5 +1,5 @@
-import UsersClient from "@/src/components/Admin/UsersClient";
-import { adminAuth } from "@/src/firebase/admin";
+import UsersClient from "@/components/Admin/UsersClient";
+import { adminAuth } from "@/firebase/admin";
 import { UserRecord } from "firebase-admin/auth";
 
 export interface SimpleUser {

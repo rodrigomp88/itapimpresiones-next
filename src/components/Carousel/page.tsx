@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Link from "next/link";
-import useSlider from "@/src/hooks/useSlider";
+import useSlider from "@/hooks/useSlider";
 
 const Carousel: React.FC = () => {
   const { currentSlide, nextSlide, prevSlide, goToSlide, sliderData } =

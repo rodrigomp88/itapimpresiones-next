@@ -1,22 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import ProductFilter from "./Product/ProductFilter";
+import ProductList from "./Product/ProductList";
+import { Product } from "@/types";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  STORE_PRODUCTS,
   GET_PRICE_RANGE,
-  selectProducts,
-  selectMinPrice,
   selectMaxPrice,
-} from "@/src/redux/slice/productSlice";
+  selectMinPrice,
+  selectProducts,
+  STORE_PRODUCTS,
+} from "@/redux/slice/productSlice";
 import {
   FILTER_BY_CATEGORY,
   FILTER_BY_PRICE,
   selectFilteredProducts,
-} from "@/src/redux/slice/filterSlice";
-import { Product } from "@/src/types";
-import ProductFilter from "./Product/ProductFilter";
-import ProductList from "./Product/ProductList";
+} from "@/redux/slice/filterSlice";
 
 interface ShopClientProps {
   initialProducts: Product[];

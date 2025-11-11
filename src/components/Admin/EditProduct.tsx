@@ -1,8 +1,8 @@
 "use client";
 
 import { ChangeEvent, useState, useTransition } from "react";
-import { editProductAction } from "@/src/app/admin/products/actions";
-import { Product } from "@/src/types";
+import { editProductAction } from "@/app/admin/products/actions";
+import { Product } from "@/types";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import { FaTrash } from "react-icons/fa";
 

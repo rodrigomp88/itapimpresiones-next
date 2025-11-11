@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../[...nextauth]/route";
-import { admin } from "@/src/firebase/admin";
+import { admin } from "@/firebase/admin";
 import { NextResponse } from "next/server";
 
 export async function POST() {

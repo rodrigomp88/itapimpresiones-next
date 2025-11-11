@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { getMessaging, getToken, isSupported } from "firebase/messaging";
-import { app } from "@/src/firebase/config";
-import { saveUserFCMTokenAction } from "@/src/app/(public)/orders/actions";
+import { saveUserFCMTokenAction } from "@/app/(public)/orders/actions";
+import app from "@/firebase/config";
 
 const UserNotificationProvider = () => {
   useEffect(() => {

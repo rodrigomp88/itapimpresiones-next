@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "@/src/types";
 import { RootState } from "../store";
+import { Product } from "@/types";
 
 interface FilterState {
   filteredProducts: Product[];

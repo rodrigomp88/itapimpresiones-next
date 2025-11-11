@@ -1,7 +1,7 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { Product } from "@/src/types";
-import { db } from "@/src/firebase/config";
-import ShopClient from "@/src/components/ShopClient";
+import { Product } from "@/types";
+import { db } from "@/firebase/config";
+import ShopClient from "@/components/ShopClient";
 
 async function getProducts(): Promise<Product[]> {
   const productsRef = collection(db, "products");

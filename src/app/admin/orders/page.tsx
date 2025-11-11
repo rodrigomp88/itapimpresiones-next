@@ -1,5 +1,5 @@
-import { adminDb } from "@/src/firebase/admin";
-import { Order } from "@/src/types";
+import { adminDb } from "@/firebase/admin";
+import { Order } from "@/types";
 import Link from "next/link";
 
 async function getAllOrders(): Promise<Order[]> {

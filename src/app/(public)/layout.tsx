@@ -1,5 +1,5 @@
-import Footer from "@/src/components/Footer/page";
-import Navbar from "@/src/components/NavBar/page";
+import Footer from "@/components/Footer/page";
+import Navbar from "@/components/NavBar/page";
 import React from "react";
 
 export default function PublicLayout({

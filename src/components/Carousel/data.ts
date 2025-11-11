@@ -1,4 +1,4 @@
-import { SlideData } from "@/src/types";
+import { SlideData } from "@/types";
 
 export const sliderData: SlideData[] = [
   {

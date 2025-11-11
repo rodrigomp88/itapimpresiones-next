@@ -1,5 +1,5 @@
+import { sliderData } from "@/components/Carousel/data";
 import { useEffect, useState, useRef } from "react";
-import { sliderData } from "@/src/components/Carousel/data";
 
 const useSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

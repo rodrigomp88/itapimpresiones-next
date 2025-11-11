@@ -1,12 +1,12 @@
 "use client";
 
-import { Order, Message } from "@/src/types";
+import { Order, Message } from "@/types";
 import { useState, useEffect, useTransition } from "react";
 import {
   updateOrderStatusAction,
   sendAdminMessageAction,
-} from "@/src/app/admin/orders/actions";
-import { markOrderAsReadAction } from "@/src/app/(public)/orders/actions";
+} from "@/app/admin/orders/actions";
+import { markOrderAsReadAction } from "@/app/(public)/orders/actions";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 
 interface AdminOrderDetailsClientProps {

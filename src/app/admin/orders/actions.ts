@@ -1,6 +1,6 @@
 "use server";
 
-import { adminDb } from "@/src/firebase/admin";
+import { adminDb } from "@/firebase/admin";
 import { revalidatePath } from "next/cache";
 import { Timestamp } from "firebase-admin/firestore";
 

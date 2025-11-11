@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { CartItem, Product } from "@/src/types";
+import { CartItem, Product } from "@/types";
 import {
   NotiflixFailure,
   NotiflixSuccess,
   NotiflixWarning,
-} from "@/src/components/Notiflix/Notiflix";
+} from "@/components/Notiflix/Notiflix";
 
 interface CartState {
   cartItems: CartItem[];

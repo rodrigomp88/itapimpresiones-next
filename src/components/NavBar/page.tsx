@@ -6,15 +6,15 @@ import { useSession, signOut } from "next-auth/react";
 import { IoCartOutline } from "react-icons/io5";
 import { RiMenu3Fill, RiCloseLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  CALCULATE_TOTAL_QUANTITY,
-  selectCartTotalQuantity,
-} from "@/src/redux/slice/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 import UserNotificationBell from "../Notifications/UserNotificationBell";
 import UserNotificationProvider from "../Notifications/UserNotificationProvider";
 import InAppNotificationHandler from "../Notifications/InAppNotificationHandler";
 import Image from "next/image";
+import {
+  CALCULATE_TOTAL_QUANTITY,
+  selectCartTotalQuantity,
+} from "@/redux/slice/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -49,11 +49,11 @@ const Navbar = () => {
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
         <Link href="/" className="relative h-10 w-[100px]">
           <Image
-            src="/images/itap-logowhite.png"
+            src={"/images/logowhite.png"}
+            width={150}
+            height={40}
             alt="Itap Impresiones Logo"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-contain"
+            className="h-10 w-auto hidden dark:block"
             priority
           />
         </Link>

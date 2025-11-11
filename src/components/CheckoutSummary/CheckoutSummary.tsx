@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { useAppSelector } from "@/src/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import {
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
-} from "@/src/redux/slice/cartSlice";
+} from "@/redux/slice/cartSlice";
 
 const CheckoutSummary: React.FC = () => {
   const cartItems = useAppSelector(selectCartItems);

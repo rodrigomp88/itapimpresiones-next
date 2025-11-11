@@ -1,6 +1,6 @@
-import ProductDetailsClient from "@/src/components/ProductDetailsClient";
-import { db } from "@/src/firebase/config";
-import { Product } from "@/src/types";
+import ProductDetailsClient from "@/components/ProductDetailsClient";
+import { db } from "@/firebase/config";
+import { Product } from "@/types";
 import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 

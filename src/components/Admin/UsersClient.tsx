@@ -1,6 +1,6 @@
 "use client";
 
-import { SimpleUser } from "@/src/app/admin/users/page";
+import { SimpleUser } from "@/app/admin/users/page";
 import { FaGoogle, FaEnvelope } from "react-icons/fa";
 
 interface UsersClientProps {

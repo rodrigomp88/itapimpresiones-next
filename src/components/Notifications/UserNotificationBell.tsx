@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { auth, db } from "@/src/firebase/config";
 import { useSession } from "next-auth/react";
-import { Order } from "@/src/types";
 import { FaBell } from "react-icons/fa";
 import NotificationDropdown from "./NotificationDropdown";
 import { onAuthStateChanged } from "firebase/auth";
+import { Order } from "@/types";
+import { auth, db } from "@/firebase/config";
 
 const UserNotificationBell = () => {
   const { data: session } = useSession();

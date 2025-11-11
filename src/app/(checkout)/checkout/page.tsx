@@ -3,15 +3,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { ShippingAddress } from "@/src/redux/slice/checkoutSlice";
-import {
-  CALCULATE_SUBTOTAL,
-  CALCULATE_TOTAL_QUANTITY,
-  CLEAR_CART,
-  selectCartItems,
-  selectCartTotalAmount,
-} from "@/src/redux/slice/cartSlice";
 import {
   Timestamp,
   addDoc,
@@ -20,13 +11,22 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
+import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
+import { ShippingAddress } from "@/redux/slice/checkoutSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  CALCULATE_SUBTOTAL,
+  CALCULATE_TOTAL_QUANTITY,
+  CLEAR_CART,
+  selectCartItems,
+  selectCartTotalAmount,
+} from "@/redux/slice/cartSlice";
+import { auth, db } from "@/firebase/config";
 import {
   NotiflixFailure,
   NotiflixSuccess,
-} from "@/src/components/Notiflix/Notiflix";
-import { auth, db } from "@/src/firebase/config";
-import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
-import CheckoutSummary from "@/src/components/CheckoutSummary/CheckoutSummary";
+} from "@/components/Notiflix/Notiflix";
+import CheckoutSummary from "@/components/CheckoutSummary/CheckoutSummary";
 
 const initialAddressState: ShippingAddress = {
   name: "",

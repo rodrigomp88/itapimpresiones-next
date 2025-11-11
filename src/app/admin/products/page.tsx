@@ -1,6 +1,6 @@
-import AdminProductsClient from "@/src/components/Admin/AdminProductsClient";
-import { adminDb } from "@/src/firebase/admin";
-import { Product } from "@/src/types";
+import AdminProductsClient from "@/components/Admin/AdminProductsClient";
+import { adminDb } from "@/firebase/admin";
+import { Product } from "@/types";
 
 async function getProducts(): Promise<Product[]> {
   const snapshot = await adminDb

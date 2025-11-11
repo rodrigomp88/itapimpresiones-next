@@ -6,9 +6,9 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaAngleRight } from "react-icons/fa";
-import { auth } from "@/src/firebase/config";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
-import { selectPreviousURL, SAVE_URL } from "@/src/redux/slice/cartSlice";
+import { auth } from "@/firebase/config";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectPreviousURL, SAVE_URL } from "@/redux/slice/cartSlice";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");

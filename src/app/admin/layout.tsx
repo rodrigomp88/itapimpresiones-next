@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import AdminNotificationBell from "@/src/components/Notifications/AdminNotificationBell";
-import FirebaseMessagingProvider from "@/src/components/Notifications/FirebaseMessagingProvider";
+import AdminNotificationBell from "@/components/Notifications/AdminNotificationBell";
+import FirebaseMessagingProvider from "@/components/Notifications/FirebaseMessagingProvider";
 
 export default async function AdminLayout({
   children,

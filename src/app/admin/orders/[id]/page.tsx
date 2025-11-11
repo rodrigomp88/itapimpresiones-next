@@ -1,6 +1,6 @@
-import AdminOrderDetailsClient from "@/src/components/Admin/AdminOrderDetailsClient";
-import { adminDb } from "@/src/firebase/admin";
-import { Order, Message } from "@/src/types";
+import AdminOrderDetailsClient from "@/components/Admin/AdminOrderDetailsClient";
+import { adminDb } from "@/firebase/admin";
+import { Order, Message } from "@/types";
 import { notFound } from "next/navigation";
 
 async function getOrderAndMessages(

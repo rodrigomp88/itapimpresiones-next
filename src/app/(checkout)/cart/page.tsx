@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+import { FaArrowLeft, FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   ADD_TO_CART,
   CALCULATE_SUBTOTAL,
@@ -16,10 +17,9 @@ import {
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
-} from "@/src/redux/slice/cartSlice";
-import { Product } from "@/src/types";
-import { FaArrowLeft, FaMinus, FaPlus, FaTrashAlt } from "react-icons/fa";
-import CheckoutSummary from "@/src/components/CheckoutSummary/CheckoutSummary";
+} from "@/redux/slice/cartSlice";
+import { Product } from "@/types";
+import CheckoutSummary from "@/components/CheckoutSummary/CheckoutSummary";
 
 const CartPage: React.FC = () => {
   const router = useRouter();

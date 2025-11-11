@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Order, Message } from "@/src/types";
 import {
   doc,
   collection,
@@ -11,10 +10,11 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { Message, Order } from "@/types";
 import {
-  sendUserMessageAction,
   markOrderAsReadAction,
-} from "@/src/app/(public)/orders/actions";
+  sendUserMessageAction,
+} from "@/app/(public)/orders/actions";
 
 interface OrderDetailsClientProps {
   order: Order;

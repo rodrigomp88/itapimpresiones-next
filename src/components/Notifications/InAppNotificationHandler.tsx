@@ -2,9 +2,9 @@
 
 import { useEffect } from "react";
 import { getMessaging, onMessage } from "firebase/messaging";
-import { app } from "@/src/firebase/config";
 import { NotiflixInfo } from "../Notiflix/Notiflix";
 import { useSession } from "next-auth/react";
+import app from "@/firebase/config";
 
 const InAppNotificationHandler = () => {
   const { status } = useSession();

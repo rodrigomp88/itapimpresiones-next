@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/src/types";
+import { Product } from "@/types";
 import { useState, useMemo, useTransition } from "react";
 import {
   FaPauseCircle,
@@ -11,7 +11,7 @@ import {
 import {
   deleteProductAction,
   togglePauseProductAction,
-} from "@/src/app/admin/products/actions";
+} from "@/app/admin/products/actions";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";

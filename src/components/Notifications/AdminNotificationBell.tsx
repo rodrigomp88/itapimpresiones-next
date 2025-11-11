@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useRef } from "react";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { db } from "@/src/firebase/config";
-import { Order } from "@/src/types";
 import { FaBell } from "react-icons/fa";
 import AdminNotificationDropdown from "./AdminNotificationDropdown";
+import { db } from "@/firebase/config";
+import { Order } from "@/types";
 
 const AdminNotificationBell = () => {
   const [notifications, setNotifications] = useState<Order[]>([]);

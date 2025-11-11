@@ -1,9 +1,9 @@
 "use client";
 
-import { Product } from "@/src/types";
 import { useState, useEffect, useMemo } from "react";
 import ProductFilter from "./ProductFilter";
 import ProductList from "./ProductList";
+import { Product } from "@/types";
 
 interface ProductContainerProps {
   initialProducts: Product[];

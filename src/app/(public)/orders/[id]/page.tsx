@@ -1,7 +1,7 @@
-import { authOptions } from "@/src/app/api/auth/[...nextauth]/route";
-import OrderDetailsClient from "@/src/components/OrderDetailsClient";
-import { adminDb } from "@/src/firebase/admin";
-import { Order } from "@/src/types";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import OrderDetailsClient from "@/components/OrderDetailsClient";
+import { adminDb } from "@/firebase/admin";
+import { Order } from "@/types";
 import { getServerSession } from "next-auth";
 import { notFound, redirect } from "next/navigation";
 
