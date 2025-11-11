@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -22,6 +22,7 @@ import { Product } from "@/types";
 import CheckoutSummary from "@/components/CheckoutSummary/CheckoutSummary";
 
 const CartPage: React.FC = () => {
+  const [isClient, setIsClient] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const { status } = useSession();
@@ -37,6 +38,10 @@ const CartPage: React.FC = () => {
   const clearCart = () => dispatch(CLEAR_CART());
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [cartItems, dispatch]);
@@ -49,6 +54,15 @@ const CartPage: React.FC = () => {
       router.push("/auth/login");
     }
   };
+
+  if (!isClient) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <p className="text-xl">Cargando carrito...</p>
+        {/* Aquí puedes poner un spinner o un esqueleto de UI si quieres */}
+      </div>
+    );
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -85,16 +99,17 @@ const CartPage: React.FC = () => {
           {cartItems.map((cart) => (
             <div
               key={cart.id}
-              className="flex items-center p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
+              className="grid grid-cols-[auto_1fr] gap-x-4 p-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0 md:flex md:items-center"
             >
-              <div className="flex-shrink-0 w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center">
+              <div className="flex-shrink-0 w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center row-span-2 md:row-auto">
                 <img
                   className="max-h-full max-w-full object-contain"
                   src={cart.images[0]}
                   alt={cart.name}
                 />
               </div>
-              <div className="ml-4 flex-grow">
+
+              <div className="ml-0 flex-grow md:ml-4">
                 <Link
                   href={`/producto-detalle/${cart.id}`}
                   className="font-semibold hover:underline"
@@ -111,26 +126,30 @@ const CartPage: React.FC = () => {
                   Quitar
                 </button>
               </div>
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={() => decreaseCart(cart)}
-                  className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  <FaMinus />
-                </button>
-                <p className="w-8 text-center font-semibold">
-                  {cart.cartQuantity}
+
+              <div className="col-start-2 mt-2 flex items-center justify-between md:col-auto md:mt-0 md:justify-start md:gap-4">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => decreaseCart(cart)}
+                    className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                  >
+                    <FaMinus />
+                  </button>
+                  <p className="w-8 text-center font-semibold">
+                    {cart.cartQuantity}
+                  </p>
+                  <button
+                    onClick={() => increaseCart(cart)}
+                    className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                  >
+                    <FaPlus />
+                  </button>
+                </div>
+
+                <p className="w-auto text-right font-semibold md:w-24">
+                  ${(cart.price * cart.cartQuantity).toLocaleString("es-AR")}
                 </p>
-                <button
-                  onClick={() => increaseCart(cart)}
-                  className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-                >
-                  <FaPlus />
-                </button>
               </div>
-              <p className="w-24 text-right font-semibold">
-                ${(cart.price * cart.cartQuantity).toLocaleString("es-AR")}
-              </p>
             </div>
           ))}
         </div>

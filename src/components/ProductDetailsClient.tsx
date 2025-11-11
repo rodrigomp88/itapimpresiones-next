@@ -37,7 +37,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
         <FaAngleDoubleLeft />
         Volver a la tienda
       </Link>
-      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md overflow-hidden">
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-12 rounded-lg shadow-md overflow-hidden">
         <Slider images={product.images.map((imgUrl) => ({ url: imgUrl }))} />
 
         <div className="p-6 flex flex-col">
@@ -52,7 +52,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
           </div>
 
           <p className="text-gray-600 dark:text-gray-300 my-4 flex-grow">
-            {product.desc}
+            {product.description}
           </p>
 
           <div className="mt-auto pt-4">

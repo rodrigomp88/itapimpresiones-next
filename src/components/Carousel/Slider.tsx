@@ -49,14 +49,14 @@ const Slider: React.FC<SliderProps> = ({ images }) => {
         <>
           <button
             onClick={prevSlide}
-            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition"
+            className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition cursor-pointer"
             aria-label="Anterior"
           >
             &#10094;
           </button>
           <button
             onClick={nextSlide}
-            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition"
+            className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/30 text-white rounded-full p-2 hover:bg-black/50 transition cursor-pointer"
             aria-label="Siguiente"
           >
             &#10095;

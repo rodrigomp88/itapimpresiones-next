@@ -85,7 +85,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4">
           {status === "authenticated" && (
-            <div className="hidden md:block">
+            <div className="relative">
               <UserNotificationBell />
             </div>
           )}
@@ -178,7 +178,6 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 Hola, {user?.name || user?.email?.split("@")[0]}
               </p>
             )}
-            {status === "authenticated" && <UserNotificationBell />}
           </div>
 
           <div className="flex flex-col space-y-6">
