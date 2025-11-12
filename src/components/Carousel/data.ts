@@ -2,22 +2,22 @@ import { SlideData } from "@/types";
 
 export const sliderData: SlideData[] = [
   {
-    image: "/images/bg-1.png",
+    image: "/images/carousel0.png",
     heading: "Bolsas Termo-sellada de Friselina",
     desc: "Con tu logo, varias medidas.",
   },
   {
-    image: "/images/bg-2.png",
+    image: "/images/carousel1.png",
     heading: "Remeras algodon peinado",
     desc: "100% algodón vários talles.",
   },
   {
-    image: "/images/bg-3.png",
+    image: "/images/carousel2.png",
     heading: "Buzos",
     desc: "Imprimí tu logo.",
   },
   {
-    image: "/images/bg-4.png",
+    image: "/images/carousel3.png",
     heading: "Gorras",
     desc: "Diferentes modelos .",
   },

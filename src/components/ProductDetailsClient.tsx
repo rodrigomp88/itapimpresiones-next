@@ -11,6 +11,7 @@ import {
 } from "../redux/slice/cartSlice";
 import { Product } from "../types";
 import Slider from "./Carousel/Slider";
+import { useEffect, useState } from "react";
 
 interface ProductDetailsClientProps {
   product: Product;
@@ -22,6 +23,12 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const isCartAdded = cartItems.some((item) => item.id === product.id);
 
@@ -60,29 +67,27 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
               <p className="text-lg text-center font-bold text-red-500">
                 Sin Stock
               </p>
+            ) : !isClient ? (
+              <div className="w-full h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
+            ) : isCartAdded ? (
+              <Link href="/cart" className="btn btn-secondary w-full">
+                Ya está en el carrito
+              </Link>
             ) : (
-              <>
-                {isCartAdded ? (
-                  <Link href="/cart" className="btn btn-secondary w-full">
-                    Ya está en el carrito
-                  </Link>
-                ) : (
-                  <div>
-                    <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
-                      Mínimo de compra: {product.unity} unidades
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <p className="text-3xl font-bold text-violet-600 dark:text-violet-400">
-                        ${product.price.toLocaleString("es-AR")}
-                      </p>
-                      <button className="btn btn-primary" onClick={addToCart}>
-                        <FaCartPlus />
-                        Añadir al carrito
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </>
+              <div>
+                <p className="mb-3 text-sm text-gray-500 dark:text-gray-400">
+                  Mínimo de compra: {product.unity} unidades
+                </p>
+                <div className="flex justify-between items-center">
+                  <p className="text-3xl font-bold text-violet-600 dark:text-violet-400">
+                    ${product.price.toLocaleString("es-AR")}
+                  </p>
+                  <button className="btn btn-primary" onClick={addToCart}>
+                    <FaCartPlus />
+                    Añadir al carrito
+                  </button>
+                </div>
+              </div>
             )}
           </div>
         </div>

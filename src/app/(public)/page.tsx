@@ -36,18 +36,18 @@ const Home = () => {
           <div className="grid md:grid-cols-3">
             <GuiaTienda
               title="Paso 1"
-              description="Selecciona el producto, la cantidad y agrega al carrito"
-              image="/images/paso-1.jpg"
+              description="Selecciona el producto"
+              image="/images/guia0.jpg"
             />
             <GuiaTienda
               title="Paso 2"
-              description="Verifica que los productos y sus cantidades sean las seleccionadas"
-              image="/images/paso-1.jpg"
+              description="Confirma el producto y su cantidad"
+              image="/images/guia1.jpg"
             />
             <GuiaTienda
               title="Paso 3"
-              description="Eleji el metodo de pago y espera el producto"
-              image="/images/paso-1.jpg"
+              description="Completa tus datos y confirma"
+              image="/images/guia2.jpg"
             />
           </div>
         </div>
@@ -60,7 +60,7 @@ const Home = () => {
             y: activeSection === "nosotros" ? 0 : 100,
           }}
           transition={{ duration: 0.5 }}
-          className=" border my-8 rounded-md shadow-lg"
+          className=" my-8 shadow-lg"
         >
           <div className="container mx-auto">
             <div className="py-3">
@@ -88,7 +88,7 @@ const Home = () => {
             y: activeSection === "productos" ? 0 : 100,
           }}
           transition={{ duration: 0.5 }}
-          className="border my-8 rounded-md shadow-lg"
+          className="my-8 shadow-lg"
         >
           <div className="container mx-auto">
             <div className="py-3">
@@ -125,7 +125,7 @@ const Home = () => {
             y: activeSection === "informacion" ? 0 : 100,
           }}
           transition={{ duration: 0.5 }}
-          className="border my-8 rounded-md shadow-lg"
+          className="my-8 shadow-lg"
         >
           <div className="container mx-auto">
             <div className="py-3">

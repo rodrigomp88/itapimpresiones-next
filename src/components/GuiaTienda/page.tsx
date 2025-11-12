@@ -21,7 +21,7 @@ const GuiaTienda: React.FC<GuiaTiendaProps> = ({
     >
       <h2 className="font-thin text-xl">{title}</h2>
       <ImageModal image={image} title={title} nameClass={"h-60"} />
-      <p className="h-auto">{description}</p>
+      <p className="h-auto p-2 font-bold text-md">{description}</p>
     </div>
   );
 };
