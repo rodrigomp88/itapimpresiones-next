@@ -32,10 +32,10 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
     );
   }, [search, initialProducts]);
 
-  const handleDelete = (productId: string) => {
+  const handleDelete = (productId: string, productSlug: string) => {
     if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
       startTransition(async () => {
-        const result = await deleteProductAction(productId);
+        const result = await deleteProductAction(productId, productSlug);
         if (result.success) {
           NotiflixSuccess("Producto eliminado.");
         } else {
@@ -124,7 +124,7 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                       <FaPencilAlt className="text-blue-500" />
                     </button>
                     <button
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleDelete(product.id, product.slug)}
                       disabled={isPending}
                       className="btn-icon"
                     >
