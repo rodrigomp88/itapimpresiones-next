@@ -83,10 +83,11 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input"
               required
             />
-            <label htmlFor="desc">Descripción</label>
+            <label htmlFor="description">Descripción</label>
             <textarea
-              name="desc"
-              defaultValue={product.desc}
+              name="description"
+              id="description"
+              defaultValue={product.description}
               className="input"
               required
             />
@@ -100,12 +101,6 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
             />
             <label htmlFor="size">Tamaño/Medidas</label>
             <input name="size" defaultValue={product.size} className="input" />
-            <label htmlFor="brand">Marca</label>
-            <input
-              name="brand"
-              defaultValue={product.brand}
-              className="input"
-            />
             <div>
               <label>Imágenes Actuales</label>
               <div className="flex flex-wrap gap-2 mt-2">

@@ -47,13 +47,13 @@ const Navbar = () => {
       )}
 
       <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
-        <Link href="/" className="relative h-10 w-[100px]">
+        <Link href="/" className="relative">
           <Image
             src={"/images/logowhite.png"}
-            width={150}
+            width={90}
             height={40}
             alt="Itap Impresiones Logo"
-            className="h-10 w-auto hidden dark:block"
+            className="hidden dark:block"
             priority
           />
         </Link>
@@ -85,7 +85,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4">
           {status === "authenticated" && (
-            <div className="relative">
+            <div className="relative hidden md:block">
               <UserNotificationBell />
             </div>
           )}
@@ -177,6 +177,12 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <p className="font-semibold">
                 Hola, {user?.name || user?.email?.split("@")[0]}
               </p>
+            )}
+
+            {status === "authenticated" && (
+              <div className="relative">
+                <UserNotificationBell />
+              </div>
             )}
           </div>
 

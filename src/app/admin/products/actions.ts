@@ -2,6 +2,7 @@
 
 import { adminDb, adminStorage } from "@/firebase/admin";
 import { revalidatePath } from "next/cache";
+import { createSlug } from "@/lib/utils";
 
 export async function addProductAction(formData: FormData, productId?: string) {
   if (productId) {
@@ -18,12 +19,14 @@ export async function addProductAction(formData: FormData, productId?: string) {
     }
   }
 
+  const name = formData.get("name") as string;
+
   const newProductData = {
-    name: formData.get("name") as string,
+    name: name,
+    slug: createSlug(name),
     price: Number(formData.get("price")),
     category: formData.get("category") as string,
-    brand: formData.get("brand") as string,
-    desc: formData.get("desc") as string,
+    description: formData.get("description") as string,
     unity: Number(formData.get("unity")),
     size: formData.get("size") as string,
     pause: false,
@@ -60,12 +63,14 @@ async function deleteImages(imageUrls: string[]) {
 }
 
 export async function editProductAction(productId: string, formData: FormData) {
+  const name = formData.get("name") as string;
+
   const updatedData = {
-    name: formData.get("name") as string,
+    name: name,
+    slug: createSlug(name),
     price: Number(formData.get("price")),
     category: formData.get("category") as string,
-    brand: formData.get("brand") as string,
-    desc: formData.get("desc") as string,
+    description: formData.get("description") as string,
     unity: Number(formData.get("unity")),
     size: formData.get("size") as string,
   };
@@ -109,17 +114,24 @@ export async function editProductAction(productId: string, formData: FormData) {
   }
 
   revalidatePath("/admin/products");
-  revalidatePath(`/producto-detalle/${productId}`);
+  revalidatePath(`/producto/${updatedData.slug}`);
+  revalidatePath("/tienda");
   return { success: true };
 }
 
-export async function deleteProductAction(productId: string) {
+export async function deleteProductAction(
+  productId: string,
+  productSlug: string
+) {
   try {
     await adminDb.collection("products").doc(productId).delete();
   } catch (error) {
     return { success: false, error: "No se pudo eliminar el producto." };
   }
+
   revalidatePath("/admin/products");
+  revalidatePath(`/producto/${productSlug}`);
+  revalidatePath("/tienda");
   return { success: true };
 }
 

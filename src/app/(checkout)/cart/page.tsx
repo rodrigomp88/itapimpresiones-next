@@ -111,7 +111,7 @@ const CartPage: React.FC = () => {
 
               <div className="ml-0 flex-grow md:ml-4">
                 <Link
-                  href={`/producto-detalle/${cart.id}`}
+                  href={`/producto/${cart.slug}`}
                   className="font-semibold hover:underline"
                 >
                   {cart.name}

@@ -121,11 +121,10 @@ const AddProduct = () => {
                   className="input"
                   required
                 />
-                <label htmlFor="brand">Marca</label>
-                <input name="brand" placeholder="Marca" className="input" />
-                <label htmlFor="desc">Descripción</label>
+                <label htmlFor="description">Descripción</label>
                 <textarea
-                  name="desc"
+                  name="description"
+                  id="description"
                   placeholder="Descripción"
                   className="input"
                   required

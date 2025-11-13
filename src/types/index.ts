@@ -3,16 +3,15 @@ import { ShippingAddress } from "../redux/slice/checkoutSlice";
 export interface Product {
   id: string;
   name: string;
+  slug: string;
   price: number;
   images: string[];
   pause: boolean;
   unity: number;
   size: string;
   category: string;
-  brand: string;
   description: string;
   createdAt: string;
-  desc: string;
 }
 
 export interface CartItem extends Product {

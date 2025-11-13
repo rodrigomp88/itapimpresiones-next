@@ -1,10 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Link from "next/link";
 import useSlider from "@/hooks/useSlider";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+  exit: { opacity: 0 },
+};
+
+const textVariants = {
+  hidden: { y: -50, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+};
+
+const imageVariants = {
+  hidden: { x: 100, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.5 } },
+};
 
 const Carousel: React.FC = () => {
   const { currentSlide, nextSlide, prevSlide, goToSlide, sliderData } =
@@ -20,25 +41,31 @@ const Carousel: React.FC = () => {
         <motion.div
           key={currentSlide}
           className="w-full h-full absolute inset-0 grid md:grid-cols-2 items-center"
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.5 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
-          <div className="flex flex-col items-center justify-center text-center space-y-4 p-4">
+          <motion.div
+            variants={textVariants}
+            className="flex flex-col items-center justify-center text-center space-y-4 p-4"
+          >
             <h1 className="text-2xl md:text-4xl font-bold">
               {sliderData[currentSlide].heading}
             </h1>
             <p className="text-lg">{sliderData[currentSlide].desc}</p>
-          </div>
+          </motion.div>
 
-          <div className="flex items-center justify-center p-4">
+          <motion.div
+            variants={imageVariants}
+            className="flex items-center justify-center p-4"
+          >
             <img
               src={sliderData[currentSlide].image}
               alt={sliderData[currentSlide].heading}
               className="max-h-[70vh] w-auto object-contain"
             />
-          </div>
+          </motion.div>
         </motion.div>
       </AnimatePresence>
 
@@ -71,7 +98,6 @@ const Carousel: React.FC = () => {
             <FaAngleRight />
           </button>
         </div>
-
         <Link href="/tienda" className="btn-primary">
           Mira nuestra tienda
         </Link>

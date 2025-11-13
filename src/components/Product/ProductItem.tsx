@@ -8,10 +8,11 @@ import { Product } from "@/types";
 const ProductItem: React.FC<Product> = ({
   id,
   name,
-  price,
+  slug,
+  price = 0,
   images,
   pause,
-  unity,
+  unity = 1,
   size,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -27,18 +28,22 @@ const ProductItem: React.FC<Product> = ({
     setCurrentImageIndex(0);
   };
 
+  if (!slug) {
+    return null;
+  }
+
   return (
-    <Link href={`/producto-detalle/${id}`} className="block group">
+    <Link href={`/producto/${slug}`} className="block group">
       <div
         className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative w-full h-64 flex items-center justify-center">
+        <div className="relative w-full h-64 flex items-center justify-center bg-gray-100">
           {!imageLoaded && (
             <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
           )}
-          {images && images.length > 0 && (
+          {images && images.length > 0 ? (
             <img
               className={`w-full h-full object-contain transition-opacity duration-300 ${
                 imageLoaded ? "opacity-100" : "opacity-0"
@@ -46,12 +51,20 @@ const ProductItem: React.FC<Product> = ({
               src={images[currentImageIndex]}
               alt={name}
               onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
             />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400">
+              Sin imagen
+            </div>
           )}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-lg font-semibold truncate" title={name}>
+        <div className="p-4 flex flex-col flex-grow bg-white dark:bg-gray-800">
+          <h3
+            className="text-lg font-semibold truncate text-gray-800 dark:text-gray-100"
+            title={name}
+          >
             {name}
           </h3>
 
