@@ -39,7 +39,7 @@ const ProductItem: React.FC<Product> = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative w-full h-64 flex items-center justify-center bg-gray-100">
+        <div className="relative w-full h-64 flex items-center justify-center">
           {!imageLoaded && (
             <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
           )}
@@ -60,7 +60,7 @@ const ProductItem: React.FC<Product> = ({
           )}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow bg-white dark:bg-gray-800">
+        <div className="p-4 flex flex-col flex-grow border-b border-r border-l rounded-xl">
           <h3
             className="text-lg font-semibold truncate text-gray-800 dark:text-gray-100"
             title={name}

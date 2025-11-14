@@ -64,9 +64,8 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
 
   return (
     <section className="p-5 my-1">
-      <h1 className="text-center py-3">Nuestra Tienda</h1>
       <div className="flex flex-col md:flex-row gap-8">
-        <aside className="md:w-1/4">
+        <aside className="w-full md:w-1/4">
           <ProductFilter
             categories={allCategories}
             selectedCategory={category}
@@ -77,7 +76,8 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             onPriceChange={handlePriceChange}
           />
         </aside>
-        <main className="md:w-3/4">
+
+        <main className="w-full md:w-3/4">
           <ProductList products={filteredProducts} />
         </main>
       </div>
