@@ -1,27 +1,35 @@
 import admin from "firebase-admin";
 
-if (!admin.apps.length) {
-  try {
-    const serviceAccount = JSON.parse(
-      process.env.FIREBASE_SERVICE_ACCOUNT_JSON as string
-    );
+let adminAuth: admin.auth.Auth | null = null;
+let adminDb: admin.firestore.Firestore | null = null;
+let adminStorage: admin.storage.Storage | null = null;
 
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
-    });
-    console.log("Firebase Admin SDK initialized successfully.");
-  } catch (error: any) {
-    console.error("Firebase Admin SDK initialization error:", error.message);
-    if (process.env.NODE_ENV === "development") {
-      console.log(
-        "Did you forget to set FIREBASE_SERVICE_ACCOUNT_JSON in .env.local?"
+try {
+  if (!admin.apps.length) {
+    const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT_JSON
+      ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON)
+      : null;
+
+    if (serviceAccount) {
+      admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+      });
+      console.log("Firebase Admin SDK initialized successfully.");
+    } else {
+      console.warn(
+        "FIREBASE_SERVICE_ACCOUNT_JSON not provided. Admin SDK not initialized."
       );
     }
   }
+
+  if (admin.apps.length) {
+    adminAuth = admin.auth();
+    adminDb = admin.firestore();
+    adminStorage = admin.storage();
+  }
+} catch (error: any) {
+  console.error("Firebase Admin SDK initialization error:", error.message);
 }
 
-export const adminAuth = admin.auth();
-export const adminDb = admin.firestore();
-export const adminStorage = admin.storage();
-export { admin };
+export { admin, adminAuth, adminDb, adminStorage };

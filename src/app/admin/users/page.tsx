@@ -12,6 +12,11 @@ export interface SimpleUser {
 }
 
 async function getAllUsers(): Promise<SimpleUser[]> {
+  if (!adminAuth) {
+    console.warn("Admin SDK not initialized. Cannot fetch users.");
+    return [];
+  }
+
   try {
     const userRecords: UserRecord[] = [];
     let nextPageToken;

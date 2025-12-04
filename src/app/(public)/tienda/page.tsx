@@ -1,14 +1,13 @@
 import { Product } from "@/types";
-import { adminDb } from "@/firebase/admin";
+import { db } from "@/firebase/config";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import ShopClient from "@/components/ShopClient";
 
 async function getProducts(): Promise<Product[]> {
   try {
-    const productsRef = adminDb.collection("products");
-
-    const q = productsRef.orderBy("createdAt", "desc");
-
-    const querySnapshot = await q.get();
+    const productsRef = collection(db, "products");
+    const q = query(productsRef, orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
       return [];

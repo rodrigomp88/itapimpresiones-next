@@ -46,8 +46,16 @@ const Navbar = () => {
         </>
       )}
 
-      <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-black border-b border-gray-200">
+      <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
         <Link href="/" className="relative">
+          <Image
+            src={"/images/logoblack.png"}
+            width={90}
+            height={40}
+            alt="Itap Impresiones Logo"
+            className="block dark:hidden"
+            priority
+          />
           <Image
             src={"/images/logowhite.png"}
             width={90}
@@ -61,6 +69,18 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-6">
           <Link href="/" className="group">
             Inicio
+            <span className="underline-hover" />
+          </Link>
+          <Link href="/servicios" className="group">
+            Servicios
+            <span className="underline-hover" />
+          </Link>
+          <Link href="/bolsas" className="group">
+            Bolsas
+            <span className="underline-hover" />
+          </Link>
+          <Link href="/indumentaria" className="group">
+            Indumentaria
             <span className="underline-hover" />
           </Link>
           <Link href="/tienda" className="group">
@@ -189,6 +209,27 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
           <div className="flex flex-col space-y-6">
             <Link href="/" className="sidebar-link" onClick={closeSidebar}>
               Inicio
+            </Link>
+            <Link
+              href="/servicios"
+              className="sidebar-link"
+              onClick={closeSidebar}
+            >
+              Servicios
+            </Link>
+            <Link
+              href="/bolsas"
+              className="sidebar-link"
+              onClick={closeSidebar}
+            >
+              Bolsas
+            </Link>
+            <Link
+              href="/indumentaria"
+              className="sidebar-link"
+              onClick={closeSidebar}
+            >
+              Indumentaria
             </Link>
             <Link
               href="/tienda"

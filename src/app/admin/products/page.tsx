@@ -1,12 +1,13 @@
 import AdminProductsClient from "@/components/Admin/AdminProductsClient";
-import { adminDb } from "@/firebase/admin";
+import { db } from "@/firebase/config";
+import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import { Product } from "@/types";
 
 async function getProducts(): Promise<Product[]> {
-  const snapshot = await adminDb
-    .collection("products")
-    .orderBy("createdAt", "desc")
-    .get();
+  const productsRef = collection(db, "products");
+  const q = query(productsRef, orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+
   if (snapshot.empty) return [];
 
   return snapshot.docs.map((doc) => {

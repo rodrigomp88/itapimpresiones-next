@@ -1,15 +1,14 @@
 import ProductDetailsClient from "@/components/ProductDetailsClient";
-import { adminDb } from "@/firebase/admin";
+import { db } from "@/firebase/config";
+import { collection, query, where, limit, getDocs } from "firebase/firestore";
 import { Product } from "@/types";
 import { notFound } from "next/navigation";
 
 async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const productsRef = adminDb.collection("products");
-
-    const q = productsRef.where("slug", "==", slug).limit(1);
-
-    const querySnapshot = await q.get();
+    const productsRef = collection(db, "products");
+    const q = query(productsRef, where("slug", "==", slug), limit(1));
+    const querySnapshot = await getDocs(q);
 
     if (querySnapshot.empty) {
       console.log(`Servidor: No se encontró producto con slug: ${slug}`);
@@ -42,8 +41,8 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
 
 export async function generateStaticParams() {
   try {
-    const productsRef = adminDb.collection("products");
-    const snapshot = await productsRef.get();
+    const productsRef = collection(db, "products");
+    const snapshot = await getDocs(productsRef);
 
     if (snapshot.empty) {
       console.log(

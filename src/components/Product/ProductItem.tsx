@@ -14,6 +14,7 @@ const ProductItem: React.FC<Product> = ({
   pause,
   unity = 1,
   size,
+  description,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -33,64 +34,65 @@ const ProductItem: React.FC<Product> = ({
   }
 
   return (
-    <Link href={`/producto/${slug}`} className="block group">
+    <Link href={`/producto/${slug}`} className="block group h-full">
       <div
-        className="flex flex-col h-full rounded-lg shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1"
+        className="flex flex-col h-full bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-shadow hover:shadow-lg dark:hover:shadow-2xl dark:hover:shadow-primary/10"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="relative w-full h-64 flex items-center justify-center">
+        <div className="relative overflow-hidden w-full h-64">
           {!imageLoaded && (
             <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
           )}
           {images && images.length > 0 ? (
             <img
-              className={`w-full h-full object-contain transition-opacity duration-300 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
+              className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
+                }`}
               src={images[currentImageIndex]}
               alt={name}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400">
+            <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-100 dark:bg-zinc-800">
               Sin imagen
             </div>
           )}
+          {/* Mock Badge - Logic can be added later */}
+          {/* <span className="absolute top-3 left-3 bg-primary/20 text-primary text-xs font-bold px-2 py-1 rounded-full">
+            NUEVO
+          </span> */}
         </div>
 
-        <div className="p-4 flex flex-col flex-grow border-b border-r border-l rounded-xl">
+        <div className="flex flex-col p-4 gap-2 flex-grow">
           <h3
-            className="text-lg font-semibold truncate text-gray-800 dark:text-gray-100"
+            className="text-zinc-900 dark:text-zinc-100 font-bold text-lg truncate"
             title={name}
           >
             {name}
           </h3>
-
-          {size && (
-            <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mt-1">
-              <FaRuler />
-              <span>{size}</span>
-            </div>
-          )}
-
-          <div className="flex-grow" />
-
-          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm line-clamp-2">
+            {description ||
+              "Suave, resistente y perfecta para el día a día o para personalizar."}
+          </p>
+          <div className="mt-auto pt-2">
             {pause ? (
               <p className="font-bold text-red-500">Sin Stock</p>
             ) : (
-              <div className="flex justify-between items-center">
-                <span className="text-xl font-bold text-violet-600 dark:text-violet-400">
-                  ${price.toLocaleString("es-AR")}
-                </span>
-                <span className="text-sm text-green-800 dark:text-green-300 bg-green-100 dark:bg-green-900 px-2 py-1 rounded">
-                  Mín. {unity}
-                </span>
-              </div>
+              <p className="text-zinc-900 dark:text-zinc-100 font-black text-xl">
+                ${price.toLocaleString("es-AR")}
+              </p>
             )}
           </div>
+        </div>
+
+        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
+          <button className="w-full flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors cursor-pointer">
+            <span>Ver Detalles</span>
+            <span className="material-symbols-outlined !text-lg">
+              arrow_forward
+            </span>
+          </button>
         </div>
       </div>
     </Link>

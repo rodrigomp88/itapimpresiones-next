@@ -51,6 +51,12 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
+        if (!adminAuth) {
+          console.warn(
+            "Admin SDK not initialized. Skipping user sync with Firebase."
+          );
+          return true;
+        }
         try {
           const firebaseUser = await adminAuth.getUser(user.id);
 
