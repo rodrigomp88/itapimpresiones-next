@@ -101,6 +101,24 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
             />
             <label htmlFor="size">Tamaño/Medidas</label>
             <input name="size" defaultValue={product.size} className="input" />
+
+            <label htmlFor="color">Color</label>
+            <select name="color" defaultValue={product.color || "Todos"} className="input">
+              <option value="Todos">Todos</option>
+              <option value="Blanco">Blanco</option>
+              <option value="Negro">Negro</option>
+              <option value="Rojo">Rojo</option>
+              <option value="Azul">Azul</option>
+              <option value="Verde">Verde</option>
+              <option value="Amarillo">Amarillo</option>
+            </select>
+
+            <label htmlFor="bagType">Tipo de Bolsa (Solo para Bolsas)</label>
+            <select name="bagType" defaultValue={product.bagType || ""} className="input">
+              <option value="">N/A</option>
+              <option value="troquel">Troquel</option>
+              <option value="manija">Manija</option>
+            </select>
             <div>
               <label>Imágenes Actuales</label>
               <div className="flex flex-wrap gap-2 mt-2">

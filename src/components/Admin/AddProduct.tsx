@@ -143,6 +143,25 @@ const AddProduct = () => {
                   placeholder="Tamaño/Medidas"
                   className="input"
                 />
+
+                <label htmlFor="color">Color</label>
+                <select name="color" className="input">
+                  <option value="">Seleccionar Color</option>
+                  <option value="Todos">Todos</option>
+                  <option value="Blanco">Blanco</option>
+                  <option value="Negro">Negro</option>
+                  <option value="Rojo">Rojo</option>
+                  <option value="Azul">Azul</option>
+                  <option value="Verde">Verde</option>
+                  <option value="Amarillo">Amarillo</option>
+                </select>
+
+                <label htmlFor="bagType">Tipo de Bolsa (Solo para Bolsas)</label>
+                <select name="bagType" className="input">
+                  <option value="">N/A</option>
+                  <option value="troquel">Troquel</option>
+                  <option value="manija">Manija</option>
+                </select>
               </div>
               <div className="p-4 space-y-2">
                 <label htmlFor="images">Imágenes</label>

@@ -3,31 +3,51 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     
+    function isAdmin() {
+      return request.auth != null && (
+        request.auth.token.admin == true || 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
     // Allow anyone to create contact submissions (write-only)
     match /contact_submissions/{document} {
       allow create: if true;  // Anyone can create submissions
-      allow read, update, delete: if request.auth != null && request.auth.token.admin == true;  // Only admins can read/update/delete
+      allow read, update, delete: if isAdmin();
     }
     
     // Products collection - read for everyone, write for admins only
     match /products/{document} {
       allow read: if true;
-      allow write: if request.auth != null && request.auth.token.admin == true;
+      allow write: if isAdmin();
     }
     
     // Users collection - users can read their own data, admins can read all
     match /users/{userId} {
-      allow read: if request.auth != null && (request.auth.uid == userId || request.auth.token.admin == true);
-      allow write: if request.auth != null && request.auth.token.admin == true;
+      allow read: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
     }
     
     // Orders collection - users can read their own orders, admins can read all
     match /orders/{orderId} {
-      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || request.auth.token.admin == true);
+      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
       allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && request.auth.token.admin == true;
+      allow update, delete: if isAdmin();
     }
     
+    // Admins collection - admins can read/write
+    match /admins/{userId} {
+      allow read, write: if isAdmin();
+    }
+
+    // FCM Tokens - users can read/write their own
+    match /fcmTokens/{userId} {
+      allow read, write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      match /tokens/{tokenId} {
+        allow read, write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+      }
+    }
+
     // Default: deny all other access
     match /{document=**} {
       allow read, write: if false;

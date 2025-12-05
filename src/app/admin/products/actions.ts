@@ -31,6 +31,8 @@ export async function addProductAction(formData: FormData, productId?: string) {
     description: formData.get("description") as string,
     unity: Number(formData.get("unity")),
     size: formData.get("size") as string,
+    color: formData.get("color") as string,
+    bagType: formData.get("bagType") as "troquel" | "manija" | undefined,
     pause: false,
     createdAt: new Date(),
     images: [],
@@ -79,6 +81,8 @@ export async function editProductAction(productId: string, formData: FormData) {
     description: formData.get("description") as string,
     unity: Number(formData.get("unity")),
     size: formData.get("size") as string,
+    color: formData.get("color") as string,
+    bagType: formData.get("bagType") as "troquel" | "manija" | undefined,
   };
 
   const imagesToDelete = formData.getAll("imagesToDelete") as string[];

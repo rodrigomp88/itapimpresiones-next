@@ -1,4 +1,9 @@
 {
+  "projects": {
+    "rockcatu85": "itap-shop"
+  },
+  "targets": {},
+  "etags": {},
   "functions": {
     "source": "functions",
     "codebase": "default",

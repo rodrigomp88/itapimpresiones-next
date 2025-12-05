@@ -28,6 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/uuid": "^11.0.0",
+    "firebase-tools": "^14.27.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

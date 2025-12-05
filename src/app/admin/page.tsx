@@ -1,6 +1,7 @@
 import { adminDb } from "@/firebase/admin";
 import Link from "next/link";
 import TestNotificationButton from "./TestNotificationButton";
+import SystemHealth from "@/components/Admin/SystemHealth";
 import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
@@ -100,7 +101,10 @@ const AdminDashboardPage = async () => {
             Resumen general de tu tienda
           </p>
         </div>
-        <TestNotificationButton />
+        <div className="flex gap-3">
+          <SystemHealth />
+          <TestNotificationButton />
+        </div>
       </div>
 
       {/* Stats Grid */}
