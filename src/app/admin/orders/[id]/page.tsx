@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 async function getOrderAndMessages(
   orderId: string
 ): Promise<{ order: Order | null; messages: Message[] }> {
+  if (!adminDb) return { order: null, messages: [] };
+
   const orderRef = adminDb.collection("orders").doc(orderId);
   const messagesRef = orderRef
     .collection("messages")

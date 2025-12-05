@@ -167,7 +167,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
 
       logger.log(
         response.successCount +
-          ` status update messages were sent successfully to user ${userId}.`
+        ` status update messages were sent successfully to user ${userId}.`
       );
 
       if (response.failureCount > 0) {
@@ -302,6 +302,103 @@ export const onNewChatMessage = onDocumentCreated(
         `Error sending chat notification for order ${orderId}:`,
         error
       );
+    }
+  }
+);
+export const onNewContactSubmission = onDocumentCreated(
+  "contact_submissions/{submissionId}",
+  async (event) => {
+    const submissionData = event.data?.data();
+    const submissionId = event.params.submissionId;
+
+    if (!submissionData) {
+      logger.log("No submission data found.");
+      return;
+    }
+
+    const { name, formType } = submissionData;
+    const formTypeLabel =
+      ({
+        services: "Servicios",
+        bags: "Bolsas",
+        apparel: "Indumentaria",
+      } as Record<string, string>)[formType] || formType;
+
+    try {
+      // 1. Get Admins
+      const adminsSnapshot = await db.collection("admins").get();
+      const adminUIDs = adminsSnapshot.docs.map((doc) => doc.id);
+
+      if (adminUIDs.length === 0) {
+        logger.log("No admins found in 'admins' collection.");
+        return;
+      }
+
+      // 2. Get Tokens
+      const allTokens: string[] = [];
+      const tokenPromises = adminUIDs.map((uid) =>
+        db.collection("fcmTokens").doc(uid).collection("tokens").get()
+      );
+
+      const results = await Promise.all(tokenPromises);
+      results.forEach((snapshot) => {
+        if (!snapshot.empty) {
+          snapshot.forEach((doc) => allTokens.push(doc.id));
+        }
+      });
+
+      if (allTokens.length === 0) {
+        logger.log("No FCM tokens found for admins.");
+        return;
+      }
+
+      // 3. Send Notification
+      const message = {
+        notification: {
+          title: "Nueva Cotización Recibida 📝",
+          body: `${name} ha solicitado cotización de ${formTypeLabel}.`,
+        },
+        webpush: {
+          fcmOptions: {
+            link: "https://itapimpresiones.vercel.app/admin/submissions",
+          },
+        },
+        tokens: allTokens,
+      };
+
+      const response = await messaging.sendEachForMulticast(message);
+      logger.log(
+        `${response.successCount} notifications sent for new submission ${submissionId}`
+      );
+
+      // 4. Cleanup Invalid Tokens
+      if (response.failureCount > 0) {
+        const tokensToRemove: Promise<any>[] = [];
+        response.responses.forEach((resp, idx) => {
+          if (!resp.success) {
+            const error = resp.error!;
+            const failedToken = allTokens[idx];
+            if (
+              error.code === "messaging/invalid-registration-token" ||
+              error.code === "messaging/registration-token-not-registered"
+            ) {
+              adminUIDs.forEach((uid) => {
+                tokensToRemove.push(
+                  db
+                    .collection("fcmTokens")
+                    .doc(uid)
+                    .collection("tokens")
+                    .doc(failedToken)
+                    .delete()
+                );
+              });
+            }
+          }
+        });
+        await Promise.all(tokensToRemove);
+      }
+    } catch (error) {
+      logger.error("Error sending contact submission notification:", error);
     }
   }
 );

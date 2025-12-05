@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import ContactForm from "@/components/ContactForm";
 
 const ApparelPage = () => {
     return (
@@ -100,41 +102,57 @@ const ApparelPage = () => {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-8">
                     <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
-                        <img
-                            className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAmvhVck4lDxwMCbFP-IPHWYdza5aShcYHy_jByZWCWzYhc133NEsuJBV2Zn7H6G2ROzOocQL02LjXTEROBAqOAFQuw2IvMBYFfUfY8zPL3S0Uv1Ral5p6TWKRcGhTiDDihoav7mdZCeGXO6v1XagNdgdKX31BEA-Qs3IHdtYTImiGt_2_1tV8fqFcoM6IPeYabdUN2sZDvGtsFUHdhdu-CzdGS_VbFjQeyOpaF_yXdnGr81IW150b00xbU5s3u78qbjKl5IVFecM"
-                            alt="Remeras"
-                        />
+                        <div className="relative h-60 w-full">
+                            <Image
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAmvhVck4lDxwMCbFP-IPHWYdza5aShcYHy_jByZWCWzYhc133NEsuJBV2Zn7H6G2ROzOocQL02LjXTEROBAqOAFQuw2IvMBYFfUfY8zPL3S0Uv1Ral5p6TWKRcGhTiDDihoav7mdZCeGXO6v1XagNdgdKX31BEA-Qs3IHdtYTImiGt_2_1tV8fqFcoM6IPeYabdUN2sZDvGtsFUHdhdu-CzdGS_VbFjQeyOpaF_yXdnGr81IW150b00xbU5s3u78qbjKl5IVFecM"
+                                alt="Remeras"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                        </div>
                         <div className="p-5">
                             <h3 className="text-lg font-bold dark:text-white">Remeras</h3>
                         </div>
                     </div>
                     <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
-                        <img
-                            className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4U8uDz0vt-WbZ-WWGtiKqYx1iZdEJa2XyLt9LvVkPJOntMfOv2ol7R0rEEcpo898afdYqE9BNplAwBpqxb-wRy7bk3dEeAgvCxxJZqasTAhGE6SAzq1LpdJFAzxIeahEm6Z6UPWiiJZ-RLBv7GwWcXGU3GVmIFVnKqlIvLlamw56w-lBklelQ9I5KvkeCAqtugOHiOgOLxEhLoPLWb7D3smxQRNjf-LQNrRuTbSbnTKo1z-49azak6cWKfoxtSJiM5SN-N9pKhSk"
-                            alt="Buzos"
-                        />
+                        <div className="relative h-60 w-full">
+                            <Image
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4U8uDz0vt-WbZ-WWGtiKqYx1iZdEJa2XyLt9LvVkPJOntMfOv2ol7R0rEEcpo898afdYqE9BNplAwBpqxb-wRy7bk3dEeAgvCxxJZqasTAhGE6SAzq1LpdJFAzxIeahEm6Z6UPWiiJZ-RLBv7GwWcXGU3GVmIFVnKqlIvLlamw56w-lBklelQ9I5KvkeCAqtugOHiOgOLxEhLoPLWb7D3smxQRNjf-LQNrRuTbSbnTKo1z-49azak6cWKfoxtSJiM5SN-N9pKhSk"
+                                alt="Buzos"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                        </div>
                         <div className="p-5">
                             <h3 className="text-lg font-bold dark:text-white">Buzos</h3>
                         </div>
                     </div>
                     <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
-                        <img
-                            className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpGuTw7vyMolfWb1viDtCr-nx28jBjtQPzmw4IBRz52MQO7_9j7ypdQ19h0gvQ7sVlEv6-Ci_CQ79TZUkyZqiHtGmJwXGntqbJRveFe8mytLHAqrMqqH84o7z2lMo4BnBNQm1VTw9QzsEGbeQNiI2QUfkgDF6h0dYOzMoFoFRhv0jekyQV7tTD6SXg9-qfFxK5ATDY-t8rntqFK6qt4i1srd7sH7OEsa7Zdr3JaUE0aFxbrVM3f1FvsaCiiwKzAWKLtUREghGepS0"
-                            alt="Gorras"
-                        />
+                        <div className="relative h-60 w-full">
+                            <Image
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpGuTw7vyMolfWb1viDtCr-nx28jBjtQPzmw4IBRz52MQO7_9j7ypdQ19h0gvQ7sVlEv6-Ci_CQ79TZUkyZqiHtGmJwXGntqbJRveFe8mytLHAqrMqqH84o7z2lMo4BnBNQm1VTw9QzsEGbeQNiI2QUfkgDF6h0dYOzMoFoFRhv0jekyQV7tTD6SXg9-qfFxK5ATDY-t8rntqFK6qt4i1srd7sH7OEsa7Zdr3JaUE0aFxbrVM3f1FvsaCiiwKzAWKLtUREghGepS0"
+                                alt="Gorras"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                        </div>
                         <div className="p-5">
                             <h3 className="text-lg font-bold dark:text-white">Gorras</h3>
                         </div>
                     </div>
                     <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
-                        <img
-                            className="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt2ChQ0XNhEF6wLzEs2FRT5L0iJVsVm8LfR2-kzI_-oI96zjH88SwujsZYesvhEx99vi7cE6yHlhiwqLgXTHtIT5Ft7BxneWkMgZFC0bDI_tFsoFIQk33z_wCg6bIIfGA_WnyI_7Fbyphmn5n2vJvuubSSvZJsudV0CmOV42Z7tnUzGdsGGV3V2Ey9bP9NUMm0a1sj0E3Tl9ED-49wwcdc5HKsmAHtgpQB6YwI2j7T_fnzZJgyLqcLfRIIys3xPNf5UMsQ_e9Z7wo"
-                            alt="Bolsas"
-                        />
+                        <div className="relative h-60 w-full">
+                            <Image
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt2ChQ0XNhEF6wLzEs2FRT5L0iJVsVm8LfR2-kzI_-oI96zjH88SwujsZYesvhEx99vi7cE6yHlhiwqLgXTHtIT5Ft7BxneWkMgZFC0bDI_tFsoFIQk33z_wCg6bIIfGA_WnyI_7Fbyphmn5n2vJvuubSSvZJsudV0CmOV42Z7tnUzGdsGGV3V2Ey9bP9NUMm0a1sj0E3Tl9ED-49wwcdc5HKsmAHtgpQB6YwI2j7T_fnzZJgyLqcLfRIIys3xPNf5UMsQ_e9Z7wo"
+                                alt="Bolsas"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                            />
+                        </div>
                         <div className="p-5">
                             <h3 className="text-lg font-bold dark:text-white">
                                 Bolsas de Friselina
@@ -156,29 +174,37 @@ const ApparelPage = () => {
                 </div>
                 <div className="mt-12 grid grid-cols-2 gap-0.5 md:grid-cols-4 lg:mt-16">
                     <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
-                        <img
-                            className="max-h-12"
+                        <Image
+                            width={150}
+                            height={48}
+                            className="max-h-12 w-auto"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe4qQ852WcmQjkxji5Z3xGiEMqzO0RFe3t_M4mem81wX5KOgAf8bgVFGTh2sllG0jfpMPuXZos6fbHlJwwY3VZhksOai1TSzMi018jbfO8TMNZJTfeFuhEZB1cNOU48pnshpNH_JRMFJgzP3M18UH1Q3nV2VjdOPNT33x-UMvsnfs0KDKxxi9V_QSJi4Rok4Ip86blMagWFfRne4Uk9fcRUbt_rK34K9l-HihmmGRkAQtsZ5s-BtQVgU5cfjScSWLd9Uj5e97knrE"
                             alt="Logo Empresa A"
                         />
                     </div>
                     <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
-                        <img
-                            className="max-h-12"
+                        <Image
+                            width={150}
+                            height={48}
+                            className="max-h-12 w-auto"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxp8TvvdzRCtTlNqc5yu0-Jujxe3TAllSDvPO8IvwUFpvgyaEGE7SeWBLxssKKOHl5sHXMQX1szrmaBKmvs59LOKzMbgNBvLOpz7fiNMt1K8CetXpm0W55ebSvWhwIqzlIpDOWJbZB2hhs8haFIdouGwC6zDhM_pXRkQeiKu5yAwgQ7q8cxJ5nSFNKoZzScIXjzBYqQTUZq1PlxnNJdHlVXN1ItdTXBsVg7Y21_0QyMX9UqY6lQKO3aU95hrEwSM3PcyPIAjSllOg"
                             alt="Logo Empresa B"
                         />
                     </div>
                     <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
-                        <img
-                            className="max-h-12"
+                        <Image
+                            width={150}
+                            height={48}
+                            className="max-h-12 w-auto"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzZnfkeGDQQRH7WBGjcqZkj8dy0WjBkrKeXr90LwJWY3VActmr9G7MDrPHyDRPOslXR6BNGDTF1axQPDD7qz-SOoR9WR8yulWZNfVgBEbaQRHtEdCF9qG2jxOgaH_RY9SnTonXOMpCOllshNxdMIjMyIIauAQTCs6dj7FdbTGK_njeHKO2HavOACC0FetndVlwSzZyG__HOlLms18J4Ffs3SgDqcdhz4gkjJE9DD0i2IZh5Pt7GKlcfkAAW0No8emkzX3ZcRkK71A"
                             alt="Logo Empresa C"
                         />
                     </div>
                     <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
-                        <img
-                            className="max-h-12"
+                        <Image
+                            width={150}
+                            height={48}
+                            className="max-h-12 w-auto"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEZqtitHnFCLk-41Liw2Ey1c9wfZPN04bPu7FeaiVjRgUbT6I7i80VkdfLUuqTk7ygtfzWxJd1pPMGxnUQPKDacT2uWh1qJIbXSrodKLO3gVbPHRFXbuDsQiPNGPcymx1DfQ-NdIwmUMLqNXr9bx3WbBYQ2tBmZtniMU2YpAJHMPvHT7A1LDgwlvnLr8jPWnXWJAwd3XUbMCtuTPr3lE_2Cv0Nv7j3WmoXWW3fyPluMgSoFOL2LszscL08uOs5-K1GVsX-ktTd_uw"
                             alt="Logo Empresa D"
                         />

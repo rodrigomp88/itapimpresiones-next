@@ -12,6 +12,8 @@ export interface Product {
   category: string;
   description: string;
   createdAt: string;
+  color?: string;
+  bagType?: "troquel" | "manija";
 }
 
 export interface CartItem extends Product {

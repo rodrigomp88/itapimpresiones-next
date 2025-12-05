@@ -14,6 +14,8 @@ export async function sendUserMessageAction(
     return { success: false, error: "El mensaje no puede estar vacío." };
   }
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const orderRef = adminDb.collection("orders").doc(orderId);
     const orderSnap = await orderRef.get();
 
@@ -45,6 +47,8 @@ export async function markOrderAsReadAction(
   role: "admin" | "client"
 ) {
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const orderRef = adminDb.collection("orders").doc(orderId);
     if (role === "admin") {
       await orderRef.update({ hasUnreadAdminMessage: false });
@@ -65,6 +69,8 @@ export async function saveUserFCMTokenAction(token: string) {
   }
 
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const tokenRef = adminDb
       .collection("fcmTokens")
       .doc(session.user.id)

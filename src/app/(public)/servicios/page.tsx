@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import ContactForm from "@/components/ContactForm";
 
 const ServicesPage = () => {
     return (
@@ -129,60 +131,72 @@ const ServicesPage = () => {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYChaR5Bn0-GYEi6ED0NXD6UBMngCpfCU5szu3l8UQedn_fNlkKTig5B9nXgbQz_JTl9V-fUIBl768Fja8yTCP4DxDSf3IxEWBHc7kX4xiKXPj67Esni2_KzJSPQ1jL91wRlG4jRVV6Sw7Jvc0oQWsC7gjhWbx2PrGvOqslpk-DKtJZnTZUiwxdmDDnF_x4ULbQIeINIxoeNIouhy6lSDiH1kZRWfH26VXUr9mj-W5-_Es_uQAdohbgPM1479WZEfiMO4kxoFkXlU"
                             alt="Remeras para Evento"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Remeras para Evento</p>
                         </div>
                     </div>
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPIG4ysf45_RxdSJDKGFA4daVosJKjX-1N5TahDo62MhzKT6FNjCWtPdEHwl4LgEEsSP6TdMmg9X5u4jfI0JthkbM9vk5yCxnpwllcS1ODgN7-Bww-_bZttCH0pF4QKhP56XEA_pv08VmhyRYfVyDF_ga5ZiJCduOhAH26b7R7DUiVuzhIZBbQDtN1Py8irDAjL-e9vLXH73ZmLZC2kkMwCVvjzYeXf2_feWZBVAs0DkOC7S-hdjNZBsFde_rHpPajwCtZBlzy2T4"
                             alt="Buzos para Empresas"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Buzos para Empresas</p>
                         </div>
                     </div>
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsQABuFXf2NA4nQdOmp4ymkRjDK7vgY2j_AeTXS5tdeE5df3VL5lpKz3nuhnNw-RWbyjSorDrPm-S_yhQrvEGm1ggX3F-bkazSTbkw1mlER9sEBKMkqGu20JaYQ-bFhZnqgfI-x6MR9bj1zPlPzw2DIgSp1Ffmxoowy-GgQLToEGNoLCK3ydoYDGIx2F0i9wn3ar3vFGVo4caYxgFwgHk2W9KOWRkzvC-HUCwGRViuWkxjoFuhl5egb4_2pJfWc9jZO4DKDdHrogg"
                             alt="Gorras Personalizadas"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Gorras Personalizadas</p>
                         </div>
                     </div>
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYwftHXYU33GbhuhagiLOldZ--J-KYE4jCw5BNgeWOVKf1KILwevCieGADOQcIDASi5shxfsc3aesRG8ixyt5SVrQO-bugzCY53LXvrBe6nABxtrDxBojX7UHnTX_n31-AYXaGtHlv47wY1IaQPaYWr4Ash-8GBNac4Fk7tT68XdVoPgQ43mbzHtOGFBqv5ll1lpkLbp0Cp0PEyiP_Tn-c62jLUsaSq8zltWVTK8CHdC4hFunU5RtxHsgiX-PwVTL25_k0ZFB4Gvs"
                             alt="Bolsas de Friselina"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Bolsas de Friselina</p>
                         </div>
                     </div>
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7hCduA6Gw6qep84N216yIsvMLphfgJT6cZzsLnHb7qiXYLCEmQtvtqvjpyXJlg1OVAPPfXPLNi6cKGQcC4eW5cCsu1izx4OGZqe9C0UUNAbWBtJ0Fuj22Zg0pFjCp4F0y5vZlJjtes1yeU_gh-fqCCw1cg1A6lQbR-AQgoRft_-2zvBcVzlM1xhMnYeXQOW0AeBeDKf4bNIBBx3uA4MIt2RnNcj6YY4INRwujj0GLv2dbWKwfIeqAD3FgpyfVH3jNo43axfVWY4o"
                             alt="Indumentaria Promocional"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Indumentaria Promocional</p>
                         </div>
                     </div>
                     <div className="group aspect-square overflow-hidden rounded-lg relative">
-                        <img
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        <Image
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZIPQm_Ju2khKHi-NQSF5Ptvx_XGCVlgiZ0pWCXdtiWVyUMDxwJkZ1pognfg8-kB0PfUF-ngSOi_s89FgiE2pfDe2ypv8NYcHGjo_G6sK_vGXswPiiWkytDLgVNy3PmiRrQk4ET_8lCRtePUw97tXR7QNdtpCLLPloM_8GkxdC0mXzAeYsUKUUV26q7Iy7QqtnF517cab1272a1e8qXH6xinnNtrs5hD-w-S0b4GuHbFbH8_8YvOMbi-i9twT6sQE-NO79cUo_xHQ"
                             alt="Diseños a Todo Color"
+                            sizes="(max-width: 768px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/50 transition-colors flex items-end p-4">
                             <p className="text-white font-semibold">Diseños a Todo Color</p>
@@ -259,117 +273,7 @@ const ServicesPage = () => {
                         la brevedad.
                     </p>
                 </div>
-                <form className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-700">
-                    <div className="sm:col-span-2">
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="name"
-                        >
-                            Nombre
-                        </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="name"
-                            name="name"
-                            type="text"
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="email"
-                        >
-                            Email
-                        </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="email"
-                            name="email"
-                            type="email"
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="phone"
-                        >
-                            Teléfono
-                        </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                        />
-                    </div>
-                    <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="service"
-                        >
-                            Tipo de Servicio
-                        </label>
-                        <select
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="service"
-                            name="service"
-                        >
-                            <option>Serigrafía</option>
-                            <option>DTF</option>
-                            <option>No estoy seguro</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="quantity"
-                        >
-                            Cantidad (aprox.)
-                        </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                        />
-                    </div>
-                    <div className="sm:col-span-2">
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="message"
-                        >
-                            Describe tu proyecto
-                        </label>
-                        <textarea
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="message"
-                            name="message"
-                            rows={4}
-                        ></textarea>
-                    </div>
-                    <div className="sm:col-span-2">
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="file-upload"
-                        >
-                            Adjuntar archivo (opcional)
-                        </label>
-                        <input
-                            className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                        />
-                    </div>
-                    <div className="sm:col-span-2">
-                        <button
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors cursor-pointer"
-                            type="submit"
-                        >
-                            Cotizar mi Proyecto
-                        </button>
-                    </div>
-                </form>
+                <ContactForm formType="services" />
             </section>
         </div>
     );

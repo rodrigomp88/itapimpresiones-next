@@ -3,6 +3,7 @@ import admin from "firebase-admin";
 let adminAuth: admin.auth.Auth | null = null;
 let adminDb: admin.firestore.Firestore | null = null;
 let adminStorage: admin.storage.Storage | null = null;
+let adminMessaging: admin.messaging.Messaging | null = null;
 
 try {
   if (!admin.apps.length) {
@@ -27,9 +28,10 @@ try {
     adminAuth = admin.auth();
     adminDb = admin.firestore();
     adminStorage = admin.storage();
+    adminMessaging = admin.messaging();
   }
 } catch (error: any) {
   console.error("Firebase Admin SDK initialization error:", error.message);
 }
 
-export { admin, adminAuth, adminDb, adminStorage };
+export { admin, adminAuth, adminDb, adminStorage, adminMessaging };

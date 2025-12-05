@@ -7,6 +7,8 @@ import { notFound, redirect } from "next/navigation";
 
 async function getOrder(orderId: string): Promise<Order | null> {
   try {
+    if (!adminDb) return null;
+
     const docRef = adminDb.collection("orders").doc(orderId);
     const docSnap = await docRef.get();
 

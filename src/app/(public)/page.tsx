@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const Home = () => {
   return (
@@ -235,33 +236,45 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16 opacity-70">
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa TechCorp"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3emsY4lBNr1yqarGKV3rvx9fYmXEXxb9Yk603FobSlfS9V7zy7J4EPTVMfXD9VH7HVeT8TI6akXW_YabpF4-YY4QUNHHbb6F1_pvDPZZ1Wd1-WytYKhHi9AntYTO9YpddWyV68lEOgMeU6Nqa5IDtCYlH2aRrb1kOv8-qqfhbh6PNa6q2DU6FdSO2YQ5mQFzX7XlT_wFy9F7aAEICUxAsW3VeitKwknQIf8x9YNkzSrMHnons848u-cylZNp7AJfQFujy-ursVLM"
                 />
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa InnovateX"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrON91xhkk6R4pw7QVF9uftO1MY1-fHa7eFOYpJ9pvJm0jfPG9WkOJWeqIQWJ-_Kid61ie7N1j1xuZVLBf86UJe84aWaF-JwAvkRrDpAt70sUcyQmGrTpXACEIZhU_st0hRX-CcTkxM0BOEz-SxXs1oZ-MTaWopWhsweEdnOawbfAzClimUO6VW8no8Xl5BgaVBxHmN8A_gGAhSx140U6enGZ4ad9XN5FWBRzri3FX25VQTLtVoSNZxnsd1ZVhSbPBb5O1ctvEPd8"
                 />
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa QuantumLeap"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9LqJMN4nR_zfG5Ce9Sx10M3Ba3_jfxO7BOfTKm-AP4iWKgTa5RrUctm2HDLwctb9NkARLZZai6R7rn0USv_yeGSwc-o2EZG9kNMS0IT0BOds8D3wiGYNxF9nGDXD3X8QVIrJUDCwSUWrhc1VepBDLLW8mJXgIxvFG5RFmui1QdWy06cyk0vxYvfFQJOhp7FXCgBcSyX4sRLAyiMh_13cFV0U44JLxhC_dsCQu69sDR6UYq26YmVTjnrS9_goA1I6gxpll7D1sNpw"
                 />
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa FutureNet"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDo-vYzOZBx0UGJCNCXXATa3K10NjaDkU6V7DYHxOoCANM9yBlCKpX4WkuyGQRoQLHgvwgQxhkKdNUc1bUNE83yGU4Yg4tQ-u_bMFt_62n2il6bkSkqZGsK0fM-fRvWJjq3udnGLRUeqpxLpUcxmximIsuapWyZfA8L0gKa-vE9kIKVSfIH6tYLO2yYm-5-QQk1xa8rabFm0SyjqoNlusMfeQfjXaYQLsQHRU0QHEQ-4HNkt1Gz0b-oIXAflSndUnhTU_MVnLy-KKA"
                 />
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa Visionary Inc."
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgQgukBa6H8U71u7rY44Ux3KVq6qkEu0wTFgHYDqd54x6sjiX3TXVGXBygwh5E0XVJX_7cQmTzsgdnStKCRyb2ur2lmnR2XMENMT74wZFZD8tEHP8KUkOcwjC-3452di36ponIG7bwPZuZE3hiMVF1KxF6p3F1G_wjteGaDqah9_Uospzy5M5MraM4ndbD3XZ3Mly71JOuuHDv0RkRbzhZ4GwGT3G11pHtA_iWG1QZLpSN7JIdfdW8FqwI8kPGo7zGiCYYI9QgktM"
                 />
-                <img
-                  className="h-8 md:h-10 transition-transform hover:scale-110"
+                <Image
+                  width={150}
+                  height={40}
+                  className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110"
                   alt="Logo de la empresa Apex Solutions"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGTyHFpHPCxmfSbeHHdP0BU0-1HQfV0pWJC-iZb7OONJcZlQ4jlerzRsYX9c5IBrofIyr1lueuxrFZHwHBoFk7E1-Q_DDRC7qtvsiSlWS7EM8MsreN9eBRzcO-tb44Y1TB3JEUZSJnCBlrf665WoDE5ZaCBRLtZdzjgTo96Jl7LdbgUvN6s55RMtO_pRidSnAuJIEvujTADCez3SXKJqdtLICTRWGG2C9_DqsmzcfZGN0CmqEWZuFj5IJAShy7dgkAL-v7n5jLA50"
                 />

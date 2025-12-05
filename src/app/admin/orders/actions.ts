@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { Timestamp } from "firebase-admin/firestore";
 
 async function deleteChatSubcollection(orderId: string) {
+  if (!adminDb) return;
+
   const messagesRef = adminDb
     .collection("orders")
     .doc(orderId)
@@ -29,6 +31,8 @@ export async function updateOrderStatusAction(
   newStatus: string
 ) {
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const orderRef = adminDb.collection("orders").doc(orderId);
     await orderRef.update({
       orderStatus: newStatus,
@@ -52,6 +56,8 @@ export async function sendAdminMessageAction(orderId: string, text: string) {
   if (!text.trim())
     return { success: false, error: "El mensaje no puede estar vacío." };
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const orderRef = adminDb.collection("orders").doc(orderId);
     const orderSnap = await orderRef.get();
 

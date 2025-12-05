@@ -51,7 +51,7 @@ const AdminNotificationBell = () => {
         onClick={() => setIsDropdownOpen((prev) => !prev)}
         className="relative"
       >
-        <FaBell className="h-5 w-5 text-yellow-40ag" />
+        <FaBell className="h-5 w-5 text-yellow-400" />
         <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
           {notificationCount}
         </span>

@@ -7,6 +7,8 @@ import { createSlug } from "@/lib/utils";
 export async function addProductAction(formData: FormData, productId?: string) {
   if (productId) {
     try {
+      if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
       const imageUrls = JSON.parse(formData.get("imageUrls") as string);
       const docRef = adminDb.collection("products").doc(productId);
       await docRef.update({ images: imageUrls });
@@ -35,6 +37,8 @@ export async function addProductAction(formData: FormData, productId?: string) {
   };
 
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     const docRef = await adminDb.collection("products").add(newProductData);
     return { success: true, productId: docRef.id };
   } catch (error) {
@@ -44,6 +48,8 @@ export async function addProductAction(formData: FormData, productId?: string) {
 }
 
 async function deleteImages(imageUrls: string[]) {
+  if (!adminStorage) return;
+
   const bucket = adminStorage.bucket();
   for (const url of imageUrls) {
     if (!url.startsWith(`https://storage.googleapis.com/${bucket.name}/`)) {
@@ -83,6 +89,8 @@ export async function editProductAction(productId: string, formData: FormData) {
     images: File[],
     prodId: string
   ): Promise<string[]> {
+    if (!adminStorage) return [];
+
     const imageUrls: string[] = [];
     const bucket = adminStorage.bucket();
     for (const image of images) {
@@ -98,6 +106,10 @@ export async function editProductAction(productId: string, formData: FormData) {
   }
 
   try {
+    if (!adminDb || !adminStorage) {
+      return { success: false, error: "Firebase Admin no inicializado." };
+    }
+
     if (imagesToDelete.length > 0) {
       await deleteImages(imagesToDelete);
     }
@@ -124,6 +136,8 @@ export async function deleteProductAction(
   productSlug: string
 ) {
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     await adminDb.collection("products").doc(productId).delete();
   } catch (error) {
     return { success: false, error: "No se pudo eliminar el producto." };
@@ -140,6 +154,8 @@ export async function togglePauseProductAction(
   currentState: boolean
 ) {
   try {
+    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+
     await adminDb
       .collection("products")
       .doc(productId)

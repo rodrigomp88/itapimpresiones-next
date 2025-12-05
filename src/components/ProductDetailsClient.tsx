@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
   ADD_TO_CART,
@@ -73,11 +74,14 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* Image Gallery */}
             <div className="flex flex-col gap-4">
-              <div className="aspect-square w-full bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
-                <img
-                  className="w-full h-full object-cover"
+              <div className="relative aspect-square w-full bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+                <Image
+                  fill
+                  className="object-cover"
                   src={product.images[selectedImage]}
                   alt={product.name}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
                 />
               </div>
               <div className="grid grid-cols-5 gap-4">
@@ -85,16 +89,18 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`aspect-square bg-white dark:bg-zinc-900 rounded-lg border-2 overflow-hidden transition-all ${selectedImage === index
-                        ? "border-primary ring-2 ring-primary/50"
-                        : "border-zinc-200 dark:border-zinc-800 hover:border-primary"
+                    className={`relative aspect-square bg-white dark:bg-zinc-900 rounded-lg border-2 overflow-hidden transition-all ${selectedImage === index
+                      ? "border-primary ring-2 ring-primary/50"
+                      : "border-zinc-200 dark:border-zinc-800 hover:border-primary"
                       }`}
                   >
-                    <img
-                      className={`w-full h-full object-cover ${selectedImage === index ? "" : "opacity-75"
+                    <Image
+                      fill
+                      className={`object-cover ${selectedImage === index ? "" : "opacity-75"
                         }`}
                       src={image}
                       alt={`${product.name} - Vista ${index + 1}`}
+                      sizes="(max-width: 768px) 20vw, 10vw"
                     />
                   </button>
                 ))}

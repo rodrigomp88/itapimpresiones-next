@@ -16,6 +16,8 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
     useState<Product[]>(initialProducts);
   const [category, setCategory] = useState<string>("Todas");
   const [price, setPrice] = useState<number>(0);
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [isCustomizable, setIsCustomizable] = useState<boolean>(false);
 
   const { minPrice, maxPrice, allCategories } = useMemo(() => {
     if (initialProducts.length === 0) {
@@ -46,8 +48,12 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
       tempProducts = tempProducts.filter((p) => p.price <= price);
     }
 
+    if (selectedSize) {
+      tempProducts = tempProducts.filter((p) => p.size === selectedSize);
+    }
+
     setFilteredProducts(tempProducts);
-  }, [category, price, initialProducts]);
+  }, [category, price, selectedSize, isCustomizable, initialProducts]);
 
   return (
     <section className="flex flex-col md:flex-row gap-8 p-4">
@@ -60,6 +66,10 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
           maxPrice={maxPrice}
           currentPrice={price}
           onPriceChange={setPrice}
+          selectedSize={selectedSize}
+          onSizeChange={setSelectedSize}
+          isCustomizable={isCustomizable}
+          onCustomizableChange={setIsCustomizable}
         />
       </div>
       <div className="w-full md:w-3/4">

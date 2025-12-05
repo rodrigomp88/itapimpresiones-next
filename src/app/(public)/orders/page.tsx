@@ -6,6 +6,8 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { adminDb } from "@/firebase/admin";
 
 async function getUserOrders(userId: string): Promise<Order[]> {
+  if (!adminDb) return [];
+
   const ordersRef = adminDb.collection("orders");
   const q = ordersRef
     .where("userID", "==", userId)

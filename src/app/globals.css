@@ -2,6 +2,8 @@
 
 @theme {
   --color-primary: #196ee6;
+  --color-primary-dark: #0d47a1;
+  --color-accent: #fbc02d;
   --color-background-light: #f6f7f8;
   --color-background-dark: #111821;
   --font-display: "Work Sans", sans-serif;

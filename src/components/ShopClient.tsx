@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import ProductFilter from "./Product/ProductFilter";
 import ProductList from "./Product/ProductList";
+import ProductSkeleton from "./Product/ProductSkeleton";
 import { Product } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
@@ -15,6 +16,8 @@ import {
 import {
   FILTER_BY_CATEGORY,
   FILTER_BY_PRICE,
+  FILTER_BY_SIZE,
+  FILTER_BY_CUSTOMIZATION,
   selectFilteredProducts,
 } from "@/redux/slice/filterSlice";
 
@@ -32,13 +35,22 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
 
   const [category, setCategory] = useState("Todas");
   const [price, setPrice] = useState(maxPrice || 0);
+  const [size, setSize] = useState("Todos");
+  const [isCustomizable, setIsCustomizable] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("popular");
+  const [selectedColor, setSelectedColor] = useState("Todos");
+  const [selectedBagType, setSelectedBagType] = useState("Todos");
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(STORE_PRODUCTS({ products: initialProducts }));
     dispatch(GET_PRICE_RANGE({ products: initialProducts }));
     dispatch(
       FILTER_BY_CATEGORY({ products: initialProducts, category: "Todas" })
     );
+    // Simulate loading delay to show skeletons
+    setTimeout(() => setIsLoading(false), 500);
   }, [dispatch, initialProducts]);
 
   useEffect(() => {
@@ -61,6 +73,52 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
     setPrice(newPrice);
     dispatch(FILTER_BY_PRICE({ products, price: newPrice }));
   };
+
+  const handleSizeChange = (newSize: string) => {
+    setSize(newSize);
+    dispatch(FILTER_BY_SIZE({ products, size: newSize }));
+  };
+
+  const handleCustomizableChange = (checked: boolean) => {
+    setIsCustomizable(checked);
+    dispatch(FILTER_BY_CUSTOMIZATION({ products, customizable: checked }));
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value);
+  };
+
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+  };
+
+  const handleBagTypeChange = (bagType: string) => {
+    setSelectedBagType(bagType);
+  };
+
+  // Filter by color and bagType
+  let colorAndBagFiltered = filteredProducts;
+  if (selectedColor !== "Todos") {
+    colorAndBagFiltered = colorAndBagFiltered.filter(p => p.color === selectedColor);
+  }
+  if (selectedBagType !== "Todos" && category === "Bolsas") {
+    colorAndBagFiltered = colorAndBagFiltered.filter(p => p.bagType === selectedBagType.toLowerCase());
+  }
+
+  // Sort filtered products
+  const sortedProducts = [...colorAndBagFiltered].sort((a, b) => {
+    switch (sortBy) {
+      case "price-low":
+        return a.price - b.price;
+      case "price-high":
+        return b.price - a.price;
+      case "newest":
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      case "popular":
+      default:
+        return 0;
+    }
+  });
 
   return (
     <div className="max-w-screen-xl mx-auto w-full px-6 py-8">
@@ -93,11 +151,15 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             <span className="text-zinc-600 dark:text-zinc-400 text-sm">
               Ordenar por:
             </span>
-            <select className="form-select rounded-lg border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:border-primary focus:ring-primary/50 p-2">
-              <option>Más populares</option>
-              <option>Precio: bajo a alto</option>
-              <option>Precio: alto a bajo</option>
-              <option>Novedades</option>
+            <select
+              value={sortBy}
+              onChange={handleSortChange}
+              className="form-select rounded-lg border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:border-primary focus:ring-primary/50 p-2"
+            >
+              <option value="popular">Más populares</option>
+              <option value="price-low">Precio: bajo a alto</option>
+              <option value="price-high">Precio: alto a bajo</option>
+              <option value="newest">Novedades</option>
             </select>
           </div>
         </div>
@@ -111,11 +173,27 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               maxPrice={maxPrice || 0}
               currentPrice={price}
               onPriceChange={handlePriceChange}
+              selectedSize={size}
+              onSizeChange={handleSizeChange}
+              isCustomizable={isCustomizable}
+              onCustomizableChange={handleCustomizableChange}
+              selectedColor={selectedColor}
+              onColorChange={handleColorChange}
+              selectedBagType={selectedBagType}
+              onBagTypeChange={handleBagTypeChange}
             />
           </aside>
 
           <main className="col-span-12 md:col-span-9">
-            <ProductList products={filteredProducts} />
+            {isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <ProductSkeleton key={index} />
+                ))}
+              </div>
+            ) : (
+              <ProductList products={sortedProducts} />
+            )}
           </main>
         </div>
       </div>
