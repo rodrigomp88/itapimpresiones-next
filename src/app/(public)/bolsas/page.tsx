@@ -148,61 +148,59 @@ const BagsPage = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2b58FhCNfI0_MAnPMTFgK8H2vijRNsgDjj2AxdptlI9KNyVisHrhN_erKrtHT0eMhx3e8tyM78ajfA6p39r5_r6eqIUbzEU3MXADt2QT3U5luaJOVGTtmnbdKAz83GHsn_HuITnQ7rF4m98BqgGtlH2IPI7HIujhsI3pG4-aUE58wz5eYc2_2oP75f_QiCfHhnkhLKFwfzy4H3egykMFYjvJutSZP-TMyeE-PYGPvlA3LnO8Ufdg5D2SXyFwOeUW1sAwwBQb8a5o"
-                                alt="Bolsa blanca con logo negro"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdW0xOWWSFyjneK_9WIWPQmUVahXs7vAllmKU_l8yxjSxXhPNbUy2xV-TanOqgja8tyDtXCUK7xwVrGnm3o48GAbdrZ9U7AxJ17DDMtdj3bHfnyqsn8sGwPGgch4K6CXOTYW3ho6FSl-zpelse26UoXlWQJvNuK5vAW4trtuZrdlU9VWGJ6mPm0xMmR5k0c45N6yQQXcGTo6UcI32yuU0V9BQfrb4qF0w2islWP6tj2nIsGFF9NZZ6-ZCK_xV8fz3JoOiPfbkNNGk"
-                                alt="Persona llevando bolsa beige"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBimgg7ymU5b8Kl_UFGd6qkCKb-GVCYT1YwgHpyRPXyTHI0tUZ1L-liiDODwL_CCVatKDtxoMT0bSN91xer-C-Ha1sW4eCA_efC6XX5EGbAMrfiGG4X1RnuGsxRpRldbBVu4kGgBxJ0pyzMvSiQ9Ugj_qqEul7WbSF3RQqptD381AYj1iyMxkMkV_zuFte_MKuXQsAVR5ZYrzx3tyOBI2qWolGmp6EccdOz9SevTHDE-zhxpFgcgbTCyZ61FhIcvkJQJaFjNETpleg"
-                                alt="Bolsa azul con logo blanco"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp0AvggFtXzyeeVsX27n8vbOhDcrBOVEvu8jCRSFpnbsRaGn9eJFRpUH8iPV3Rdz58nzfBW21uEXeX18Iq5aYX1yg_xBbyAusjtTZkSYFqW_eYPnKGkPhbqgpb_581sldyt76Xue6l0DcROwHXjSTPgf_8FtkK3Q1LO640zsjH1A_VvJdDUWLLHDdpd9J7do38vICawmpJdYFvTKLTbRglqjtvTVUJkhPQJ4xyjF1WRWp5e9WmYEkF089NROVd5tFAljZKPSzgH3s"
-                                alt="Bolsas de colores apiladas"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVoMNm0EfjvovnqeJyyNxM9Tp5Yx9Ae8yqBVF50YdXUei9nEep4EHAN2P4XWqE9csrGmpKTCQb_RrB6o9ng10mXHiFVhSCM-zITPOFGS7vc8NyCTCwNHXvaHAcIj5RmsjJDJoaXYcf42ljAVEQJAjygf9qQ9AgpVmzd34nOJiK9J0mZGkanmAx5eNyAY85DTzg7TmM0bj9Lb37PloCda4hseLqRsu93WNtz-1HT-BpGn3TDaS3RAL-fggnfWdpAd_szx0r96p4V94"
-                                alt="Textura de bolsa negra"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
-                        <div className="relative aspect-square w-full rounded-lg overflow-hidden">
-                            <Image
-                                fill
-                                className="object-cover"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5BQ0jwF6AUI60u1FBXBA6voABDlWDIebHVv7hSTPEPSFTAL_1ahQgc0NQc3b0ogOPtqqKWPI2RQdBckI2R1Hohc2UrDef7PkIE7A0SIDfMBbPtjeB1WkqNwyNNail00W6jT5n-ZgUftTbQDUUHsmBgDeh_p_fpQcW1K3hbbcrJAfIS9f4wKGkXlKkqmu5b8ID1QINq11bKM9ENq7jC1WMBE5oh4zGXz-3MSG2MMnF16A9mK4Iu0BQpPX-yQ8Ht3GXC0lxhRmug4"
-                                alt="Bolsa roja personalizada"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            />
-                        </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2b58FhCNfI0_MAnPMTFgK8H2vijRNsgDjj2AxdptlI9KNyVisHrhN_erKrtHT0eMhx3e8tyM78ajfA6p39r5_r6eqIUbzEU3MXADt2QT3U5luaJOVGTtmnbdKAz83GHsn_HuITnQ7rF4m98BqgGtlH2IPI7HIujhsI3pG4-aUE58wz5eYc2_2oP75f_QiCfHhnkhLKFwfzy4H3egykMFYjvJutSZP-TMyeE-PYGPvlA3LnO8Ufdg5D2SXyFwOeUW1sAwwBQb8a5o"
+                            alt="Bolsa blanca con logo negro"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdW0xOWWSFyjneK_9WIWPQmUVahXs7vAllmKU_l8yxjSxXhPNbUy2xV-TanOqgja8tyDtXCUK7xwVrGnm3o48GAbdrZ9U7AxJ17DDMtdj3bHfnyqsn8sGwPGgch4K6CXOTYW3ho6FSl-zpelse26UoXlWQJvNuK5vAW4trtuZrdlU9VWGJ6mPm0xMmR5k0c45N6yQQXcGTo6UcI32yuU0V9BQfrb4qF0w2islWP6tj2nIsGFF9NZZ6-ZCK_xV8fz3JoOiPfbkNNGk"
+                            alt="Persona llevando bolsa beige"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBimgg7ymU5b8Kl_UFGd6qkCKb-GVCYT1YwgHpyRPXyTHI0tUZ1L-liiDODwL_CCVatKDtxoMT0bSN91xer-C-Ha1sW4eCA_efC6XX5EGbAMrfiGG4X1RnuGsxRpRldbBVu4kGgBxJ0pyzMvSiQ9Ugj_qqEul7WbSF3RQqptD381AYj1iyMxkMkV_zuFte_MKuXQsAVR5ZYrzx3tyOBI2qWolGmp6EccdOz9SevTHDE-zhxpFgcgbTCyZ61FhIcvkJQJaFjNETpleg"
+                            alt="Bolsa azul con logo blanco"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp0AvggFtXzyeeVsX27n8vbOhDcrBOVEvu8jCRSFpnbsRaGn9eJFRpUH8iPV3Rdz58nzfBW21uEXeX18Iq5aYX1yg_xBbyAusjtTZkSYFqW_eYPnKGkPhbqgpb_581sldyt76Xue6l0DcROwHXjSTPgf_8FtkK3Q1LO640zsjH1A_VvJdDUWLLHDdpd9J7do38vICawmpJdYFvTKLTbRglqjtvTVUJkhPQJ4xyjF1WRWp5e9WmYEkF089NROVd5tFAljZKPSzgH3s"
+                            alt="Bolsas de colores apiladas"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVoMNm0EfjvovnqeJyyNxM9Tp5Yx9Ae8yqBVF50YdXUei9nEep4EHAN2P4XWqE9csrGmpKTCQb_RrB6o9ng10mXHiFVhSCM-zITPOFGS7vc8NyCTCwNHXvaHAcIj5RmsjJDJoaXYcf42ljAVEQJAjygf9qQ9AgpVmzd34nOJiK9J0mZGkanmAx5eNyAY85DTzg7TmM0bj9Lb37PloCda4hseLqRsu93WNtz-1HT-BpGn3TDaS3RAL-fggnfWdpAd_szx0r96p4V94"
+                            alt="Textura de bolsa negra"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    </div>
+                    <div className="relative aspect-square w-full rounded-lg overflow-hidden">
+                        <Image
+                            fill
+                            className="object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5BQ0jwF6AUI60u1FBXBA6voABDlWDIebHVv7hSTPEPSFTAL_1ahQgc0NQc3b0ogOPtqqKWPI2RQdBckI2R1Hohc2UrDef7PkIE7A0SIDfMBbPtjeB1WkqNwyNNail00W6jT5n-ZgUftTbQDUUHsmBgDeh_p_fpQcW1K3hbbcrJAfIS9f4wKGkXlKkqmu5b8ID1QINq11bKM9ENq7jC1WMBE5oh4zGXz-3MSG2MMnF16A9mK4Iu0BQpPX-yQ8Ht3GXC0lxhRmug4"
+                            alt="Bolsa roja personalizada"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
                     </div>
                 </div>
             </section>

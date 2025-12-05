@@ -29,10 +29,16 @@ export interface User {
 }
 
 export interface SlideData {
+  id?: string;
   image: string;
   heading: string;
   desc: string;
+  ctaLink?: string;
+  ctaText?: string;
+  createdAt?: any;
 }
+
+export type Banner = SlideData;
 
 export interface OrderItem {
   id: string;

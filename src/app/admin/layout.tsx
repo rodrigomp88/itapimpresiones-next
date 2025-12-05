@@ -4,7 +4,7 @@ import Link from "next/link";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import AdminNotificationBell from "@/components/Notifications/AdminNotificationBell";
 import FirebaseMessagingProvider from "@/components/Notifications/FirebaseMessagingProvider";
-import { FaHome, FaBox, FaShoppingBag, FaUsers, FaClipboardList } from "react-icons/fa";
+import { FaHome, FaBox, FaShoppingBag, FaUsers, FaClipboardList, FaPaintBrush } from "react-icons/fa";
 
 export default async function AdminLayout({
   children,
@@ -27,6 +27,7 @@ export default async function AdminLayout({
     { href: "/admin/orders", label: "Órdenes", icon: FaShoppingBag },
     { href: "/admin/users", label: "Usuarios", icon: FaUsers },
     { href: "/admin/submissions", label: "Cotizaciones", icon: FaClipboardList },
+    { href: "/admin/design", label: "Diseño", icon: FaPaintBrush },
   ];
 
   return (

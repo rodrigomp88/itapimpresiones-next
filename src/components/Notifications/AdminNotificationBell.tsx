@@ -18,12 +18,19 @@ const AdminNotificationBell = () => {
       where("hasUnreadAdminMessage", "==", true)
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const unreadOrders = snapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as Order)
-      );
-      setNotifications(unreadOrders);
-    });
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const unreadOrders = snapshot.docs.map(
+          (doc) => ({ id: doc.id, ...doc.data() } as Order)
+        );
+        setNotifications(unreadOrders);
+      },
+      (error) => {
+        console.log("Admin notification listener error (likely permissions):", error.code);
+        // Supress UI crash, just valid empty notifications
+      }
+    );
 
     return () => unsubscribe();
   }, []);

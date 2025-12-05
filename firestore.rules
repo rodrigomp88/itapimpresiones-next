@@ -5,14 +5,21 @@ service cloud.firestore {
     
     function isAdmin() {
       return request.auth != null && (
+        request.auth.token.email == 'itapimpresiones@gmail.com' ||
         request.auth.token.admin == true || 
         exists(/databases/$(database)/documents/admins/$(request.auth.uid))
       );
     }
 
+    // Banners: Everyone can read, only admin can write
+    match /banners/{bannerId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Allow anyone to create contact submissions (write-only)
     match /contact_submissions/{document} {
-      allow create: if true;  // Anyone can create submissions
+      allow create: if true;
       allow read, update, delete: if isAdmin();
     }
     
