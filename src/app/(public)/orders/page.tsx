@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Order } from "@/types";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { adminDb } from "@/firebase/admin";
+import { authOptions } from "@/lib/authOptions";
 
 async function getUserOrders(userId: string): Promise<Order[]> {
   if (!adminDb) return [];
