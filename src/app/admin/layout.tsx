@@ -1,10 +1,17 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import AdminNotificationBell from "@/components/Notifications/AdminNotificationBell";
 import FirebaseMessagingProvider from "@/components/Notifications/FirebaseMessagingProvider";
-import { FaHome, FaBox, FaShoppingBag, FaUsers, FaClipboardList, FaPaintBrush } from "react-icons/fa";
+import {
+  FaHome,
+  FaBox,
+  FaShoppingBag,
+  FaUsers,
+  FaClipboardList,
+  FaPaintBrush,
+} from "react-icons/fa";
+import { authOptions } from "@/lib/authOptions";
 
 export default async function AdminLayout({
   children,
@@ -26,7 +33,11 @@ export default async function AdminLayout({
     { href: "/admin/products", label: "Productos", icon: FaBox },
     { href: "/admin/orders", label: "Órdenes", icon: FaShoppingBag },
     { href: "/admin/users", label: "Usuarios", icon: FaUsers },
-    { href: "/admin/submissions", label: "Cotizaciones", icon: FaClipboardList },
+    {
+      href: "/admin/submissions",
+      label: "Cotizaciones",
+      icon: FaClipboardList,
+    },
     { href: "/admin/design", label: "Diseño", icon: FaPaintBrush },
   ];
 
@@ -44,8 +55,12 @@ export default async function AdminLayout({
                 <span className="text-white font-bold text-xl">A</span>
               </div>
               <div>
-                <h2 className="text-lg font-bold text-zinc-900 dark:text-white">Panel Admin</h2>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">Itap Impresiones</p>
+                <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+                  Panel Admin
+                </h2>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  Itap Impresiones
+                </p>
               </div>
             </div>
 

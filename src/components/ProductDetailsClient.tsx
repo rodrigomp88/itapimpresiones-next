@@ -55,26 +55,27 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   const minQty = product.unity && product.unity > 0 ? product.unity : 1;
 
   // ESTADO DE CANTIDAD:
-  // Inicializamos SIEMPRE con minQty para evitar error de hidratación (server vs client mismatch).
-  // Actualizaremos este valor en el useEffect si el producto ya está en el carrito.
+  // Inicializamos SIEMPRE con minQty para evitar error de hidratación.
   const [quantity, setQuantity] = useState(minQty);
+
+  // Estado para saber si está en el carrito
+  const [isCartAdded, setIsCartAdded] = useState(false);
 
   const safeImages =
     product.images && product.images.length > 0
       ? product.images
       : ["/placeholder.png"];
 
-  // Verificar si está en el carrito (buscamos por ID)
-  // Usamos useAppSelector directamente, pero para la UI segura usamos un estado derivado en useEffect
+  // Verificar si está en el carrito (buscamos por ID) en el store de Redux
   const cartItemInStore = cartItems.find((item) => item.id === product.id);
-  const [isCartAdded, setIsCartAdded] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-
     // Sincronización post-montaje para evitar error de hidratación
     if (cartItemInStore) {
       setIsCartAdded(true);
+      // Si está en el carrito, mostramos la cantidad que tiene en el carrito (opcional)
+      // Aunque según tu lógica, si está en el carrito ocultamos los controles.
       setQuantity(cartItemInStore.cartQuantity);
     } else {
       setIsCartAdded(false);
@@ -88,7 +89,6 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
       cartQuantity: quantity,
     };
     dispatch(ADD_TO_CART(productToSend));
-    // No redirigimos forzosamente, el usuario verá que el botón cambia
   };
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
@@ -117,7 +117,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    // Limitar para que no se salga demasiado (opcional)
+    // Limitar para que no se salga del contenedor
     const clampedX = Math.max(0, Math.min(100, x));
     const clampedY = Math.max(0, Math.min(100, y));
 
@@ -355,8 +355,11 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-800">
                 {!product.pause ? (
                   <>
-                    {/* Controles de Cantidad: Solo visibles/activos si no está añadido para añadir, o siempre visibles pero si está añadido son informativos */}
-                    {/* Según requerimiento: Si está en carrito, mostrar link. Si no, añadir. */}
+                    {/* 
+                       LÓGICA DE BOTONES:
+                       - Si isCartAdded es FALSE: Muestra controles de cantidad y botón "Añadir".
+                       - Si isCartAdded es TRUE: Oculta controles de cantidad y muestra botón "Ir al Carrito".
+                    */}
 
                     {!isCartAdded && (
                       <div className="flex items-center gap-2">

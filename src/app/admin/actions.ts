@@ -1,7 +1,7 @@
 "use server";
 
 import { adminDb, adminMessaging } from "@/firebase/admin";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
 
 export async function saveFCMTokenAction(token: string) {
@@ -35,8 +35,6 @@ export async function saveFCMTokenAction(token: string) {
   }
 }
 
-
-
 export async function sendTestNotificationAction() {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) {
@@ -55,7 +53,10 @@ export async function sendTestNotificationAction() {
       .get();
 
     if (tokensSnapshot.empty) {
-      return { success: false, error: "No se encontraron tokens FCM para este usuario." };
+      return {
+        success: false,
+        error: "No se encontraron tokens FCM para este usuario.",
+      };
     }
 
     const tokens = tokensSnapshot.docs.map((doc) => doc.id);
@@ -69,7 +70,10 @@ export async function sendTestNotificationAction() {
     };
 
     if (!adminMessaging) {
-      return { success: false, error: "Firebase Admin Messaging no inicializado." };
+      return {
+        success: false,
+        error: "Firebase Admin Messaging no inicializado.",
+      };
     }
 
     const response = await adminMessaging.sendEachForMulticast(message);
@@ -77,7 +81,7 @@ export async function sendTestNotificationAction() {
     return {
       success: true,
       count: response.successCount,
-      failures: response.failureCount
+      failures: response.failureCount,
     };
   } catch (error) {
     console.error("Error sending test notification:", error);
