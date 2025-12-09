@@ -17,7 +17,6 @@ interface CartState {
 const getInitialCartItems = (): CartItem[] => {
   if (typeof window !== "undefined") {
     const item = localStorage.getItem("cartItems");
-
     return item ? JSON.parse(item) : [];
   }
   return [];
@@ -34,34 +33,67 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    ADD_TO_CART(state, action: PayloadAction<Product>) {
+    ADD_TO_CART(state, action: PayloadAction<Product | CartItem>) {
       const productIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
 
       const unity = action.payload.unity || 1;
+      const incomingQuantity =
+        "cartQuantity" in action.payload
+          ? (action.payload as CartItem).cartQuantity
+          : 0;
 
       if (productIndex >= 0) {
-        state.cartItems[productIndex].cartQuantity += 1;
-        NotiflixSuccess(`Agregó 1 item de "${action.payload.name}" al carrito`);
+        if (incomingQuantity > 0) {
+          state.cartItems[productIndex].cartQuantity += incomingQuantity;
+          NotiflixSuccess(
+            `Se agregaron ${incomingQuantity} unidades más de "${action.payload.name}"`
+          );
+        } else {
+          state.cartItems[productIndex].cartQuantity += 1;
+          NotiflixSuccess(
+            `Agregó 1 item de "${action.payload.name}" al carrito`
+          );
+        }
       } else {
+        const initialQty = incomingQuantity > 0 ? incomingQuantity : unity;
         const tempProduct: CartItem = {
           ...action.payload,
-          cartQuantity: unity,
+          cartQuantity: initialQty,
+          unity: unity,
         };
         state.cartItems.push(tempProduct);
         NotiflixSuccess(
-          `Agregó ${unity} items de "${action.payload.name}" al carrito`
+          `Agregó ${initialQty} items de "${action.payload.name}" al carrito`
         );
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    DECREASE_CART(state, action: PayloadAction<Product>) {
+    // --- NUEVA ACCIÓN: FIJAR CANTIDAD EXACTA ---
+    SET_CART_QUANTITY(
+      state,
+      action: PayloadAction<{ id: string; quantity: number; name: string }>
+    ) {
       const productIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
 
+      if (productIndex >= 0) {
+        state.cartItems[productIndex].cartQuantity = action.payload.quantity;
+        NotiflixSuccess(
+          `Cantidad de "${action.payload.name}" actualizada a ${action.payload.quantity}`
+        );
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      }
+    },
+    // -------------------------------------------
+
+    DECREASE_CART(state, action: PayloadAction<Product>) {
+      const productIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
       const unity = state.cartItems[productIndex].unity || 1;
 
       if (state.cartItems[productIndex].cartQuantity > unity) {
@@ -121,6 +153,7 @@ const cartSlice = createSlice({
 
 export const {
   ADD_TO_CART,
+  SET_CART_QUANTITY, // Exportamos la nueva acción
   DECREASE_CART,
   REMOVE_FROM_CART,
   CLEAR_CART,

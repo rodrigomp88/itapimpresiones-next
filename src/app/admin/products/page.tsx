@@ -12,17 +12,33 @@ async function getProducts(): Promise<Product[]> {
 
   return snapshot.docs.map((doc) => {
     const data = doc.data();
+
+    // Normalización de datos al vuelo por seguridad
+    let images = data.images || [];
+
+    // Si encontramos imágenes antiguas (array de strings), las convertimos
+    // para que la interfaz no se rompa
+    if (
+      Array.isArray(images) &&
+      images.length > 0 &&
+      typeof images[0] === "string"
+    ) {
+      images = images.map((url: string) => ({ url, color: "Todos" }));
+    }
+
     return {
       id: doc.id,
       ...data,
-      createdAt: data.createdAt.toDate().toISOString(),
+      images: images,
+      createdAt: data.createdAt?.toDate
+        ? data.createdAt.toDate().toISOString()
+        : new Date().toISOString(),
     } as Product;
   });
 }
 
 const AdminProductsPage = async () => {
   const products = await getProducts();
-
   return <AdminProductsClient initialProducts={products} />;
 };
 

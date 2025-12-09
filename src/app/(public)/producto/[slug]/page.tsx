@@ -23,13 +23,19 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
       name: data.name,
       slug: data.slug,
       price: data.price,
-      images: data.images,
+      // Aseguramos que sea array o array vacío
+      images: data.images || [],
       pause: data.pause,
       unity: data.unity,
       size: data.size,
       category: data.category,
-      description: data.description,
-      createdAt: data.createdAt.toDate().toISOString(),
+      // Manejo seguro del color general
+      color: data.color || "Todos",
+      bagType: data.bagType,
+      description: data.description || data.desc, // Soporte para ambos nombres de campo
+      createdAt: data.createdAt?.toDate
+        ? data.createdAt.toDate().toISOString()
+        : new Date().toISOString(),
     };
 
     return productData as Product;
@@ -45,9 +51,6 @@ export async function generateStaticParams() {
     const snapshot = await getDocs(productsRef);
 
     if (snapshot.empty) {
-      console.log(
-        "No se encontraron productos para generar páginas estáticas."
-      );
       return [];
     }
 

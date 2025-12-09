@@ -3,19 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FaRuler } from "react-icons/fa";
-import { Product } from "@/types";
+import { Product, ProductImage } from "@/types";
 import { motion } from "framer-motion";
 
+// Helper para obtener la URL limpia
+const getImageUrl = (img: string | ProductImage): string => {
+  if (typeof img === "string") return img;
+  return img?.url || "";
+};
+
 const ProductItem: React.FC<Product> = ({
-  id,
   name,
   slug,
   price = 0,
   images,
   pause,
-  unity = 1,
-  size,
   description,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -31,9 +33,11 @@ const ProductItem: React.FC<Product> = ({
     setCurrentImageIndex(0);
   };
 
-  if (!slug) {
-    return null;
-  }
+  if (!slug) return null;
+
+  // Obtenemos la URL actual usando el helper
+  const currentImageSrc =
+    images && images.length > 0 ? getImageUrl(images[currentImageIndex]) : "";
 
   return (
     <Link href={`/producto/${slug}`} className="block group h-full">
@@ -50,12 +54,13 @@ const ProductItem: React.FC<Product> = ({
           {!imageLoaded && (
             <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
           )}
-          {images && images.length > 0 ? (
+          {currentImageSrc ? (
             <Image
               fill
-              className={`object-contain transition-transform duration-300 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
-                }`}
-              src={images[currentImageIndex]}
+              className={`object-contain transition-transform duration-300 group-hover:scale-105 ${
+                imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              src={currentImageSrc}
               alt={name}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
@@ -76,9 +81,36 @@ const ProductItem: React.FC<Product> = ({
             {name}
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400 text-sm line-clamp-2">
-            {description ||
-              "Suave, resistente y perfecta para el día a día o para personalizar."}
+            {description || "Suave, resistente y perfecta para el día a día."}
           </p>
+
+          {/* Opcional: Mostrar indicación de colores disponibles */}
+          <div className="flex gap-1 mt-1">
+            {images.slice(0, 4).map((img, idx) => {
+              const color = typeof img !== "string" ? img.color : "Todos";
+              if (color === "Todos") return null;
+
+              const colorMap: any = {
+                Blanco: "bg-gray-100 border-gray-300",
+                Negro: "bg-black",
+                Rojo: "bg-red-500",
+                Azul: "bg-blue-500",
+                Verde: "bg-green-500",
+                Amarillo: "bg-yellow-400",
+              };
+
+              return (
+                <div
+                  key={idx}
+                  className={`w-3 h-3 rounded-full border ${
+                    colorMap[color] || "bg-gray-400"
+                  }`}
+                  title={color}
+                />
+              );
+            })}
+          </div>
+
           <div className="mt-auto pt-2">
             {pause ? (
               <p className="font-bold text-red-500">Sin Stock</p>

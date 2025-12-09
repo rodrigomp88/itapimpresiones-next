@@ -13,6 +13,7 @@ import Image from "next/image";
 import {
   CALCULATE_TOTAL_QUANTITY,
   selectCartTotalQuantity,
+  selectCartItems, // <--- 1. Importar el selector de items
 } from "@/redux/slice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
@@ -21,12 +22,15 @@ const Navbar = () => {
   const user = session?.user;
   const isAdmin = user?.email === process.env.NEXT_PUBLIC_USER_ADMIN;
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const cartTotalQuantity = useAppSelector(selectCartTotalQuantity);
+  const cartItems = useAppSelector(selectCartItems); // <--- 2. Suscribirse a los items
   const dispatch = useAppDispatch();
 
+  // <--- 3. Agregar cartItems como dependencia
   useEffect(() => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
-  }, [dispatch]);
+  }, [dispatch, cartItems]);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const logoutUser = () => signOut({ callbackUrl: "/" });
@@ -109,14 +113,18 @@ const Navbar = () => {
               <UserNotificationBell />
             </div>
           )}
-          <Link href="/cart" className="relative">
+
+          <Link href="/cart" className="relative group">
             <IoCartOutline className="h-6 w-6" />
+
+            {/* Solo mostramos el badge si hay items */}
             {cartTotalQuantity > 0 && (
-              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                {cartTotalQuantity > 9 ? "+9" : cartTotalQuantity}
+              <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white animate-in zoom-in duration-300">
+                {cartTotalQuantity > 99 ? "99+" : cartTotalQuantity}
               </span>
             )}
           </Link>
+
           <div className="hidden md:flex items-center gap-2">
             {status === "unauthenticated" ? (
               <Link href="/auth/login" className="btn-sm">

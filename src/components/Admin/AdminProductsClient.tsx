@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/types";
+import { Product, ProductImage } from "@/types";
 import { useState, useMemo, useTransition } from "react";
 import {
   FaPauseCircle,
@@ -20,6 +20,14 @@ import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 import { motion, AnimatePresence } from "framer-motion";
+
+// Helper para obtener URL segura (maneja compatibilidad antigua vs nueva)
+const getImageUrl = (images: any[]): string => {
+  if (!images || images.length === 0) return "/placeholder.png";
+  const firstImage = images[0];
+  if (typeof firstImage === "string") return firstImage; // Legacy
+  return (firstImage as ProductImage).url || "/placeholder.png"; // New structure
+};
 
 const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
   initialProducts,
@@ -77,9 +85,11 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Productos</h2>
+          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">
+            Productos
+          </h2>
           <p className="text-zinc-500 dark:text-zinc-400 mt-1">
-            Gestiona el catálogo de productos
+            Gestiona el catálogo de productos y colores
           </p>
         </div>
         <AddProduct />
@@ -87,7 +97,6 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
 
       {/* Filters */}
       <div className="flex flex-col md:flex-row gap-4">
-        {/* Search */}
         <div className="flex-1 relative">
           <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
           <input
@@ -99,7 +108,6 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
           />
         </div>
 
-        {/* Category Filter */}
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
@@ -113,9 +121,9 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
         </select>
       </div>
 
-      {/* Results Count */}
       <p className="text-sm text-zinc-500 dark:text-zinc-400">
-        Mostrando {filteredProducts.length} de {initialProducts.length} productos
+        Mostrando {filteredProducts.length} de {initialProducts.length}{" "}
+        productos
       </p>
 
       {/* Products Grid */}
@@ -133,12 +141,16 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
             >
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Product Image */}
-                <div className="flex-shrink-0">
+                <div className="flex-shrink-0 relative group">
                   <img
-                    src={product.images?.[0] || "/placeholder.png"}
+                    src={getImageUrl(product.images)}
                     alt={product.name}
                     className="w-32 h-32 object-contain rounded-lg bg-zinc-100 dark:bg-zinc-900"
                   />
+                  {/* Badge de cantidad de imágenes */}
+                  <span className="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-2 py-1 rounded-full">
+                    {product.images?.length || 0} img
+                  </span>
                 </div>
 
                 {/* Product Info */}
@@ -156,10 +168,11 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                       </div>
                     </div>
                     <span
-                      className={`px-3 py-1 text-xs font-medium rounded-full ${product.pause
+                      className={`px-3 py-1 text-xs font-medium rounded-full ${
+                        product.pause
                           ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
                           : "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
-                        }`}
+                      }`}
                     >
                       {product.pause ? "Pausado" : "Activo"}
                     </span>
@@ -179,7 +192,9 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                   {/* Actions */}
                   <div className="flex gap-2 pt-2">
                     <button
-                      onClick={() => handleTogglePause(product.id, product.pause)}
+                      onClick={() =>
+                        handleTogglePause(product.id, product.pause)
+                      }
                       disabled={isPending}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-600 transition-colors disabled:opacity-50"
                       title={product.pause ? "Reanudar" : "Pausar"}
@@ -189,14 +204,16 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                       ) : (
                         <FaPauseCircle className="text-yellow-500" />
                       )}
-                      <span className="text-sm">{product.pause ? "Reanudar" : "Pausar"}</span>
+                      <span className="text-sm hidden sm:inline">
+                        {product.pause ? "Reanudar" : "Pausar"}
+                      </span>
                     </button>
                     <button
                       onClick={() => setEditingProduct(product)}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/20 dark:hover:bg-blue-900/40 text-blue-700 dark:text-blue-400 transition-colors"
                     >
                       <FaPencilAlt />
-                      <span className="text-sm">Editar</span>
+                      <span className="text-sm hidden sm:inline">Editar</span>
                     </button>
                     <button
                       onClick={() => handleDelete(product.id, product.slug)}
@@ -204,7 +221,7 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-900/20 dark:hover:bg-red-900/40 text-red-700 dark:text-red-400 transition-colors disabled:opacity-50"
                     >
                       <FaTrashAlt />
-                      <span className="text-sm">Eliminar</span>
+                      <span className="text-sm hidden sm:inline">Eliminar</span>
                     </button>
                   </div>
                 </div>
@@ -218,7 +235,9 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
       {filteredProducts.length === 0 && (
         <div className="text-center py-12">
           <FaBox className="mx-auto text-6xl text-zinc-300 dark:text-zinc-600 mb-4" />
-          <p className="text-zinc-500 dark:text-zinc-400">No se encontraron productos</p>
+          <p className="text-zinc-500 dark:text-zinc-400">
+            No se encontraron productos
+          </p>
         </div>
       )}
 

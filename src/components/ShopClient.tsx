@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProductFilter from "./Product/ProductFilter";
 import ProductList from "./Product/ProductList";
 import ProductSkeleton from "./Product/ProductSkeleton";
-import { Product } from "@/types";
+import { Product, ProductImage } from "@/types";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   GET_PRICE_RANGE,
@@ -27,7 +27,6 @@ interface ShopClientProps {
 
 const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   const dispatch = useAppDispatch();
-
   const products = useAppSelector(selectProducts);
   const minPrice = useAppSelector(selectMinPrice);
   const maxPrice = useAppSelector(selectMaxPrice);
@@ -49,63 +48,55 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
     dispatch(
       FILTER_BY_CATEGORY({ products: initialProducts, category: "Todas" })
     );
-    // Simulate loading delay to show skeletons
     setTimeout(() => setIsLoading(false), 500);
   }, [dispatch, initialProducts]);
 
   useEffect(() => {
-    if (maxPrice) {
-      setPrice(maxPrice);
-    }
+    if (maxPrice) setPrice(maxPrice);
   }, [maxPrice]);
 
-  const allCategories = [
-    "Todas",
-    ...new Set(products.map((product) => product.category)),
-  ];
+  const allCategories = ["Todas", ...new Set(products.map((p) => p.category))];
 
-  const handleCategoryChange = (newCategory: string) => {
-    setCategory(newCategory);
-    dispatch(FILTER_BY_CATEGORY({ products, category: newCategory }));
+  const handleCategoryChange = (val: string) => {
+    setCategory(val);
+    dispatch(FILTER_BY_CATEGORY({ products, category: val }));
   };
-
-  const handlePriceChange = (newPrice: number) => {
-    setPrice(newPrice);
-    dispatch(FILTER_BY_PRICE({ products, price: newPrice }));
+  const handlePriceChange = (val: number) => {
+    setPrice(val);
+    dispatch(FILTER_BY_PRICE({ products, price: val }));
   };
-
-  const handleSizeChange = (newSize: string) => {
-    setSize(newSize);
-    dispatch(FILTER_BY_SIZE({ products, size: newSize }));
+  const handleSizeChange = (val: string) => {
+    setSize(val);
+    dispatch(FILTER_BY_SIZE({ products, size: val }));
   };
-
   const handleCustomizableChange = (checked: boolean) => {
     setIsCustomizable(checked);
     dispatch(FILTER_BY_CUSTOMIZATION({ products, customizable: checked }));
   };
-
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSortBy(e.target.value);
-  };
+  const handleColorChange = (val: string) => setSelectedColor(val);
+  const handleBagTypeChange = (val: string) => setSelectedBagType(val);
 
-  const handleColorChange = (color: string) => {
-    setSelectedColor(color);
-  };
-
-  const handleBagTypeChange = (bagType: string) => {
-    setSelectedBagType(bagType);
-  };
-
-  // Filter by color and bagType
+  // --- FILTRADO DE COLOR POR IMAGEN ---
   let colorAndBagFiltered = filteredProducts;
+
   if (selectedColor !== "Todos") {
-    colorAndBagFiltered = colorAndBagFiltered.filter(p => p.color === selectedColor);
-  }
-  if (selectedBagType !== "Todos" && category === "Bolsas") {
-    colorAndBagFiltered = colorAndBagFiltered.filter(p => p.bagType === selectedBagType.toLowerCase());
+    colorAndBagFiltered = colorAndBagFiltered.filter((p) => {
+      if (!p.images || p.images.length === 0) return false;
+      return p.images.some((img) => {
+        if (typeof img === "string") return false; // Ignoramos legacy sin color
+        return (img as ProductImage).color === selectedColor;
+      });
+    });
   }
 
-  // Sort filtered products
+  if (selectedBagType !== "Todos" && category === "Bolsas") {
+    colorAndBagFiltered = colorAndBagFiltered.filter(
+      (p) => p.bagType === selectedBagType.toLowerCase()
+    );
+  }
+
   const sortedProducts = [...colorAndBagFiltered].sort((a, b) => {
     switch (sortBy) {
       case "price-low":
@@ -113,7 +104,9 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
       case "price-high":
         return b.price - a.price;
       case "newest":
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       case "popular":
       default:
         return 0;
@@ -125,26 +118,23 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-2">
           <a
-            className="text-zinc-600 dark:text-zinc-400 text-sm font-medium leading-normal hover:text-primary"
+            className="text-zinc-600 dark:text-zinc-400 text-sm font-medium hover:text-primary"
             href="/"
           >
             Inicio
           </a>
-          <span className="text-zinc-600 dark:text-zinc-400 text-sm font-medium leading-normal">
-            /
-          </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium leading-normal">
+          <span className="text-zinc-600 dark:text-zinc-400 text-sm">/</span>
+          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
             Productos
           </span>
         </div>
         <div className="flex flex-wrap justify-between gap-4 items-center">
           <div className="flex min-w-72 flex-col gap-2">
-            <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black leading-tight tracking-[-0.033em]">
+            <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black">
               Nuestros Productos
             </p>
-            <p className="text-zinc-600 dark:text-zinc-400 text-base font-normal leading-normal">
-              Explora nuestra selección de indumentaria de alta calidad, lista
-              para comprar o personalizar a tu gusto.
+            <p className="text-zinc-600 dark:text-zinc-400 text-base">
+              Explora nuestra selección.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -154,7 +144,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             <select
               value={sortBy}
               onChange={handleSortChange}
-              className="form-select rounded-lg border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm focus:border-primary focus:ring-primary/50 p-2"
+              className="form-select rounded-lg border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm p-2"
             >
               <option value="popular">Más populares</option>
               <option value="price-low">Precio: bajo a alto</option>
@@ -183,12 +173,11 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               onBagTypeChange={handleBagTypeChange}
             />
           </aside>
-
           <main className="col-span-12 md:col-span-9">
             {isLoading ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <ProductSkeleton key={index} />
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <ProductSkeleton key={i} />
                 ))}
               </div>
             ) : (

@@ -1,18 +1,24 @@
 import { ShippingAddress } from "../redux/slice/checkoutSlice";
 
+// Nueva interfaz para las imágenes
+export interface ProductImage {
+  url: string;
+  color: string;
+}
+
 export interface Product {
   id: string;
   name: string;
   slug: string;
   price: number;
-  images: string[];
+  images: ProductImage[]; // Array de objetos
   pause: boolean;
   unity: number;
   size: string;
   category: string;
   description: string;
   createdAt: string;
-  color?: string;
+  color?: string; // Opcional/Legacy (ya no lo usaremos activamente)
   bagType?: "troquel" | "manija";
 }
 

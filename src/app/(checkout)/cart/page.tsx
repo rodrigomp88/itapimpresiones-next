@@ -9,7 +9,6 @@ import {
   ADD_TO_CART,
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_QUANTITY,
-  CLEAR_CART,
   DECREASE_CART,
   REMOVE_FROM_CART,
   SAVE_URL,
@@ -17,7 +16,16 @@ import {
   selectCartTotalAmount,
   selectCartTotalQuantity,
 } from "@/redux/slice/cartSlice";
-import { Product } from "@/types";
+import { Product, ProductImage, CartItem } from "@/types";
+
+// Helper para obtener la URL de la imagen
+const getImageUrl = (image: string | ProductImage | undefined): string => {
+  if (!image) return "/placeholder.png";
+  if (typeof image === "string") {
+    return image !== "" ? image : "/placeholder.png";
+  }
+  return image.url || "/placeholder.png";
+};
 
 const CartPage: React.FC = () => {
   const [isClient, setIsClient] = useState(false);
@@ -27,11 +35,18 @@ const CartPage: React.FC = () => {
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
-  const cartTotalQuantity = useAppSelector(selectCartTotalQuantity);
+  // const cartTotalQuantity = useAppSelector(selectCartTotalQuantity); // Descomentar si se usa
 
-  const increaseCart = (cart: Product) => dispatch(ADD_TO_CART(cart));
-  const decreaseCart = (cart: Product) => dispatch(DECREASE_CART(cart));
-  const removeFromCart = (cart: Product) => dispatch(REMOVE_FROM_CART(cart));
+  // CORRECCIÓN PRINCIPAL AQUÍ:
+  // Cuando aumentamos desde el carrito, forzamos cartQuantity a 1.
+  // Así Redux sabe que solo debe sumar 1 unidad, no duplicar la cantidad actual.
+  const increaseCart = (cart: CartItem) => {
+    const itemToIncrease: CartItem = { ...cart, cartQuantity: 1 };
+    dispatch(ADD_TO_CART(itemToIncrease));
+  };
+
+  const decreaseCart = (cart: CartItem) => dispatch(DECREASE_CART(cart));
+  const removeFromCart = (cart: CartItem) => dispatch(REMOVE_FROM_CART(cart));
 
   useEffect(() => {
     setIsClient(true);
@@ -65,20 +80,23 @@ const CartPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="flex flex-wrap gap-2 pb-4">
             <Link
-              className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary"
+              className="text-gray-500 dark:text-gray-400 text-sm font-medium hover:text-primary"
               href="/"
             >
               Inicio
             </Link>
-            <span className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">
+            <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
               /
             </span>
-            <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium leading-normal">
+            <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
               Carrito de Compras
             </span>
           </div>
           <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
-            <span className="material-symbols-outlined text-gray-300 dark:text-gray-600 mb-4" style={{ fontSize: '80px' }}>
+            <span
+              className="material-symbols-outlined text-gray-300 dark:text-gray-600 mb-4"
+              style={{ fontSize: "80px" }}
+            >
               shopping_cart
             </span>
             <p className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
@@ -102,132 +120,133 @@ const CartPage: React.FC = () => {
   return (
     <div className="flex-grow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Breadcrumbs */}
         <div className="flex flex-wrap gap-2 pb-4">
           <Link
-            className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary"
+            className="text-gray-500 dark:text-gray-400 text-sm font-medium hover:text-primary"
             href="/"
           >
             Inicio
           </Link>
-          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal">
+          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
             /
           </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium leading-normal">
+          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
             Carrito de Compras
           </span>
         </div>
 
-        {/* Page Title */}
         <div className="flex flex-wrap justify-between gap-3 pb-8">
-          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">
+          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black min-w-72">
             Tu Carrito
           </p>
         </div>
 
-        {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          {/* Cart Items Table */}
           <div className="lg:col-span-2 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
             <table className="w-full">
               <thead className="border-b border-zinc-200 dark:border-zinc-700">
                 <tr className="bg-zinc-50 dark:bg-zinc-800/50">
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase">
                     Producto
                   </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                     Precio
                   </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                     Cantidad
                   </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                     Subtotal
                   </th>
-                  <th className="px-6 py-3 text-right text-zinc-900 dark:text-zinc-300 w-auto text-xs font-semibold uppercase tracking-wider"></th>
+                  <th className="px-6 py-3 text-right text-zinc-900 dark:text-zinc-300 w-auto text-xs font-semibold uppercase"></th>
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((cart, index) => (
-                  <tr
-                    key={cart.id}
-                    className={`border-b border-zinc-200 dark:border-zinc-700 ${index === cartItems.length - 1 ? "last:border-0" : ""
+                {cartItems.map((cart, index) => {
+                  const imageSrc =
+                    cart.images && cart.images.length > 0
+                      ? getImageUrl(cart.images[0])
+                      : "/placeholder.png";
+
+                  return (
+                    <tr
+                      key={cart.id}
+                      className={`border-b border-zinc-200 dark:border-zinc-700 ${
+                        index === cartItems.length - 1 ? "last:border-0" : ""
                       }`}
-                  >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-4">
-                        <div
-                          className="w-16 h-16 rounded-lg bg-cover bg-center flex-shrink-0"
-                          style={{
-                            backgroundImage: `url('${cart.images[0]}')`,
-                          }}
-                        ></div>
-                        <div>
-                          <Link
-                            href={`/producto/${cart.slug}`}
-                            className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold leading-normal hover:text-primary"
-                          >
-                            {cart.name}
-                          </Link>
-                          {cart.size && (
-                            <p className="text-gray-500 dark:text-gray-400 text-xs">
-                              Talle: {cart.size}
-                            </p>
-                          )}
+                    >
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-4">
+                          <div
+                            className="w-16 h-16 rounded-lg bg-cover bg-center flex-shrink-0 border border-zinc-200 dark:border-zinc-700"
+                            style={{ backgroundImage: `url('${imageSrc}')` }}
+                          ></div>
+                          <div>
+                            <Link
+                              href={`/producto/${cart.slug}`}
+                              className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold hover:text-primary"
+                            >
+                              {cart.name}
+                            </Link>
+                            {cart.size && (
+                              <p className="text-gray-500 dark:text-gray-400 text-xs">
+                                Talle: {cart.size}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300 text-sm font-normal leading-normal">
-                      ${cart.price.toLocaleString("es-AR")}
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden max-w-[100px]">
+                      </td>
+                      <td className="px-6 py-4 text-gray-600 dark:text-gray-300 text-sm">
+                        ${cart.price.toLocaleString("es-AR")}
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden max-w-[100px]">
+                          <button
+                            onClick={() => decreaseCart(cart)}
+                            className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            -
+                          </button>
+                          <input
+                            className="w-full text-center border-0 bg-transparent text-gray-800 dark:text-white focus:ring-0 p-1"
+                            type="text"
+                            value={cart.cartQuantity}
+                            readOnly
+                          />
+                          <button
+                            onClick={() => increaseCart(cart)}
+                            className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          >
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-gray-800 dark:text-white text-sm font-semibold">
+                        $
+                        {(cart.price * cart.cartQuantity).toLocaleString(
+                          "es-AR"
+                        )}
+                      </td>
+                      <td className="px-6 py-4 text-right">
                         <button
-                          onClick={() => decreaseCart(cart)}
-                          className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                          onClick={() => removeFromCart(cart)}
+                          className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
                         >
-                          -
+                          <span className="material-symbols-outlined text-xl">
+                            delete
+                          </span>
                         </button>
-                        <input
-                          className="w-full text-center border-0 bg-transparent text-gray-800 dark:text-white focus:ring-0 p-1"
-                          type="text"
-                          value={cart.cartQuantity}
-                          readOnly
-                        />
-                        <button
-                          onClick={() => increaseCart(cart)}
-                          className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
-                        >
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-gray-800 dark:text-white text-sm font-semibold leading-normal">
-                      $
-                      {(cart.price * cart.cartQuantity).toLocaleString(
-                        "es-AR"
-                      )}
-                    </td>
-                    <td className="px-6 py-4 text-right">
-                      <button
-                        onClick={() => removeFromCart(cart)}
-                        className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
-                      >
-                        <span className="material-symbols-outlined text-xl">
-                          delete
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
 
-          {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sticky top-10">
-              <h2 className="text-zinc-900 dark:text-zinc-100 text-xl font-bold leading-tight tracking-[-0.015em] pb-4 border-b border-zinc-200 dark:border-zinc-700">
+              <h2 className="text-zinc-900 dark:text-zinc-100 text-xl font-bold pb-4 border-b border-zinc-200 dark:border-zinc-700">
                 Resumen del Pedido
               </h2>
               <div className="space-y-4 py-4">
@@ -261,13 +280,13 @@ const CartPage: React.FC = () => {
               <div className="mt-6 flex flex-col gap-3">
                 <button
                   onClick={handleCheckout}
-                  className="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
+                  className="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors"
                 >
                   Proceder al Pago
                 </button>
                 <Link
                   href="/tienda"
-                  className="w-full flex items-center justify-center rounded-lg h-12 bg-zinc-50 dark:bg-zinc-700/50 text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal tracking-[0.015em] hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+                  className="w-full flex items-center justify-center rounded-lg h-12 bg-zinc-50 dark:bg-zinc-700/50 text-zinc-900 dark:text-zinc-100 text-base font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
                 >
                   Continuar Comprando
                 </Link>
