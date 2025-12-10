@@ -3,6 +3,11 @@ import { adminDb } from "@/firebase/admin";
 import { Order, Message } from "@/types";
 import { notFound } from "next/navigation";
 
+// Definir el tipo para params como promesa
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
 async function getOrderAndMessages(
   orderId: string
 ): Promise<{ order: Order | null; messages: Message[] }> {
@@ -45,17 +50,17 @@ async function getOrderAndMessages(
   return { order, messages };
 }
 
-const AdminOrderDetailsPage = async ({
-  params,
-}: {
-  params: { id: string };
-}) => {
-  console.log(`[Admin Server] Fetching order details for ID: ${params.id}`);
+// Actualizar el componente para recibir params como promesa
+const AdminOrderDetailsPage = async ({ params }: PageProps) => {
+  // Esperar a que se resuelva la promesa
+  const { id } = await params;
 
-  const { order, messages } = await getOrderAndMessages(params.id);
+  console.log(`[Admin Server] Fetching order details for ID: ${id}`);
+
+  const { order, messages } = await getOrderAndMessages(id);
 
   if (!order) {
-    console.log(`[Admin Server] Order with ID: ${params.id} not found.`);
+    console.log(`[Admin Server] Order with ID: ${id} not found.`);
     notFound();
   }
 

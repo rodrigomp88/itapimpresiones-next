@@ -50,46 +50,45 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "google") {
-        if (!adminAuth) {
-          console.warn(
-            "Admin SDK not initialized. Skipping user sync with Firebase."
-          );
-          return true;
-        }
-        try {
-          const firebaseUser = await adminAuth.getUser(user.id);
+        if (!adminAuth) return true;
 
-          if (firebaseUser) {
-            await adminAuth.updateUser(user.id, {
-              email: user.email ?? undefined,
-              displayName: user.name ?? undefined,
-              photoURL: user.image ?? undefined,
-            });
-            console.log("¡Usuario actualizado con éxito!");
-          }
+        try {
+          // 1. Intentar obtener usuario por su UID de Google
+          await adminAuth.getUser(user.id);
+
+          // Si existe, actualizamos datos básicos
+          await adminAuth.updateUser(user.id, {
+            email: user.email ?? undefined,
+            displayName: user.name ?? undefined,
+            photoURL: user.image ?? undefined,
+          });
         } catch (error: any) {
-          console.error(
-            "Error al intentar obtener/actualizar usuario:",
-            error.code
-          );
           if (error.code === "auth/user-not-found") {
-            console.log(
-              `Usuario con UID ${user.id} no encontrado. Creando nuevo usuario...`
-            );
-            await adminAuth.createUser({
-              uid: user.id,
-              email: user.email ?? undefined,
-              displayName: user.name ?? undefined,
-              photoURL: user.image ?? undefined,
-            });
-            console.log(
-              "¡Nuevo usuario de Google creado con éxito en Firebase!"
-            );
+            // 2. Si no existe por UID, verificamos si existe por EMAIL
+            // (Caso: Usuario registrado con contraseña intenta entrar con Google)
+            try {
+              const existingUser = await adminAuth.getUserByEmail(user.email!);
+              console.log(
+                `Usuario ya existe con email ${user.email} (UID: ${existingUser.uid}). Se vinculará en JWT.`
+              );
+              // No hacemos nada, dejaremos que el callback JWT unifique el ID.
+            } catch (emailError: any) {
+              // 3. Si no existe ni por UID ni por Email, lo CREAMOS
+              if (emailError.code === "auth/user-not-found") {
+                console.log(
+                  `Creando nuevo usuario para Google UID: ${user.id}`
+                );
+                await adminAuth.createUser({
+                  uid: user.id, // Usamos el ID de Google como UID de Firebase
+                  email: user.email ?? undefined,
+                  displayName: user.name ?? undefined,
+                  photoURL: user.image ?? undefined,
+                  emailVerified: true, // Google ya verificó el email
+                });
+              }
+            }
           } else {
-            console.error(
-              "Ocurrió un error inesperado en el callback signIn:",
-              error
-            );
+            console.error("Error en signIn callback:", error);
           }
         }
       }
@@ -98,7 +97,21 @@ export const authOptions: AuthOptions = {
 
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        // Lógica de Unificación:
+        // Siempre intentamos buscar el UID real de Firebase usando el email.
+        // Esto garantiza que si el usuario se registró con contraseña (UID 'ABC')
+        // y entra con Google (ID '123'), el sistema use 'ABC' para todo.
+        try {
+          if (user.email && adminAuth) {
+            const firebaseUser = await adminAuth.getUserByEmail(user.email);
+            token.id = firebaseUser.uid;
+          } else {
+            token.id = user.id;
+          }
+        } catch (error) {
+          // Si falla (o es un registro nuevo puro), usamos el ID que viene de NextAuth
+          token.id = user.id;
+        }
       }
       return token;
     },

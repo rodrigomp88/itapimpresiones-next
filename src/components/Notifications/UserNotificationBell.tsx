@@ -14,32 +14,29 @@ const UserNotificationBell = () => {
   const [notifications, setNotifications] = useState<Order[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [firebaseUid, setFirebaseUid] = useState<string | null>(null);
 
-  // Estado para saber si Firebase está listo
-  const [firebaseReady, setFirebaseReady] = useState(false);
-
-  // 1. Efecto para esperar a que Firebase auth esté listo
+  // 1. Obtener UID real de Firebase
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      // Solo activamos la bandera si hay usuario y coincide con la sesión
-      if (user && session?.user?.id && user.uid === session.user.id) {
-        setFirebaseReady(true);
+      if (user) {
+        setFirebaseUid(user.uid);
       } else {
-        setFirebaseReady(false);
-        setNotifications([]); // Limpiar si no hay usuario
+        setFirebaseUid(null);
+        setNotifications([]);
       }
     });
     return () => unsubscribe();
-  }, [session]);
+  }, []);
 
-  // 2. Efecto para escuchar notificaciones (Solo si Firebase está listo)
+  // 2. Escuchar notificaciones usando el UID de Firebase
   useEffect(() => {
-    if (!firebaseReady || !session?.user?.id) return;
+    if (!firebaseUid) return;
 
-    // CONSULTA SEGURA: Solo se ejecuta si firebaseReady es true
+    // La consulta debe coincidir con la regla: resource.data.userID == request.auth.uid
     const q = query(
       collection(db, "orders"),
-      where("userID", "==", session.user.id),
+      where("userID", "==", firebaseUid), // Usamos el UID directo de Firebase
       where("hasUnreadClientMessage", "==", true)
     );
 
@@ -52,19 +49,15 @@ const UserNotificationBell = () => {
         setNotifications(unreadOrders);
       },
       (error) => {
-        // Manejo silencioso de errores de permisos transitorios
-        if (error.code === "permission-denied") {
-          console.warn(
-            "Permiso denegado temporalmente en notificaciones (sincronizando...)"
-          );
-        } else {
-          console.error("Error en notificaciones:", error);
+        // Ignoramos errores de permisos iniciales mientras se sincroniza
+        if (error.code !== "permission-denied") {
+          console.error("Error notification listener:", error);
         }
       }
     );
 
     return () => unsubscribeSnapshot();
-  }, [firebaseReady, session?.user?.id]);
+  }, [firebaseUid]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -76,9 +69,7 @@ const UserNotificationBell = () => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const notificationCount = notifications.length;
@@ -87,11 +78,13 @@ const UserNotificationBell = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsDropdownOpen((prev) => !prev)}
-        className="relative"
+        className="relative p-1"
       >
-        <FaBell className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" />
+        <FaBell className="h-5 w-5 text-zinc-600 dark:text-zinc-300 hover:text-primary transition-colors" />
         {notificationCount > 0 && (
-          <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 border-2 border-white dark:border-black animate-pulse" />
+          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white border border-white dark:border-black">
+            {notificationCount}
+          </span>
         )}
       </button>
 

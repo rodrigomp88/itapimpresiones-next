@@ -5,43 +5,49 @@ service cloud.firestore {
     
     // --- FUNCIONES AUXILIARES ---
     
-    // Verifica si el usuario tiene privilegios de admin
     function isAdmin() {
       return request.auth != null && (
         request.auth.token.email == 'itapimpresiones@gmail.com' ||
         request.auth.token.admin == true || 
-        // Importante: esta función `exists` es interna de las reglas, no causa el error del cliente
         exists(/databases/$(database)/documents/admins/$(request.auth.uid))
       );
     }
 
-    // Verifica si el usuario autenticado es el dueño del documento que intenta tocar
-    function isOwner(userId) {
-      return request.auth != null && request.auth.uid == userId;
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
     }
 
-    // --- REGLAS POR COLECCIÓN ---
+    // --- REGLAS ---
 
-    // 1. ADMINS: Aquí estaba el error principal.
-    // Permitimos que el usuario lea su propio ID para saber si es admin o no.
+    // 1. ADMINS
     match /admins/{userId} {
       allow read: if isOwner(userId) || isAdmin(); 
       allow write: if isAdmin();
     }
 
-    // 2. USERS: El usuario debe poder leer y escribir sus propios datos (checkout)
+    // 2. USERS (Perfil de usuario)
     match /users/{userId} {
       allow read, write: if isOwner(userId) || isAdmin();
     }
 
-    // 3. ORDERS:
+    // 3. ORDERS (AQUÍ ESTABA EL ERROR)
     match /orders/{orderId} {
-      // El usuario ve sus propias órdenes, el admin ve todas
-      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || isAdmin());
-      // Cualquiera autenticado puede crear una orden
-      allow create: if request.auth != null;
-      // Solo admin puede borrar o editar estados
-      allow update, delete: if isAdmin();
+      // CORRECCIÓN: Cambiado 'userId' por 'userID' para coincidir con tu código
+      allow read: if request.auth != null && (resource.data.userID == request.auth.uid || isAdmin());
+      
+      // Permitir crear si estás autenticado
+      allow create: if request.auth != null; 
+      
+      // Solo admin borra o edita (o lógica específica para actualizar mensajes)
+      allow update: if request.auth != null && (resource.data.userID == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+      
+      // Subcolección de mensajes dentro de órdenes
+      match /messages/{messageId} {
+         allow read, write: if request.auth != null && (
+            get(/databases/$(database)/documents/orders/$(orderId)).data.userID == request.auth.uid || isAdmin()
+         );
+      }
     }
 
     // 4. BANNERS
@@ -62,7 +68,7 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin();
     }
 
-    // 7. NOTIFICACIONES (FCM)
+    // 7. FCM TOKENS
     match /fcmTokens/{userId} {
       allow read, write: if isOwner(userId) || isAdmin();
       match /tokens/{tokenId} {
@@ -70,7 +76,7 @@ service cloud.firestore {
       }
     }
 
-    // Bloqueo por defecto para cualquier otra cosa
+    // Bloqueo por defecto
     match /{document=**} {
       allow read, write: if false;
     }

@@ -5,6 +5,11 @@ import { Order } from "@/types";
 import { getServerSession } from "next-auth";
 import { notFound, redirect } from "next/navigation";
 
+// Definir el tipo para params como promesa
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
 async function getOrder(orderId: string): Promise<Order | null> {
   try {
     if (!adminDb) return null;
@@ -33,14 +38,17 @@ async function getOrder(orderId: string): Promise<Order | null> {
   }
 }
 
-const OrderDetailsPage = async ({ params }: { params: { id: string } }) => {
+// Actualizar el componente para recibir params como promesa
+const OrderDetailsPage = async ({ params }: PageProps) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user?.id) {
     redirect("/auth/login");
   }
 
-  const orderId = params.id;
+  // Esperar a que se resuelva la promesa
+  const { id: orderId } = await params;
+
   const order = await getOrder(orderId);
 
   if (!order || order.userID !== session.user.id) {
