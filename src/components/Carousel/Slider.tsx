@@ -120,8 +120,11 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
               <button
                 key={idx}
                 onClick={() => setCurrent(idx)}
-                className={`w-3 h-3 rounded-full transition-all ${idx === current ? "bg-white w-8" : "bg-white/50 hover:bg-white/80"
-                  }`}
+                className={`w-3 h-3 rounded-full transition-all ${
+                  idx === current
+                    ? "bg-white w-8"
+                    : "bg-white/50 hover:bg-white/80"
+                }`}
                 aria-label={`Ir a slide ${idx + 1}`}
               />
             ))}

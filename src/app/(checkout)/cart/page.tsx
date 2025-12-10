@@ -18,7 +18,6 @@ import {
 } from "@/redux/slice/cartSlice";
 import { Product, ProductImage, CartItem } from "@/types";
 
-// Helper para obtener la URL de la imagen
 const getImageUrl = (image: string | ProductImage | undefined): string => {
   if (!image) return "/placeholder.png";
   if (typeof image === "string") {
@@ -35,11 +34,7 @@ const CartPage: React.FC = () => {
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
-  // const cartTotalQuantity = useAppSelector(selectCartTotalQuantity); // Descomentar si se usa
 
-  // CORRECCIÓN PRINCIPAL AQUÍ:
-  // Cuando aumentamos desde el carrito, forzamos cartQuantity a 1.
-  // Así Redux sabe que solo debe sumar 1 unidad, no duplicar la cantidad actual.
   const increaseCart = (cart: CartItem) => {
     const itemToIncrease: CartItem = { ...cart, cartQuantity: 1 };
     dispatch(ADD_TO_CART(itemToIncrease));
@@ -142,112 +137,196 @@ const CartPage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
-            <table className="w-full">
-              <thead className="border-b border-zinc-200 dark:border-zinc-700">
-                <tr className="bg-zinc-50 dark:bg-zinc-800/50">
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase">
-                    Producto
-                  </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
-                    Precio
-                  </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
-                    Cantidad
-                  </th>
-                  <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
-                    Subtotal
-                  </th>
-                  <th className="px-6 py-3 text-right text-zinc-900 dark:text-zinc-300 w-auto text-xs font-semibold uppercase"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {cartItems.map((cart, index) => {
-                  const imageSrc =
-                    cart.images && cart.images.length > 0
-                      ? getImageUrl(cart.images[0])
-                      : "/placeholder.png";
-
-                  return (
-                    <tr
-                      key={cart.id}
-                      className={`border-b border-zinc-200 dark:border-zinc-700 ${
-                        index === cartItems.length - 1 ? "last:border-0" : ""
-                      }`}
-                    >
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-4">
-                          <div
-                            className="w-16 h-16 rounded-lg bg-cover bg-center flex-shrink-0 border border-zinc-200 dark:border-zinc-700"
-                            style={{ backgroundImage: `url('${imageSrc}')` }}
-                          ></div>
-                          <div>
-                            <Link
-                              href={`/producto/${cart.slug}`}
-                              className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold hover:text-primary"
-                            >
-                              {cart.name}
-                            </Link>
-                            {cart.size && (
-                              <p className="text-gray-500 dark:text-gray-400 text-xs">
-                                Talle: {cart.size}
-                              </p>
-                            )}
-                          </div>
+          {/* SECCIÓN DE PRODUCTOS */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* VISTA MÓVIL (Cards) */}
+            <div className="block lg:hidden space-y-4">
+              {cartItems.map((cart) => {
+                const imageSrc =
+                  cart.images && cart.images.length > 0
+                    ? getImageUrl(cart.images[0])
+                    : "/placeholder.png";
+                return (
+                  <div
+                    key={cart.id}
+                    className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 flex gap-4 relative shadow-sm"
+                  >
+                    <div className="w-24 h-24 flex-shrink-0 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700">
+                      <div
+                        className="w-full h-full bg-cover bg-center"
+                        style={{ backgroundImage: `url('${imageSrc}')` }}
+                      ></div>
+                    </div>
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-start pr-8">
+                          <Link
+                            href={`/producto/${cart.slug}`}
+                            className="text-zinc-900 dark:text-zinc-100 font-semibold text-sm line-clamp-2 mb-1"
+                          >
+                            {cart.name}
+                          </Link>
                         </div>
-                      </td>
-                      <td className="px-6 py-4 text-gray-600 dark:text-gray-300 text-sm">
-                        ${cart.price.toLocaleString("es-AR")}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden max-w-[100px]">
+                        {cart.size && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                            Talle: {cart.size}
+                          </p>
+                        )}
+                        <p className="text-primary font-bold text-lg">
+                          ${cart.price.toLocaleString("es-AR")}
+                        </p>
+                      </div>
+
+                      <div className="flex justify-between items-center mt-3">
+                        <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-lg h-9">
                           <button
                             onClick={() => decreaseCart(cart)}
-                            className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            className="w-8 h-full flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             -
                           </button>
-                          <input
-                            className="w-full text-center border-0 bg-transparent text-gray-800 dark:text-white focus:ring-0 p-1"
-                            type="text"
-                            value={cart.cartQuantity}
-                            readOnly
-                          />
+                          <span className="w-8 text-center text-sm font-medium">
+                            {cart.cartQuantity}
+                          </span>
                           <button
                             onClick={() => increaseCart(cart)}
-                            className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            className="w-8 h-full flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             +
                           </button>
                         </div>
-                      </td>
-                      <td className="px-6 py-4 text-gray-800 dark:text-white text-sm font-semibold">
-                        $
-                        {(cart.price * cart.cartQuantity).toLocaleString(
-                          "es-AR"
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button
-                          onClick={() => removeFromCart(cart)}
-                          className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
-                        >
-                          <span className="material-symbols-outlined text-xl">
-                            delete
-                          </span>
-                        </button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                        <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                          Subtotal: $
+                          {(cart.price * cart.cartQuantity).toLocaleString(
+                            "es-AR"
+                          )}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Botón Eliminar Absoluto */}
+                    <button
+                      onClick={() => removeFromCart(cart)}
+                      className="absolute top-2 right-2 text-gray-400 hover:text-red-500 p-2"
+                      aria-label="Eliminar producto"
+                    >
+                      <span className="material-symbols-outlined text-xl">
+                        delete
+                      </span>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* VISTA ESCRITORIO (Tabla) */}
+            <div className="hidden lg:block overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900">
+              <table className="w-full">
+                <thead className="border-b border-zinc-200 dark:border-zinc-700">
+                  <tr className="bg-zinc-50 dark:bg-zinc-800/50">
+                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase">
+                      Producto
+                    </th>
+                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                      Precio
+                    </th>
+                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                      Cantidad
+                    </th>
+                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                      Subtotal
+                    </th>
+                    <th className="px-6 py-3 text-right text-zinc-900 dark:text-zinc-300 w-auto text-xs font-semibold uppercase"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartItems.map((cart, index) => {
+                    const imageSrc =
+                      cart.images && cart.images.length > 0
+                        ? getImageUrl(cart.images[0])
+                        : "/placeholder.png";
+                    return (
+                      <tr
+                        key={cart.id}
+                        className={`border-b border-zinc-200 dark:border-zinc-700 ${
+                          index === cartItems.length - 1 ? "last:border-0" : ""
+                        }`}
+                      >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-4">
+                            <div
+                              className="w-16 h-16 rounded-lg bg-cover bg-center flex-shrink-0 border border-zinc-200 dark:border-zinc-700"
+                              style={{ backgroundImage: `url('${imageSrc}')` }}
+                            ></div>
+                            <div>
+                              <Link
+                                href={`/producto/${cart.slug}`}
+                                className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold hover:text-primary"
+                              >
+                                {cart.name}
+                              </Link>
+                              {cart.size && (
+                                <p className="text-gray-500 dark:text-gray-400 text-xs">
+                                  Talle: {cart.size}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-300 text-sm">
+                          ${cart.price.toLocaleString("es-AR")}
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden max-w-[100px]">
+                            <button
+                              onClick={() => decreaseCart(cart)}
+                              className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            >
+                              -
+                            </button>
+                            <input
+                              className="w-full text-center border-0 bg-transparent text-gray-800 dark:text-white focus:ring-0 p-1"
+                              type="text"
+                              value={cart.cartQuantity}
+                              readOnly
+                            />
+                            <button
+                              onClick={() => increaseCart(cart)}
+                              className="px-2 py-1 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-gray-800 dark:text-white text-sm font-semibold">
+                          $
+                          {(cart.price * cart.cartQuantity).toLocaleString(
+                            "es-AR"
+                          )}
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <button
+                            onClick={() => removeFromCart(cart)}
+                            className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400"
+                          >
+                            <span className="material-symbols-outlined text-xl">
+                              delete
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
 
+          {/* RESUMEN DEL PEDIDO (Fixed en desktop) */}
           <div className="lg:col-span-1">
-            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sticky top-10">
+            <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sticky top-24 shadow-sm">
               <h2 className="text-zinc-900 dark:text-zinc-100 text-xl font-bold pb-4 border-b border-zinc-200 dark:border-zinc-700">
-                Resumen del Pedido
+                Resumen
               </h2>
               <div className="space-y-4 py-4">
                 <div className="flex justify-between text-sm">
@@ -262,8 +341,8 @@ const CartPage: React.FC = () => {
                   <span className="text-gray-600 dark:text-gray-300">
                     Envío
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">
-                    Se calculará en el siguiente paso
+                  <span className="text-gray-500 dark:text-gray-400 text-right">
+                    Calculado al pagar
                   </span>
                 </div>
               </div>
@@ -292,10 +371,10 @@ const CartPage: React.FC = () => {
                 </Link>
               </div>
               <div className="mt-6">
-                <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                <p className="text-xs text-gray-500 dark:text-gray-400 text-center mb-2">
                   Pagos seguros con:
                 </p>
-                <div className="flex justify-center items-center gap-4 mt-2 text-gray-400 dark:text-gray-500">
+                <div className="flex justify-center items-center gap-4 text-gray-400 dark:text-gray-500">
                   <span className="text-xs">💳 Visa</span>
                   <span className="text-xs">💳 Mastercard</span>
                   <span className="text-xs">💳 PayPal</span>

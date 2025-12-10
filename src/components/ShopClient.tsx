@@ -114,7 +114,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   });
 
   return (
-    <div className="max-w-screen-xl mx-auto w-full px-6 py-8">
+    <div className="max-w-screen-xl mx-auto w-full md:px-6 py-8">
       <div className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-2">
           <a

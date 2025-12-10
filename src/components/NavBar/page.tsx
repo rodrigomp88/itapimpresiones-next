@@ -6,7 +6,6 @@ import { useSession, signOut } from "next-auth/react";
 import { IoCartOutline } from "react-icons/io5";
 import { RiMenu3Fill, RiCloseLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
-import UserNotificationBell from "../Notifications/UserNotificationBell";
 import UserNotificationProvider from "../Notifications/UserNotificationProvider";
 import InAppNotificationHandler from "../Notifications/InAppNotificationHandler";
 import Image from "next/image";
@@ -16,6 +15,7 @@ import {
   selectCartItems, // <--- 1. Importar el selector de items
 } from "@/redux/slice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import UserNotificationBell from "../Notifications/UserNotificationBell";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -93,7 +93,7 @@ const Navbar = () => {
           </Link>
           {status === "authenticated" && (
             <Link href="/orders" className="group">
-              Mis Órdenes
+              Órdenes
               <span className="underline-hover" />
             </Link>
           )}
@@ -135,7 +135,10 @@ const Navbar = () => {
                 <p className="text-sm">
                   Hola, {user?.name || user?.email?.split("@")[0]}
                 </p>
-                <button onClick={logoutUser} className="btn-sm-secondary">
+                <button
+                  onClick={logoutUser}
+                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointer"
+                >
                   Salir
                 </button>
               </>
@@ -253,7 +256,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                   className="sidebar-link"
                   onClick={closeSidebar}
                 >
-                  Mis Órdenes
+                  Órdenes
                 </Link>
                 {isAdmin && (
                   <Link
@@ -269,7 +272,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     logoutUser();
                     closeSidebar();
                   }}
-                  className="sidebar-link text-red-500 text-left"
+                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointe"
                 >
                   Salir
                 </button>
