@@ -4,41 +4,46 @@ import ContactForm from "@/components/ContactForm";
 
 const ServicesPage = () => {
     return (
-        <div className="flex-grow">
-            {/* HeroSection */}
-            <section className="container mx-auto px-4 py-16 sm:py-24">
-                <div className="@container">
-                    <div className="flex flex-col gap-8 @[864px]:flex-row-reverse items-center">
-                        <div
-                            className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-full shadow-lg"
-                            style={{
-                                backgroundImage:
-                                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5PY7LV3YqwD2BxvMqektS007AbbWRbhvceeMS_pv4TT9SSniZNV3Zy718c-ZwhHAMTg5sccxIjGX2eyxin0wUEH9dkY2JNf-P9qnFaLFP3LLtHby4zqF1FJc-9T8QBLy1Z0NMZO-aGuHQlZLy_xnmfvxsQ8zPYqTRTsQP4JU_3RzOrm-kKJrmZ0sMpUAUOoI_N1dVOjc7BkQBkhKEj1VYq2AwMDXsw__MygX4hFyLkRBWik4aO1dupf9PFKsVN8S8fRhjv-6zzfg")',
-                            }}
-                        ></div>
-                        <div className="flex flex-col gap-6 text-center @[864px]:text-left @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center">
-                            <div className="flex flex-col gap-2">
-                                <h1 className="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl dark:text-white">
+    <div className="bg-white dark:bg-slate-900 font-display text-slate-900 dark:text-white antialiased">
+            <main className="flex-grow">
+                <section className="relative bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 overflow-hidden" id="inicio">
+                    <div className="container mx-auto px-6 py-20 lg:py-32">
+                        <div className="grid lg:grid-cols-2 gap-12 items-center">
+                            <div className="flex flex-col gap-6 text-center lg:text-left z-10">
+                                <h1 className="text-4xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight tracking-[-0.033em]">
                                     Impresión Textil Profesional: Serigrafía y DTF de Alta Calidad
                                 </h1>
-                                <h2 className="text-base font-normal leading-normal @[480px]:text-lg text-gray-600 dark:text-gray-300">
+                                <p className="text-base font-normal leading-normal lg:text-lg text-slate-600 dark:text-slate-100">
                                     Damos vida a tus diseños en remeras, buzos, gorras y más.
-                                </h2>
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                                    <a className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5" href="#portfolio">
+                                        Ver Productos
+                                    </a>
+                                    <a className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-slate-200 text-slate-700 text-sm font-semibold tracking-wide hover:bg-slate-50 transition-all hover:border-slate-300" href="#contacto">
+                                        Solicitar Cotización
+                                    </a>
+                                </div>
                             </div>
-                            <a
-                                className="flex self-center @[864px]:self-start min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
-                                href="#contacto"
-                            >
-                                <span className="truncate">Solicitar Cotización</span>
-                            </a>
+                            <div className="relative lg:h-[500px] flex items-center justify-center">
+                                <div className="relative z-10 w-full max-w-[600px] aspect-video rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500">
+                                    <div className="w-full h-full bg-center bg-cover" style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5PY7LV3YqwD2BxvMqektS007AbbWRbhvceeMS_pv4TT9SSniZNV3Zy718c-ZwhHAMTg5sccxIjGX2eyxin0wUEH9dkY2JNf-P9qnFaLFP3LLtHby4zqF1FJc-9T8QBLy1Z0NMZO-aGuHQlZLy_xnmfvxsQ8zPYqTRTsQP4JU_3RzOrm-kKJrmZ0sMpUAUOoI_N1dVOjc7BkQBkhKEj1VYq2AwMDXsw__MygX4hFyLkRBWik4aO1dupf9PFKsVN8S8fRhjv-6zzfg")' }}></div>
+                                </div>
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/30 blur-3xl rounded-full -z-0"></div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center gap-2 mt-12 lg:absolute lg:bottom-12 lg:left-1/2 lg:-translate-x-1/2">
+                            <div className="w-8 h-2 bg-white rounded-full shadow-sm"></div>
+                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
+                            <div className="w-2 h-2 bg-slate-300 rounded-full"></div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
             {/* Services Section */}
             <section
-                className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-gray-900 rounded-xl"
+                className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-slate-900 rounded-xl"
                 id="servicios"
             >
                 <div className="max-w-3xl mx-auto text-center mb-12">
@@ -119,7 +124,7 @@ const ServicesPage = () => {
             </section>
 
             {/* Portfolio Section */}
-            <section className="container mx-auto px-4 py-16 sm:py-24" id="portfolio">
+            <section className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-slate-900" id="portfolio">
                 <div className="max-w-3xl mx-auto text-center mb-12">
                     <h2 className="text-3xl font-bold leading-tight tracking-[-0.015em] dark:text-white">
                         Conoce Nuestro Trabajo
@@ -206,7 +211,7 @@ const ServicesPage = () => {
             </section>
 
             {/* How it works Section */}
-            <section className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-gray-900 rounded-xl">
+            <section className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-slate-900 rounded-xl">
                 <div className="max-w-3xl mx-auto text-center mb-12">
                     <h2 className="text-3xl font-bold leading-tight tracking-[-0.015em] dark:text-white">
                         Nuestro Proceso Simplificado
@@ -263,7 +268,7 @@ const ServicesPage = () => {
             </section>
 
             {/* Contact Form Section */}
-            <section className="container mx-auto px-4 py-16 sm:py-24" id="contacto">
+            <section className="container mx-auto px-4 py-16 sm:py-24 bg-white dark:bg-slate-900" id="contacto">
                 <div className="max-w-3xl mx-auto text-center mb-12">
                     <h2 className="text-3xl font-bold leading-tight tracking-[-0.015em] dark:text-white">
                         Solicita tu Cotización Personalizada
@@ -275,6 +280,7 @@ const ServicesPage = () => {
                 </div>
                 <ContactForm formType="services" />
             </section>
+            </main>
         </div>
     );
 };

@@ -65,7 +65,7 @@ const Navbar = () => {
                 </defs>
               </svg>
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">TextilePrint Co.</h2>
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">PrintStudio</h2>
           </Link>
 
         <div className="hidden md:flex flex-1 justify-end items-center gap-10">
@@ -96,10 +96,12 @@ const Navbar = () => {
               </Link>
             )}
           </div>
-          <Link href="/auth/login" className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md">
-            <span className="mr-2 material-symbols-outlined !text-lg">shopping_cart</span>
-            <span>Ingresar</span>
-          </Link>
+          {status === "unauthenticated" && (
+            <Link href="/auth/login" className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md">
+              <span className="mr-2 material-symbols-outlined !text-lg">person</span>
+              <span>Ingresar</span>
+            </Link>
+          )}
         </div>
         <div className="flex items-center gap-4">
           {status === "authenticated" && (

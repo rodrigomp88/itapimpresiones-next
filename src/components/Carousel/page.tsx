@@ -36,11 +36,20 @@ const Carousel: React.FC = () => {
   };
 
   return (
-    <div className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+    <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
+      {/* Overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10"></div>
+      
+      {/* Background image with parallax effect */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{ backgroundImage: `url(${sliderData[currentSlide].image})` }}
+      ></div>
+
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={currentSlide}
-          className="w-full h-full absolute inset-0 grid md:grid-cols-2 items-center"
+          className="w-full h-full absolute inset-0 grid md:grid-cols-2 items-center z-20"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -48,12 +57,17 @@ const Carousel: React.FC = () => {
         >
           <motion.div
             variants={textVariants}
-            className="flex flex-col items-center justify-center text-center space-y-4 p-4"
+            className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 p-6 lg:p-12"
           >
-            <h1 className="text-2xl md:text-4xl font-bold">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white drop-shadow-lg">
               {sliderData[currentSlide].heading}
             </h1>
-            <p className="text-lg">{sliderData[currentSlide].desc}</p>
+            <p className="text-lg md:text-xl font-light text-slate-100 max-w-lg leading-relaxed opacity-90">
+              {sliderData[currentSlide].desc}
+            </p>
+            <Link href="/tienda" className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-semibold hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+              Ver Servicios
+            </Link>
           </motion.div>
 
           <motion.div
@@ -63,13 +77,13 @@ const Carousel: React.FC = () => {
             <img
               src={sliderData[currentSlide].image}
               alt={sliderData[currentSlide].heading}
-              className="max-h-[70vh] w-auto object-contain"
+              className="max-h-[500px] w-auto object-contain drop-shadow-xl"
             />
           </motion.div>
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-5 w-full flex flex-col items-center gap-4">
+      <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-4 z-30">
         <div className="flex items-center justify-center gap-2">
           <button
             className="control-btn"
@@ -81,10 +95,10 @@ const Carousel: React.FC = () => {
           {sliderData.map((_, index) => (
             <button
               key={index}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 index === currentSlide
-                  ? "w-8 bg-black dark:bg-white"
-                  : "w-4 bg-gray-400"
+                  ? "w-8 bg-white opacity-100 shadow-sm"
+                  : "w-2 bg-white/50"
               }`}
               onClick={() => handleClickIndicator(index)}
               aria-label={`Ir al slide ${index + 1}`}
@@ -98,9 +112,6 @@ const Carousel: React.FC = () => {
             <FaAngleRight />
           </button>
         </div>
-        <Link href="/tienda" className="btn-primary">
-          Mira nuestra tienda
-        </Link>
       </div>
     </div>
   );

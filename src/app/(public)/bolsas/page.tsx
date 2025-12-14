@@ -204,21 +204,48 @@ const BagsPage = () => {
         </div>
       </section>
 
-      {/* Quotation Form Section */}
+      {/* Quote Form & FAQ Section */}
       <section
-        className="flex flex-col gap-10 px-4 py-10 bg-white dark:bg-zinc-900 rounded-lg my-10 border border-[#dce0e5] dark:border-[#2c3a4a] max-w-screen-xl mx-auto"
-        id="cotizacion"
+        className="py-16 sm:py-24 bg-zinc-50 dark:bg-zinc-900 rounded-xl max-w-screen-xl mx-auto"
+        id="quote-form"
       >
-        <div className="flex flex-col gap-4 text-center items-center">
-          <h2 className="text-[#111418] dark:text-white tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
-            Obtén tu Cotización Personalizada
-          </h2>
-          <p className="text-[#637288] dark:text-[#aeb8c4] text-base font-normal leading-normal max-w-[720px]">
-            Completa el formulario y nuestro equipo te contactará pronto con un
-            presupuesto a medida.
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 px-8">
+          {/* Quote Form */}
+          <div>
+            <h2 className="text-3xl font-bold leading-tight tracking-[-0.015em] mb-2 dark:text-white">
+              ¿Listo para empezar?
+            </h2>
+            <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+              Completa el formulario y nos pondremos en contacto a la brevedad.
+            </p>
+            <ContactForm formType="bags" />
+          </div>
+
+          {/* FAQ */}
+          <div>
+            <h2 className="text-3xl font-bold leading-tight tracking-[-0.015em] mb-8 dark:text-white">
+              Preguntas Frecuentes
+            </h2>
+            <div className="space-y-4">
+              <details className="group rounded-lg bg-white dark:bg-black p-4 shadow-sm border border-zinc-200 dark:border-zinc-800">
+                <summary className="flex cursor-pointer list-none items-center justify-between font-medium dark:text-white">
+                  ¿Cuál es el tamaño mínimo de pedido para bolsas de friselina?
+                  <span className="transition group-open:rotate-180">
+                    <span className="material-symbols-outlined">
+                      expand_more
+                    </span>
+                  </span>
+                </summary>
+                <p className="group-open:animate-fadeIn mt-3 text-zinc-600 dark:text-zinc-400">
+                  No tenemos cantidad mínima, podés solicitar desde 1 bolsa. Sin
+                  embargo, para obtener mejores precios, recomendamos pedidos a
+                  partir de 100 unidades.
+                </p>
+              </details>
+              {/* Más preguntas aquí... */}
+            </div>
+          </div>
         </div>
-        <ContactForm formType="bags" />
       </section>
     </div>
   );

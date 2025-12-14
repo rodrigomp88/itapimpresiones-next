@@ -4,35 +4,30 @@ import ContactForm from "@/components/ContactForm";
 
 const ApparelPage = () => {
     return (
-        <div className="flex-grow">
-            {/* HeroSection */}
-            <div className="mt-5 @container">
-                <div className="@[480px]:p-0">
-                    <div
-                        className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 rounded-xl items-start justify-center text-center px-4 py-10 @[480px]:px-10 shadow-lg"
-                        style={{
-                            backgroundImage:
-                                'linear-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkf8ftoyMDQFE4hvxVQRbUHtg3KFAwua69-VWr6O8dQ8UampxOJbkrKMx8vY1G8x6lmGKFxnEGih7GeiAL4vOF2Z_hSA8XV0lp7yQGzzVtVhjv3saJ0ohrWGBiSH0V0efgVuIy2rDtcoRLLbcVI-xT_8DveDm3BMlX7r9jXMmj2ne6mybgZI5Ev64kxH34pwqxsZt2ptcLYzUsuczCmkWJvpLZxHv-dSV1jmfqsPEjJCmAGbURuM5bO3-kZC49QQzIfFjEAZ5mOxE")',
-                        }}
-                    >
-                        <div className="flex flex-col gap-4 max-w-3xl mx-auto">
-                            <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                                Indumentaria Personalizada para tu Empresa
-                            </h1>
-                            <h2 className="text-white/90 text-base font-normal leading-normal @[480px]:text-lg @[480px]:font-normal @[480px]:leading-normal">
-                                Potencia la identidad de tu marca con indumentaria de alta
-                                calidad diseñada exclusivamente para tu equipo.
-                            </h2>
+        <div className="bg-white dark:bg-slate-900 font-display text-slate-900 dark:text-white antialiased">
+            <main className="flex-grow">
+                <div className="px-4 sm:px-6 lg:px-12 py-8 lg:py-12">
+                    <div className="@container">
+                        <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                            <div className="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center text-center px-6 sm:px-12 lg:px-16 py-16" style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkf8ftoyMDQFE4hvxVQRbUHtg3KFAwua69-VWr6O8dQ8UampxOJbkrKMx8vY1G8x6lmGKFxnEGih7GeiAL4vOF2Z_hSA8XV0lp7yQGzzVtVhjv3saJ0ohrWGBiSH0V0efgVuIy2rDtcoRLLbcVI-xT_8DveDm3BMlX7r9jXMmj2ne6mybgZI5Ev64kxH34pwqxsZt2ptcLYzUsuczCmkWJvpLZxHv-dSV1jmfqsPEjJCmAGbURuM5bO3-kZC49QQzIfFjEAZ5mOxE")' }}>
+                                <div className="absolute inset-0 bg-gradient-to-r from-gray-900/20 to-gray-900/10 z-0"></div>
+                                <div className="relative z-10 flex flex-col gap-6 max-w-4xl mx-auto">
+                                    <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                                        Indumentaria Personalizada <br /> para tu Empresa
+                                    </h1>
+                                    <p className="text-gray-200 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                                        Potencia la identidad de tu marca con indumentaria de alta calidad, diseñada exclusivamente para unir y destacar a tu equipo.
+                                    </p>
+                                    <div className="pt-4">
+                                        <a className="inline-flex cursor-pointer items-center justify-center rounded-full h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold shadow-lg hover:shadow-blue-500/30" href="#quote-form">
+                                            Empezar Ahora
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <a
-                            href="#quote-form"
-                            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 @[480px]:h-14 @[480px]:px-8 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] @[480px]:text-lg @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] mx-auto hover:bg-primary/90 transition-colors"
-                        >
-                            <span className="truncate">Solicitar Cotización</span>
-                        </a>
                     </div>
                 </div>
-            </div>
 
             {/* Process Section */}
             <section className="py-16 sm:py-24 max-w-screen-xl mx-auto">
@@ -379,6 +374,7 @@ const ApparelPage = () => {
                     </div>
                 </div>
             </section>
+            </main>
         </div>
     );
 };

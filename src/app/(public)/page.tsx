@@ -3,42 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import FeaturedProducts from "@/components/Shop/FeaturedProducts";
+import HomeBanners from "@/components/Home/HomeBanners";
 
 const Home = () => {
   return (
-    <div className="font-display bg-background-light dark:bg-background-dark text-text-main dark:text-slate-200 antialiased">
+    <div className="font-display bg-white dark:bg-slate-900 text-slate-900 dark:text-white antialiased">
       <main className="flex-1">
         <section className="w-full">
-          <div className="relative w-full h-[600px] bg-slate-100 overflow-hidden">
-            <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNvBGQFcs78d2ZoldSkkBGjbKSKk0XcjZet_eQoMCAPqI7EOzYpqxawSD2D03jgDkC8KJH2ZLmFWZdJTksNIWNZaZ4WXjW5Wnilmuva16l_Dw9f1ufQVojo6vQx9f44CSI9o_fJ7-3HSBRyTrxUlnJlaFXgAveAO3fthinJtKrFR9O0iKkyKXRO9ydqmWLKH3RXrC3BiA6xvSEj41ArZGR9yCiSiqFyAWLxNqg2V1Q3JZje3DrWMYFKD4hYtzg_ME_azRaVJBpqVQ")`,
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
-            </div>
-            <div className="relative h-full max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center">
-              <div className="max-w-2xl text-left">
-                <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 tracking-tight drop-shadow-sm">
-                  Personalizamos <br /> tus Ideas
-                </h1>
-                <p className="text-slate-100 text-lg md:text-xl font-light mb-8 max-w-lg leading-relaxed opacity-90">
-                  El toque final para tu identidad corporativa. Calidad superior y atención personalizada.
-                </p>
-                <Link href="/servicios">
-                  <button className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-base font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                    Ver Servicios
-                  </button>
-                </Link>
-              </div>
-            </div>
-            <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-2">
-              <span className="w-8 h-1.5 bg-white rounded-full opacity-100 shadow-sm"></span>
-              <span className="w-2 h-1.5 bg-white/50 rounded-full"></span>
-              <span className="w-2 h-1.5 bg-white/50 rounded-full"></span>
-            </div>
-          </div>
+          <HomeBanners />
         </section>
         <section className="w-full py-20 bg-white dark:bg-slate-900">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
