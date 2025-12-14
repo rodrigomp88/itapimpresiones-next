@@ -1,37 +1,29 @@
-import { FaFacebookSquare, FaInstagram } from "react-icons/fa";
-
 const Footer = () => {
-  const year = new Date().getFullYear();
-
   return (
-    <>
-      <section className="bg-gradient-to-b border-t px-5 md:px-20 lg:px-48 mt-14">
-        <div className="grid place-items-center gap-8 py-5">
-          <div>
-            <div className="py-3">
-              <h3>Seguinos en nuestras redes</h3>
-            </div>
-            <div className="flex md:justify-center text-2xl gap-3 py-3">
-              <p>
-                <a href="" target="_blank">
-                  <FaFacebookSquare />
-                </a>
-              </p>
-              <p>
-                <a href="" target="_blank">
-                  <FaInstagram />
-                </a>
-              </p>
-            </div>
+    <footer className="w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12">
+        <div className="flex flex-col items-center justify-center text-center gap-6">
+          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Síguenos en nuestras redes</h3>
+          <div className="flex gap-6">
+            <a className="text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" href="#">
+              <span className="sr-only">Facebook</span>
+              <span className="material-symbols-outlined">public</span>
+            </a>
+            <a className="text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors" href="#">
+              <span className="sr-only">Instagram</span>
+              <span className="material-symbols-outlined">photo_camera</span>
+            </a>
           </div>
         </div>
-
-        <div className="grid justify-center text-center text-sm py-4">
-          <h1>&copy; Itap-Impresiones</h1>
-          <p>2012 - {year}</p>
+        <div className="mt-12 border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+          <p>© 2024 TextilePrint Co.</p>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <a className="hover:text-slate-800 dark:hover:text-white transition-colors" href="#">Política de Privacidad</a>
+            <a className="hover:text-slate-800 dark:hover:text-white transition-colors" href="#">Términos de Servicio</a>
+          </div>
         </div>
-      </section>
-    </>
+      </div>
+    </footer>
   );
 };
 
