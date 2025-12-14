@@ -50,62 +50,43 @@ const Navbar = () => {
         </>
       )}
 
-      <nav className="sticky top-0 z-30 flex items-center justify-between py-3 px-5 md:px-20 xl:px-40 bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
-        <Link href="/" className="relative">
-          <Image
-            src={"/images/logoblack.png"}
-            width={90}
-            height={40}
-            alt="Itap Impresiones Logo"
-            className="block dark:hidden"
-            priority
-          />
-          <Image
-            src={"/images/logowhite.png"}
-            width={90}
-            height={40}
-            alt="Itap Impresiones Logo"
-            className="hidden dark:block"
-            priority
-          />
-        </Link>
+      <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
+        <div className="flex items-center justify-between whitespace-nowrap px-6 lg:px-12 py-4 max-w-[1440px] mx-auto">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="size-8 text-blue-600">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_330)">
+                  <path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+                </g>
+                <defs>
+                  <clipPath id="clip0_6_330">
+                    <rect fill="white" height="48" width="48"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">TextilePrint Co.</h2>
+          </Link>
 
-        <div className="hidden md:flex items-center gap-6">
-          <Link href="/" className="group">
-            Inicio
-            <span className="underline-hover" />
-          </Link>
-          <Link href="/servicios" className="group">
-            Servicios
-            <span className="underline-hover" />
-          </Link>
-          <Link href="/bolsas" className="group">
-            Bolsas
-            <span className="underline-hover" />
-          </Link>
-          <Link href="/indumentaria" className="group">
-            Indumentaria
-            <span className="underline-hover" />
-          </Link>
-          <Link href="/tienda" className="group">
-            Tienda
-            <span className="underline-hover" />
-          </Link>
-          {status === "authenticated" && (
-            <Link href="/orders" className="group">
-              Órdenes
-              <span className="underline-hover" />
+        <div className="hidden md:flex flex-1 justify-end items-center gap-10">
+          <div className="flex items-center gap-8">
+            <Link href="/" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Inicio
             </Link>
-          )}
-          {isAdmin && (
-            <Link
-              href="/admin"
-              className="group bg-yellow-400 text-black px-2 py-1 rounded-md"
-            >
-              Panel Admin
-              <span className="underline-hover" />
+            <Link href="/servicios" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Servicios
             </Link>
-          )}
+            <Link href="/tienda" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Productos
+            </Link>
+            <Link href="/contact" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Contacto
+            </Link>
+          </div>
+          <Link href="/auth/login" className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md">
+            <span className="mr-2 material-symbols-outlined !text-lg">shopping_cart</span>
+            <span>Ingresar</span>
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           {status === "authenticated" && (
@@ -126,11 +107,7 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-2">
-            {status === "unauthenticated" ? (
-              <Link href="/auth/login" className="btn-sm">
-                Ingresar
-              </Link>
-            ) : (
+            {status === "authenticated" && (
               <>
                 <p className="text-sm">
                   Hola, {user?.name || user?.email?.split("@")[0]}
@@ -147,6 +124,7 @@ const Navbar = () => {
           <button onClick={toggleSidebar} className="md:hidden text-2xl z-50">
             {isSidebarOpen ? <RiCloseLine /> : <RiMenu3Fill />}
           </button>
+        </div>
         </div>
       </nav>
 
