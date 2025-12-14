@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import FeaturedProducts from "@/components/Shop/FeaturedProducts";
 
 const Home = () => {
   return (
@@ -49,104 +50,7 @@ const Home = () => {
                 Descubre lo último en personalización y diseño.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="group flex flex-col bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-card hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="aspect-square w-full overflow-hidden bg-slate-50 relative p-6 flex items-center justify-center">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNvBGQFcs78d2ZoldSkkBGjbKSKk0XcjZet_eQoMCAPqI7EOzYpqxawSD2D03jgDkC8KJH2ZLmFWZdJTksNIWNZaZ4WXjW5Wnilmuva16l_Dw9f1ufQVojo6vQx9f44CSI9o_fJ7-3HSBRyTrxUlnJlaFXgAveAO3fthinJtKrFR9O0iKkyKXRO9ydqmWLKH3RXrC3BiA6xvSEj41ArZGR9yCiSiqFyAWLxNqg2V1Q3JZje3DrWMYFKD4hYtzg_ME_azRaVJBpqVQ")`,
-                    }}
-                  ></div>
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Gorra Tracker</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                    Gorra tracker, variedad de colores, impresas en dtf.
-                  </p>
-                  <div className="mt-auto pt-2 flex items-center justify-between">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">$7.000</span>
-                  </div>
-                  <Link href="/tienda">
-                    <button className="w-full mt-3 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Ver Detalles <span className="material-symbols-outlined !text-sm">arrow_forward</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              <div className="group flex flex-col bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-card hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="aspect-square w-full overflow-hidden bg-slate-50 relative p-6 flex items-center justify-center">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnxStq18NJ7wAIDiSFoL5gn24j5HCTb84f9qlA7lBDiWrgMEtTsBJ23YdnDue9wRST2PBsKkdpnsYoBLhBYQAPiQp2LsK45kz33BUT684kh6I-WWrdPn7hu_Gt6AEyAOmgM3acjz_r8h5gckG2BvMVnMifPv80gGPbShkVNZb3ppPJtdMN8zB4coMBu1IhCkdJYZvLfpuOHlcmEpxvFJ3I2YQJR8jPKf8-QrMXo5jc5rIwCgzxMg3hZfx4H6Usr3-de4Mo3Wb4pNE")`,
-                    }}
-                  ></div>
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Remeras Premium</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                    Remeras de algodón con tu logo a elección, impresión DTG.
-                  </p>
-                  <div className="mt-auto pt-2 flex items-center justify-between">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">$16.000</span>
-                  </div>
-                  <Link href="/tienda">
-                    <button className="w-full mt-3 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Ver Detalles <span className="material-symbols-outlined !text-sm">arrow_forward</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              <div className="group flex flex-col bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-card hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="aspect-square w-full overflow-hidden bg-slate-50 relative p-6 flex items-center justify-center">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmxVk643s8uDDhgjRbXDrgH0jHjHHwprx0KLG0HU50JSkbmhZMWoX5RyrhsD1k5yDikXyDbJjRtUdbMYRQ0CDrTkxQBXO_IQXIPx8BpDeQcgWItvfI_maL4-CPcUmSWsh7u4_bSLfWQjJ6n6PLRv9F_YPpv9bvSGn6QtEPmDJs78xC0aOXIz84UUN180ybVjLk6tzEPW9HZLsZFlO6mN2ZB6HcEkx8-JID5_C9DNoOT-Oj90RQcxRwWQpwjURSIXfGSVwP_bY9SqI")`,
-                    }}
-                  ></div>
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Bolsa Eco 40x45</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                    Ideal para calzados, marroquinería e indumentaria.
-                  </p>
-                  <div className="mt-auto pt-2 flex items-center justify-between">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">$700</span>
-                  </div>
-                  <Link href="/tienda">
-                    <button className="w-full mt-3 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Ver Detalles <span className="material-symbols-outlined !text-sm">arrow_forward</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-              <div className="group flex flex-col bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-card hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="aspect-square w-full overflow-hidden bg-slate-50 relative p-6 flex items-center justify-center">
-                  <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwrz5dNbt2NaQ6vMfqzndRZIKHMqfX1cZvNgAxKYsxitcXDjKbIOL_WWvzpfWy9h9JPlYKhQqaaHWX0_Qy9-4qrWbDxkqx-zqF4bo9qBe2me_FImBpWZ_QtaQX0xQPaF7e8Ed7hfZFrWQKiJtXevf04GmIu5LbsOK7WwOT7r9G0aNQiqm4drAV5sP3eS4JnTw810x39nF9qepRNXAfhgKEl3OENG1DtcInemrlnqfYLbJBlHhorgMteC5Im84webVVx3ybtRSYZW4")`,
-                    }}
-                  ></div>
-                </div>
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Buzos Estampados</h3>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
-                    Buzos frizados premium, ideales para merch corporativo.
-                  </p>
-                  <div className="mt-auto pt-2 flex items-center justify-between">
-                    <span className="text-xl font-bold text-slate-900 dark:text-white">$22.000</span>
-                  </div>
-                  <Link href="/tienda">
-                    <button className="w-full mt-3 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
-                      Ver Detalles <span className="material-symbols-outlined !text-sm">arrow_forward</span>
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <FeaturedProducts />
             <div className="mt-12 flex justify-center">
               <Link href="/tienda">
                 <button className="px-8 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-sm">
