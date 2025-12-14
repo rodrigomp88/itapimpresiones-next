@@ -76,12 +76,25 @@ const Navbar = () => {
             <Link href="/servicios" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
               Servicios
             </Link>
+            <Link href="/bolsas" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Bolsas
+            </Link>
+            <Link href="/indumentaria" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+              Indumentaria
+            </Link>
             <Link href="/tienda" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
-              Productos
+              Tienda
             </Link>
-            <Link href="/contact" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
-              Contacto
-            </Link>
+            {status === "authenticated" && (
+              <Link href="/orders" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+                Órdenes
+              </Link>
+            )}
+            {isAdmin && (
+              <Link href="/admin" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors">
+                Panel Admin
+              </Link>
+            )}
           </div>
           <Link href="/auth/login" className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md">
             <span className="mr-2 material-symbols-outlined !text-lg">shopping_cart</span>
