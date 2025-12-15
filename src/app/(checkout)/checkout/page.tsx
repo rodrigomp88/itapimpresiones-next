@@ -466,14 +466,14 @@ const CheckoutPage: React.FC = () => {
 
                 <div className="flex justify-between text-sm">
                   <span className="text-zinc-600 dark:text-zinc-400">IVA (21%)</span>
-                  <span className="text-zinc-900 dark:text-zinc-100">${taxAmount.toFixed(0).toLocaleString("es-AR")}</span>
+                  <span className="text-zinc-900 dark:text-zinc-100">${Math.round(taxAmount).toLocaleString("es-AR")}</span>
                 </div>
 
                 <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3">
                   <div className="flex justify-between text-lg font-bold">
                     <span className="text-zinc-900 dark:text-zinc-100">Total</span>
                     <span className="text-zinc-900 dark:text-zinc-100">
-                      ${(cartTotalAmount + shippingCost + taxAmount).toFixed(0).toLocaleString("es-AR")}
+                      ${Math.round(cartTotalAmount + shippingCost + taxAmount).toLocaleString("es-AR")}
                     </span>
                   </div>
                 </div>
