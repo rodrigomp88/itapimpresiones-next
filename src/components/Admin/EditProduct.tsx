@@ -1,10 +1,11 @@
 "use client";
 
-import { ChangeEvent, useState, useTransition } from "react";
+import { ChangeEvent, useState, useTransition, FormEvent } from "react";
 import { editProductAction } from "@/app/admin/products/actions";
 import { Product, ProductImage } from "@/types";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import { FaTrash, FaPlus } from "react-icons/fa";
+import { productSchema, ProductFormData } from "@/lib/validationSchemas";
 
 interface EditProductProps {
   product: Product;
@@ -25,6 +26,7 @@ const COLORS = [
 
 const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
   const [isPending, startTransition] = useTransition();
+  const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof ProductFormData, string>>>({});
 
   const [existingImages, setExistingImages] = useState<ProductImage[]>(
     product.images.map((img: any) =>
@@ -75,7 +77,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
     });
   };
 
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmitAction = (formData: FormData) => {
     imagesToDelete.forEach((url) => formData.append("imagesToDelete", url));
     formData.append("existingImagesData", JSON.stringify(existingImages));
     newImages.forEach((item) => {
@@ -94,11 +96,45 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
     });
   };
 
+  const handleSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    // Extraer valores para validación
+    const formValues = {
+      name: formData.get('name') as string,
+      price: parseFloat(formData.get('price') as string),
+      unity: parseInt(formData.get('unity') as string),
+      category: formData.get('category') as string,
+      description: formData.get('description') as string,
+      size: formData.get('size') as string || undefined,
+      bagType: formData.get('bagType') as string || undefined,
+    };
+
+    // Validar con ZOD
+    const validationResult = productSchema.safeParse(formValues);
+    if (!validationResult.success) {
+      const errors: Partial<Record<keyof ProductFormData, string>> = {};
+      validationResult.error.issues.forEach((err) => {
+        const field = err.path[0] as keyof ProductFormData;
+        errors[field] = err.message;
+      });
+      setValidationErrors(errors);
+      return;
+    }
+
+    // Limpiar errores
+    setValidationErrors({});
+
+    // Proceder con el submit
+    handleSubmitAction(formData);
+  };
+
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
         <h2 className="text-xl font-bold mb-4">Editar Producto</h2>
-        <form key={product.id} action={handleSubmit}>
+        <form key={product.id} onSubmit={handleSubmitForm}>
           <div className="space-y-4">
             <label className="text-sm font-semibold">Nombre</label>
             <input
@@ -107,6 +143,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input"
               required
             />
+            {validationErrors.name && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+            )}
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -119,6 +158,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   className="input"
                   required
                 />
+                {validationErrors.price && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.price}</p>
+                )}
               </div>
               <div>
                 <label className="text-sm font-semibold">Unidades Min.</label>
@@ -129,6 +171,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   className="input"
                   required
                 />
+                {validationErrors.unity && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.unity}</p>
+                )}
               </div>
             </div>
 
@@ -139,6 +184,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input"
               required
             />
+            {validationErrors.category && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.category}</p>
+            )}
             <label className="text-sm font-semibold">Descripción</label>
             <textarea
               name="description"
@@ -146,6 +194,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               className="input min-h-[100px]"
               required
             />
+            {validationErrors.description && (
+              <p className="text-red-500 text-sm mt-1">{validationErrors.description}</p>
+            )}
             <label className="text-sm font-semibold">Tamaño</label>
             <input name="size" defaultValue={product.size} className="input" />
 

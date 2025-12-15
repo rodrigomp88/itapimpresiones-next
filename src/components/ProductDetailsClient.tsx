@@ -8,6 +8,7 @@ import { ADD_TO_CART, selectCartItems } from "../redux/slice/cartSlice";
 import { Product, ProductImage, CartItem } from "../types";
 import { useEffect, useState, useRef, ChangeEvent, PointerEvent } from "react";
 import { NotiflixWarning } from "./Notiflix/Notiflix";
+import { useProductDetailsReducer } from "../hooks/useProductDetailsReducer";
 
 interface ProductDetailsClientProps {
   product: Product;
@@ -36,30 +37,27 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
-
   const [isClient, setIsClient] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(0);
-
-  // --- LOGO PREVIEW STATE ---
-  const [userLogo, setUserLogo] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Posición y Tamaño del Logo
-  const [logoPos, setLogoPos] = useState({ x: 50, y: 50 }); // Porcentajes
-  const [logoSize, setLogoSize] = useState(30); // Porcentaje de ancho
-  const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  // --------------------------
 
   // Mínimo real
   const minQty = product.unity && product.unity > 0 ? product.unity : 1;
 
-  // ESTADO DE CANTIDAD:
-  // Inicializamos SIEMPRE con minQty para evitar error de hidratación.
-  const [quantity, setQuantity] = useState(minQty);
-
-  // Estado para saber si está en el carrito
-  const [isCartAdded, setIsCartAdded] = useState(false);
+  // ✅ HOOK USEREDUCER - OPTIMIZACIÓN DE PERFORMANCE
+  const {
+    state,
+    setSelectedImage,
+    setUserLogo,
+    setLogoPos,
+    setLogoSize,
+    setIsDragging,
+    setQuantity,
+    incrementQuantity,
+    decrementQuantity,
+    setIsCartAdded,
+    resetLogoState,
+  } = useProductDetailsReducer(minQty);
 
   const safeImages =
     product.images && product.images.length > 0
@@ -74,31 +72,20 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
     // Sincronización post-montaje para evitar error de hidratación
     if (cartItemInStore) {
       setIsCartAdded(true);
-      // Si está en el carrito, mostramos la cantidad que tiene en el carrito (opcional)
-      // Aunque según tu lógica, si está en el carrito ocultamos los controles.
+      // Si está en el carrito, mostramos la cantidad que tiene en el carrito
       setQuantity(cartItemInStore.cartQuantity);
     } else {
       setIsCartAdded(false);
       setQuantity(minQty);
     }
-  }, [cartItemInStore, minQty]);
+  }, [cartItemInStore, minQty, setIsCartAdded, setQuantity]);
 
   const handleAddToCart = () => {
     const productToSend: CartItem = {
       ...product,
-      cartQuantity: quantity,
+      cartQuantity: state.quantity,
     };
     dispatch(ADD_TO_CART(productToSend));
-  };
-
-  const incrementQuantity = () => setQuantity((prev) => prev + 1);
-
-  const decrementQuantity = () => {
-    if (quantity > minQty) {
-      setQuantity((prev) => prev - 1);
-    } else {
-      NotiflixWarning(`La cantidad mínima de "${product.name}" es ${minQty}`);
-    }
   };
 
   // --- LÓGICA DE ARRASTRAR (DRAG AND DROP) ---
@@ -109,7 +96,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   };
 
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
-    if (!isDragging || !containerRef.current) return;
+    if (!state.isDragging || !containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
 
@@ -143,12 +130,12 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   const triggerFileInput = () => fileInputRef.current?.click();
 
   const removeLogo = () => {
-    setUserLogo(null);
+    resetLogoState();
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  const currentImageSrc = getImageUrl(safeImages[selectedImage]);
-  const currentColor = getImageColor(safeImages[selectedImage]);
+  const currentImageSrc = getImageUrl(safeImages[state.selectedImage]);
+  const currentColor = getImageColor(safeImages[state.selectedImage]);
 
   return (
     <div className="flex-grow">
@@ -197,22 +184,22 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                 </div>
 
                 {/* LOGO DRAGGABLE */}
-                {userLogo && (
+                {state.userLogo && (
                   <div
                     onPointerDown={handlePointerDown}
                     onPointerUp={handlePointerUp}
                     className="absolute z-10 cursor-move border-2 border-dashed border-primary/50 hover:border-primary bg-white/10 rounded"
                     style={{
-                      left: `${logoPos.x}%`,
-                      top: `${logoPos.y}%`,
-                      width: `${logoSize}%`,
-                      transform: "translate(-50%, -50%)", // Centrar el div en el punto del mouse
+                      left: `${state.logoPos.x}%`,
+                      top: `${state.logoPos.y}%`,
+                      width: `${state.logoSize}%`,
+                      transform: "translate(-50%, -50%)",
                       aspectRatio: "1/1",
                     }}
                   >
                     <div className="relative w-full h-full pointer-events-none">
                       <Image
-                        src={userLogo}
+                        src={state.userLogo}
                         fill
                         className="object-contain"
                         alt="Logo Preview"
@@ -222,7 +209,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                 )}
 
                 {/* Botón quitar logo flotante */}
-                {userLogo && (
+                {state.userLogo && (
                   <button
                     onClick={removeLogo}
                     className="absolute top-4 left-4 z-20 bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600 transition-colors"
@@ -242,7 +229,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
               </div>
 
               {/* Controles del Logo (Solo si hay logo cargado) */}
-              {userLogo && (
+              {state.userLogo && (
                 <div className="bg-zinc-100 dark:bg-zinc-800 p-3 rounded-lg flex items-center gap-3">
                   <span className="text-xs font-bold text-zinc-500 uppercase">
                     Tamaño:
@@ -251,7 +238,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                     type="range"
                     min="10"
                     max="80"
-                    value={logoSize}
+                    value={state.logoSize}
                     onChange={(e) => setLogoSize(Number(e.target.value))}
                     className="w-full accent-primary h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                   />
@@ -266,7 +253,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                       key={index}
                       onClick={() => setSelectedImage(index)}
                       className={`relative aspect-square bg-white dark:bg-zinc-900 rounded-lg border-2 overflow-hidden transition-all ${
-                        selectedImage === index
+                        state.selectedImage === index
                           ? "border-primary ring-2 ring-primary/50"
                           : "border-zinc-200 dark:border-zinc-800 hover:border-primary"
                       }`}
@@ -274,7 +261,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                       <Image
                         fill
                         className={`object-cover p-1 ${
-                          selectedImage === index ? "" : "opacity-75"
+                          state.selectedImage === index ? "" : "opacity-75"
                         }`}
                         src={getImageUrl(image)}
                         alt={`${product.name} - Vista ${index + 1}`}
@@ -340,11 +327,11 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                       add_photo_alternate
                     </span>
                     <span>
-                      {userLogo ? "Cambiar Logo" : "Subir y Previsualizar Logo"}
+                      {state.userLogo ? "Cambiar Logo" : "Subir y Previsualizar Logo"}
                     </span>
                   </button>
                 </div>
-                {userLogo && (
+                {state.userLogo && (
                   <p className="text-xs text-primary mt-1">
                     * Previsualización aproximada. Arrastra el logo para
                     ubicarlo.
@@ -361,23 +348,23 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                        - Si isCartAdded es TRUE: Oculta controles de cantidad y muestra botón "Ir al Carrito".
                     */}
 
-                    {!isCartAdded && (
+                    {!state.isCartAdded && (
                       <div className="flex items-center gap-2">
                         <button
                           onClick={decrementQuantity}
                           className={`flex items-center justify-center rounded-lg h-12 w-12 border transition-colors ${
-                            quantity <= minQty
+                            state.quantity <= minQty
                               ? "border-zinc-200 bg-zinc-100 text-zinc-400 cursor-not-allowed dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-600"
                               : "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                           }`}
-                          disabled={quantity <= minQty}
+                          disabled={state.quantity <= minQty}
                         >
                           <span className="material-symbols-outlined">
                             remove
                           </span>
                         </button>
                         <span className="text-zinc-900 dark:text-zinc-100 text-xl font-bold w-12 text-center select-none">
-                          {isClient ? quantity : minQty}
+                          {isClient ? state.quantity : minQty}
                         </span>
                         <button
                           onClick={incrementQuantity}
@@ -390,7 +377,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
 
                     {!isClient ? (
                       <div className="w-full sm:w-auto flex-grow h-12 bg-gray-200 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                    ) : isCartAdded ? (
+                    ) : state.isCartAdded ? (
                       <Link
                         href="/cart"
                         className="w-full sm:w-auto flex-grow flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-base font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
