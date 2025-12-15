@@ -28,11 +28,17 @@ import {
 } from "@/components/Notiflix/Notiflix";
 import CheckoutSummary from "@/components/CheckoutSummary/CheckoutSummary";
 import Link from "next/link";
+import { shippingAddressSchema } from "@/lib/validationSchemas";
 
 const initialAddressState: ShippingAddress = {
   name: "",
   mail: "",
   phone: "",
+  address: "",
+  city: "",
+  postalCode: "",
+  province: "",
+  notes: "",
 };
 
 const CheckoutPage: React.FC = () => {
@@ -45,6 +51,8 @@ const CheckoutPage: React.FC = () => {
 
   const [shippingAddress, setShippingAddress] = useState(initialAddressState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [taxAmount, setTaxAmount] = useState(0);
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
@@ -62,6 +70,38 @@ const CheckoutPage: React.FC = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   }, [dispatch, cartItems]);
 
+  // Calcular costos de envío e impuestos
+  useEffect(() => {
+    if (shippingAddress.province && cartTotalAmount > 0) {
+      // Costo de envío basado en provincia (ejemplo simple)
+      const shippingRates: { [key: string]: number } = {
+        'Buenos Aires': 500,
+        'Córdoba': 800,
+        'Santa Fe': 700,
+        'Mendoza': 900,
+        'Tucumán': 1000,
+        'Entre Ríos': 750,
+        'Salta': 1100,
+        'Chaco': 850,
+        'Corrientes': 800,
+        'Misiones': 950,
+      };
+
+      const baseShipping = shippingRates[shippingAddress.province] || 600;
+      // Envío gratis para compras > $10,000
+      const finalShipping = cartTotalAmount >= 10000 ? 0 : baseShipping;
+      setShippingCost(finalShipping);
+
+      // Impuestos (21% IVA en Argentina)
+      const taxRate = 0.21;
+      const tax = cartTotalAmount * taxRate;
+      setTaxAmount(tax);
+    } else {
+      setShippingCost(0);
+      setTaxAmount(0);
+    }
+  }, [shippingAddress.province, cartTotalAmount]);
+
   useEffect(() => {
     if (sessionStatus === "loading" || isFirebaseLoading) return;
     if (sessionStatus === "unauthenticated") {
@@ -78,12 +118,22 @@ const CheckoutPage: React.FC = () => {
             name: userData.name || session?.user?.name || "",
             mail: userData.mail || session?.user?.email || "",
             phone: userData.phone || "",
+            address: userData.address || "",
+            city: userData.city || "",
+            postalCode: userData.postalCode || "",
+            province: userData.province || "",
+            notes: userData.notes || "",
           });
         } else {
           setShippingAddress({
             name: session?.user?.name || "",
             mail: session?.user?.email || "",
             phone: "",
+            address: "",
+            city: "",
+            postalCode: "",
+            province: "",
+            notes: "",
           });
         }
       };
@@ -102,12 +152,12 @@ const CheckoutPage: React.FC = () => {
       NotiflixFailure("Error: La sesión de usuario no está disponible.");
       return;
     }
-    if (
-      !shippingAddress.name ||
-      !shippingAddress.phone ||
-      !shippingAddress.mail
-    ) {
-      NotiflixFailure("Por favor, complete todos los campos de envío.");
+
+    // Validar con ZOD
+    const validationResult = shippingAddressSchema.safeParse(shippingAddress);
+    if (!validationResult.success) {
+      const errors = validationResult.error.issues.map(issue => issue.message).join(", ");
+      NotiflixFailure(`Errores en el formulario: ${errors}`);
       return;
     }
     setIsSubmitting(true);
@@ -264,6 +314,104 @@ const CheckoutPage: React.FC = () => {
                     />
                   </div>
                 </div>
+
+                <div>
+                  <label
+                    htmlFor="address"
+                    className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                  >
+                    Dirección Completa
+                  </label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    placeholder="Ej: Calle Ficticia 123, Piso 4, Depto B"
+                    value={shippingAddress.address}
+                    onChange={handleShippingChange}
+                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                    required
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label
+                      htmlFor="city"
+                      className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                    >
+                      Ciudad
+                    </label>
+                    <input
+                      type="text"
+                      id="city"
+                      name="city"
+                      placeholder="Ej: Buenos Aires"
+                      value={shippingAddress.city}
+                      onChange={handleShippingChange}
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="postalCode"
+                      className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                    >
+                      Código Postal
+                    </label>
+                    <input
+                      type="text"
+                      id="postalCode"
+                      name="postalCode"
+                      placeholder="Ej: 1000"
+                      value={shippingAddress.postalCode}
+                      onChange={handleShippingChange}
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label
+                      htmlFor="province"
+                      className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                    >
+                      Provincia/Estado
+                    </label>
+                    <input
+                      type="text"
+                      id="province"
+                      name="province"
+                      placeholder="Ej: Buenos Aires"
+                      value={shippingAddress.province}
+                      onChange={handleShippingChange}
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      required
+                    />
+                  </div>
+                  <div></div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="notes"
+                    className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1"
+                  >
+                    Notas de envío (opcional)
+                  </label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Ej: Tocar timbre, dejar en conserjería, etc."
+                    value={shippingAddress.notes}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setShippingAddress({...shippingAddress, notes: e.target.value})}
+                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                    rows={3}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -275,9 +423,45 @@ const CheckoutPage: React.FC = () => {
                 Tu Pedido
               </h2>
 
-              {/* Aquí usamos tu componente CheckoutSummary existente, pero si quieres estilos consistentes podrías reescribirlo o asegurarte que CheckoutSummary use estilos limpios */}
-              <div className="mb-6">
-                <CheckoutSummary />
+              {/* Resumen de costos detallado */}
+              <div className="mb-6 space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
+                  <span className="text-zinc-900 dark:text-zinc-100">${cartTotalAmount.toLocaleString("es-AR")}</span>
+                </div>
+
+                <div className="flex justify-between text-sm">
+                  <span className="text-zinc-600 dark:text-zinc-400">Envío</span>
+                  <span className="text-zinc-900 dark:text-zinc-100">
+                    {shippingCost === 0 ? (
+                      <span className="text-green-600 dark:text-green-400">¡Gratis!</span>
+                    ) : (
+                      `$${shippingCost.toLocaleString("es-AR")}`
+                    )}
+                  </span>
+                </div>
+
+                <div className="flex justify-between text-sm">
+                  <span className="text-zinc-600 dark:text-zinc-400">IVA (21%)</span>
+                  <span className="text-zinc-900 dark:text-zinc-100">${taxAmount.toFixed(0).toLocaleString("es-AR")}</span>
+                </div>
+
+                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3">
+                  <div className="flex justify-between text-lg font-bold">
+                    <span className="text-zinc-900 dark:text-zinc-100">Total</span>
+                    <span className="text-zinc-900 dark:text-zinc-100">
+                      ${(cartTotalAmount + shippingCost + taxAmount).toFixed(0).toLocaleString("es-AR")}
+                    </span>
+                  </div>
+                </div>
+
+                {cartTotalAmount >= 10000 && (
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-3">
+                    <p className="text-green-800 dark:text-green-200 text-xs">
+                      🎉 ¡Envío gratis por compra mayor a $10.000!
+                    </p>
+                  </div>
+                )}
               </div>
 
               <button

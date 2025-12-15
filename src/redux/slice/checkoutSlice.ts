@@ -5,6 +5,11 @@ export interface ShippingAddress {
   name: string;
   mail: string;
   phone: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  province: string;
+  notes?: string;
 }
 
 interface CheckoutState {

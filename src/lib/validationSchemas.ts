@@ -24,6 +24,18 @@ export const contactFormSchema = z.object({
   formType: z.enum(['services', 'bags', 'apparel']),
 });
 
+// Schema para direcciones de envío
+export const shippingAddressSchema = z.object({
+  name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres').max(100, 'El nombre no puede exceder 100 caracteres'),
+  mail: z.string().email('Email inválido'),
+  phone: z.string().min(8, 'Teléfono inválido').max(20, 'Teléfono demasiado largo'),
+  address: z.string().min(5, 'La dirección debe tener al menos 5 caracteres').max(200, 'Dirección demasiado larga'),
+  city: z.string().min(2, 'Ciudad requerida').max(100, 'Ciudad demasiado larga'),
+  postalCode: z.string().min(4, 'Código postal inválido').max(10, 'Código postal demasiado largo'),
+  province: z.string().min(2, 'Provincia requerida').max(100, 'Provincia demasiado larga'),
+  notes: z.string().max(500, 'Notas demasiado largas').optional(),
+});
+
 // Schema para órdenes
 export const orderSchema = z.object({
   userID: z.string().min(1, 'El ID de usuario es requerido'),
@@ -37,14 +49,7 @@ export const orderSchema = z.object({
     cartQuantity: z.number().int().positive('Cantidad debe ser mayor a 0'),
     imageURL: z.string().url('URL de imagen inválida'),
   })).min(1, 'Debe haber al menos un item'),
-  shippingAddress: z.object({
-    firstName: z.string().min(1, 'Nombre requerido'),
-    lastName: z.string().min(1, 'Apellido requerido'),
-    address: z.string().min(1, 'Dirección requerida'),
-    city: z.string().min(1, 'Ciudad requerida'),
-    postalCode: z.string().min(1, 'Código postal requerido'),
-    phone: z.string().optional(),
-  }),
+  shippingAddress: shippingAddressSchema,
 });
 
 // Tipos inferidos
