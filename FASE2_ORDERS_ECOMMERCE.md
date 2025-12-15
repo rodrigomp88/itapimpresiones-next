@@ -18,7 +18,7 @@
 - [x] Implementar formulario de envío completo con validación ZOD
 - [x] Integrar cálculo automático de costos (envío, impuestos)
 - [x] Crear componente de resumen de orden
-- [ ] Implementar validación de stock antes de checkout
+- [x] Implementar validación de stock antes de checkout
 - [ ] Crear página de confirmación de orden
 
 ### 🎯 2. SISTEMA DE PAGOS
@@ -72,13 +72,13 @@ npm install --save-dev @playwright/test
 
 | Tarea | Estado | Progreso |
 |-------|---------|----------|
-| Checkout completo | 🟡 En progreso | 3/5 |
+| Checkout completo | 🟡 En progreso | 4/5 |
 | Sistema de pagos | ⏳ Pendiente | 0/5 |
 | Gestión admin | ⏳ Pendiente | 0/5 |
 | Notificaciones | ⏳ Pendiente | 0/4 |
 | Testing órdenes | ⏳ Pendiente | 0/4 |
 
-**Total de progreso:** 3/23 subtareas completadas (~13%)
+**Total de progreso:** 4/23 subtareas completadas (~17%)
 
 ---
 

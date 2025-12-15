@@ -18,6 +18,7 @@ export interface Product {
   category: string;
   description: string;
   createdAt: string;
+  stock: number; // Cantidad disponible en inventario
   color?: string; // Opcional/Legacy (ya no lo usaremos activamente)
   bagType?: "troquel" | "manija";
 }

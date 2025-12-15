@@ -146,10 +146,33 @@ const CheckoutPage: React.FC = () => {
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
+  // Validar stock antes del checkout
+  const validateStockAvailability = (): { isValid: boolean; errors: string[] } => {
+    const errors: string[] = [];
+
+    cartItems.forEach((item) => {
+      if (item.stock < item.cartQuantity) {
+        errors.push(`${item.name}: Solo hay ${item.stock} unidades disponibles (solicitaste ${item.cartQuantity})`);
+      }
+    });
+
+    return {
+      isValid: errors.length === 0,
+      errors
+    };
+  };
+
   const handleOrderSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firebaseUser) {
       NotiflixFailure("Error: La sesión de usuario no está disponible.");
+      return;
+    }
+
+    // Validar stock antes del checkout
+    const stockValidation = validateStockAvailability();
+    if (!stockValidation.isValid) {
+      NotiflixFailure(`Problemas de stock: ${stockValidation.errors.join(", ")}`);
       return;
     }
 
