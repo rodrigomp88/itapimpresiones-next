@@ -26,7 +26,6 @@ import {
   NotiflixFailure,
   NotiflixSuccess,
 } from "@/components/Notiflix/Notiflix";
-import CheckoutSummary from "@/components/CheckoutSummary/CheckoutSummary";
 import Link from "next/link";
 import { shippingAddressSchema } from "@/lib/validationSchemas";
 
@@ -141,7 +140,7 @@ const CheckoutPage: React.FC = () => {
     }
   }, [sessionStatus, session, firebaseUser, isFirebaseLoading, router]);
 
-  const handleShippingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShippingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
@@ -183,6 +182,7 @@ const CheckoutPage: React.FC = () => {
       NotiflixFailure(`Errores en el formulario: ${errors}`);
       return;
     }
+
     setIsSubmitting(true);
     try {
       const orderItems = cartItems.map((item) => ({
@@ -223,7 +223,7 @@ const CheckoutPage: React.FC = () => {
 
       dispatch(CLEAR_CART());
       NotiflixSuccess("¡Orden realizada con éxito!");
-      router.push("/orders");
+      router.push("/checkout/confirmation");
     } catch (error) {
       console.error("Error al guardar la orden:", error);
       NotiflixFailure("Hubo un problema al procesar tu orden.");
@@ -504,8 +504,7 @@ const CheckoutPage: React.FC = () => {
 
               <div className="mt-4 text-center">
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Al confirmar, aceptas nuestros términos y condiciones de
-                  envío.
+                  Al confirmar, aceptas nuestros términos y condiciones de envío.
                 </p>
               </div>
             </div>

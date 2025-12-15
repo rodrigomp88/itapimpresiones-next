@@ -19,7 +19,9 @@
 - [x] Integrar cálculo automático de costos (envío, impuestos)
 - [x] Crear componente de resumen de orden
 - [x] Implementar validación de stock antes de checkout
-- [ ] Crear página de confirmación de orden
+- [x] Crear página de confirmación de orden
++++++++ REPLACE</diff>
+</invoke>
 
 ### 🎯 2. SISTEMA DE PAGOS
 **Impacto:** Alto | **Esfuerzo:** Alto | **Tiempo:** 6-8 horas
@@ -72,7 +74,9 @@ npm install --save-dev @playwright/test
 
 | Tarea | Estado | Progreso |
 |-------|---------|----------|
-| Checkout completo | 🟡 En progreso | 4/5 |
+| Checkout completo | ✅ Completada | 5/5 |
++++++++ REPLACE</diff>
+</invoke>
 | Sistema de pagos | ⏳ Pendiente | 0/5 |
 | Gestión admin | ⏳ Pendiente | 0/5 |
 | Notificaciones | ⏳ Pendiente | 0/4 |
