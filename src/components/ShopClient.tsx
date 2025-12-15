@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProductFilter from "./Product/ProductFilter";
 import ProductList from "./Product/ProductList";
 import ProductSkeleton from "./Product/ProductSkeleton";
@@ -20,6 +20,7 @@ import {
   FILTER_BY_CUSTOMIZATION,
   selectFilteredProducts,
 } from "@/redux/slice/filterSlice";
+import { useShopReducer } from "../hooks/useShopReducer";
 
 interface ShopClientProps {
   initialProducts: Product[];
@@ -32,16 +33,21 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   const maxPrice = useAppSelector(selectMaxPrice);
   const filteredProducts = useAppSelector(selectFilteredProducts);
 
-  const [category, setCategory] = useState("Todas");
-  const [price, setPrice] = useState(maxPrice || 0);
-  const [size, setSize] = useState("Todos");
-  const [isCustomizable, setIsCustomizable] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("popular");
-  const [selectedColor, setSelectedColor] = useState("Todos");
-  const [selectedBagType, setSelectedBagType] = useState("Todos");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  // ✅ HOOK USEREDUCER - OPTIMIZACIÓN DE PERFORMANCE
+  const {
+    state,
+    setCategory,
+    setPrice,
+    setSize,
+    setIsCustomizable,
+    setIsLoading,
+    setSortBy,
+    setSelectedColor,
+    setSelectedBagType,
+    setSearchQuery,
+    setViewMode,
+    setPriceRange,
+  } = useShopReducer(maxPrice || 0);
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,11 +57,13 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
       FILTER_BY_CATEGORY({ products: initialProducts, category: "Todas" })
     );
     setTimeout(() => setIsLoading(false), 500);
-  }, [dispatch, initialProducts]);
+  }, [dispatch, initialProducts, setIsLoading]);
 
   useEffect(() => {
-    if (maxPrice) setPrice(maxPrice);
-  }, [maxPrice]);
+    if (maxPrice) {
+      setPriceRange(0, maxPrice);
+    }
+  }, [maxPrice, setPriceRange]);
 
   const allCategories = ["Todas", ...new Set(products.map((p) => p.category))];
 
@@ -86,32 +94,32 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   // --- FILTRADO DE COLOR POR IMAGEN ---
   let colorAndBagFiltered = filteredProducts;
 
-  if (selectedColor !== "Todos") {
+  if (state.selectedColor !== "Todos") {
     colorAndBagFiltered = colorAndBagFiltered.filter((p) => {
       if (!p.images || p.images.length === 0) return false;
       return p.images.some((img) => {
         if (typeof img === "string") return false; // Ignoramos legacy sin color
-        return (img as ProductImage).color === selectedColor;
+        return (img as ProductImage).color === state.selectedColor;
       });
     });
   }
 
-  if (selectedBagType !== "Todos" && category === "Bolsas") {
+  if (state.selectedBagType !== "Todos" && state.category === "Bolsas") {
     colorAndBagFiltered = colorAndBagFiltered.filter(
-      (p) => p.bagType === selectedBagType.toLowerCase()
+      (p) => p.bagType === state.selectedBagType.toLowerCase()
     );
   }
 
   // --- BÚSQUEDA ---
-  const searchFiltered = searchQuery
+  const searchFiltered = state.searchQuery
     ? colorAndBagFiltered.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description?.toLowerCase().includes(searchQuery.toLowerCase())
+        p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+        p.description?.toLowerCase().includes(state.searchQuery.toLowerCase())
       )
     : colorAndBagFiltered;
 
   const sortedProducts = [...searchFiltered].sort((a, b) => {
-    switch (sortBy) {
+    switch (state.sortBy) {
       case "price-low":
         return a.price - b.price;
       case "price-high":
@@ -229,7 +237,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             <input
               type="text"
               placeholder="Buscar productos..."
-              value={searchQuery}
+              value={state.searchQuery}
               onChange={handleSearchChange}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
@@ -242,7 +250,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               </h2>
               <p className="text-zinc-600 dark:text-zinc-400 text-base">
                 {searchFiltered.length} productos encontrados
-                {searchQuery && ` para "${searchQuery}"`}
+                {state.searchQuery && ` para "${state.searchQuery}"`}
               </p>
             </div>
             <div className="flex items-center gap-4">
@@ -251,7 +259,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                 <button 
                   onClick={() => setViewMode("grid")}
                   className={`p-2 rounded-md transition-all ${
-                    viewMode === "grid" 
+                    state.viewMode === "grid" 
                       ? "bg-white dark:bg-gray-700 shadow-sm" 
                       : "hover:bg-gray-200 dark:hover:bg-gray-600"
                   }`}
@@ -263,7 +271,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                 <button 
                   onClick={() => setViewMode("list")}
                   className={`p-2 rounded-md transition-all ${
-                    viewMode === "list" 
+                    state.viewMode === "list" 
                       ? "bg-white dark:bg-gray-700 shadow-sm" 
                       : "hover:bg-gray-200 dark:hover:bg-gray-600"
                   }`}
@@ -279,7 +287,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                   Ordenar por:
                 </span>
                 <select
-                  value={sortBy}
+                  value={state.sortBy}
                   onChange={handleSortChange}
                   className="form-select rounded-lg border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-sm p-2"
                 >
@@ -296,31 +304,31 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             <aside className="col-span-12 md:col-span-3">
               <ProductFilter
                 categories={allCategories}
-                selectedCategory={category}
+                selectedCategory={state.category}
                 onCategoryChange={handleCategoryChange}
                 minPrice={minPrice || 0}
                 maxPrice={maxPrice || 0}
-                currentPrice={price}
+                currentPrice={state.price}
                 onPriceChange={handlePriceChange}
-                selectedSize={size}
+                selectedSize={state.size}
                 onSizeChange={handleSizeChange}
-                isCustomizable={isCustomizable}
+                isCustomizable={state.isCustomizable}
                 onCustomizableChange={handleCustomizableChange}
-                selectedColor={selectedColor}
+                selectedColor={state.selectedColor}
                 onColorChange={handleColorChange}
-                selectedBagType={selectedBagType}
+                selectedBagType={state.selectedBagType}
                 onBagTypeChange={handleBagTypeChange}
               />
             </aside>
             <main className="col-span-12 md:col-span-9">
-              {isLoading ? (
+              {state.isLoading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <ProductSkeleton key={i} />
                   ))}
                 </div>
               ) : (
-                <ProductList products={sortedProducts}  />
+                <ProductList products={sortedProducts} />
               )}
             </main>
           </div>

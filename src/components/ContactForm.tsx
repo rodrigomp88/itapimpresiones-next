@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion } from "framer-motion";
+import { contactFormSchema, ContactFormData } from "@/lib/validationSchemas";
 
 interface ContactFormProps {
     formType: "services" | "bags" | "apparel";
@@ -10,6 +11,7 @@ interface ContactFormProps {
 const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+    const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -19,6 +21,22 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData.entries());
         data.formType = formType;
+
+        // Validar con ZOD
+        const validationResult = contactFormSchema.safeParse(data);
+        if (!validationResult.success) {
+            const errors: Partial<Record<keyof ContactFormData, string>> = {};
+            validationResult.error.issues.forEach((err) => {
+                const field = err.path[0] as keyof ContactFormData;
+                errors[field] = err.message;
+            });
+            setValidationErrors(errors);
+            setIsSubmitting(false);
+            return;
+        }
+
+        // Limpiar errores
+        setValidationErrors({});
 
         try {
             const response = await fetch("/api/contact", {
@@ -64,6 +82,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
                     type="text"
                     required
                 />
+                {validationErrors.name && (
+                    <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+                )}
             </div>
             <div>
                 <label
@@ -79,6 +100,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
                     type="email"
                     required
                 />
+                {validationErrors.email && (
+                    <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>
+                )}
             </div>
             <div>
                 <label
@@ -217,6 +241,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
                     rows={4}
                     required
                 ></textarea>
+                {validationErrors.message && (
+                    <p className="text-red-500 text-sm mt-1">{validationErrors.message}</p>
+                )}
             </div>
             {formType === "services" && (
                 <div className="sm:col-span-2">

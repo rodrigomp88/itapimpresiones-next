@@ -7,6 +7,7 @@ import { storage } from "@/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { FaTrash, FaImage } from "react-icons/fa";
+import { productSchema, ProductFormData } from "@/lib/validationSchemas";
 
 interface ImagePreview {
   file: File;
@@ -31,6 +32,7 @@ const AddProduct = () => {
   const [isPending, startTransition] = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedImages, setSelectedImages] = useState<ImagePreview[]>([]);
+  const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof ProductFormData, string>>>({});
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -75,6 +77,32 @@ const AddProduct = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
+    // Extraer valores para validación
+    const formValues = {
+      name: formData.get('name') as string,
+      price: parseFloat(formData.get('price') as string),
+      unity: parseInt(formData.get('unity') as string),
+      category: formData.get('category') as string,
+      description: formData.get('description') as string,
+      size: formData.get('size') as string || undefined,
+      bagType: formData.get('bagType') as string || undefined,
+    };
+
+    // Validar con ZOD
+    const validationResult = productSchema.safeParse(formValues);
+    if (!validationResult.success) {
+      const errors: Partial<Record<keyof ProductFormData, string>> = {};
+      validationResult.error.issues.forEach((err) => {
+        const field = err.path[0] as keyof ProductFormData;
+        errors[field] = err.message;
+      });
+      setValidationErrors(errors);
+      return;
+    }
+
+    // Limpiar errores
+    setValidationErrors({});
+
     startTransition(async () => {
       try {
         const initialResult = await addProductAction(formData);
@@ -117,6 +145,7 @@ const AddProduct = () => {
     formRef.current?.reset();
     selectedImages.forEach((img) => URL.revokeObjectURL(img.previewUrl));
     setSelectedImages([]);
+    setValidationErrors({});
   };
 
   return (
@@ -132,6 +161,9 @@ const AddProduct = () => {
               <div className="space-y-4">
                 <label className="block text-sm font-medium">Nombre</label>
                 <input name="name" className="input" required />
+                {validationErrors.name && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+                )}
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -143,6 +175,9 @@ const AddProduct = () => {
                       className="input"
                       required
                     />
+                    {validationErrors.price && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.price}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium">
@@ -154,17 +189,26 @@ const AddProduct = () => {
                       className="input"
                       required
                     />
+                    {validationErrors.unity && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.unity}</p>
+                    )}
                   </div>
                 </div>
 
                 <label className="block text-sm font-medium">Categoría</label>
                 <input name="category" className="input" required />
+                {validationErrors.category && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.category}</p>
+                )}
                 <label className="block text-sm font-medium">Descripción</label>
                 <textarea
                   name="description"
                   className="input min-h-[100px]"
                   required
                 />
+                {validationErrors.description && (
+                  <p className="text-red-500 text-sm mt-1">{validationErrors.description}</p>
+                )}
                 <label className="block text-sm font-medium">Tamaño</label>
                 <input name="size" className="input" />
 
