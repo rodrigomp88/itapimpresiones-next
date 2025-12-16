@@ -21,8 +21,8 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
   const getNotificationText = (order: Order): string => {
     if (order.lastUpdatedBy === "tienda") {
       if (
-        order.orderStatus === "Completada" ||
-        order.orderStatus === "Cancelada"
+        order.orderStatus === "delivered" ||
+        order.orderStatus === "cancelled"
       ) {
         return `La orden #${order.id.slice(
           0,

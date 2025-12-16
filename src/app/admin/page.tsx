@@ -2,6 +2,7 @@ import { adminDb } from "@/firebase/admin";
 import Link from "next/link";
 import TestNotificationButton from "./TestNotificationButton";
 import SystemHealth from "@/components/Admin/SystemHealth";
+import AnalyticsDashboard from "@/components/Admin/AnalyticsDashboard";
 import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList, FaCalendarAlt, FaCreditCard, FaExclamationTriangle } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
@@ -126,8 +127,6 @@ const AdminDashboardPage = async () => {
     },
   ];
 
-
-
   return (
     <div className="p-6 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -169,6 +168,9 @@ const AdminDashboardPage = async () => {
           </div>
         ))}
       </div>
+
+      {/* Analytics Dashboard */}
+      <AnalyticsDashboard />
 
       {/* Status Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

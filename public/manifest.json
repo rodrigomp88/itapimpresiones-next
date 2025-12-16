@@ -1,0 +1,53 @@
+{
+  "name": "Itap Impresiones - Soluciones Gráficas",
+  "short_name": "Itap Impresiones",
+  "description": "Servicio de impresiones personalizadas en bolsas, gorras, remeras, buzos y más. Diseño gráfico profesional para tu marca.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es-AR",
+  "categories": ["business", "productivity", "shopping"],
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tienda",
+      "short_name": "Tienda",
+      "description": "Ver productos disponibles",
+      "url": "/tienda",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Mis Órdenes",
+      "short_name": "Órdenes",
+      "description": "Ver mis pedidos",
+      "url": "/orders",
+      "icons": [
+        {
+          "src": "/android-chrome-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

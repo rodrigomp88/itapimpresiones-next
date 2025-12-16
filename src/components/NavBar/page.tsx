@@ -16,6 +16,7 @@ import {
 } from "@/redux/slice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import UserNotificationBell from "../Notifications/UserNotificationBell";
+import { ThemeToggle } from "../ThemeProvider";
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -120,6 +121,11 @@ const Navbar = () => {
               </span>
             )}
           </Link>
+
+          {/* Theme Toggle */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
 
           <div className="hidden md:flex items-center gap-2">
             {status === "authenticated" && (

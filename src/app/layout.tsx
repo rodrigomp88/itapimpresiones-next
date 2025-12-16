@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import SessionHandler from "../components/SessionHandler";
+import PreloadResources from "../components/PreloadResources";
+import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
+import PWAInstaller from "../components/PWAInstaller";
+import SkipLink from "../components/SkipLink";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +25,7 @@ export const metadata: Metadata = {
 
   metadataBase: new URL("https://itapimpresiones.vercel.app"),
 
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.json",
 
   openGraph: {
     title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
@@ -69,8 +73,18 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        {/* Preconnects para performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://firestore.googleapis.com" />
+        <link rel="preconnect" href="https://firebaseinstallations.googleapis.com" />
+
+        {/* DNS prefetch para recursos externos */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//www.gstatic.com" />
+
         <link
           href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
@@ -80,12 +94,19 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
-        suppressHydrationWarning
-      >
+  <body
+    className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
+    suppressHydrationWarning
+  >
+    {/* Skip Link para navegación por teclado */}
+    <SkipLink />
+
+    {/* Main content landmark */}
+    <div id="main-content">
         <Providers>
           <SessionHandler />
+          <ServiceWorkerRegister />
+          <PWAInstaller />
           {children}
 
           <script
@@ -100,7 +121,8 @@ export default function RootLayout({
             }}
           />
         </Providers>
-      </body>
-    </html>
+    </div>
+  </body>
+</html>
   );
 }

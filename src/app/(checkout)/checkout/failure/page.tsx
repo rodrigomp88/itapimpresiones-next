@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { NotiflixFailure } from "@/components/Notiflix/Notiflix";
 
-const FailurePage: React.FC = () => {
+const FailurePageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id");
 
@@ -91,6 +91,14 @@ const FailurePage: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const FailurePage: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+      <FailurePageContent />
+    </Suspense>
   );
 };
 

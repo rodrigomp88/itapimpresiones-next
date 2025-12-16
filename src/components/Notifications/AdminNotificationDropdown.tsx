@@ -20,7 +20,7 @@ const AdminNotificationDropdown: React.FC<AdminNotificationDropdownProps> = ({
 
   const getNotificationText = (order: Order): string => {
     const clientName = order.shippingAddress?.name || "un cliente";
-    if (order.orderStatus === "Orden Recibida") {
+    if (order.orderStatus === "confirmed") {
       return `Nueva orden de ${clientName}.`;
     }
     return `Nuevo mensaje de ${clientName}.`;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
@@ -12,7 +12,6 @@ import { ShippingAddress } from "@/redux/slice/checkoutSlice";
 
 const OrderConfirmationPage: React.FC = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { data: session, status: sessionStatus } = useSession();
 
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);

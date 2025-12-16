@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-const PendingPage: React.FC = () => {
+const PendingPageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id");
 
@@ -90,6 +90,14 @@ const PendingPage: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const PendingPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+      <PendingPageContent />
+    </Suspense>
   );
 };
 

@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { NotiflixSuccess } from "@/components/Notiflix/Notiflix";
 
-const SuccessPage: React.FC = () => {
+const SuccessPageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id");
 
@@ -121,6 +121,14 @@ const SuccessPage: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const SuccessPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+      <SuccessPageContent />
+    </Suspense>
   );
 };
 

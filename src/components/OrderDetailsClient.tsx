@@ -84,7 +84,7 @@ const OrderDetailsClient: React.FC<OrderDetailsClientProps> = ({
     amount.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
 
   const isChatActive =
-    order.orderStatus !== "Completada" && order.orderStatus !== "Cancelada";
+    order.orderStatus !== "delivered" && order.orderStatus !== "cancelled";
 
   return (
     <div className="container mx-auto py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">

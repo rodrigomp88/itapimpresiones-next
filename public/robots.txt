@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /checkout/
+Disallow: /api/
+
+# Host
+Host: https://itapimpresiones.com
+
+# Sitemaps
+Sitemap: https://itapimpresiones.com/sitemap.xml
