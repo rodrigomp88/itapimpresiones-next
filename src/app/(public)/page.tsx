@@ -40,12 +40,14 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="flex flex-col gap-4 group cursor-pointer">
                 <div className="w-full bg-slate-200 rounded-xl overflow-hidden aspect-[16/10] shadow-sm">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnxStq18NJ7wAIDiSFoL5gn24j5HCTb84f9qlA7lBDiWrgMEtTsBJ23YdnDue9wRST2PBsKkdpnsYoBLhBYQAPiQp2LsK45kz33BUT684kh6I-WWrdPn7hu_Gt6AEyAOmgM3acjz_r8h5gckG2BvMVnMifPv80gGPbShkVNZb3ppPJtdMN8zB4coMBu1IhCkdJYZvLfpuOHlcmEpxvFJ3I2YQJR8jPKf8-QrMXo5jc5rIwCgzxMg3hZfx4H6Usr3-de4Mo3Wb4pNE")`,
-                    }}
-                  ></div>
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnxStq18NJ7wAIDiSFoL5gn24j5HCTb84f9qlA7lBDiWrgMEtTsBJ23YdnDue9wRST2PBsKkdpnsYoBLhBYQAPiQp2LsK45kz33BUT684kh6I-WWrdPn7hu_Gt6AEyAOmgM3acjz_r8h5gckG2BvMVnMifPv80gGPbShkVNZb3ppPJtdMN8zB4coMBu1IhCkdJYZvLfpuOHlcmEpxvFJ3I2YQJR8jPKf8-QrMXo5jc5rIwCgzxMg3hZfx4H6Usr3-de4Mo3Wb4pNE"
+                    alt="Impresión de Remeras"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    priority={true}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
                 <div>
                   <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2">Impresión de Remeras</h3>
@@ -56,12 +58,14 @@ const Home = () => {
               </div>
               <div className="flex flex-col gap-4 group cursor-pointer">
                 <div className="w-full bg-slate-200 rounded-xl overflow-hidden aspect-[16/10] shadow-sm">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnRaP9yvD6Em36XeRVHuPQRpSgvOI7irAA_aqVZH8sRXUAATRTspdan8DortOBNVsk1baEbybraLf4O36r8w90yriR8jD4dX2Ty3FT3Vovgzgd_ww29frR5wWc_IZenvTqF3lymhiIVlgT2HFC5K76FG4ruwQl7EjXUxilsvaGnxooJS7C5h7BHjoTUyy1xf0ee3gLpztRS6tYv6A0MOx9Lo9M9RnKZcJT_-zrV_Zc0nz2Ht-DCTcbXxAMEsqftPNPTVGMDxM3T_Y")`,
-                    }}
-                  ></div>
+              <Image
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnRaP9yvD6Em36XeRVHuPQRpSgvOI7irAA_aqVZH8sRXUAATRTspdan8DortOBNVsk1baEbybraLf4O36r8w90yriR8jD4dX2Ty3FT3Vovgzgd_ww29frR5wWc_IZenvTqF3lymhiIVlgT2HFC5K76FG4ruwQl7EjXUxilsvaGnxooJS7C5h7BHjoTUyy1xf0ee3gLpztRS6tYv6A0MOx9Lo9M9RnKZcJT_-zrV_Zc0nz2Ht-DCTcbXxAMEsqftPNPTVGMDxM3T_Y"
+                alt="Gorras Personalizadas"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                loading="lazy"
+              />
                 </div>
                 <div>
                   <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2">Gorras Personalizadas</h3>
@@ -72,12 +76,14 @@ const Home = () => {
               </div>
               <div className="flex flex-col gap-4 group cursor-pointer">
                 <div className="w-full bg-slate-200 rounded-xl overflow-hidden aspect-[16/10] shadow-sm">
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4kXf04GvtTkjT_46aDVcO4909CtSnzQgMNhjthKBwFPTkLps0gGl_WgqEPbQmp2csIqXkkNYWKYqxh8fq-Tet-EAhmBEqSGWu-rfPgs--QUzVlXT6e8wQUP6cey36vTNkFhNEWyVU9ZznYLaVxEaLnEPODJYMcfbh87tGWLJDjIWMI47BU5RAmoCLV_fhOZUPwOEHn0uFeM-TpyrtiFW-QElYeR8NDx6GHGHtbKgW6Zyzw-oBAV_VSPrpSJ1AgUC00ljTEstrpe4")`,
-                    }}
-                  ></div>
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4kXf04GvtTkjT_46aDVcO4909CtSnzQgMNhjthKBwFPTkLps0gGl_WgqEPbQmp2csIqXkkNYWKYqxh8fq-Tet-EAhmBEqSGWu-rfPgs--QUzVlXT6e8wQUP6cey36vTNkFhNEWyVU9ZznYLaVxEaLnEPODJYMcfbh87tGWLJDjIWMI47BU5RAmoCLV_fhOZUPwOEHn0uFeM-TpyrtiFW-QElYeR8NDx6GHGHtbKgW6Zyzw-oBAV_VSPrpSJ1AgUC00ljTEstrpe4"
+                    alt="Indumentaria Corporativa"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    loading="lazy"
+                  />
                 </div>
                 <div>
                   <h3 className="text-slate-900 dark:text-white text-xl font-bold mb-2">Indumentaria Corporativa</h3>

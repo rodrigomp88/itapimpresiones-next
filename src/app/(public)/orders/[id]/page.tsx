@@ -26,11 +26,20 @@ async function getOrder(orderId: string): Promise<Order | null> {
 
     const items = data.orderItems || data.cartItems || [];
 
+    // Convertir todos los campos Timestamp a strings serializables
+    const serializeTimestamp = (timestamp: any) => {
+      if (timestamp && typeof timestamp.toDate === 'function') {
+        return timestamp.toDate().toISOString();
+      }
+      return timestamp;
+    };
+
     return {
       id: docSnap.id,
       ...data,
       orderItems: items,
-      createdAt: data.createdAt.toDate().toISOString(),
+      createdAt: serializeTimestamp(data.createdAt),
+      updatedAt: serializeTimestamp(data.updatedAt),
     } as Order;
   } catch (error) {
     console.error("Servidor (Cliente): Error al obtener la orden:", error);

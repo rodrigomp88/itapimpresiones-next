@@ -31,11 +31,20 @@ async function getOrderAndMessages(
 
   const items = orderData.orderItems || orderData.cartItems || [];
 
+  // Convertir todos los campos Timestamp a strings serializables
+  const serializeTimestamp = (timestamp: any) => {
+    if (timestamp && typeof timestamp.toDate === 'function') {
+      return timestamp.toDate().toISOString();
+    }
+    return timestamp;
+  };
+
   const order = {
     id: orderSnap.id,
     ...orderData,
     orderItems: items,
-    createdAt: orderData.createdAt.toDate().toISOString(),
+    createdAt: serializeTimestamp(orderData.createdAt),
+    updatedAt: serializeTimestamp(orderData.updatedAt),
   } as Order;
 
   const messages = messagesSnap.docs.map((doc) => {

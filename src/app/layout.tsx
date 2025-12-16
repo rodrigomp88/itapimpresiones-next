@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";
-import SessionHandler from "../components/SessionHandler";
-import PreloadResources from "../components/PreloadResources";
-import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
-import PWAInstaller from "../components/PWAInstaller";
-import SkipLink from "../components/SkipLink";
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap', // Optimizar para Core Web Vitals
+  preload: true,
+  variable: '--font-inter',
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,13 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+import Providers from "./providers";
+import SessionHandler from "../components/SessionHandler";
+import PreloadResources from "../components/PreloadResources";
+import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
+import PWAInstaller from "../components/PWAInstaller";
+import SkipLink from "../components/SkipLink";
 
 export const metadata: Metadata = {
   title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
@@ -85,17 +93,42 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//www.gstatic.com" />
 
+        {/* Critical CSS inlining para mejor FCP */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Critical CSS para above-the-fold content */
+            body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+            .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+            .font-display { font-family: 'Work Sans', system-ui, sans-serif; }
+
+            /* Loading states */
+            .animate-spin { animation: spin 1s linear infinite; }
+            @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+            /* Critical layout */
+            .min-h-screen { min-height: 100vh; }
+            .flex { display: flex; }
+            .items-center { align-items: center; }
+            .justify-center { justify-content: center; }
+          `
+        }} />
+
+        {/* Fonts optimizadas */}
         <link
           href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
           rel="stylesheet"
         />
+
+        {/* Preload critical resources */}
+        <link rel="modulepreload" href="/_next/static/chunks/webpack.js" />
+        <link rel="preload" as="image" href="/android-chrome-512x512.png" />
       </head>
   <body
-    className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
+    className={`font-display antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
     suppressHydrationWarning
   >
     {/* Skip Link para navegación por teclado */}
