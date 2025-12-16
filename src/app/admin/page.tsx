@@ -2,7 +2,7 @@ import { adminDb } from "@/firebase/admin";
 import Link from "next/link";
 import TestNotificationButton from "./TestNotificationButton";
 import SystemHealth from "@/components/Admin/SystemHealth";
-import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList } from "react-icons/fa";
+import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList, FaCalendarAlt, FaCreditCard, FaExclamationTriangle } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
 
@@ -22,10 +22,37 @@ async function getDashboardStats() {
     const totalProducts = productsSnap.size;
     const totalSubmissions = submissionsSnap.size;
 
-    const totalRevenue = ordersSnap.docs.reduce((acc, doc) => {
-      const data = doc.data();
-      return acc + (data.orderAmount || 0);
-    }, 0);
+    // Calcular estadísticas de ingresos
+    const ordersData = ordersSnap.docs.map(doc => doc.data());
+    const totalRevenue = ordersData.reduce((acc, data) => acc + (data.orderAmount || 0), 0);
+    const depositRevenue = ordersData.reduce((acc, data) => acc + (data.depositAmount || 0), 0);
+
+    // Estadísticas por estado de orden
+    const ordersByStatus = ordersData.reduce((acc, order) => {
+      const status = order.orderStatus || 'pending';
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Estadísticas por estado de pago
+    const ordersByPaymentStatus = ordersData.reduce((acc, order) => {
+      const status = order.paymentStatus || 'pending';
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Ingresos del mes actual
+    const now = new Date();
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const monthlyRevenue = ordersData
+      .filter(order => order.createdAt?.toDate() >= startOfMonth)
+      .reduce((acc, data) => acc + (data.orderAmount || 0), 0);
+
+    // Órdenes pendientes de pago
+    const pendingPayments = ordersData.filter(order =>
+      order.paymentStatus === 'pending' ||
+      (order.remainingAmount && order.remainingAmount > 0)
+    ).length;
 
     const recentOrders = ordersSnap.docs.slice(0, 5).map(doc => ({
       id: doc.id,
@@ -39,6 +66,11 @@ async function getDashboardStats() {
       totalProducts,
       totalSubmissions,
       totalRevenue,
+      depositRevenue,
+      monthlyRevenue,
+      ordersByStatus,
+      ordersByPaymentStatus,
+      pendingPayments,
       recentOrders,
     };
   } catch (error) {
@@ -63,30 +95,34 @@ const AdminDashboardPage = async () => {
     {
       title: "Ingresos Totales",
       value: `$${stats.totalRevenue.toLocaleString("es-AR")}`,
+      subtitle: `$${stats.depositRevenue.toLocaleString("es-AR")} en señas`,
       icon: <FaMoneyBillWave className="text-green-500 text-2xl" />,
       bg: "bg-green-100 dark:bg-green-900/20",
       border: "border-green-200 dark:border-green-800",
     },
     {
-      title: "Órdenes",
-      value: stats.totalOrders,
-      icon: <FaShoppingBag className="text-blue-500 text-2xl" />,
+      title: "Ingresos del Mes",
+      value: `$${stats.monthlyRevenue.toLocaleString("es-AR")}`,
+      subtitle: `Mes actual`,
+      icon: <FaCalendarAlt className="text-blue-500 text-2xl" />,
       bg: "bg-blue-100 dark:bg-blue-900/20",
       border: "border-blue-200 dark:border-blue-800",
     },
     {
-      title: "Usuarios",
-      value: stats.totalUsers,
-      icon: <FaUsers className="text-purple-500 text-2xl" />,
-      bg: "bg-purple-100 dark:bg-purple-900/20",
-      border: "border-purple-200 dark:border-purple-800",
-    },
-    {
-      title: "Cotizaciones",
-      value: stats.totalSubmissions,
-      icon: <FaClipboardList className="text-orange-500 text-2xl" />,
+      title: "Pagos Pendientes",
+      value: stats.pendingPayments,
+      subtitle: `Requieren atención`,
+      icon: <FaExclamationTriangle className="text-orange-500 text-2xl" />,
       bg: "bg-orange-100 dark:bg-orange-900/20",
       border: "border-orange-200 dark:border-orange-800",
+    },
+    {
+      title: "Órdenes",
+      value: stats.totalOrders,
+      subtitle: `${stats.ordersByStatus.confirmed || 0} confirmadas`,
+      icon: <FaShoppingBag className="text-purple-500 text-2xl" />,
+      bg: "bg-purple-100 dark:bg-purple-900/20",
+      border: "border-purple-200 dark:border-purple-800",
     },
   ];
 
@@ -125,8 +161,80 @@ const AdminDashboardPage = async () => {
             <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mt-1">
               {card.value}
             </h3>
+            {card.subtitle && (
+              <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
+                {card.subtitle}
+              </p>
+            )}
           </div>
         ))}
+      </div>
+
+      {/* Status Breakdown */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Orders by Status */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm p-6">
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">
+            Órdenes por Estado
+          </h2>
+          <div className="space-y-4">
+            {Object.entries(stats.ordersByStatus).map(([status, count]) => (
+              <div key={status} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                    status === 'confirmed' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400' :
+                    status === 'processing' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400' :
+                    status === 'shipped' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400' :
+                    status === 'delivered' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
+                    status === 'cancelled' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
+                    status === 'refunded' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400' :
+                    'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                  }`}>
+                    {status === 'confirmed' ? 'Confirmadas' :
+                     status === 'processing' ? 'Procesando' :
+                     status === 'shipped' ? 'Enviadas' :
+                     status === 'delivered' ? 'Entregadas' :
+                     status === 'cancelled' ? 'Canceladas' :
+                     status === 'refunded' ? 'Reembolsadas' :
+                     'Pendientes'}
+                  </span>
+                </div>
+                <span className="font-bold text-zinc-900 dark:text-white">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Payment Status Breakdown */}
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm p-6">
+          <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">
+            Estados de Pago
+          </h2>
+          <div className="space-y-4">
+            {Object.entries(stats.ordersByPaymentStatus).map(([status, count]) => (
+              <div key={status} className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                    status === 'approved' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
+                    status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' :
+                    status === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
+                    status === 'cancelled' ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400' :
+                    status === 'refunded' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400' :
+                    'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
+                  }`}>
+                    {status === 'approved' ? 'Aprobados' :
+                     status === 'pending' ? 'Pendientes' :
+                     status === 'rejected' ? 'Rechazados' :
+                     status === 'cancelled' ? 'Cancelados' :
+                     status === 'refunded' ? 'Reembolsados' :
+                     status}
+                  </span>
+                </div>
+                <span className="font-bold text-zinc-900 dark:text-white">{count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Recent Orders Section */}

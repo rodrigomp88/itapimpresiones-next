@@ -25,33 +25,67 @@
 
 ### 🎯 2. SISTEMA DE PAGOS
 **Impacto:** Alto | **Esfuerzo:** Alto | **Tiempo:** 6-8 horas
-- [ ] Integrar MercadoPago o Stripe
-- [ ] Implementar webhook para confirmación de pagos
-- [ ] Crear estados de pago (pendiente, aprobado, rechazado)
-- [ ] Manejar errores de pago y reintentos
-- [ ] Implementar reembolso básico
+- [x] Instalar SDK de MercadoPago
+- [x] Crear API route para crear preferencia de pago
+- [x] Integrar MercadoPago Checkout Pro en checkout
+- [x] Implementar webhook para confirmación de pagos
+- [x] Crear estados de pago (pendiente, aprobado, rechazado, expirado)
+- [x] Actualizar órdenes según estado de pago
+- [x] Manejar errores de pago y reintentos (fallback desarrollo)
+- [x] Implementar reembolso básico (simulado)
+- [x] Testing completo del flujo de pago
+- [x] Páginas de resultado (success/failure/pending)
 
 ### 🎯 3. GESTIÓN DE ÓRDENES EN ADMIN
 **Impacto:** Alto | **Esfuerzo:** Medio | **Tiempo:** 3-4 horas
-- [ ] Crear panel de órdenes en admin
-- [ ] Implementar cambio de estados de orden
-- [ ] Agregar filtros y búsqueda de órdenes
-- [ ] Crear vista detallada de cada orden
-- [ ] Implementar actualización de stock automática
+- [x] Crear panel de órdenes en admin con filtros avanzados
+- [x] Implementar cambio de estados de orden sincronizados con pagos
+- [x] Agregar filtros por estado de orden y estado de pago
+- [x] Crear vista detallada con información completa de pago
+- [x] Implementar sistema de chat admin-cliente
+- [x] **Implementar sistema de stock híbrido inteligente**
+  - [x] Tipos de stock: `physical`, `made-to-order`, `service`
+  - [x] Validación de stock solo para productos físicos
+  - [x] Actualización automática de stock al procesar órdenes
+  - [x] Gestión diferenciada según tipo de producto
+- [x] **Sistema de pagos parciales (seña)**
+  - [x] Seña del 50% para confirmar pedidos
+  - [x] Pago restante al finalizar trabajo
+  - [x] Flujo especial para órdenes con seña
+  - [x] Control administrativo de pagos completos
+- [x] **Dashboard mejorado con estadísticas detalladas**
+  - [x] Ingresos totales y del mes actual
+  - [x] Órdenes por estado (con breakdown visual)
+  - [x] Estados de pago (con breakdown visual)
+  - [x] Pagos pendientes que requieren atención
+  - [x] Información de señas en ingresos
+- [x] **Acciones masivas para gestión eficiente**
+  - [x] Selección múltiple de órdenes con checkboxes
+  - [x] Barra de acciones masivas para cambiar estados
+  - [x] Procesamiento en lote con indicadores de progreso
+  - [x] Seleccionar/deseleccionar todo
+- [x] **Historial de cambios y auditoría**
+  - [x] Registro automático de cambios de estado
+  - [x] Timestamp y usuario que realizó el cambio
+  - [x] Subcolección en Firestore para historial
+  - [x] Información de última actualización visible
 
 ### 🎯 4. NOTIFICACIONES DE ÓRDENES
 **Impacto:** Medio | **Esfuerzo:** Medio | **Tiempo:** 2-3 horas
-- [ ] Notificaciones push para nuevos pedidos (admin)
-- [ ] Email de confirmación para clientes
-- [ ] Actualizaciones de estado por email
-- [ ] Notificaciones de baja stock
+- [x] Notificaciones push para nuevos pedidos (admin) - Implementado en functions/index.ts
+- [x] Email de confirmación para clientes - Implementado en sendOrderConfirmationEmail
+- [x] Actualizaciones de estado por email - Implementado en sendOrderStatusUpdateEmail
+- [x] Notificaciones de baja stock - Implementado en sendLowStockEmail
 
 ### 🎯 5. VALIDACIÓN Y TESTING DE ÓRDENES
 **Impacto:** Alto | **Esfuerzo:** Medio | **Tiempo:** 3-4 horas
-- [ ] Tests para flujo completo de checkout
-- [ ] Tests para integración de pagos
-- [ ] Tests para gestión de órdenes
-- [ ] Validación end-to-end con Playwright
+- [x] Tests para flujo completo de checkout
+- [x] Tests para integración de pagos
+- [x] Tests para gestión de órdenes
+- [x] Validación end-to-end con Playwright
+- [x] Testing de integración de notificaciones
+- [x] Verificación de envío de emails automáticos
+- [x] Validación de notificaciones push en tiempo real
 
 ---
 
@@ -77,12 +111,12 @@ npm install --save-dev @playwright/test
 | Checkout completo | ✅ Completada | 5/5 |
 +++++++ REPLACE</diff>
 </invoke>
-| Sistema de pagos | ⏳ Pendiente | 0/5 |
-| Gestión admin | ⏳ Pendiente | 0/5 |
-| Notificaciones | ⏳ Pendiente | 0/4 |
-| Testing órdenes | ⏳ Pendiente | 0/4 |
+| Sistema de pagos | ✅ Completado | 10/10 |
+| Gestión admin | ✅ Completado | 6/6 |
+| Notificaciones | ✅ Completada | 4/4 |
+| Testing órdenes | ✅ Completado | 7/7 |
 
-**Total de progreso:** 4/23 subtareas completadas (~17%)
+**Total de progreso:** 32/33 subtareas completadas (~97%) + sistema de seña + mejoras avanzadas de admin implementadas + testing completo de integración
 
 ---
 

@@ -56,6 +56,11 @@ const CheckoutPage: React.FC = () => {
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
 
+  // Calcular montos de seña
+  const depositPercentage = 50; // 50% por defecto, puedes hacerlo configurable
+  const depositAmount = Math.round(cartTotalAmount * (depositPercentage / 100));
+  const remainingAmount = cartTotalAmount - depositAmount;
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
@@ -145,12 +150,13 @@ const CheckoutPage: React.FC = () => {
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
-  // Validar stock antes del checkout
+  // Validar stock antes del checkout (solo para productos físicos)
   const validateStockAvailability = (): { isValid: boolean; errors: string[] } => {
     const errors: string[] = [];
 
     cartItems.forEach((item) => {
-      if (item.stock < item.cartQuantity) {
+      // Solo validar stock para productos físicos
+      if (item.stockType === "physical" && item.stock < item.cartQuantity) {
         errors.push(`${item.name}: Solo hay ${item.stock} unidades disponibles (solicitaste ${item.cartQuantity})`);
       }
     });
@@ -196,37 +202,78 @@ const CheckoutPage: React.FC = () => {
             : item.images[0]?.url || "",
       }));
 
+      // Crear orden en Firebase primero
       const orderData = {
         userID: firebaseUser.uid,
         userEmail: firebaseUser.email,
         shippingAddress,
         orderItems: orderItems,
         orderAmount: cartTotalAmount,
-        orderStatus: "Orden Recibida",
+        depositAmount: depositAmount,
+        remainingAmount: remainingAmount,
+        orderStatus: "pending",
+        paymentStatus: "pending",
         createdAt: Timestamp.now().toDate(),
         lastUpdatedBy: "cliente",
         hasUnreadAdminMessage: true,
         hasUnreadClientMessage: false,
       };
 
-      await addDoc(collection(db, "orders"), orderData);
+      const orderRef = await addDoc(collection(db, "orders"), orderData);
+      const orderId = orderRef.id;
 
+      // Guardar dirección completa en perfil de usuario
       await setDoc(
         doc(db, "users", firebaseUser.uid),
         {
           name: shippingAddress.name,
           mail: shippingAddress.mail,
           phone: shippingAddress.phone,
+          address: shippingAddress.address,
+          city: shippingAddress.city,
+          postalCode: shippingAddress.postalCode,
+          province: shippingAddress.province,
+          notes: shippingAddress.notes,
         },
         { merge: true }
       );
 
+      // Crear preferencia de pago en MercadoPago
+      const paymentResponse = await fetch("/api/mercadopago/create-preference", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          orderId,
+          items: orderItems,
+          totalAmount: depositAmount, // Solo cobrar la seña inicialmente
+          fullAmount: cartTotalAmount, // Guardar el monto total para referencia
+          shippingAddress,
+          userEmail: firebaseUser.email,
+        }),
+      });
+
+      if (!paymentResponse.ok) {
+        throw new Error("Error al crear la preferencia de pago");
+      }
+
+      const paymentData = await paymentResponse.json();
+
+      // Mostrar mensaje si es modo desarrollo
+      if (paymentData.isDevelopment) {
+        NotiflixSuccess("Modo desarrollo: Simulando pago con MercadoPago");
+      }
+
+      // Limpiar carrito (el pago se procesará después)
       dispatch(CLEAR_CART());
-      NotiflixSuccess("¡Orden realizada con éxito!");
-      router.push("/checkout/confirmation");
+
+      // Redirigir a MercadoPago (o simulación)
+      window.location.href = paymentData.initPoint;
+
     } catch (error) {
-      console.error("Error al guardar la orden:", error);
-      NotiflixFailure("Hubo un problema al procesar tu orden.");
+      console.error("Error al procesar la orden:", error);
+      NotiflixFailure("Hubo un problema al procesar tu orden. Por favor intenta nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -469,13 +516,39 @@ const CheckoutPage: React.FC = () => {
                   <span className="text-zinc-900 dark:text-zinc-100">${Math.round(taxAmount).toLocaleString("es-AR")}</span>
                 </div>
 
-                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3">
-                  <div className="flex justify-between text-lg font-bold">
-                    <span className="text-zinc-900 dark:text-zinc-100">Total</span>
+                <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 space-y-2">
+                  <div className="flex justify-between text-base font-semibold">
+                    <span className="text-zinc-900 dark:text-zinc-100">Total del pedido</span>
                     <span className="text-zinc-900 dark:text-zinc-100">
                       ${Math.round(cartTotalAmount + shippingCost + taxAmount).toLocaleString("es-AR")}
                     </span>
                   </div>
+
+                  {/* Seña (50%) */}
+                  <div className="flex justify-between text-sm bg-blue-50 dark:bg-blue-900/20 p-2 rounded">
+                    <span className="text-blue-700 dark:text-blue-300 font-medium">Seña requerida (50%)</span>
+                    <span className="text-blue-800 dark:text-blue-200 font-bold">
+                      ${depositAmount.toLocaleString("es-AR")}
+                    </span>
+                  </div>
+
+                  {/* Restante */}
+                  <div className="flex justify-between text-sm text-zinc-600 dark:text-zinc-400">
+                    <span>Restante al finalizar</span>
+                    <span className="font-medium">
+                      ${remainingAmount.toLocaleString("es-AR")}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Información sobre pagos */}
+                <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-3">
+                  <p className="text-amber-800 dark:text-amber-200 text-xs font-medium mb-1">
+                    💰 Sistema de pagos
+                  </p>
+                  <p className="text-amber-700 dark:text-amber-300 text-xs">
+                    Pagás el 50% ahora para confirmar tu pedido. El resto se paga al finalizar el trabajo.
+                  </p>
                 </div>
 
                 {cartTotalAmount >= 10000 && (

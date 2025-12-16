@@ -2,8 +2,8 @@ import {
   onDocumentCreated,
   onDocumentUpdated,
 } from "firebase-functions/v2/firestore";
-import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
+import * as nodemailer from "nodemailer";
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -12,12 +12,8 @@ const messaging = admin.messaging();
 export const onNewOrderCreated = onDocumentCreated(
   "orders/{orderId}",
   async (event) => {
-    const snap = event.data;
-    if (!snap) {
-      logger.log("No data associated with the event");
-      return;
-    }
-    const orderData = snap.data();
+    const orderData = event.data?.data();
+    if (!orderData) return;
     const clientName = orderData.shippingAddress.name;
     const orderAmount = orderData.orderAmount;
 
@@ -26,7 +22,7 @@ export const onNewOrderCreated = onDocumentCreated(
       const adminUIDs = adminsSnapshot.docs.map((doc) => doc.id);
 
       if (adminUIDs.length === 0) {
-        logger.log("No admins found.");
+        console.log("No admins found.");
         return;
       }
 
@@ -43,11 +39,11 @@ export const onNewOrderCreated = onDocumentCreated(
       });
 
       if (allTokens.length === 0) {
-        logger.log("No FCM tokens found.");
+        console.log("No FCM tokens found.");
         return;
       }
 
-      logger.log(
+      console.log(
         `Found ${allTokens.length} tokens. Attempting to send notification.`
       );
 
@@ -60,7 +56,7 @@ export const onNewOrderCreated = onDocumentCreated(
         },
         webpush: {
           fcmOptions: {
-            link: "https://itapimpresiones.vercel.app/admin/orders",
+            link: process.env.FRONTEND_URL || "http://localhost:3000/admin/orders",
           },
         },
         tokens: allTokens,
@@ -68,7 +64,7 @@ export const onNewOrderCreated = onDocumentCreated(
 
       const response = await messaging.sendEachForMulticast(message);
 
-      logger.log(response.successCount + " messages were sent successfully");
+      console.log(response.successCount + " messages were sent successfully");
 
       if (response.failureCount > 0) {
         const tokensToRemove: Promise<any>[] = [];
@@ -76,12 +72,12 @@ export const onNewOrderCreated = onDocumentCreated(
           if (!resp.success) {
             const error = resp.error!;
             const failedToken = allTokens[idx];
-            logger.error("Failure sending notification to", failedToken, error);
+            console.error("Failure sending notification to", failedToken, error);
             if (
               error.code === "messaging/invalid-registration-token" ||
               error.code === "messaging/registration-token-not-registered"
             ) {
-              logger.log("Identified invalid token for deletion:", failedToken);
+              console.log("Identified invalid token for deletion:", failedToken);
               adminUIDs.forEach((uid) => {
                 const tokenRef = db
                   .collection("fcmTokens")
@@ -96,16 +92,15 @@ export const onNewOrderCreated = onDocumentCreated(
 
         if (tokensToRemove.length > 0) {
           await Promise.all(tokensToRemove);
-          logger.log(
+          console.log(
             `${tokensToRemove.length} invalid tokens have been cleaned up.`
           );
         }
       }
     } catch (error) {
-      logger.error("Critical error in onNewOrderCreated function:", error);
+      console.error("Critical error in onNewOrderCreated function:", error);
     }
-  }
-);
+  });
 
 export const onOrderStatusUpdated = onDocumentUpdated(
   "orders/{orderId}",
@@ -129,7 +124,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
     const newStatus = afterData.orderStatus;
     const orderId = event.params.orderId;
 
-    logger.log(
+    console.log(
       `Status changed for order ${orderId} to "${newStatus}". Notifying user ${userId}.`
     );
 
@@ -141,7 +136,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
         .get();
 
       if (tokensSnapshot.empty) {
-        logger.log(`No FCM tokens found for user ${userId}.`);
+        console.log(`No FCM tokens found for user ${userId}.`);
         return;
       }
 
@@ -157,7 +152,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
         },
         webpush: {
           fcmOptions: {
-            link: `https://itapimpresiones.vercel.app/orders/${orderId}`,
+            link: `${process.env.FRONTEND_URL || "http://localhost:3000"}/orders/${orderId}`,
           },
         },
         tokens: tokens,
@@ -165,7 +160,7 @@ export const onOrderStatusUpdated = onDocumentUpdated(
 
       const response = await messaging.sendEachForMulticast(message);
 
-      logger.log(
+      console.log(
         response.successCount +
         ` status update messages were sent successfully to user ${userId}.`
       );
@@ -194,13 +189,12 @@ export const onOrderStatusUpdated = onDocumentUpdated(
         await Promise.all(tokensToRemove);
       }
     } catch (error) {
-      logger.error(
+      console.error(
         `Error sending status update notification to user ${userId}:`,
         error
       );
     }
-  }
-);
+  });
 
 export const onNewChatMessage = onDocumentCreated(
   "orders/{orderId}/messages/{messageId}",
@@ -208,22 +202,19 @@ export const onNewChatMessage = onDocumentCreated(
     const messageData = event.data?.data();
     const orderId = event.params.orderId;
 
-    if (!messageData) {
-      logger.log("No message data found.");
-      return;
-    }
+    if (!messageData) return;
 
     try {
       const orderDoc = await db.collection("orders").doc(orderId).get();
       if (!orderDoc.exists) {
-        logger.log(`Order ${orderId} not found.`);
+        console.log(`Order ${orderId} not found.`);
         return;
       }
       const orderData = orderDoc.data()!;
 
       if (messageData.sender === "usuario") {
         const clientName = orderData.shippingAddress.name;
-        logger.log(
+        console.log(
           `New message from client ${clientName} on order ${orderId}. Notifying admins.`
         );
 
@@ -253,7 +244,7 @@ export const onNewChatMessage = onDocumentCreated(
             },
             webpush: {
               fcmOptions: {
-                link: `https://itapimpresiones.vercel.app/admin/orders/${orderId}`,
+                link: `${process.env.FRONTEND_URL || "http://localhost:3000"}/admin/orders/${orderId}`,
               },
             },
             tokens: allAdminTokens,
@@ -262,7 +253,7 @@ export const onNewChatMessage = onDocumentCreated(
         }
       } else if (messageData.sender === "tienda") {
         const userId = orderData.userID;
-        logger.log(
+        console.log(
           `New message from store on order ${orderId}. Notifying user ${userId}.`
         );
 
@@ -272,7 +263,7 @@ export const onNewChatMessage = onDocumentCreated(
           .collection("tokens")
           .get();
         if (tokensSnapshot.empty) {
-          logger.log(`No FCM tokens found for user ${userId}.`);
+          console.log(`No FCM tokens found for user ${userId}.`);
           return;
         }
 
@@ -289,7 +280,7 @@ export const onNewChatMessage = onDocumentCreated(
             },
             webpush: {
               fcmOptions: {
-                link: `https://itapimpresiones.vercel.app/orders/${orderId}`,
+                link: `${process.env.FRONTEND_URL || "http://localhost:3000"}/orders/${orderId}`,
               },
             },
             tokens: userTokens,
@@ -298,23 +289,18 @@ export const onNewChatMessage = onDocumentCreated(
         }
       }
     } catch (error) {
-      logger.error(
+      console.error(
         `Error sending chat notification for order ${orderId}:`,
         error
       );
     }
-  }
-);
+  });
 export const onNewContactSubmission = onDocumentCreated(
   "contact_submissions/{submissionId}",
   async (event) => {
     const submissionData = event.data?.data();
+    if (!submissionData) return;
     const submissionId = event.params.submissionId;
-
-    if (!submissionData) {
-      logger.log("No submission data found.");
-      return;
-    }
 
     const { name, formType } = submissionData;
     const formTypeLabel =
@@ -330,7 +316,7 @@ export const onNewContactSubmission = onDocumentCreated(
       const adminUIDs = adminsSnapshot.docs.map((doc) => doc.id);
 
       if (adminUIDs.length === 0) {
-        logger.log("No admins found in 'admins' collection.");
+        console.log("No admins found in 'admins' collection.");
         return;
       }
 
@@ -348,7 +334,7 @@ export const onNewContactSubmission = onDocumentCreated(
       });
 
       if (allTokens.length === 0) {
-        logger.log("No FCM tokens found for admins.");
+        console.log("No FCM tokens found for admins.");
         return;
       }
 
@@ -360,14 +346,14 @@ export const onNewContactSubmission = onDocumentCreated(
         },
         webpush: {
           fcmOptions: {
-            link: "https://itapimpresiones.vercel.app/admin/submissions",
+            link: `${process.env.FRONTEND_URL || "http://localhost:3000"}/admin/submissions`,
           },
         },
         tokens: allTokens,
       };
 
       const response = await messaging.sendEachForMulticast(message);
-      logger.log(
+      console.log(
         `${response.successCount} notifications sent for new submission ${submissionId}`
       );
 
@@ -398,7 +384,169 @@ export const onNewContactSubmission = onDocumentCreated(
         await Promise.all(tokensToRemove);
       }
     } catch (error) {
-      logger.error("Error sending contact submission notification:", error);
+      console.error("Error sending contact submission notification:", error);
     }
-  }
-);
+  });
+
+// Email configuration
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// Email functions
+export const sendOrderConfirmationEmail = onDocumentCreated(
+  "orders/{orderId}",
+  async (event) => {
+    const orderData = event.data?.data();
+    if (!orderData) return;
+    const orderId = event.params.orderId;
+    const clientEmail = orderData.shippingAddress.email;
+    const clientName = orderData.shippingAddress.name;
+    const orderAmount = orderData.orderAmount;
+
+    const mailOptions = {
+      from: `"Itap Impresiones" <${process.env.EMAIL_USER}>`,
+      to: clientEmail,
+      subject: `Confirmación de Pedido #${orderId.slice(0, 6)}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333;">¡Gracias por tu pedido, ${clientName}!</h1>
+          <p>Tu orden ha sido recibida exitosamente.</p>
+          <div style="background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3>Detalles del Pedido</h3>
+            <p><strong>Número de Orden:</strong> ${orderId.slice(0, 6)}</p>
+            <p><strong>Total:</strong> $${orderAmount.toLocaleString('es-AR')}</p>
+            <p><strong>Estado:</strong> ${orderData.orderStatus}</p>
+          </div>
+          <p>Te mantendremos informado sobre el progreso de tu pedido por email.</p>
+          <p>Si tienes alguna pregunta, puedes responder a este email.</p>
+          <br>
+          <p>Saludos,<br>Equipo de Itap Impresiones</p>
+        </div>
+      `,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Order confirmation email sent to ${clientEmail}`);
+    } catch (error) {
+      console.error("Error sending order confirmation email:", error);
+    }
+  });
+
+export const sendOrderStatusUpdateEmail = onDocumentUpdated(
+  "orders/{orderId}",
+  async (event) => {
+    const beforeData = event.data?.before.data();
+    const afterData = event.data?.after.data();
+
+    if (
+      !beforeData ||
+      !afterData ||
+      beforeData.orderStatus === afterData.orderStatus
+    ) {
+      return;
+    }
+
+    if (afterData.lastUpdatedBy !== "tienda") {
+      return;
+    }
+
+    const orderId = event.params.orderId;
+    const clientEmail = afterData.shippingAddress.email;
+    const clientName = afterData.shippingAddress.name;
+    const newStatus = afterData.orderStatus;
+
+    const mailOptions = {
+      from: `"Itap Impresiones" <${process.env.EMAIL_USER}>`,
+      to: clientEmail,
+      subject: `Actualización de tu Pedido #${orderId.slice(0, 6)}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #333;">Actualización de tu Pedido</h1>
+          <p>Hola ${clientName},</p>
+          <p>Tu pedido ha cambiado de estado.</p>
+          <div style="background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px;">
+            <h3>Nuevo Estado</h3>
+            <p><strong>Número de Orden:</strong> ${orderId.slice(0, 6)}</p>
+            <p><strong>Estado Actual:</strong> ${newStatus}</p>
+          </div>
+          <p>Puedes revisar el detalle completo de tu pedido en: <a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/orders/${orderId}">Ver Pedido</a></p>
+          <br>
+          <p>Saludos,<br>Equipo de Itap Impresiones</p>
+        </div>
+      `,
+    };
+
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Order status update email sent to ${clientEmail} for order ${orderId}`);
+    } catch (error) {
+      console.error("Error sending order status update email:", error);
+    }
+  });
+
+export const sendLowStockEmail = onDocumentUpdated(
+  "products/{productId}",
+  async (event) => {
+    const beforeData = event.data?.before.data();
+    const afterData = event.data?.after.data();
+
+    if (!beforeData || !afterData) return;
+
+    const productId = event.params.productId;
+    const productName = afterData.name || "Producto";
+    const currentStock = afterData.stock || 0;
+    const previousStock = beforeData.stock || 0;
+
+    // Send email if stock drops below 5 and was above 5 before
+    if (currentStock <= 5 && previousStock > 5) {
+      try {
+        const adminsSnapshot = await db.collection("admins").get();
+        const adminEmails: string[] = [];
+
+        for (const doc of adminsSnapshot.docs) {
+          const adminData = doc.data();
+          if (adminData.email) {
+            adminEmails.push(adminData.email);
+          }
+        }
+
+        if (adminEmails.length === 0) {
+          console.log("No admin emails found for low stock notification.");
+          return;
+        }
+
+        const mailOptions = {
+          from: `"Sistema Itap Impresiones" <${process.env.EMAIL_USER}>`,
+          to: adminEmails.join(","),
+          subject: `⚠️ Alerta de Stock Bajo - ${productName}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h1 style="color: #ff6b6b;">⚠️ Alerta de Stock Bajo</h1>
+              <p>El siguiente producto tiene stock bajo:</p>
+              <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 20px; margin: 20px 0; border-radius: 5px;">
+                <h3>${productName}</h3>
+                <p><strong>ID del Producto:</strong> ${productId}</p>
+                <p><strong>Stock Actual:</strong> ${currentStock}</p>
+                <p><strong>Stock Anterior:</strong> ${previousStock}</p>
+              </div>
+              <p>Por favor, revisa el inventario y considera reponer stock.</p>
+              <p><a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/admin/products" style="background: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ver Productos</a></p>
+              <br>
+              <p>Sistema Automático,<br>Itap Impresiones</p>
+            </div>
+          `,
+        };
+
+        await transporter.sendMail(mailOptions);
+        console.log(`Low stock email sent for product ${productName} (${productId})`);
+      } catch (error) {
+        console.error("Error sending low stock email:", error);
+      }
+    }
+  });
