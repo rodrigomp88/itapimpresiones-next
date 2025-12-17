@@ -11,7 +11,7 @@ const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <SessionProvider>
       <ReduxProvider store={store}>
-        <ThemeProvider defaultTheme="system" storageKey="itap-theme">
+        <ThemeProvider defaultTheme="light" storageKey="itap-theme">
           <PreloadResources />
           {children}
         </ThemeProvider>

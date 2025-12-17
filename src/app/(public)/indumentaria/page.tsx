@@ -9,7 +9,7 @@ const ApparelPage = () => {
                 <div className="px-4 sm:px-6 lg:px-12 py-8 lg:py-12">
                     <div className="@container">
                         <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                            <div className="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center text-center px-6 sm:px-12 lg:px-16 py-16" style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkf8ftoyMDQFE4hvxVQRbUHtg3KFAwua69-VWr6O8dQ8UampxOJbkrKMx8vY1G8x6lmGKFxnEGih7GeiAL4vOF2Z_hSA8XV0lp7yQGzzVtVhjv3saJ0ohrWGBiSH0V0efgVuIy2rDtcoRLLbcVI-xT_8DveDm3BMlX7r9jXMmj2ne6mybgZI5Ev64kxH34pwqxsZt2ptcLYzUsuczCmkWJvpLZxHv-dSV1jmfqsPEjJCmAGbURuM5bO3-kZC49QQzIfFjEAZ5mOxE")' }}>
+                            <div className="flex min-h-[500px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center text-center px-6 sm:px-12 lg:px-16 py-16" style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkf8ftoyMDQFE4hvxVQRbUHtg3KFAwua69-VWr6O8dQ8UampxOJbkrKMx8vY1G8x6lmGKFxnEGih7GeiAL4vOF2Z_hSA8XV0lp7yQGzzVtVhjv3saJ0ohrWGBiSH0V0efgVuIy2rDtcoRLLbcVI-xT_8DveDm3BMlX7r9jXMmj2ne6mybgZI5Ev64kxH34pwqxsZt2ptcLYzUsuczCmkWJvpLZxHv-dSV1jmfqsPEjJCmAGbURuM5bO3-kZC49QQzIfFjEAZ5mOxE")' }}>
                                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900/20 to-gray-900/10 z-0"></div>
                                 <div className="relative z-10 flex flex-col gap-6 max-w-4xl mx-auto">
                                     <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
@@ -230,7 +230,7 @@ const ApparelPage = () => {
                                     Nombre de la Empresa
                                 </label>
                                 <input
-                                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-black shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2"
+                                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
                                     id="company-name"
                                     type="text"
                                 />
@@ -244,7 +244,7 @@ const ApparelPage = () => {
                                         Email
                                     </label>
                                     <input
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-black shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2"
+                                        className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
                                         id="email"
                                         type="email"
                                     />
@@ -257,7 +257,7 @@ const ApparelPage = () => {
                                         Teléfono
                                     </label>
                                     <input
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-black shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2"
+                                        className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
                                         id="phone"
                                         type="tel"
                                     />
@@ -272,7 +272,7 @@ const ApparelPage = () => {
                                         Tipo de Producto
                                     </label>
                                     <select
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-black shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2"
+                                        className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
                                         id="product-type"
                                     >
                                         <option>Remeras</option>
@@ -290,7 +290,7 @@ const ApparelPage = () => {
                                         Cantidad Estimada
                                     </label>
                                     <input
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-black shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2"
+                                        className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
                                         id="quantity"
                                         type="number"
                                     />
@@ -304,13 +304,13 @@ const ApparelPage = () => {
                                     Adjuntar logo (opcional)
                                 </label>
                                 <input
-                                    className="mt-1 block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                                    className="mt-1 block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400"
                                     id="logo-upload"
                                     type="file"
                                 />
                             </div>
                             <button
-                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors cursor-pointer"
+                                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer"
                                 type="submit"
                             >
                                 Enviar Solicitud

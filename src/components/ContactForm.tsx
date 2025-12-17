@@ -8,6 +8,8 @@ interface ContactFormProps {
     formType: "services" | "bags" | "apparel";
 }
 
+const inputClasses = "w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-900 dark:text-white";
+
 const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
@@ -22,7 +24,6 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
         const data = Object.fromEntries(formData.entries());
         data.formType = formType;
 
-        // Validar con ZOD
         const validationResult = contactFormSchema.safeParse(data);
         if (!validationResult.success) {
             const errors: Partial<Record<keyof ContactFormData, string>> = {};
@@ -35,23 +36,18 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
             return;
         }
 
-        // Limpiar errores
         setValidationErrors({});
 
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data),
             });
 
             if (response.ok) {
                 setSubmitStatus("success");
-                if (e.currentTarget) {
-                    e.currentTarget.reset();
-                }
+                if (e.currentTarget) e.currentTarget.reset();
             } else {
                 setSubmitStatus("error");
             }
@@ -69,119 +65,58 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
             className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 bg-white dark:bg-gray-900 p-8 rounded-xl border border-gray-200 dark:border-gray-700"
         >
             <div className="sm:col-span-2">
-                <label
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                    htmlFor="name"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="name">
                     Nombre
                 </label>
-                <input
-                    className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                />
-                {validationErrors.name && (
-                    <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
-                )}
+                <input className={inputClasses} id="name" name="name" type="text" required />
+                {validationErrors.name && <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>}
             </div>
             <div>
-                <label
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                    htmlFor="email"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="email">
                     Email
                 </label>
-                <input
-                    className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                />
-                {validationErrors.email && (
-                    <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>
-                )}
+                <input className={inputClasses} id="email" name="email" type="email" required />
+                {validationErrors.email && <p className="text-red-500 text-sm mt-1">{validationErrors.email}</p>}
             </div>
             <div>
-                <label
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                    htmlFor="phone"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="phone">
                     Teléfono
                 </label>
-                <input
-                    className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                />
+                <input className={inputClasses} id="phone" name="phone" type="tel" />
             </div>
             {formType === "services" && (
                 <>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="service"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="service">
                             Tipo de Servicio
                         </label>
-                        <select
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="service"
-                            name="service"
-                        >
+                        <select className={inputClasses} id="service" name="service">
                             <option>Serigrafía</option>
                             <option>DTF</option>
                             <option>No estoy seguro</option>
                         </select>
                     </div>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="quantity"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="quantity">
                             Cantidad (aprox.)
                         </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                        />
+                        <input className={inputClasses} id="quantity" name="quantity" type="number" />
                     </div>
                 </>
             )}
             {formType === "bags" && (
                 <>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="quantity"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="quantity">
                             Cantidad
                         </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                            placeholder="ej., 500"
-                        />
+                        <input className={inputClasses} id="quantity" name="quantity" type="number" placeholder="ej., 500" />
                     </div>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="bagSize"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="bagSize">
                             Tamaño de Bolsa
                         </label>
-                        <select
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="bagSize"
-                            name="bagSize"
-                        >
+                        <select className={inputClasses} id="bagSize" name="bagSize">
                             <option>Selecciona un tamaño...</option>
                             <option>Estándar (30x40 cm)</option>
                             <option>Grande (40x50 cm con fuelle)</option>
@@ -194,17 +129,10 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
             {formType === "apparel" && (
                 <>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="productType"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="productType">
                             Tipo de Producto
                         </label>
-                        <select
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="productType"
-                            name="productType"
-                        >
+                        <select className={inputClasses} id="productType" name="productType">
                             <option>Remeras</option>
                             <option>Buzos</option>
                             <option>Gorras</option>
@@ -212,49 +140,27 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
                         </select>
                     </div>
                     <div>
-                        <label
-                            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                            htmlFor="quantity"
-                        >
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="quantity">
                             Cantidad
                         </label>
-                        <input
-                            className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                            id="quantity"
-                            name="quantity"
-                            type="number"
-                        />
+                        <input className={inputClasses} id="quantity" name="quantity" type="number" />
                     </div>
                 </>
             )}
             <div className="sm:col-span-2">
-                <label
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                    htmlFor="message"
-                >
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="message">
                     Describe tu proyecto
                 </label>
-                <textarea
-                    className="w-full rounded-md border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark focus:ring-primary focus:border-primary p-2"
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                ></textarea>
-                {validationErrors.message && (
-                    <p className="text-red-500 text-sm mt-1">{validationErrors.message}</p>
-                )}
+                <textarea className={inputClasses} id="message" name="message" rows={4} required></textarea>
+                {validationErrors.message && <p className="text-red-500 text-sm mt-1">{validationErrors.message}</p>}
             </div>
             {formType === "services" && (
                 <div className="sm:col-span-2">
-                    <label
-                        className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
-                        htmlFor="file-upload"
-                    >
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1" htmlFor="file-upload">
                         Adjuntar archivo (opcional)
                     </label>
                     <input
-                        className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
+                        className="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400 cursor-pointer"
                         id="file-upload"
                         name="file-upload"
                         type="file"
@@ -277,7 +183,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
             )}
             <div className="sm:col-span-2">
                 <motion.button
-                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     type="submit"
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
