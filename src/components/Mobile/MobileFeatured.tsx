@@ -180,19 +180,6 @@ const MobileFeatured = () => {
           </motion.div>
         ))}
       </div>
-      
-      <div className="mt-6 text-center">
-        <Link href="/tienda">
-          <motion.button 
-            className="w-full bg-secondary hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-colors flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <span className="material-icons-outlined text-lg">storefront</span>
-            Ver Toda la Tienda
-          </motion.button>
-        </Link>
-      </div>
     </section>
   );
 };
