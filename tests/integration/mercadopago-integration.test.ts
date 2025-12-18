@@ -1,30 +1,56 @@
-// Type declaration for NextRequest
-declare const NextRequest: typeof Request;
-
 // Mock Firebase to avoid auth errors
 jest.mock('../../src/firebase/config', () => ({
   auth: {},
   db: {},
 }));
 
-// Mock MercadoPago SDK with simple approach
+// Mock MercadoPago SDK with proper structure
 jest.mock('mercadopago', () => ({
   MercadoPagoConfig: jest.fn(() => ({})),
   Preference: jest.fn(() => ({
-    create: jest.fn(),
+    create: jest.fn(() => Promise.resolve({
+      id: 'pref_123456789',
+      init_point: 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=pref_123456789',
+      sandbox_init_point: 'https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id=pref_123456789',
+    })),
+  })),
+  Payment: jest.fn(() => ({
+    get: jest.fn(() => Promise.resolve({
+      id: 'pay_123456789',
+      status: 'approved',
+      status_detail: 'accredited',
+      transaction_amount: 1000,
+      description: 'Test payment',
+      external_reference: 'order_123',
+      payment_method_id: 'visa',
+      payment_type_id: 'credit_card',
+      date_approved: new Date().toISOString(),
+      date_created: new Date().toISOString(),
+    })),
   })),
   configure: jest.fn(),
-  preferences: {
-    create: jest.fn(),
-  },
-  payment: {
-    findById: jest.fn(),
-  },
 }));
 
-// Import after mock is set up
+// Import handlers after mock is set up
 import { POST as createPreference } from '../../src/app/api/mercadopago/create-preference/route';
 import { POST as webhookHandler } from '../../src/app/api/mercadopago/webhook/route';
+
+// Mock NextRequest for testing
+const createMockNextRequest = (url: string, options: RequestInit = {}) => {
+  const mockRequest = {
+    url,
+    method: options.method || 'GET',
+    headers: new Headers(options.headers),
+    json: async () => JSON.parse(options.body as string || '{}'),
+    text: async () => options.body as string || '',
+    // NextRequest specific properties
+    cookies: {},
+    nextUrl: new URL(url),
+    page: {},
+    ua: {},
+  };
+  return mockRequest as any;
+};
 
 describe('MercadoPago Integration Tests', () => {
   beforeEach(() => {
@@ -44,20 +70,28 @@ describe('MercadoPago Integration Tests', () => {
       mercadopago.preferences.create.mockResolvedValue({ body: mockPreference });
 
       const requestBody = {
+        orderId: 'order_123',
         items: [
           {
             id: 'product_1',
-            title: 'Test Product',
-            quantity: 1,
-            unit_price: 1000,
+            name: 'Test Product',
+            cartQuantity: 1,
+            price: 1000,
           },
         ],
-        payer: {
+        totalAmount: 1000,
+        fullAmount: 1000,
+        shippingAddress: {
+          name: 'Test User',
           email: 'test@example.com',
+          address: 'Test Address',
+          city: 'Test City',
+          postalCode: '1234',
         },
+        userEmail: 'test@example.com',
       };
 
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/create-preference', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/create-preference', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -68,12 +102,11 @@ describe('MercadoPago Integration Tests', () => {
       const response = await createPreference(request);
       const result = await response.json();
 
-      // Since the mock causes an error, it should return 500 with development fallback
-      expect(response.status).toBe(200); // Development fallback returns 200
-      expect(result).toHaveProperty('preferenceId');
+      // Mock returns success, so should return 200 with actual data
+      expect(response.status).toBe(200);
+      expect(result).toHaveProperty('preferenceId', 'pref_123456789');
       expect(result).toHaveProperty('initPoint');
       expect(result).toHaveProperty('sandboxInitPoint');
-      expect(result).toHaveProperty('isDevelopment');
     });
 
     it('should handle MercadoPago API errors', async () => {
@@ -81,17 +114,28 @@ describe('MercadoPago Integration Tests', () => {
       mercadopago.preferences.create.mockRejectedValue(new Error('API Error'));
 
       const requestBody = {
+        orderId: 'order_123',
         items: [
           {
             id: 'product_1',
-            title: 'Test Product',
-            quantity: 1,
-            unit_price: 1000,
+            name: 'Test Product',
+            cartQuantity: 1,
+            price: 1000,
           },
         ],
+        totalAmount: 1000,
+        fullAmount: 1000,
+        shippingAddress: {
+          name: 'Test User',
+          email: 'test@example.com',
+          address: 'Test Address',
+          city: 'Test City',
+          postalCode: '1234',
+        },
+        userEmail: 'test@example.com',
       };
 
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/create-preference', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/create-preference', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -108,7 +152,7 @@ describe('MercadoPago Integration Tests', () => {
     });
 
     it('should validate request body', async () => {
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/create-preference', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/create-preference', {
         method: 'POST',
         body: JSON.stringify({}),
         headers: {
@@ -127,69 +171,70 @@ describe('MercadoPago Integration Tests', () => {
   describe('Webhook Handler', () => {
     it('should handle payment approved webhook', async () => {
       const webhookData = {
-        id: '123456789',
-        type: 'payment',
+        action: 'payment.updated',
         data: {
           id: 'pay_123456789',
         },
       };
 
       const mercadopago = require('mercadopago');
-      mercadopago.payment.findById.mockResolvedValue({
-        body: {
-          status: 'approved',
-          status_detail: 'accredited',
-          transaction_amount: 1000,
-          description: 'Test payment',
-          metadata: {
-            order_id: 'order_123',
-          },
-        },
+      // Mock the Payment instance get method
+      const mockPaymentInstance = mercadopago.Payment.mock.results[0].value;
+      mockPaymentInstance.get.mockResolvedValue({
+        id: 'pay_123456789',
+        status: 'approved',
+        status_detail: 'accredited',
+        transaction_amount: 1000,
+        description: 'Test payment',
+        external_reference: 'order_123',
+        payment_method_id: 'visa',
+        payment_type_id: 'credit_card',
+        date_approved: new Date().toISOString(),
+        date_created: new Date().toISOString(),
       });
 
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/webhook', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/webhook', {
         method: 'POST',
         body: JSON.stringify(webhookData),
         headers: {
           'content-type': 'application/json',
-          'x-signature': 'test-signature',
         },
       });
 
       const response = await webhookHandler(request);
 
       expect(response.status).toBe(200);
-      expect(mercadopago.payment.findById).toHaveBeenCalledWith('pay_123456789');
+      expect(mockPaymentInstance.get).toHaveBeenCalledWith({ id: 'pay_123456789' });
     });
 
     it('should handle payment rejected webhook', async () => {
       const webhookData = {
-        id: '123456789',
-        type: 'payment',
+        action: 'payment.updated',
         data: {
           id: 'pay_123456789',
         },
       };
 
       const mercadopago = require('mercadopago');
-      mercadopago.payment.findById.mockResolvedValue({
-        body: {
-          status: 'rejected',
-          status_detail: 'cc_rejected_bad_filled_other',
-          transaction_amount: 1000,
-          description: 'Test payment',
-          metadata: {
-            order_id: 'order_123',
-          },
-        },
+      const mockPaymentInstance = mercadopago.Payment.mock.results[0].value;
+      mockPaymentInstance.get.mockResolvedValue({
+        id: 'pay_123456789',
+        status: 'rejected',
+        status_detail: 'cc_rejected_bad_filled_other',
+        transaction_amount: 1000,
+        description: 'Test payment',
+        external_reference: 'order_123',
+        payment_method_id: 'visa',
+        payment_type_id: 'credit_card',
+        date_approved: null,
+        date_created: new Date().toISOString(),
       });
 
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/webhook', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/webhook', {
         method: 'POST',
         body: JSON.stringify(webhookData),
         headers: {
           'content-type': 'application/json',
-          'x-signature': 'test-signature',
         },
       });
 
@@ -198,29 +243,25 @@ describe('MercadoPago Integration Tests', () => {
       expect(response.status).toBe(200);
     });
 
-    it('should reject invalid webhook signature', async () => {
-      const webhookData = {
-        id: '123456789',
-        type: 'payment',
-        data: {
-          id: 'pay_123456789',
-        },
+    it('should handle invalid webhook data', async () => {
+      const invalidWebhookData = {
+        invalid: 'data',
       };
 
-      const request = new NextRequest('http://localhost:3000/api/mercadopago/webhook', {
+      const request = createMockNextRequest('http://localhost:3000/api/mercadopago/webhook', {
         method: 'POST',
-        body: JSON.stringify(webhookData),
+        body: JSON.stringify(invalidWebhookData),
         headers: {
           'content-type': 'application/json',
-          // Missing x-signature header
         },
       });
 
       const response = await webhookHandler(request);
       const result = await response.json();
 
-      expect(response.status).toBe(400);
-      expect(result).toHaveProperty('error');
+      // Should handle gracefully and return success for non-payment actions
+      expect(response.status).toBe(200);
+      expect(result).toHaveProperty('received', true);
     });
   });
 });

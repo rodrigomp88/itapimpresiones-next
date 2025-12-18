@@ -31,12 +31,12 @@ const Home = () => {
   return (
     <div className="font-display bg-white dark:bg-slate-900 text-slate-900 dark:text-white antialiased">
       <main className="flex-1">
-        {/* Hero */}
+        {/* Carrusel */}
         <section className="w-full">
           {isMobile ? <MobileHero /> : <HomeBanners />}
         </section>
 
-        {/* Destacados */}
+        {/* Novedades */}
         <section className="w-full py-20 bg-white dark:bg-slate-900">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-16">
@@ -148,16 +148,22 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Logos clientes */}
+        {/* Testimonios */}
         <section className="w-full py-20 bg-slate-50 dark:bg-slate-950">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold mb-12">Confían en Nosotros</h2>
-            <div className="flex flex-wrap justify-center gap-12 opacity-60">
+            <div className="flex flex-wrap justify-center gap-16 opacity-60">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3emsY4lBNr1yqarGKV3rvx9fYmXEXxb9Yk603FobSlfS9V7zy7J4EPTVMfXD9VH7HVeT8TI6akXW_YabpF4-YY4QUNHHbb6F1_pvDPZZ1Wd1-WytYKhHi9AntYTO9YpddWyV68lEOgMeU6Nqa5IDtCYlH2aRrb1kOv8-qqfhbh6PNa6q2DU6FdSO2YQ5mQFzX7XlT_wFy9F7aAEICUxAsW3VeitKwknQIf8x9YNkzSrMHnons848u-cylZNp7AJfQFujy-ursVLM"
-                alt="Cliente"
                 width={150}
                 height={40}
+                alt="Client Logo 1"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3emsY4lBNr1yqarGKV3rvx9fYmXEXxb9Yk603FobSlfS9V7zy7J4EPTVMfXD9VH7HVeT8TI6akXW_YabpF4-YY4QUNHHbb6F1_pvDPZZ1Wd1-WytYKhHi9AntYTO9YpddWyV68lEOgMeU6Nqa5IDtCYlH2aRrb1kOv8-qqfhbh6PNa6q2DU6FdSO2YQ5mQFzX7XlT_wFy9F7aAEICUxAsW3VeitKwknQIf8x9YNkzSrMHnons848u-cylZNp7AJfQFujy-ursVLM"
+              />
+              <Image
+                width={150}
+                height={40}
+                alt="Client Logo 2"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrON91xhkk6R4pw7QVF9uftO1MY1-fHa7eFOYpJ9pvJm0jfPG9WkOJWeqIQWJ-_Kid61ie7N1j1xuZVLBf86UJe84aWaF-JwAvkRrDpAt70sUcyQmGrTpXACEIZhU_st0hRX-CcTkxM0BOEz-SxXs1oZ-MTaWopWhsweEdnOawbfAzClimUO6VW8no8Xl5BgaVBxHmN8A_gGAhSx140U6enGZ4ad9XN5FWBRzri3FX25VQTLtVoSNZxnsd1ZVhSbPBb5O1ct"
               />
             </div>
           </div>

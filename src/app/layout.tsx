@@ -25,6 +25,7 @@ import PreloadResources from "../components/PreloadResources";
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
 import PWAInstaller from "../components/PWAInstaller";
 import SkipLink from "../components/SkipLink";
+import MobileNavigationWrapper from "../components/Mobile/MobileNavigationWrapper";
 
 import { initSentry } from "../utils/sentry";
 
@@ -151,6 +152,9 @@ export default function RootLayout({
           <ServiceWorkerRegister />
           <PWAInstaller />
           {children}
+
+          {/* Navegación móvil - solo visible en dispositivos móviles */}
+          <MobileNavigationWrapper />
 
           <script
             type="application/ld+json"

@@ -26,68 +26,67 @@ const MobileNavigation = () => {
       isActive: pathname.startsWith("/tienda") || pathname.startsWith("/producto"),
     },
     {
-      icon: "shopping_cart",
-      label: "Carrito",
-      href: "/checkout",
-      isActive: pathname.startsWith("/checkout"),
-      hasBadge: true,
+      icon: "shopping_bag",
+      label: "Bolsas",
+      href: "/bolsas",
+      isActive: pathname.startsWith("/bolsas"),
+    },
+    {
+      icon: "checkroom",
+      label: "Indumentaria",
+      href: "/indumentaria",
+      isActive: pathname.startsWith("/indumentaria"),
     },
     {
       icon: "support",
       label: "Servicios",
       href: "/servicios",
       isActive: pathname.startsWith("/servicios"),
-      isSpecial: true,
-    },
-    {
-      icon: "receipt_long",
-      label: "Pedidos",
-      href: "/orders",
-      isActive: pathname.startsWith("/orders"),
     },
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 pb-safe z-50">
-      <div className="flex justify-around items-center h-16 px-1">
+    <nav className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200/50 dark:border-gray-700/50 backdrop-blur-xl shadow-2xl shadow-black/10 dark:shadow-black/20 pb-safe z-50">
+      <div className="flex justify-around items-center h-20 px-2">
         {navigationItems.map((item, index) => (
           <Link 
             key={index}
             href={item.href} 
-            className={`flex flex-col items-center justify-center w-full h-full transition-colors relative ${
-              item.isActive 
-                ? "text-primary" 
-                : "text-muted-light dark:text-muted-dark hover:text-gray-900 dark:hover:text-white"
-            }`}
+            className={`flex flex-col items-center justify-center w-full h-full transition-all duration-300 relative group ${item.isActive ? "transform -translate-y-1" : "hover:transform hover:-translate-y-0.5"}`}
           >
-            {item.isSpecial ? (
-              // Botón central especial (Servicios)
-              <motion.div
-                className="flex flex-col items-center -mt-4"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="w-11 h-11 bg-primary rounded-full flex items-center justify-center text-white shadow-lg border-4 border-surface-light dark:border-surface-dark">
-                  <span className="material-icons-outlined text-2xl">{item.icon}</span>
-                </div>
-                <span className="text-[10px] mt-1 font-medium">{item.label}</span>
-              </motion.div>
-            ) : (
-              <div className="flex flex-col items-center">
-                <span className="material-icons-outlined text-2xl relative">
+            {/* Botones regulares con diseño mejorado */}
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                {item.isActive && (
+                  <motion.div
+                    className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0 }}
+                  />
+                )}
+                <span className={`material-symbols-outlined text-2xl relative transition-all duration-300 ${
+                  item.isActive 
+                    ? "text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text drop-shadow-sm" 
+                    : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"
+                }`}>
                   {item.icon}
-                  {item.hasBadge && cartItemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-[9px] font-bold flex items-center justify-center rounded-full">
-                      {cartItemCount > 99 ? "99+" : cartItemCount}
-                    </span>
-                  )}
                 </span>
-                <span className="text-[10px] mt-1 font-medium">{item.label}</span>
               </div>
-            )}
+              <span className={`text-xs mt-1.5 font-medium transition-all duration-300 ${
+                item.isActive 
+                  ? "text-gray-800 dark:text-white" 
+                  : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"
+              }`}>
+                {item.label}
+              </span>
+            </div>
           </Link>
         ))}
       </div>
+      
+      {/* Indicador de estado activo */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-600"></div>
     </nav>
   );
 };

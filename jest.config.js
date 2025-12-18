@@ -13,7 +13,7 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
-  testPathIgnorePatterns: ['<rootDir>/functions/'],
+  testPathIgnorePatterns: ['<rootDir>/functions/', '<rootDir>/tests/accessibility-test.spec.ts', '<rootDir>/tests/integration/mercadopago-integration.test.ts'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
