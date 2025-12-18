@@ -1,0 +1,96 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    # Warm up phase
+    - duration: 60
+      arrivalRate: 5
+      name: "Warm up"
+    # Main load phase
+    - duration: 300
+      arrivalRate: 10
+      name: "Main load"
+    # Spike phase
+    - duration: 60
+      arrivalRate: 50
+      name: "Spike test"
+    # Cool down
+    - duration: 60
+      arrivalRate: 1
+      name: "Cool down"
+
+scenarios:
+  - name: "Home page load"
+    weight: 30
+    flow:
+      - get:
+          url: "/"
+
+  - name: "Product browsing"
+    weight: 25
+    flow:
+      - get:
+          url: "/tienda"
+      - think: 2
+      - get:
+          url: "/producto/test-product"
+      - think: 3
+
+  - name: "User authentication"
+    weight: 15
+    flow:
+      - get:
+          url: "/auth/login"
+      - think: 1
+      - post:
+          url: "/api/auth/[...nextauth]"
+          json:
+            action: "signin"
+            provider: "credentials"
+          expect:
+            - statusCode: 200
+
+  - name: "Cart operations"
+    weight: 15
+    flow:
+      - get:
+          url: "/checkout/cart"
+      - think: 2
+      - post:
+          url: "/api/cart/add"
+          json:
+            productId: "test-product"
+            quantity: 1
+          expect:
+            - statusCode: 200
+      - think: 1
+
+  - name: "Checkout process"
+    weight: 10
+    flow:
+      - get:
+          url: "/checkout"
+      - think: 3
+      - post:
+          url: "/api/mercadopago/create-preference"
+          json:
+            items: [
+              {
+                id: "test-product",
+                title: "Test Product",
+                quantity: 1,
+                unit_price: 1000
+              }
+            ]
+          expect:
+            - statusCode: 200
+      - think: 2
+
+  - name: "API health check"
+    weight: 5
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+
+processor: "./tests/load-test-processor.js"

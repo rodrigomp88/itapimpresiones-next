@@ -25,6 +25,7 @@ import PreloadResources from "../components/PreloadResources";
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
 import PWAInstaller from "../components/PWAInstaller";
 import SkipLink from "../components/SkipLink";
+
 import { initSentry } from "../utils/sentry";
 
 // Inicializar Sentry
@@ -140,7 +141,7 @@ export default function RootLayout({
     className={`font-display antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
     suppressHydrationWarning
   >
-    {/* Skip Link para navegación por teclado */}
+    {/* Skip Link temporalmente removido por error HMR */}
     <SkipLink />
 
     {/* Main content landmark */}

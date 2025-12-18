@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { collection, query, limit, getDocs, orderBy } from "firebase/firestore";
-import { db } from "@/firebase/config";
 import { Product, ProductImage } from "@/types";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -12,8 +10,8 @@ const getImageUrl = (img: ProductImage): string => {
   return img?.url || "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+";
 };
 
-// Fallback image URL
-const FALLBACK_IMAGE = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+";
+// Fallback image URL - Optimized placeholder
+const FALLBACK_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23F3F4F6'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='0.35em' fill='%239B9BA4' font-size='14'%3ENo Image%3C/text%3E%3C/svg%3E";
 
 const MobileFeatured = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,6 +20,10 @@ const MobileFeatured = () => {
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
+        // Dynamic imports to avoid HMR issues
+        const { collection, query, limit, getDocs, orderBy } = await import("firebase/firestore");
+        const { db } = await import("@/firebase/config");
+
         // Fetch 3 productos destacados
         const q = query(
           collection(db, "products"),
@@ -46,7 +48,7 @@ const MobileFeatured = () => {
             description: "Gorra trucker sublimada a colores, impresa en DTF.",
             images: [
               {
-                url: "https://lh3.googleusercontent.com/aida-public/AB6AXuDKqBdeW6bdw38ZKnuRGsnsh9afS05rDQo9d7rqZNZXrW2igLJ9P0B9LrlSG3p2jNmoADiL493ncx7CgF2d1Uy5m3ed5bu-8FPIw5F0vXBqUtBwhkPRxgwBcq2nVkFXGFB07J_KAhBKi1kiimMlthPvGWhf9k9ukvBH-GsHNpa3au6d5YtuRolweR8zyLvwT14IzuYHjdETnnaZGefQJGtSkm8kwMW_ZXA0MiaLBHSjI1-0zUMJcCmOoe2G98EIr7kM3AX6r7APdyCP",
+                url: "/images/carousel0.png",
                 color: "Todos"
               }
             ],
@@ -66,7 +68,7 @@ const MobileFeatured = () => {
             description: "Remeras de algodón con su logo a elección.",
             images: [
               {
-                url: "https://lh3.googleusercontent.com/aida-public/AB6AXuAA885wmVhE59GU2KU7i0BhhyIsrcNhfKsRoC81KspmOH5r60K0WKsSxi9PuZMeBpbXaeO2gQv5K88PxtVZ3OtPY2rxe5ypxQ7ChTg2AexWwxwSX66H-c2W0PE9z5vVEFlprHG0YcUYcTxTfV5yV6jreO_f8_SiaeITr6k_KL1us4LiiGOVBOKIrpKOb54ZqeFFk6SDjrZ21mSjtxvkmvMCZ8DPkjtQtsYBJ_jMp2TeRwMAkrR5l66LhC3dtKU7F6Eagkk36FA59dfa",
+                url: "/images/carousel1.png",
                 color: "Todos"
               }
             ],
@@ -86,7 +88,7 @@ const MobileFeatured = () => {
             description: "Bolsa ecológica reutilizable con estampado.",
             images: [
               {
-                url: "https://lh3.googleusercontent.com/aida-public/AB6AXuBAho6A5RxXwCwTXjueO-dsZ0QDGi0KwEBK2yUhw8AF-FvYi6si5znxwSzpYwGLaS3WqA0LMYmp7fqPEciPlY-TXugrjmyYANB_6xo755MorujdFJgr-SdvQyYLoyMOQqFgIx9uIxy7J7yhXU4SYt1-TTXnBShjfKUSnMiYqr2XuHPXgrX_L0d8gkT6dxxBKA9oOmhIzxh8Lq6ZZgBQ0jtyTZ-Y6kKVObjZeXBKc30zQrEEwCJozV6eIFZMtz-_neJ3sd3qijqVj_vN",
+                url: "/images/carousel2.png",
                 color: "Todos"
               }
             ],

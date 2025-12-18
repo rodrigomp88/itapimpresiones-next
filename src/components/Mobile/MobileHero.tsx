@@ -15,7 +15,9 @@ const MobileHero = () => {
               <img
                 alt="Gorras exclusivas personalizadas con logo corporativo"
                 className="relative z-10 w-full h-64 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgSf9-ZvnZtUl-xFj6iX2zBTEvcuctH89WNzpCKifjZyXNQmGfDuq5xf0HR5dBvSCMU-VYfykhKcYN6RW4IpgKbucvPHXdYGkSat7EiS9SxPH79YOgc_rhLpnlEwMowv-kDOrbZyRE2BiUp0Csnb8MWTIZV4JYmlZPaDGAvZh_maxAymNG50QOdXHUHpbslo_Q-x47RG1c7LAVFjHk0WSxaRtxDr1ADNJX0THTD-rcunqk1V1qNGWudfTn1WnBqRiEyAk_r_z35Nvn"
+                src="/images/carousel0.png"
+                loading="eager"
+                decoding="async"
               />
             </div>
             <motion.h1 
@@ -26,8 +28,8 @@ const MobileHero = () => {
             >
               Gorras Exclusivas
             </motion.h1>
-            <motion.p 
-              className="text-muted-light dark:text-muted-dark mb-6 text-sm px-4"
+            <motion.p
+              className="text-text-light dark:text-text-dark mb-6 text-sm px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}

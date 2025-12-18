@@ -2,9 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { signInWithCustomToken } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/firebase/config";
 
 const SessionHandler = () => {
   const { data: session, status } = useSession();
@@ -13,6 +10,11 @@ const SessionHandler = () => {
     if (status === "loading") return;
 
     const syncFirebaseAuth = async () => {
+      // Dynamic imports to avoid HMR issues
+      const { signInWithCustomToken } = await import("firebase/auth");
+      const { doc, getDoc, setDoc } = await import("firebase/firestore");
+      const { auth, db } = await import("@/firebase/config");
+
       if (
         session?.user?.id &&
         (!auth.currentUser || auth.currentUser.uid !== session.user.id)

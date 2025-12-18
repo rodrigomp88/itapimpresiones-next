@@ -13,6 +13,18 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
+  testPathIgnorePatterns: ['<rootDir>/functions/'],
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/index.ts',
+    '!src/**/*.test.{js,jsx,ts,tsx}',
+    '!src/**/__tests__/**',
+  ],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  // Add setup file for web APIs
+  setupFiles: ['<rootDir>/jest.polyfills.js'],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
