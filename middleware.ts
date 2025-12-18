@@ -7,7 +7,7 @@ import {
   contactLimiter,
   adminLimiter
 } from './src/utils/rate-limit';
-import { logRequest } from './src/utils/logger';
+// Logger no se importa aquí por compatibilidad con Edge Runtime
 
 // Middleware principal
 export function middleware(request: NextRequest) {
@@ -58,11 +58,7 @@ export function middleware(request: NextRequest) {
     console.error('Middleware error:', error);
     return NextResponse.next();
   } finally {
-    // Loggear la request (solo en desarrollo o para debugging)
-    if (process.env.NODE_ENV === 'development') {
-      const duration = Date.now() - startTime;
-      logRequest(method, url, 200, duration, userAgent, ip);
-    }
+    // Logging se maneja en las rutas individuales para compatibilidad con Edge Runtime
   }
 }
 

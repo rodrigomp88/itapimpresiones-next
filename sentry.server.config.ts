@@ -9,7 +9,7 @@ Sentry.init({
 
   integrations: [
     Sentry.httpIntegration(),
-    Sentry.nativeFetchIntegration(),
+    Sentry.nativeNodeFetchIntegration(),
   ],
 
   // Configuración específica del servidor

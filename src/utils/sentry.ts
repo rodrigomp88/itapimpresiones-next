@@ -1,26 +1,20 @@
 import * as Sentry from '@sentry/nextjs';
 
-// Configuración de Sentry para el cliente
+// Configuraciรณn de Sentry para el cliente
 export const initSentry = () => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
     environment: process.env.NODE_ENV,
     tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-    replaysOnErrorSampleRate: 1.0,
-    replaysSessionSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 0.1,
 
     integrations: [
-      Sentry.replayIntegration({
-        maskAllText: true,
-        blockAllMedia: true,
-      }),
       Sentry.httpIntegration(),
-      Sentry.nativeFetchIntegration(),
+      Sentry.nativeNodeFetchIntegration(),
     ],
 
-    // Configuración de performance monitoring
+    // Configuraciรณn de performance monitoring
     beforeSend: (event, hint) => {
-      // Filtrar errores de navegación que no son críticos
+      // Filtrar errores de navegaciรณn que no son crรญticos
       if (event.exception) {
         const error = hint.originalException as Error;
         if (error?.message?.includes('Loading chunk') ||
@@ -38,7 +32,7 @@ export const initSentry = () => {
       return event;
     },
 
-    // Configuración de breadcrumbs
+    // Configuraciรณn de breadcrumbs
     beforeBreadcrumb: (breadcrumb, hint) => {
       // Filtrar breadcrumbs innecesarios
       if (breadcrumb.category === 'console' &&
@@ -51,7 +45,7 @@ export const initSentry = () => {
   });
 };
 
-// Función helper para capturar errores con contexto
+// Funciรณn helper para capturar errores con contexto
 export const captureError = (
   error: Error,
   context?: Record<string, any>,
@@ -73,7 +67,7 @@ export const captureError = (
   });
 };
 
-// Función helper para capturar mensajes
+// Funciรณn helper para capturar mensajes
 export const captureMessage = (
   message: string,
   level: Sentry.SeverityLevel = 'info',
@@ -91,15 +85,13 @@ export const captureMessage = (
   });
 };
 
-// Función para trackear performance
+// Funciรณn para trackear performance (no disponible en esta versiรณn de Sentry)
 export const startTransaction = (name: string, op: string) => {
-  return Sentry.startTransaction({
-    name,
-    op,
-  });
+  // Performance tracking se maneja automรกticamente por Sentry
+  console.log(`Performance transaction: ${name} (${op})`);
 };
 
-// Función para trackear navegación
+// Funciรณn para trackear navegaciรณn
 export const trackNavigation = (from: string, to: string) => {
   Sentry.addBreadcrumb({
     category: 'navigation',
@@ -108,7 +100,7 @@ export const trackNavigation = (from: string, to: string) => {
   });
 };
 
-// Función para trackear user actions
+// Funciรณn para trackear user actions
 export const trackUserAction = (
   action: string,
   details?: Record<string, any>

@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { MercadoPagoConfig, Preference } from "mercadopago";
-import { applyRateLimit } from "@/utils/rate-limit";
+// Rate limiting se maneja en el middleware
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN!,
 });
 
 export async function POST(request: NextRequest) {
-  // 🛡️ Rate limit: 10 preferencias por hora por IP para evitar spam de pagos
-  const rateLimitResponse = await applyRateLimit(request, 10, 60 * 60 * 1000);
-  if (rateLimitResponse) return rateLimitResponse;
+  // Rate limiting se maneja en el middleware
 
   const { orderId, items, totalAmount, fullAmount, shippingAddress, userEmail } = await request.json();
 

@@ -142,7 +142,7 @@ const verifyBackupIntegrity = (backupFile: string) => {
     }
 
     // Verificar que el total de documentos sea correcto
-    const totalDocuments = Object.values(data).reduce((sum: number, docs: any[]) => sum + docs.length, 0 as number);
+    const totalDocuments = Object.values(data).reduce((sum: number, docs: any) => sum + (docs as any[]).length, 0);
     if (totalDocuments !== metadata.totalDocuments) {
       throw new Error('Documents count mismatch');
     }
