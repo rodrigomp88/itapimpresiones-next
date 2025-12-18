@@ -25,6 +25,10 @@ import PreloadResources from "../components/PreloadResources";
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
 import PWAInstaller from "../components/PWAInstaller";
 import SkipLink from "../components/SkipLink";
+import { initSentry } from "../utils/sentry";
+
+// Inicializar Sentry
+initSentry();
 
 export const metadata: Metadata = {
   title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
