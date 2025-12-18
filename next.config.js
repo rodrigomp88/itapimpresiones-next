@@ -92,6 +92,9 @@ const nextConfig = {
     // Habilitar optimización agresiva
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Optimizaciones adicionales para Core Web Vitals
+    minimumCacheTTL: 86400, // 24 horas de cache
+    unoptimized: false, // Asegurar optimización
   },
 
   // Experimental features para performance

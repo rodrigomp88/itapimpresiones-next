@@ -39,6 +39,9 @@ const ProductItem: React.FC<Product> = ({
   const currentImageSrc =
     images && images.length > 0 ? getImageUrl(images[currentImageIndex]) : "";
 
+  // Debug: log para verificar URLs
+  console.log(`Producto: ${name}, Imagen actual: ${currentImageSrc}, Todas las imágenes:`, images);
+
   return (
     <Link href={`/producto/${slug}`} className="block group h-full">
       <motion.div
@@ -67,8 +70,21 @@ const ProductItem: React.FC<Product> = ({
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400 bg-gray-100 dark:bg-zinc-800">
-              Sin imagen
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-zinc-800">
+              <Image
+                fill
+                className="object-contain opacity-50"
+                src="/images/placeholder.jpg"
+                alt="Sin imagen disponible"
+                onError={(e) => {
+                  // Fallback si no existe placeholder
+                  e.currentTarget.style.display = 'none';
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    parent.innerHTML = '<div class="text-gray-400 text-sm">Sin imagen</div>';
+                  }
+                }}
+              />
             </div>
           )}
         </div>

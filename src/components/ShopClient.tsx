@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import ProductFilter from "./Product/ProductFilter";
 import ProductList from "./Product/ProductList";
 import ProductSkeleton from "./Product/ProductSkeleton";
@@ -92,47 +92,89 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   };
 
   // --- FILTRADO DE COLOR POR IMAGEN ---
-  let colorAndBagFiltered = filteredProducts;
+  const colorAndBagFiltered = useMemo(() => {
+    let filtered = filteredProducts;
 
-  if (state.selectedColor !== "Todos") {
-    colorAndBagFiltered = colorAndBagFiltered.filter((p) => {
-      if (!p.images || p.images.length === 0) return false;
-      return p.images.some((img) => {
-        if (typeof img === "string") return false; // Ignoramos legacy sin color
-        return (img as ProductImage).color === state.selectedColor;
+    if (state.selectedColor !== "Todos") {
+      filtered = filtered.filter((p) => {
+        if (!p.images || p.images.length === 0) return false;
+        return p.images.some((img) => {
+          if (typeof img === "string") return false; // Ignoramos legacy sin color
+          return (img as ProductImage).color === state.selectedColor;
+        });
       });
-    });
-  }
+    }
 
-  if (state.selectedBagType !== "Todos" && state.category === "Bolsas") {
-    colorAndBagFiltered = colorAndBagFiltered.filter(
-      (p) => p.bagType === state.selectedBagType.toLowerCase()
-    );
-  }
+    if (state.selectedBagType !== "Todos" && state.category === "Bolsas") {
+      filtered = filtered.filter(
+        (p) => p.bagType === state.selectedBagType.toLowerCase()
+      );
+    }
+
+    return filtered;
+  }, [filteredProducts, state.selectedColor, state.selectedBagType, state.category]);
 
   // --- BÚSQUEDA ---
-  const searchFiltered = state.searchQuery
-    ? colorAndBagFiltered.filter((p) =>
-        p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
-        p.description?.toLowerCase().includes(state.searchQuery.toLowerCase())
-      )
-    : colorAndBagFiltered;
+  const searchFiltered = useMemo(() => {
+    return state.searchQuery
+      ? colorAndBagFiltered.filter((p) =>
+          p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+          p.description?.toLowerCase().includes(state.searchQuery.toLowerCase())
+        )
+      : colorAndBagFiltered;
+  }, [colorAndBagFiltered, state.searchQuery]);
 
-  const sortedProducts = [...searchFiltered].sort((a, b) => {
-    switch (state.sortBy) {
-      case "price-low":
-        return a.price - b.price;
-      case "price-high":
-        return b.price - a.price;
-      case "newest":
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-      case "popular":
-      default:
-        return 0;
+  const sortedProducts = useMemo(() => {
+    return [...searchFiltered].sort((a, b) => {
+      switch (state.sortBy) {
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "newest":
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        case "popular":
+        default:
+          return 0;
+      }
+    });
+  }, [searchFiltered, state.sortBy]);
+
+  // Infinite Scroll State
+  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState(1);
+  const productsPerPage = 12;
+  const observer = useRef<IntersectionObserver | null>(null);
+
+
+  useEffect(() => {
+    if (sortedProducts.length > 0) {
+      setDisplayedProducts(sortedProducts.slice(0, productsPerPage));
+      setPage(1);
     }
-  });
+  }, [sortedProducts, productsPerPage]);
+
+  const loadMoreProducts = useCallback(() => {
+    const nextPage = page + 1;
+    const startIndex = (nextPage - 1) * productsPerPage;
+    const endIndex = nextPage * productsPerPage;
+    const newProducts = sortedProducts.slice(startIndex, endIndex);
+    setDisplayedProducts(prev => [...prev, ...newProducts]);
+    setPage(nextPage);
+  }, [page, sortedProducts, productsPerPage]);
+
+  const lastProductRef = useCallback((node: HTMLDivElement) => {
+    if (state.isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && displayedProducts.length < sortedProducts.length) {
+        loadMoreProducts();
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [state.isLoading, displayedProducts.length, sortedProducts.length, loadMoreProducts]);
 
   return (
     <div className="w-full">
@@ -142,66 +184,72 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-transparent rounded-full blur-3xl"></div>
         
-        <div className="relative max-w-screen-xl mx-auto px-6 py-16 lg:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="flex flex-col gap-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium w-fit">
+        <div className="relative max-w-screen-xl mx-auto px-6 py-32 sm:py-40 lg:py-24 min-h-[600px] sm:min-h-[700px]">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
+            <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
+              <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium w-fit mx-auto lg:mx-0">
                 <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                Nueva Colección Disponible
+                🚀 Nueva Colección Disponible - ¡ACTUALIZADO!
               </div>
-              
-              <h1 className="text-4xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 dark:text-white leading-tight">
                 Descubre Nuestra
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {" "}Tienda
                 </span>
               </h1>
-              
-              <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg">
-                Explora nuestra selección de productos personalizados de alta calidad. 
+
+              <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                Explora nuestra selección de productos personalizados de alta calidad.
                 Desde remeras hasta bolsas, encontrá todo lo que necesitás para tu marca.
               </p>
 
-              {/* Estadísticas */}
-              <div className="grid grid-cols-3 gap-6 pt-4">
+              {/* Estadísticas - Ocultas en mobile muy pequeño */}
+              <div className="hidden sm:grid sm:grid-cols-3 gap-4 lg:gap-6 pt-4">
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
                     {products.length}+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                     Productos
                   </div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
                     500+
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                     Clientes
                   </div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
                     5★
                   </div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
                     Valoración
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5">
+                <button
+                  onClick={() => document.getElementById('product-list')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl active:scale-95 group"
+                >
                   Explorar Productos
+                  <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
-                <button className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-slate-200 text-slate-700 text-sm font-semibold tracking-wide hover:bg-slate-50 transition-all hover:border-slate-300">
+                <button className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-slate-200 text-slate-700 text-sm font-semibold tracking-wide hover:bg-slate-50 transition-all duration-300 hover:border-slate-300 hover:shadow-md active:scale-95">
                   Ver Ofertas
                 </button>
               </div>
             </div>
 
-            <div className="relative lg:h-[400px] flex items-center justify-center">
-              <div className="relative z-10 w-full max-w-md aspect-square rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500">
+            <div className="relative lg:h-[400px] flex items-center justify-center order-1 lg:order-2 h-64 sm:h-80 lg:h-auto">
+              <div className="relative z-10 w-56 h-56 sm:w-80 sm:h-80 lg:w-full lg:max-w-md aspect-square rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500">
                 <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
                 <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
               </div>
@@ -255,25 +303,25 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             </div>
             <div className="flex items-center gap-4">
               {/* Toggle Vista */}
-              <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-                <button 
+              <div className="flex items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-1 shadow-inner">
+                <button
                   onClick={() => setViewMode("grid")}
-                  className={`p-2 rounded-md transition-all ${
-                    state.viewMode === "grid" 
-                      ? "bg-white dark:bg-gray-700 shadow-sm" 
-                      : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                  className={`p-2 rounded-md transition-all duration-200 transform ${
+                    state.viewMode === "grid"
+                      ? "bg-white dark:bg-gray-700 shadow-sm scale-105"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105"
                   }`}
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clipRule="evenodd" />
                   </svg>
                 </button>
-                <button 
+                <button
                   onClick={() => setViewMode("list")}
-                  className={`p-2 rounded-md transition-all ${
-                    state.viewMode === "list" 
-                      ? "bg-white dark:bg-gray-700 shadow-sm" 
-                      : "hover:bg-gray-200 dark:hover:bg-gray-600"
+                  className={`p-2 rounded-md transition-all duration-200 transform ${
+                    state.viewMode === "list"
+                      ? "bg-white dark:bg-gray-700 shadow-sm scale-105"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105"
                   }`}
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -320,7 +368,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                 onBagTypeChange={handleBagTypeChange}
               />
             </aside>
-            <main className="col-span-12 md:col-span-9">
+            <main id="product-list" className="col-span-12 md:col-span-9">
               {state.isLoading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Array.from({ length: 6 }).map((_, i) => (
@@ -328,7 +376,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                   ))}
                 </div>
               ) : (
-                <ProductList products={sortedProducts} />
+                <ProductList products={displayedProducts} lastElementRef={lastProductRef} />
               )}
             </main>
           </div>

@@ -126,6 +126,11 @@ export default function RootLayout({
         {/* Preload critical resources */}
         <link rel="modulepreload" href="/_next/static/chunks/webpack.js" />
         <link rel="preload" as="image" href="/android-chrome-512x512.png" />
+
+        {/* Preload critical above-the-fold images */}
+        <link rel="preload" as="image" href="/images/carousel0.png" />
+        <link rel="preload" as="image" href="/images/carousel1.png" />
+        <link rel="preload" as="image" href="/images/carousel3.png" />
       </head>
   <body
     className={`font-display antialiased dark:bg-black text-slate-800 dark:text-slate-200`}

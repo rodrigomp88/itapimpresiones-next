@@ -134,3 +134,106 @@ select:focus-visible {
     --color-background-dark: #000000;
   }
 }
+
+/* === ESTILOS PARA COMPONENTES MÓVILES === */
+
+/* Ocultar scrollbars pero mantener funcionalidad */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animaciones personalizadas */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+/* Colores específicos para móviles */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: #9333ea;
+}
+
+.text-muted-light {
+  color: #6b7280;
+}
+
+.text-muted-dark {
+  color: #9ca3af;
+}
+
+.bg-surface-light {
+  background-color: #ffffff;
+}
+
+.bg-surface-dark {
+  background-color: #1f2937;
+}
+
+.bg-background-light {
+  background-color: #f9fafb;
+}
+
+.bg-background-dark {
+  background-color: #111827;
+}
+
+.text-text-light {
+  color: #1f2937;
+}
+
+.text-text-dark {
+  color: #f3f4f6;
+}
+
+.bg-primary-dark {
+  background-color: #1d4ed8;
+}
+
+/* Safe area para dispositivos con notch */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Material icons fix */
+.material-icons-outlined {
+  font-family: 'Material Icons Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

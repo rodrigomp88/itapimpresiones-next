@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
+import { applyRateLimit } from "@/utils/rate-limit";
 
 export async function POST(request: Request) {
     try {
+        // 🛡️ Rate limit: 3 mensajes por hora por IP para contacto
+        const rateLimitResponse = await applyRateLimit(request, 3, 60 * 60 * 1000);
+        if (rateLimitResponse) return rateLimitResponse;
+
         const body = await request.json();
 
         // Import Firestore dynamically to avoid SSR issues
