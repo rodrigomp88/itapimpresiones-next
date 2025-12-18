@@ -16,10 +16,13 @@ Sentry.init({
   beforeSend: (event, hint) => {
     // Filtrar errores de base de datos que no son críticos
     if (event.exception) {
-      const error = hint.originalException as Error;
-      if (error?.message?.includes('ECONNREFUSED') ||
-          error?.message?.includes('ETIMEDOUT')) {
-        event.level = 'warning'; // Downgrade network errors
+      const error = hint.originalException;
+      if (error && typeof error === 'object' && 'message' in error) {
+        const errorMessage = (error as any).message;
+        if (errorMessage?.includes('ECONNREFUSED') ||
+            errorMessage?.includes('ETIMEDOUT')) {
+          event.level = 'warning'; // Downgrade network errors
+        }
       }
     }
 
