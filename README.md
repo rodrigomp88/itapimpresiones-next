@@ -162,6 +162,11 @@ npm run type-check   # Verificación de tipos
 - Análisis de ventas
 - Gestión de pedidos
 
+### **♿ Accesibilidad:**
+- Hook useA11y para mejoras de UX
+- Componentes skeleton para estados de carga
+- Sistema de temas mejorado
+
 ---
 
 ## 🧪 **Testing**
@@ -207,6 +212,7 @@ npm run start
 - Panel de administración
 - Tests unitarios y E2E
 - PWA configurada
+- Mejoras de accesibilidad y UX
 
 ### **🔄 En Desarrollo:**
 - Optimizaciones de performance
@@ -241,7 +247,17 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ## 📝 **Changelog**
 
-### **v2.0.0** (Actual)
+### **v2.1.0** (Actual)
+- ✅ Hook de accesibilidad (useA11y) para mejoras de UX
+- ✅ Componente ErrorFeedback para manejo de errores en admin
+- ✅ SkeletonComponents para estados de carga
+- ✅ Sistema de temas mejorado con ThemeProvider
+- ✅ CSS para animaciones de carga (image-skeleton)
+- ✅ Actualización de componentes FeaturedProducts y MobileFeatured
+- ✅ Mejoras en tests unitarios
+- ✅ Optimizaciones de performance
+
+### **v2.0.0**
 - ✅ Botonera móvil rediseñada
 - ✅ Optimizaciones de performance
 - ✅ Tests E2E con Playwright
@@ -255,4 +271,4 @@ Este proyecto está bajo la licencia MIT. Ver `LICENSE` para más detalles.
 
 ---
 
-*Última actualización: 18/12/2025*
+*Última actualización: 19/12/2025*
