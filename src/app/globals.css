@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* Configurar Tailwind para usar clase 'dark' en lugar de media query */
-/* @variant dark (&:where(.dark, .dark *)); */
-
 /* Variables CSS para el tema */
 :root {
   --color-primary: #196ee6;

@@ -21,6 +21,8 @@ const mockProduct: CartItem = {
   description: 'Descripción',
   createdAt: '2025-01-01',
   cartQuantity: 1,
+  stock: 100,
+  stockType: 'physical',
 };
 
 describe('cartSlice', () => {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Product, ProductImage } from "@/types";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ProductHorizontalSkeleton } from "../SkeletonComponents";
 
 // Helper para obtener la URL limpia
 const getImageUrl = (img: ProductImage): string => {
@@ -109,6 +110,7 @@ const MobileFeatured = () => {
     fetchFeatured();
   }, []);
 
+  // Loading state con Skeleton Components profesional
   if (loading) {
     return (
       <section className="px-4 py-8">
@@ -116,11 +118,7 @@ const MobileFeatured = () => {
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Novedades Destacadas</h2>
           <span className="text-sm text-primary font-medium">Ver todo</span>
         </div>
-        <div className="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-4 px-4 snap-x">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="min-w-[240px] h-[320px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse snap-center" />
-          ))}
-        </div>
+        <ProductHorizontalSkeleton count={3} />
       </section>
     );
   }

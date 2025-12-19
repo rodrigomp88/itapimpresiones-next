@@ -6,6 +6,7 @@ import { db } from "@/firebase/config";
 import { Product, ProductImage } from "@/types";
 import ProductItem from "../Product/ProductItem";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { ProductGridSkeleton, ProductHorizontalSkeleton } from "../SkeletonComponents";
 
 // Helper para obtener la URL de imagen
 const getImageUrl = (img: string | ProductImage): string => {
@@ -43,21 +44,12 @@ const FeaturedProducts = () => {
         fetchFeatured();
     }, []);
 
+    // Loading state con Skeleton Components profesional
     if (loading) {
         return isMobile ? (
-            // Loading móvil
-            <div className="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-4 px-4 snap-x">
-                {[...Array(4)].map((_, i) => (
-                    <div key={i} className="min-w-[240px] h-[320px] bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse snap-center" />
-                ))}
-            </div>
+            <ProductHorizontalSkeleton count={4} />
         ) : (
-            // Loading desktop
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[...Array(4)].map((_, i) => (
-                    <div key={i} className="h-[400px] w-full bg-gray-200 dark:bg-gray-700 animate-pulse rounded-xl" />
-                ))}
-            </div>
+            <ProductGridSkeleton count={4} />
         );
     }
 

@@ -34,6 +34,8 @@ const mockProduct: Product = {
   category: 'Test',
   description: 'Descripción de prueba',
   createdAt: '2025-01-01',
+  stock: 100,
+  stockType: 'physical',
 };
 
 describe('ProductItem', () => {

@@ -142,9 +142,6 @@ export default function RootLayout({
     className={`font-display antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
     suppressHydrationWarning
   >
-    {/* Skip Link temporalmente removido por error HMR */}
-    <SkipLink />
-
     {/* Main content landmark */}
     <div id="main-content">
         <Providers>

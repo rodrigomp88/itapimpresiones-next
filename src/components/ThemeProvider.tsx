@@ -28,7 +28,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'system',
+  defaultTheme = 'light', // Cambiado de 'system' a 'light'
   storageKey = 'itap-theme'
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme);
@@ -38,6 +38,7 @@ export function ThemeProvider({
   useEffect(() => {
     try {
       const stored = localStorage.getItem(storageKey);
+      console.log('ThemeProvider - Loading theme from localStorage:', stored);
       if (stored && ['light', 'dark', 'system'].includes(stored)) {
         setTheme(stored as Theme);
       }
@@ -49,9 +50,12 @@ export function ThemeProvider({
   // Resolver el tema actual basado en la preferencia del sistema
   useEffect(() => {
     const updateResolvedTheme = () => {
+      console.log('ThemeProvider - Updating resolved theme, current theme:', theme);
       if (theme === 'system') {
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setResolvedTheme(systemPrefersDark ? 'dark' : 'light');
+        const newResolvedTheme = systemPrefersDark ? 'dark' : 'light';
+        console.log('ThemeProvider - System preference:', systemPrefersDark ? 'dark' : 'light');
+        setResolvedTheme(newResolvedTheme);
       } else {
         setResolvedTheme(theme);
       }
@@ -72,17 +76,21 @@ export function ThemeProvider({
   // Aplicar el tema al documento
   useEffect(() => {
     const root = document.documentElement;
+    console.log('ThemeProvider - Applying theme to document:', resolvedTheme);
 
     if (resolvedTheme === 'dark') {
       root.classList.add('dark');
+      console.log('ThemeProvider - Added dark class to document');
     } else {
       root.classList.remove('dark');
+      console.log('ThemeProvider - Removed dark class from document');
     }
   }, [resolvedTheme]);
 
   // Guardar tema en localStorage
   const handleSetTheme = (newTheme: Theme) => {
     try {
+      console.log('ThemeProvider - Setting theme to:', newTheme);
       setTheme(newTheme);
       localStorage.setItem(storageKey, newTheme);
     } catch (error) {
@@ -131,7 +139,7 @@ export function ThemeToggle() {
 
   const toggleTheme = () => {
     const newTheme = resolvedTheme === 'light' ? 'dark' : 'light';
-    console.log('Toggling theme from', resolvedTheme, 'to', newTheme);
+    console.log('ThemeToggle - Toggling theme from', resolvedTheme, 'to', newTheme);
     setTheme(newTheme);
   };
 
