@@ -1,15 +1,34 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
+import { motion } from "framer-motion";
 
-const SkipLink: React.FC = () => {
+interface SkipLinkProps {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}
+
+/**
+ * Componente SkipLink para mejorar la accesibilidad
+ * Permite saltar a secciones importantes del sitio
+ */
+const SkipLink: React.FC<SkipLinkProps> = ({ 
+  href, 
+  children, 
+  className = "" 
+}) => {
   return (
-    <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:transition-all focus:duration-200 focus:hover:bg-primary/90"
+    <motion.a
+      href={href}
+      className={`skip-link ${className}`}
+      initial={{ top: "-40px" }}
+      whileFocus={{ top: "6px" }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ top: "6px" }}
     >
-      Saltar al contenido principal
-    </a>
+      {children}
+    </motion.a>
   );
 };
 

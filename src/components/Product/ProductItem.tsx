@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Product, ProductImage } from "@/types";
 import { motion } from "framer-motion";
+import OptimizedImage from "../OptimizedImage";
 
 // Helper para obtener la URL limpia
 const getImageUrl = (img: string | ProductImage): string => {
@@ -21,7 +21,6 @@ const ProductItem: React.FC<Product> = ({
   description,
 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleMouseEnter = () => {
     if (images && images.length > 1) {
@@ -39,9 +38,6 @@ const ProductItem: React.FC<Product> = ({
   const currentImageSrc =
     images && images.length > 0 ? getImageUrl(images[currentImageIndex]) : "";
 
-  // Debug: log para verificar URLs
-  console.log(`Producto: ${name}, Imagen actual: ${currentImageSrc}, Todas las imágenes:`, images);
-
   return (
     <Link href={`/producto/${slug}`} className="block group h-full">
       <motion.div
@@ -54,37 +50,36 @@ const ProductItem: React.FC<Product> = ({
         whileHover={{ y: -4 }}
       >
         <div className="relative overflow-hidden w-full h-64">
-          {!imageLoaded && (
-            <div className="absolute inset-0 w-full h-full bg-gray-300 dark:bg-gray-600 animate-pulse" />
-          )}
           {currentImageSrc ? (
-            <Image
-              fill
-              className={`object-contain transition-transform duration-300 group-hover:scale-105 ${
-                imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
+            <OptimizedImage
               src={currentImageSrc}
               alt={name}
-              onLoad={() => setImageLoaded(true)}
-              onError={() => setImageLoaded(true)}
+              fill={true}
+              quality={85}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-contain transition-transform duration-300 group-hover:scale-105"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-zinc-800">
-              <Image
-                fill
-                className="object-contain opacity-50"
-                src="/images/placeholder.jpg"
-                alt="Sin imagen disponible"
-                onError={(e) => {
-                  // Fallback si no existe placeholder
-                  e.currentTarget.style.display = 'none';
-                  const parent = e.currentTarget.parentElement;
-                  if (parent) {
-                    parent.innerHTML = '<div class="text-gray-400 text-sm">Sin imagen</div>';
-                  }
-                }}
-              />
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-2 opacity-50">
+                  <svg
+                    className="w-full h-full"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Sin imagen
+                </p>
+              </div>
             </div>
           )}
         </div>

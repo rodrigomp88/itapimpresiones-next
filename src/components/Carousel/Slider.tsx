@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -13,34 +13,113 @@ interface SliderProps {
 
 const Slider: React.FC<SliderProps> = ({ slides }) => {
   const [current, setCurrent] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [announceText, setAnnounceText] = useState("");
   const isMobile = useIsMobile();
 
-  // Auto-slide effect
+  // Auto-slide effect (pausa durante navegación manual)
   useEffect(() => {
+    if (!isPlaying || slides.length <= 1) return;
+
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setCurrent((prev) => {
+        const next = prev === slides.length - 1 ? 0 : prev + 1;
+        setAnnounceText(`Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`);
+        return next;
+      });
     }, 5000);
+
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [slides.length, isPlaying]);
+
+  // Navegación por teclado
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (slides.length <= 1) return;
+
+    switch (event.key) {
+      case "ArrowLeft":
+        event.preventDefault();
+        setIsPlaying(false);
+        prevSlide();
+        break;
+      case "ArrowRight":
+        event.preventDefault();
+        setIsPlaying(false);
+        nextSlide();
+        break;
+      case "Home":
+        event.preventDefault();
+        setIsPlaying(false);
+        goToSlide(0);
+        break;
+      case "End":
+        event.preventDefault();
+        setIsPlaying(false);
+        goToSlide(slides.length - 1);
+        break;
+      case " ":
+        event.preventDefault();
+        setIsPlaying(!isPlaying);
+        break;
+    }
+  }, [slides.length, isPlaying]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
 
   const nextSlide = () => {
-    setCurrent(current === slides.length - 1 ? 0 : current + 1);
+    const next = current === slides.length - 1 ? 0 : current + 1;
+    setCurrent(next);
+    setAnnounceText(`Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`);
   };
 
   const prevSlide = () => {
-    setCurrent(current === 0 ? slides.length - 1 : current - 1);
+    const prev = current === 0 ? slides.length - 1 : current - 1;
+    setCurrent(prev);
+    setAnnounceText(`Slide ${prev + 1} de ${slides.length}: ${slides[prev].heading}`);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrent(index);
+    setAnnounceText(`Slide ${index + 1} de ${slides.length}: ${slides[index].heading}`);
   };
 
   if (!slides || slides.length === 0) {
     return (
-      <div className="flex items-center justify-center h-[500px] bg-gray-200">
+      <div className="flex items-center justify-center h-[500px] bg-gray-200" role="alert">
         No hay imágenes
       </div>
     );
   }
 
   return (
-    <div className="relative w-full h-[600px] md:h-[500px] overflow-hidden group bg-white dark:bg-black">
+    <section 
+      className="relative w-full h-[600px] md:h-[500px] overflow-hidden group bg-white dark:bg-black"
+      role="region"
+      aria-label="Carrusel de imágenes"
+      aria-roledescription="carrusel"
+    >
+      {/* Live region para anunciar cambios a lectores de pantalla */}
+      <div 
+        className="sr-only" 
+        aria-live="polite" 
+        aria-atomic="true"
+        role="status"
+      >
+        {announceText}
+      </div>
+
+      {/* Controles de reproducción/pausa (ocultos visualmente) */}
+      <button
+        onClick={() => setIsPlaying(!isPlaying)}
+        className="sr-only"
+        aria-label={isPlaying ? "Pausar carrusel automático" : "Reanudar carrusel automático"}
+      >
+        {isPlaying ? "Pausar" : "Reanudar"}
+      </button>
+
       <AnimatePresence initial={false} mode="wait">
         <motion.div
           key={current}
@@ -49,6 +128,9 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
+          role="group"
+          aria-roledescription="slide"
+          aria-label={`Slide ${current + 1} de ${slides.length}`}
         >
           {/* Clean background */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-100 to-white dark:from-slate-900 dark:to-black" />
@@ -104,7 +186,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                 </motion.div>
               </div>
             ) : (
-              // LAYOUT DESKTOP: texto izquierda, imagen derecha - ORIGINAL
+              // LAYOUT DESKTOP: texto izquierda, imagen derecha
               <div className="h-full grid md:grid-cols-2 items-center">
                 
                 {/* Texto IZQUIERDA en desktop */}
@@ -155,42 +237,65 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Buttons */}
+      {/* Navigation Controls */}
       {slides.length > 1 && (
         <>
+          {/* Botones de navegación */}
+          <div className="sr-only">
+            <p>Use las flechas del teclado para navegar, Home para ir al primer slide, End para el último, y Espacio para pausar/reanudar.</p>
+          </div>
+
           <button
             onClick={prevSlide}
             className="absolute top-1/2 left-2 md:left-4 transform -translate-y-1/2 bg-slate-200 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/20 text-slate-700 dark:text-white rounded-full p-2 md:p-3 transition-colors backdrop-blur-sm opacity-70 md:opacity-0 group-hover:opacity-100 z-20"
-            aria-label="Anterior"
+            aria-label={`Slide anterior (${current === 0 ? slides.length : current} de ${slides.length})`}
+            aria-describedby="carousel-instructions"
           >
-            <span className="text-lg md:text-2xl">&#10094;</span>
+            <span className="text-lg md:text-2xl" aria-hidden="true">‹</span>
           </button>
+          
           <button
             onClick={nextSlide}
             className="absolute top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-slate-200 hover:bg-slate-300 dark:text-white rounded-full p-2 md:p-3 transition-colors backdrop-blur-sm opacity-70 md:opacity-0 group-hover:opacity-100 z-20"
-            aria-label="Siguiente"
+            aria-label={`Slide siguiente (${current === slides.length - 1 ? 1 : current + 2} de ${slides.length})`}
+            aria-describedby="carousel-instructions"
           >
-            <span className="text-lg md:text-2xl">&#10095;</span>
+            <span className="text-lg md:text-2xl" aria-hidden="true">›</span>
           </button>
 
-          {/* Dots Indicators */}
-          <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+          {/* Indicadores de puntos */}
+          <nav 
+            className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20"
+            aria-label="Navegación de slides"
+            role="tablist"
+          >
             {slides.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrent(idx)}
-                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 ${
+                onClick={() => goToSlide(idx)}
+                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                   idx === current
                     ? "w-6 md:w-8 bg-slate-800 dark:bg-white"
                     : "w-1.5 md:w-2 bg-slate-400 dark:bg-white/50 hover:bg-slate-500 dark:hover:bg-white/70"
                 }`}
-                aria-label={`Ir a slide ${idx + 1}`}
-              />
+                aria-label={`Ir a slide ${idx + 1}: ${slides[idx].heading}`}
+                aria-current={idx === current ? "true" : "false"}
+                role="tab"
+                tabIndex={idx === current ? 0 : -1}
+              >
+                <span className="sr-only">Slide {idx + 1}</span>
+              </button>
             ))}
+          </nav>
+
+          {/* Instrucciones ocultas para lectores de pantalla */}
+          <div id="carousel-instructions" className="sr-only">
+            Carrusel de {slides.length} slides. Use las flechas izquierda y derecha para navegar. 
+            {isPlaying ? "Reproducción automática activa." : "Reproducción automática pausada."}
           </div>
         </>
       )}
-    </div>
+    </section>
   );
 };
 

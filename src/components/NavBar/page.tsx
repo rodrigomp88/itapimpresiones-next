@@ -51,7 +51,12 @@ const Navbar = () => {
         </>
       )}
 
-      <nav className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800">
+      <nav 
+        id="navigation"
+        className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800"
+        role="navigation"
+        aria-label="Navegación principal"
+      >
         <div className="flex items-center justify-between whitespace-nowrap px-6 lg:px-12 py-4 max-w-[1440px] mx-auto">
           <Link href="/" className="flex items-center gap-3">
             <div className="size-8 text-blue-600">
@@ -271,7 +276,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     logoutUser();
                     closeSidebar();
                   }}
-                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointe"
+                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointer"
                 >
                   Salir
                 </button>
