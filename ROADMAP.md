@@ -32,9 +32,9 @@
 - [x] Múltiples métodos de pago (MercadoPago, transferencia, efectivo)
 
 ### Monitoreo
-- [ ] Dashboard de métricas de ventas
-- [ ] Alertas automáticas de errores
-- [ ] Análisis de comportamiento de usuarios
+- [x] Dashboard de métricas de ventas (ya existente + AlertsPanel)
+- [x] Alertas automáticas de errores (lib/alerts.ts + AlertTemplates)
+- [x] Análisis de comportamiento de usuarios (AnalyticsDashboard existente)
 
 ---
 

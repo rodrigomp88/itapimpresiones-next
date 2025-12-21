@@ -81,6 +81,13 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // 9. ALERTAS DEL SISTEMA
+    match /alerts/{alertId} {
+      allow read: if isAdmin();
+      allow create: if request.auth != null; // Sistema puede crear alertas
+      allow update, delete: if isAdmin();
+    }
+
     // Bloqueo por defecto
     match /{document=**} {
       allow read, write: if false;

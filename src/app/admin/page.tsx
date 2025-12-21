@@ -3,6 +3,7 @@ import Link from "next/link";
 import TestNotificationButton from "./TestNotificationButton";
 import SystemHealth from "@/components/Admin/SystemHealth";
 import AnalyticsDashboard from "@/components/Admin/AnalyticsDashboard";
+import AlertsPanel from "@/components/Admin/AlertsPanel";
 import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList, FaCalendarAlt, FaCreditCard, FaExclamationTriangle } from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
@@ -168,6 +169,9 @@ const AdminDashboardPage = async () => {
           </div>
         ))}
       </div>
+
+      {/* Alertas del Sistema */}
+      <AlertsPanel />
 
       {/* Analytics Dashboard */}
       <AnalyticsDashboard />
