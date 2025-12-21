@@ -23,8 +23,8 @@
 
 ### Performance
 - [x] Implementar ISR para páginas de productos (revalidate=3600)
-- [ ] Optimizar bundle size
-- [ ] Caché de consultas Firebase
+- [x] Optimizar bundle size (modularizeImports, tree shaking, compress)
+- [x] Caché de consultas Firebase (firebase-cache.ts con TTL configurable)
 
 ### Funcionalidades
 - [ ] Sistema de cupones de descuento

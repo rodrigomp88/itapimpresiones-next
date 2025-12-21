@@ -99,10 +99,23 @@ const nextConfig = {
 
   // Experimental features para performance
   experimental: {
-    optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion', 'firebase', '@firebase/firestore'],
     optimizeCss: true,
     scrollRestoration: true,
   },
+
+  // Modularize imports para tree shaking más agresivo
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{member}}',
+    },
+  },
+
+  // Compression
+  compress: true,
+
+  // Minimizar el output en producción
+  productionBrowserSourceMaps: false,
 };
 
 module.exports = nextConfig;
