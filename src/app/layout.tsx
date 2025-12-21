@@ -137,9 +137,28 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/carousel0.png" />
         <link rel="preload" as="image" href="/images/carousel1.png" />
         <link rel="preload" as="image" href="/images/carousel3.png" />
+
+        {/* Script para evitar FOUC en cambio de tema */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              try {
+                var theme = localStorage.getItem('itap-theme');
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                } else if (theme === 'system') {
+                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                  }
+                }
+                // Si es 'light' o no hay tema, no hacer nada (por defecto es claro)
+              } catch (e) {}
+            })();
+          `
+        }} />
       </head>
   <body
-    className={`font-display antialiased dark:bg-black text-slate-800 dark:text-slate-200`}
+    className={`font-display antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
     suppressHydrationWarning
   >
     {/* Main content landmark */}
