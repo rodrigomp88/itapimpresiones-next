@@ -8,6 +8,20 @@
   --color-background-light: #f6f7f8;
   --color-background-dark: #111821;
   --font-display: "Work Sans", sans-serif;
+  color-scheme: light;
+}
+
+/* Dark mode */
+:root.dark {
+  color-scheme: dark;
+}
+
+html {
+  background-color: white;
+}
+
+html.dark {
+  background-color: black;
 }
 
 .btn {
