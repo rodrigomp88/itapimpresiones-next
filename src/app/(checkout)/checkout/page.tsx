@@ -28,6 +28,8 @@ import {
 } from "@/components/Notiflix/Notiflix";
 import Link from "next/link";
 import { shippingAddressSchema } from "@/lib/validationSchemas";
+import CouponInput from "@/components/CouponInput";
+import { AppliedCoupon } from "@/types/coupon";
 
 const initialAddressState: ShippingAddress = {
   name: "",
@@ -52,14 +54,19 @@ const CheckoutPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shippingCost, setShippingCost] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
 
-  // Calcular montos de seña
-  const depositPercentage = 50; // 50% por defecto, puedes hacerlo configurable
-  const depositAmount = Math.round(cartTotalAmount * (depositPercentage / 100));
-  const remainingAmount = cartTotalAmount - depositAmount;
+  // Calcular descuento del cupón
+  const couponDiscount = appliedCoupon?.discount || 0;
+  const subtotalAfterDiscount = cartTotalAmount - couponDiscount;
+
+  // Calcular montos de seña (sobre el subtotal con descuento)
+  const depositPercentage = 50;
+  const depositAmount = Math.round(subtotalAfterDiscount * (depositPercentage / 100));
+  const remainingAmount = subtotalAfterDiscount - depositAmount;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -493,12 +500,33 @@ const CheckoutPage: React.FC = () => {
                 Tu Pedido
               </h2>
 
+              {/* Cupón de descuento */}
+              <div className="mb-4">
+                <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                  ¿Tenés un cupón?
+                </p>
+                <CouponInput
+                  cartTotal={cartTotalAmount}
+                  categories={cartItems.map(item => item.category)}
+                  onCouponApplied={setAppliedCoupon}
+                  appliedCoupon={appliedCoupon}
+                />
+              </div>
+
               {/* Resumen de costos detallado */}
               <div className="mb-6 space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
                   <span className="text-zinc-900 dark:text-zinc-100">${cartTotalAmount.toLocaleString("es-AR")}</span>
                 </div>
+
+                {/* Mostrar descuento del cupón */}
+                {appliedCoupon && (
+                  <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
+                    <span>Descuento ({appliedCoupon.code})</span>
+                    <span>-${appliedCoupon.discount.toLocaleString("es-AR")}</span>
+                  </div>
+                )}
 
                 <div className="flex justify-between text-sm">
                   <span className="text-zinc-600 dark:text-zinc-400">Envío</span>

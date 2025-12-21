@@ -27,7 +27,7 @@
 - [x] Caché de consultas Firebase (firebase-cache.ts con TTL configurable)
 
 ### Funcionalidades
-- [ ] Sistema de cupones de descuento
+- [x] Sistema de cupones de descuento (tipos, API validación, UI checkout)
 - [ ] Notificaciones push
 - [ ] Múltiples métodos de pago
 
