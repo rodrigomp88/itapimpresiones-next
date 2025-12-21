@@ -10,6 +10,7 @@ import {
   FaUsers,
   FaClipboardList,
   FaPaintBrush,
+  FaTicketAlt,
 } from "react-icons/fa";
 import { authOptions } from "@/lib/authOptions";
 
@@ -32,6 +33,7 @@ export default async function AdminLayout({
     { href: "/admin", label: "Dashboard", icon: FaHome },
     { href: "/admin/products", label: "Productos", icon: FaBox },
     { href: "/admin/orders", label: "Órdenes", icon: FaShoppingBag },
+    { href: "/admin/coupons", label: "Cupones", icon: FaTicketAlt },
     { href: "/admin/users", label: "Usuarios", icon: FaUsers },
     {
       href: "/admin/submissions",
