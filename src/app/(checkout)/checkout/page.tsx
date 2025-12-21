@@ -30,6 +30,8 @@ import Link from "next/link";
 import { shippingAddressSchema } from "@/lib/validationSchemas";
 import CouponInput from "@/components/CouponInput";
 import { AppliedCoupon } from "@/types/coupon";
+import PaymentMethodSelector from "@/components/PaymentMethodSelector";
+import { PaymentMethod, BANK_TRANSFER_INFO } from "@/types/payment";
 
 const initialAddressState: ShippingAddress = {
   name: "",
@@ -55,6 +57,7 @@ const CheckoutPage: React.FC = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('mercadopago');
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
@@ -586,6 +589,15 @@ const CheckoutPage: React.FC = () => {
                     </p>
                   </div>
                 )}
+              </div>
+
+              {/* Selector de método de pago */}
+              <div className="mb-6 border-t border-zinc-200 dark:border-zinc-700 pt-4">
+                <PaymentMethodSelector
+                  selectedMethod={paymentMethod}
+                  onMethodChange={setPaymentMethod}
+                  cartTotal={cartTotalAmount}
+                />
               </div>
 
               <button

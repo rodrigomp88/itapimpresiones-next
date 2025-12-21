@@ -29,7 +29,7 @@
 ### Funcionalidades
 - [x] Sistema de cupones de descuento (tipos, API validación, UI checkout)
 - [x] Notificaciones push (FCM, servicio, API suscripción, componente prompt)
-- [ ] Múltiples métodos de pago
+- [x] Múltiples métodos de pago (MercadoPago, transferencia, efectivo)
 
 ### Monitoreo
 - [ ] Dashboard de métricas de ventas
