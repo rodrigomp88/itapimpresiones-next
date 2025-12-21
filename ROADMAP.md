@@ -22,7 +22,7 @@
 ## 🔮 Futuras Mejoras (Backlog)
 
 ### Performance
-- [ ] Implementar ISR para páginas de productos
+- [x] Implementar ISR para páginas de productos (revalidate=3600)
 - [ ] Optimizar bundle size
 - [ ] Caché de consultas Firebase
 

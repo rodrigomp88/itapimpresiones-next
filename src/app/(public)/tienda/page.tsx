@@ -3,6 +3,9 @@ import { db } from "@/firebase/config";
 import { collection, query, orderBy, getDocs } from "firebase/firestore";
 import ShopClient from "@/components/ShopClient";
 
+// ISR: Revalidar cada hora (3600 segundos)
+export const revalidate = 3600;
+
 async function getProducts(): Promise<Product[]> {
   try {
     const productsRef = collection(db, "products");

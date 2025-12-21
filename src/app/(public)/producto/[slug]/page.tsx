@@ -5,6 +5,12 @@ import { Product, ProductImage } from "@/types";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
+// ISR: Revalidar cada hora (3600 segundos)
+export const revalidate = 3600;
+
+// Permitir generar nuevas rutas dinámicamente
+export const dynamicParams = true;
+
 // Definimos el tipo de las props para Next.js 15
 interface PageProps {
   params: Promise<{ slug: string }>;
