@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { GuestUser } from "@/hooks/useGuestCheckout";
 import { AppliedCoupon } from "@/types/coupon";
 import { PaymentMethod } from "@/types/payment";

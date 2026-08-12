@@ -10,8 +10,9 @@ import SearchResultsSimple from "@/components/Search/SearchResultsSimple";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiFilter } from "react-icons/hi";
+import { Suspense } from "react";
 
-const SearchPage: React.FC = () => {
+const SearchPageContent: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useIsMobile();
@@ -205,5 +206,11 @@ const SearchPage: React.FC = () => {
     </div>
   );
 };
+
+const SearchPage: React.FC = () => (
+  <Suspense>
+    <SearchPageContent />
+  </Suspense>
+);
 
 export default SearchPage;

@@ -35,7 +35,6 @@ const GuestCheckoutPage: React.FC = () => {
     cartTotalAmount,
     costs,
     updateGuestUser,
-    validateGuestUser,
     createGuestOrder,
     processGuestPayment,
     clearGuestOrder,
@@ -52,12 +51,12 @@ const GuestCheckoutPage: React.FC = () => {
   // Handlers con tipos explícitos
   const handleGuestUserFormSubmit = (
     appliedCoupon: AppliedCoupon | undefined,
-    paymentMethod: PaymentMethod
+    paymentMethod?: PaymentMethod
   ) => {
     createGuestOrder(appliedCoupon, paymentMethod);
   };
 
-  const handlePaymentComplete = (paymentData: any) => {
+  const handlePaymentComplete = () => {
     if (currentOrder?.id) {
       processGuestPayment(currentOrder.id);
     }

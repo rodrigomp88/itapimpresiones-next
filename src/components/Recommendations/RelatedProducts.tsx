@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types";
 import useRecommendations, {
@@ -181,10 +182,12 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                   <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300 group-hover:-translate-y-1">
                     {/* Image */}
                     <div className="relative aspect-square bg-zinc-100 dark:bg-zinc-700 overflow-hidden">
-                      <img
+                      <Image
                         src={getProductImage(product)}
                         alt={product.name}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        unoptimized
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
 
                       {/* Recommendation Badge */}

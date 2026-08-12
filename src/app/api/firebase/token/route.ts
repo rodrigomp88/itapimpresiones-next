@@ -16,10 +16,9 @@ export async function POST() {
 
     // Asegurarse de que adminAuth esté inicializado
     if (!adminAuth) {
-      console.error("Firebase Admin SDK not initialized");
       return NextResponse.json(
-        { error: "Server Configuration Error" },
-        { status: 500 }
+        { firebaseToken: null, error: "Admin SDK not configured" },
+        { status: 200 }
       );
     }
 

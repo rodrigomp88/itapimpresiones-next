@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { CartItem } from "@/types";
 import { GuestOrder } from "@/hooks/useGuestCheckout";
-import { HiShoppingCart, HiCreditCard } from "react-icons/hi";
+import { HiCreditCard } from "react-icons/hi";
 
 interface PaymentSummaryProps {
   cartItems: CartItem[];
@@ -41,13 +42,16 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
         {cartItems.map((item) => (
           <div key={item.id} className="flex items-center gap-3">
             <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden flex-shrink-0">
-              <img
+              <Image
                 src={
                   typeof item.images[0] === "string"
                     ? item.images[0]
                     : item.images[0]?.url || "/placeholder.png"
                 }
                 alt={item.name}
+                width={64}
+                height={64}
+                unoptimized
                 className="w-full h-full object-cover"
               />
             </div>

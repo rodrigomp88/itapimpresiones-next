@@ -31,7 +31,7 @@ import { shippingAddressSchema } from "@/lib/validationSchemas";
 import CouponInput from "@/components/CouponInput";
 import { AppliedCoupon } from "@/types/coupon";
 import PaymentMethodSelector from "@/components/PaymentMethodSelector";
-import { PaymentMethod, BANK_TRANSFER_INFO } from "@/types/payment";
+import { PaymentMethod } from "@/types/payment";
 
 const initialAddressState: ShippingAddress = {
   name: "",
@@ -77,6 +77,10 @@ const CheckoutPage: React.FC = () => {
   const remainingAmount = subtotalAfterDiscount - depositAmount;
 
   useEffect(() => {
+    if (!auth) {
+      setIsFirebaseLoading(false);
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       setIsFirebaseLoading(false);

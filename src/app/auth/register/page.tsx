@@ -6,7 +6,6 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import {
   FaAngleRight,
   FaEnvelope,
@@ -15,8 +14,6 @@ import {
   FaEnvelopeOpenText,
 } from "react-icons/fa";
 import { auth } from "@/firebase/config";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { selectPreviousURL, SAVE_URL } from "@/redux/slice/cartSlice";
 import { motion } from "framer-motion";
 
 const RegisterPage = () => {
@@ -26,11 +23,6 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isVerificationSent, setIsVerificationSent] = useState(false);
-  const router = useRouter();
-
-  const previousURL = useAppSelector(selectPreviousURL);
-  const dispatch = useAppDispatch();
-
   const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);

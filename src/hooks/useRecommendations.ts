@@ -8,8 +8,6 @@ import {
   orderBy,
   limit,
   getDocs,
-  doc,
-  getDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { Product } from "@/types";

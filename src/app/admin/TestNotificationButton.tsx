@@ -16,7 +16,7 @@ export default function TestNotificationButton() {
       } else {
         alert(`❌ Error: ${res.error}`);
       }
-    } catch (err) {
+    } catch {
       alert("❌ Error inesperado");
     } finally {
       setLoading(false);

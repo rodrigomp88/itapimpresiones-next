@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Product, ProductImage } from "@/types";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ProductHorizontalSkeleton } from "../SkeletonComponents";
 
@@ -154,8 +155,11 @@ const MobileFeatured = () => {
             transition={{ delay: index * 0.1 }}
           >
             <div className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-t-xl flex justify-center">
-              <img
+              <Image
                 alt={product.name}
+                width={128}
+                height={128}
+                unoptimized
                 className="h-32 object-contain mix-blend-multiply dark:mix-blend-normal"
                 src={getImageUrl(product.images[0])}
                 onError={(e) => {

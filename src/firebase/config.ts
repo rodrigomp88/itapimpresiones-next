@@ -1,5 +1,4 @@
 import { initializeApp, getApp, getApps, FirebaseApp } from "firebase/app";
-
 import { getAuth, Auth } from "firebase/auth";
 import { getFirestore, Firestore } from "firebase/firestore";
 import { getStorage, FirebaseStorage } from "firebase/storage";
@@ -24,45 +23,26 @@ const firebaseConfig: FirebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-const hasValidConfig = Boolean(
-  firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId
-);
+let _app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
+let _db: Firestore | null = null;
+let _storage: FirebaseStorage | null = null;
 
-let app: FirebaseApp | null = null;
-let auth: Auth | null = null;
-let db: Firestore | null = null;
-let storage: FirebaseStorage | null = null;
-
-if (hasValidConfig) {
-  console.log("Firebase config loaded:", {
-    apiKey: firebaseConfig.apiKey?.substring(0, 10) + "...",
-    projectId: firebaseConfig.projectId,
-  });
-  try {
-    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-    auth = getAuth(app);
-  } catch (error: any) {
-    console.error("Firebase Auth initialization error:", error.message);
-  }
-
-  try {
-    if (app) {
-      db = getFirestore(app);
-    }
-  } catch (error: any) {
-    console.error("Firebase Firestore initialization error:", error.message);
-  }
-
-  try {
-    if (app) {
-      storage = getStorage(app);
-    }
-  } catch (error: any) {
-    console.error("Firebase Storage initialization error:", error.message);
-  }
-} else {
-  console.warn("Firebase config not found. Firebase services disabled.");
+try {
+  _app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+  _auth = getAuth(_app);
+  _db = getFirestore(_app);
+  _storage = getStorage(_app);
+} catch (error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error("Firebase initialization error:", message);
 }
 
-export { app, auth, db, storage };
+// Export as non-null types — runtime null is handled by try-catch above
+// and by guards in consumer components
+export const app: FirebaseApp = _app!;
+export const auth: Auth = _auth!;
+export const db: Firestore = _db!;
+export const storage: FirebaseStorage = _storage!;
+
 export default app;

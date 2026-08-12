@@ -7,6 +7,7 @@ import {
   sendAdminMessageAction,
 } from "@/app/admin/orders/actions";
 import { markOrderAsReadAction } from "@/app/(public)/orders/actions";
+import Image from "next/image";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 
 interface AdminOrderDetailsClientProps {
@@ -18,10 +19,6 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
   initialOrder,
   initialMessages,
 }) => {
-  if (!initialOrder) {
-    return <div className="text-center p-8">No se pudo cargar la orden.</div>;
-  }
-
   const [order, setOrder] = useState(initialOrder);
   const [messages, setMessages] = useState(initialMessages);
   const [newMessage, setNewMessage] = useState("");
@@ -37,6 +34,10 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!initialOrder) {
+    return <div className="text-center p-8">No se pudo cargar la orden.</div>;
+  }
 
   const handleStatusChange = () => {
     if (selectedStatus === order.orderStatus) return;
@@ -294,10 +295,13 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
                 key={item.id}
                 className="flex gap-4 items-center border-b dark:border-gray-700 last:border-b-0 pb-3 last:pb-0"
               >
-                <img
+                <Image
                   src={item.imageURL}
                   alt={item.name}
-                  className="w-16 h-16 rounded object-cover bg-gray-100 dark:bg-gray-700"
+                  width={64}
+                  height={64}
+                  unoptimized
+                  className="rounded object-cover bg-gray-100 dark:bg-gray-700"
                 />
                 <div>
                   <p className="font-semibold">{item.name}</p>

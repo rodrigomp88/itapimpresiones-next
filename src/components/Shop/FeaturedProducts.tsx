@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, query, limit, getDocs, orderBy } from "firebase/firestore";
 import { db } from "@/firebase/config";
+import Image from "next/image";
 import { Product, ProductImage } from "@/types";
 import ProductItem from "../Product/ProductItem";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -65,8 +66,11 @@ const FeaturedProducts = () => {
           className="min-w-[240px] bg-surface-light dark:bg-surface-dark rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm snap-center"
         >
           <div className="p-4 bg-gray-50 dark:bg-gray-800/50 rounded-t-xl flex justify-center">
-            <img
+            <Image
               alt={product.name}
+              width={128}
+              height={128}
+              unoptimized
               className="h-32 object-contain mix-blend-multiply dark:mix-blend-normal"
               src={getImageUrl(product.images?.[0])}
               onError={(e) => {

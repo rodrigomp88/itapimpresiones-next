@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useCallback } from "react";
+import { useMemo } from "react";
 
 // ⚡ UTILIDADES DE RENDIMIENTO
 

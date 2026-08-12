@@ -5,14 +5,11 @@ import {
   ChartBarIcon,
   CurrencyDollarIcon,
   ShoppingCartIcon,
-  UsersIcon,
   ArrowTrendingUpIcon,
   EyeIcon,
   ClockIcon,
   StarIcon,
 } from "@heroicons/react/24/outline";
-import { format, subDays, startOfDay, endOfDay } from "date-fns";
-import { es } from "date-fns/locale";
 
 interface AnalyticsData {
   totalRevenue: number;

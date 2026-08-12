@@ -16,6 +16,7 @@ import {
   deleteProductAction,
   togglePauseProductAction,
 } from "@/app/admin/products/actions";
+import Image from "next/image";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
@@ -142,10 +143,13 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Product Image */}
                 <div className="flex-shrink-0 relative group">
-                  <img
+                  <Image
                     src={getImageUrl(product.images)}
                     alt={product.name}
-                    className="w-32 h-32 object-contain rounded-lg bg-zinc-100 dark:bg-zinc-900"
+                    width={128}
+                    height={128}
+                    unoptimized
+                    className="object-contain rounded-lg bg-zinc-100 dark:bg-zinc-900"
                   />
                   {/* Badge de cantidad de imágenes */}
                   <span className="absolute bottom-1 right-1 bg-black/70 text-white text-xs px-2 py-1 rounded-full">

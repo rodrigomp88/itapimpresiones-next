@@ -4,6 +4,7 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 import useSlider from "@/hooks/useSlider";
 
 const containerVariants = {
@@ -77,9 +78,12 @@ const Carousel: React.FC = () => {
             variants={imageVariants}
             className="flex items-center justify-center p-4"
           >
-            <img
+            <Image
               src={sliderData[currentSlide].image}
               alt={sliderData[currentSlide].heading}
+              width={500}
+              height={500}
+              unoptimized
               className="max-h-[500px] w-auto object-contain drop-shadow-xl"
             />
           </motion.div>

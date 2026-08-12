@@ -4,6 +4,7 @@ import { ChangeEvent, useState, useTransition, FormEvent } from "react";
 import { editProductAction } from "@/app/admin/products/actions";
 import { Product, ProductImage } from "@/types";
 import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
+import Image from "next/image";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { productSchema, ProductFormData } from "@/lib/validationSchemas";
 
@@ -231,10 +232,13 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                     key={`exist-${index}`}
                     className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800 p-2 rounded"
                   >
-                    <img
+                    <Image
                       src={img.url}
                       alt="img"
-                      className="w-12 h-12 object-cover rounded"
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="object-cover rounded"
                     />
                     <div className="flex-1">
                       <select
@@ -283,10 +287,13 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                     key={`new-${index}`}
                     className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 p-2 rounded border border-blue-200"
                   >
-                    <img
+                    <Image
                       src={img.preview}
                       alt="preview"
-                      className="w-12 h-12 object-cover rounded"
+                      width={48}
+                      height={48}
+                      unoptimized
+                      className="object-cover rounded"
                     />
                     <div className="flex-1">
                       <select

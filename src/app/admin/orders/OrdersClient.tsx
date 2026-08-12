@@ -14,9 +14,7 @@ import {
   FaCreditCard,
   FaCheckSquare,
   FaSquare,
-  FaTasks,
   FaCheck,
-  FaDownload,
 } from "react-icons/fa";
 
 interface OrdersClientProps {
@@ -29,7 +27,6 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
   const [paymentStatusFilter, setPaymentStatusFilter] =
     useState<string>("Todos");
   const [selectedOrders, setSelectedOrders] = useState<string[]>([]);
-  const [showBulkActions, setShowBulkActions] = useState(false);
   const [bulkStatus, setBulkStatus] = useState<OrderStatus>("pending");
   const [isProcessingBulk, setIsProcessingBulk] = useState(false);
 

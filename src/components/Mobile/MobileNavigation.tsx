@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 import { selectCartTotalQuantity } from "@/redux/slice/cartSlice";
 
 const MobileNavigation = () => {

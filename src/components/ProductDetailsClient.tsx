@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { ADD_TO_CART, selectCartItems } from "../redux/slice/cartSlice";
 import { Product, ProductImage, CartItem } from "../types";
 import { useEffect, useState, useRef, ChangeEvent, PointerEvent } from "react";
-import { NotiflixWarning } from "./Notiflix/Notiflix";
 import { useProductDetailsReducer } from "../hooks/useProductDetailsReducer";
 
 interface ProductDetailsClientProps {
@@ -34,7 +32,6 @@ const getImageColor = (
 const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
   product,
 }) => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const cartItems = useAppSelector(selectCartItems);
   const [isClient, setIsClient] = useState(false);

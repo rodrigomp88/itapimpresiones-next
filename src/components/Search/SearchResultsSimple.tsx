@@ -6,12 +6,6 @@ import { Product } from "@/types";
 import ProductItem from "../Product/ProductItem";
 import { ProductGridSkeleton } from "../SkeletonComponents";
 
-// Helper para obtener URL de imagen
-const getImageUrl = (img: string | any): string => {
-  if (typeof img === "string") return img;
-  return img?.url || "/placeholder.png";
-};
-
 interface SearchResultsProps {
   products: Product[];
   loading: boolean;

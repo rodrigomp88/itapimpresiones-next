@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ImageModalProps {
@@ -21,12 +22,15 @@ const ImageModal: React.FC<ImageModalProps> = ({ title, image, nameClass }) => {
 
   return (
     <div>
-      <img
-        src={image}
-        alt={title}
-        className={`cursor-pointer w-full object-cover ${nameClass}`}
-        onClick={handleOpen}
-      />
+      <div className="relative w-full" onClick={handleOpen}>
+        <Image
+          src={image}
+          alt={title}
+          fill
+          unoptimized
+          className={`cursor-pointer object-cover ${nameClass}`}
+        />
+      </div>
 
       <AnimatePresence>
         {isOpen && (
@@ -43,10 +47,12 @@ const ImageModal: React.FC<ImageModalProps> = ({ title, image, nameClass }) => {
               animate={{ scale: 1 }}
               exit={{ scale: 0.7 }}
             >
-              <img
+              <Image
                 src={image}
                 alt={title}
-                className="w-full h-full object-contain"
+                fill
+                unoptimized
+                className="object-contain"
               />
 
               <button

@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, lazy, ComponentType, createElement } from "react";
-import LoadingSpinner, { SectionLoadingSpinner } from "./LoadingSpinner";
+import { SectionLoadingSpinner } from "./LoadingSpinner";
 
 // Hook para lazy loading de componentes
 export function lazyLoad<T extends ComponentType<any>>(

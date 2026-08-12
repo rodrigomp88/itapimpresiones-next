@@ -10,6 +10,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase/config";
+import Image from "next/image";
 import { Message, Order } from "@/types";
 import {
   markOrderAsReadAction,
@@ -106,10 +107,13 @@ const OrderDetailsClient: React.FC<OrderDetailsClientProps> = ({
                 key={item.id}
                 className="flex items-center gap-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0 pb-4 last:pb-0"
               >
-                <img
+                <Image
                   src={item.imageURL}
                   alt={item.name}
-                  className="w-20 h-20 object-cover rounded-md bg-gray-100 dark:bg-gray-700"
+                  width={80}
+                  height={80}
+                  unoptimized
+                  className="object-cover rounded-md bg-gray-100 dark:bg-gray-700"
                 />
                 <div className="flex-grow">
                   <p className="font-semibold">{item.name}</p>

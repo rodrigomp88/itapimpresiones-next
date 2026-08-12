@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { db, storage, auth } from "@/firebase/config";
+import { db, storage } from "@/firebase/config";
 import {
   collection,
   addDoc,
@@ -10,19 +10,16 @@ import {
   doc,
   orderBy,
   query,
-  updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
 import {
   ref,
   uploadBytes,
   getDownloadURL,
-  deleteObject,
 } from "firebase/storage";
 import { Banner } from "@/types";
 import {
   FaTrash,
-  FaEdit,
   FaPlus,
   FaImage,
   FaCloudDownloadAlt,

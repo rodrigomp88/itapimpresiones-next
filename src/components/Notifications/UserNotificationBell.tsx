@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import { FaBell } from "react-icons/fa";
 import NotificationDropdown from "./NotificationDropdown";
 import { onAuthStateChanged } from "firebase/auth";
@@ -10,7 +9,6 @@ import { Order } from "@/types";
 import { auth, db } from "@/firebase/config";
 
 const UserNotificationBell = () => {
-  const { data: session } = useSession();
   const [notifications, setNotifications] = useState<Order[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -18,6 +16,7 @@ const UserNotificationBell = () => {
 
   // 1. Obtener UID real de Firebase
   useEffect(() => {
+    if (!auth) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setFirebaseUid(user.uid);

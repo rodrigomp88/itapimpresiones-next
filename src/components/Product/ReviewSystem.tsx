@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
@@ -457,11 +458,14 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
             {review.images && review.images.length > 0 && (
               <div className="flex space-x-2 mt-3">
                 {review.images.map((image, index) => (
-                  <img
+                  <Image
                     key={index}
                     src={image}
                     alt={`Reseña ${index + 1}`}
                     className="w-20 h-20 object-cover rounded-lg"
+                    width={80}
+                    height={80}
+                    unoptimized
                   />
                 ))}
               </div>

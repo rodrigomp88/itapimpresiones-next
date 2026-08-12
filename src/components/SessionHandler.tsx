@@ -26,14 +26,18 @@ const SessionHandler = () => {
           });
 
           if (!response.ok) {
-            const errorText = await response.text();
-            console.error("Error fetching token:", response.status, errorText);
-            throw new Error("Failed to fetch custom token");
+            console.warn("Firebase token unavailable (status:", response.status, ")");
+            return;
           }
 
           const data = await response.json();
 
-          if (data.firebaseToken) {
+          if (!data.firebaseToken) {
+            // Admin SDK not configured — skip silently
+            return;
+          }
+
+          if (data.firebaseToken && auth) {
             await signInWithCustomToken(auth, data.firebaseToken);
 
             // ... resto del código igual ...
@@ -57,7 +61,7 @@ const SessionHandler = () => {
         } catch (error) {
           console.error("Error syncing Firebase auth:", error);
         }
-      } else if (!session && auth.currentUser) {
+      } else if (!session && auth?.currentUser) {
         await auth.signOut();
       }
     };

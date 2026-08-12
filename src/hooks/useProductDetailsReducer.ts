@@ -1,5 +1,4 @@
 import { useReducer, useCallback } from "react";
-import { Product, ProductImage } from "../types";
 
 interface ProductDetailsState {
   selectedImage: number;

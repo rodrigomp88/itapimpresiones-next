@@ -14,9 +14,8 @@ import {
   SAVE_URL,
   selectCartItems,
   selectCartTotalAmount,
-  selectCartTotalQuantity,
 } from "@/redux/slice/cartSlice";
-import { Product, ProductImage, CartItem } from "@/types";
+import { ProductImage, CartItem } from "@/types";
 
 const getImageUrl = (image: string | ProductImage | undefined): string => {
   if (!image) return "/placeholder.png";

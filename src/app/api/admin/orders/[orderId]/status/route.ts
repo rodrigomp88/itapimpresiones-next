@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminDb } from "@/firebase/admin";
 import { updateOrderStatusAction } from "@/app/admin/orders/actions";
 
 export async function PATCH(

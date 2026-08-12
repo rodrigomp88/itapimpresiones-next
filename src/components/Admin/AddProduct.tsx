@@ -6,6 +6,7 @@ import { NotiflixFailure, NotiflixSuccess } from "../Notiflix/Notiflix";
 import { storage } from "@/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import Image from "next/image";
 import { FaTrash, FaImage } from "react-icons/fa";
 import { productSchema, ProductFormData } from "@/lib/validationSchemas";
 
@@ -256,10 +257,13 @@ const AddProduct = () => {
                         key={i}
                         className="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-900 p-2 rounded border border-zinc-200"
                       >
-                        <img
+                        <Image
                           src={img.previewUrl}
                           alt="preview"
-                          className="w-16 h-16 object-cover rounded"
+                          width={64}
+                          height={64}
+                          unoptimized
+                          className="object-cover rounded"
                         />
                         <div className="flex-1">
                           <label className="text-xs text-zinc-500 mb-1 block">

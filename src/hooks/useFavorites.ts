@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Product } from "@/types";
 import { safeLocalStorageGet, safeLocalStorageSet } from "@/utils/security";
 
 export const useFavorites = () => {

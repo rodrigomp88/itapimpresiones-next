@@ -1,5 +1,4 @@
 import { useReducer, useCallback } from "react";
-import { Product } from "../types";
 
 export interface ShopState {
   category: string;

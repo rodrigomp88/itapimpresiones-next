@@ -1,30 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap", // Optimizar para Core Web Vitals
-  preload: true,
-  variable: "--font-inter",
-});
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 import Providers from "./providers";
 import SessionHandler from "../components/SessionHandler";
-import PreloadResources from "../components/PreloadResources";
 import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
 import PWAInstaller from "../components/PWAInstaller";
-import SkipLink from "../components/SkipLink";
 import MobileNavigationWrapper from "../components/Mobile/MobileNavigationWrapper";
 
 import { initSentry } from "../utils/sentry";

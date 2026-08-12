@@ -53,8 +53,7 @@ export default function CouponsAdminPage() {
         updatedAt: doc.data().updatedAt?.toDate() || new Date(),
       })) as Coupon[];
       setCoupons(couponsData);
-    } catch (error) {
-      console.error("Error cargando cupones:", error);
+    } catch {
       NotiflixFailure("Error al cargar cupones");
     } finally {
       setIsLoading(false);

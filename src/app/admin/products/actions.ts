@@ -153,7 +153,7 @@ export async function editProductAction(productId: string, formData: FormData) {
 
 export async function deleteProductAction(
   productId: string,
-  productSlug: string
+  _productSlug: string
 ) {
   try {
     if (!adminDb) return { success: false, error: "Admin no init" };

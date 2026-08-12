@@ -14,12 +14,13 @@ import {
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth, db } from "@/firebase/config";
 import { Order } from "@/types";
+import Image from "next/image";
 import Link from "next/link";
 import { ShippingAddress } from "@/redux/slice/checkoutSlice";
 
 const OrderConfirmationPage: React.FC = () => {
   const router = useRouter();
-  const { data: session, status: sessionStatus } = useSession();
+  const { status: sessionStatus } = useSession();
 
   const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
   const [isFirebaseLoading, setIsFirebaseLoading] = useState(true);
@@ -28,6 +29,10 @@ const OrderConfirmationPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!auth) {
+      setIsFirebaseLoading(false);
+      return;
+    }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setFirebaseUser(user);
       setIsFirebaseLoading(false);
@@ -311,12 +316,14 @@ const OrderConfirmationPage: React.FC = () => {
         <div className="divide-y divide-zinc-200 dark:divide-zinc-700">
           {order.orderItems.map((item, index) => (
             <div key={index} className="px-6 py-4 flex items-center gap-4">
-              <div className="flex-shrink-0 w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden">
+              <div className="flex-shrink-0 relative w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden">
                 {item.imageURL ? (
-                  <img
+                  <Image
                     src={item.imageURL}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    unoptimized
+                    className="object-cover"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-zinc-400">

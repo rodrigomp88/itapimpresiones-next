@@ -8,7 +8,6 @@ import { RiMenu3Fill, RiCloseLine } from "react-icons/ri";
 import { motion, AnimatePresence } from "framer-motion";
 import UserNotificationProvider from "../Notifications/UserNotificationProvider";
 import InAppNotificationHandler from "../Notifications/InAppNotificationHandler";
-import Image from "next/image";
 import {
   CALCULATE_TOTAL_QUANTITY,
   selectCartTotalQuantity,
