@@ -17,8 +17,59 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+const fallbackProducts: Product[] = [
+  {
+    id: "1",
+    name: "Remera Algodón Blanca",
+    slug: "remera-algodon-blanca",
+    price: 2500,
+    images: [{ url: "/images/carousel1.png", color: "Blanco" }],
+    pause: false,
+    unity: "unidad",
+    size: "M",
+    category: "Remeras",
+    color: "Blanco",
+    description: "Remera de algodón peinado 100%. Calidad premium.",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "2",
+    name: "Bolsa Friselina Standard",
+    slug: "bolsa-friselina-standard",
+    price: 800,
+    images: [{ url: "/images/carousel0.png", color: "Blanco" }],
+    pause: false,
+    unity: "unidad",
+    size: "30x40",
+    category: "Bolsas",
+    color: "Blanco",
+    bagType: "Friselina",
+    description: "Bolsa de friselina ecológica. Personalizable.",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "3",
+    name: "Gorra Bordada Negra",
+    slug: "gorra-bordada-negra",
+    price: 3500,
+    images: [{ url: "/images/carousel3.png", color: "Negro" }],
+    pause: false,
+    unity: "unidad",
+    size: "Única",
+    category: "Gorras",
+    color: "Negro",
+    description: "Gorra con bordado personalizado. Estilo único.",
+    createdAt: new Date().toISOString(),
+  },
+];
+
 async function getProductBySlug(slug: string): Promise<Product | null> {
   if (!slug) return null;
+
+  if (!db) {
+    console.warn("Firestore not available. Showing fallback product.");
+    return fallbackProducts.find((p) => p.slug === slug) || null;
+  }
 
   return cachedQuery(
     CACHE_KEYS.productBySlug(slug),

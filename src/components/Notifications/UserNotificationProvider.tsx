@@ -7,6 +7,8 @@ import app from "@/firebase/config";
 
 const UserNotificationProvider = () => {
   useEffect(() => {
+    if (!app) return;
+
     const setupMessaging = async () => {
       try {
         if (await isSupported()) {

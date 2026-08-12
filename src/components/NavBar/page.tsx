@@ -109,7 +109,7 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 ml-4">
           {status === "authenticated" && (
             <div className="relative hidden md:block">
               <UserNotificationBell />

@@ -19,12 +19,6 @@ const nextConfig = {
             chunks: 'all',
             priority: 10,
           },
-          firebase: {
-            test: /[\\/]node_modules[\\/]firebase[\\/]/,
-            name: 'firebase',
-            chunks: 'all',
-            priority: 20,
-          },
           ui: {
             test: /[\\/]node_modules[\\/](lucide-react|@heroicons|framer-motion)[\\/]/,
             name: 'ui',
@@ -99,7 +93,7 @@ const nextConfig = {
 
   // Experimental features para performance
   experimental: {
-    optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion', 'firebase', '@firebase/firestore'],
+    optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion'],
     optimizeCss: true,
     scrollRestoration: true,
   },

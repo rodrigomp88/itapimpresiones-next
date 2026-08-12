@@ -247,14 +247,6 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                 </button>
               </div>
             </div>
-
-            <div className="relative lg:h-[400px] flex items-center justify-center order-1 lg:order-2 h-64 sm:h-80 lg:h-auto">
-              <div className="relative z-10 w-56 h-56 sm:w-80 sm:h-80 lg:w-full lg:max-w-md aspect-square rounded-2xl overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500">
-                <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600"></div>
-                <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-              </div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-3xl rounded-full"></div>
-            </div>
           </div>
         </div>
       </section>

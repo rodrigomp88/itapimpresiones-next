@@ -24,12 +24,44 @@ const firebaseConfig: FirebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-export const app: FirebaseApp = !getApps().length
-  ? initializeApp(firebaseConfig)
-  : getApp();
+const hasValidConfig = Boolean(
+  firebaseConfig.apiKey &&
+  firebaseConfig.authDomain &&
+  firebaseConfig.projectId
+);
 
-export const auth: Auth = getAuth(app);
-export const db: Firestore = getFirestore(app);
-export const storage: FirebaseStorage = getStorage(app);
+let app: FirebaseApp | null = null;
+let auth: Auth | null = null;
+let db: Firestore | null = null;
+let storage: FirebaseStorage | null = null;
 
+if (hasValidConfig) {
+  console.log("Firebase config loaded:", { apiKey: firebaseConfig.apiKey?.substring(0, 10) + "...", projectId: firebaseConfig.projectId });
+  try {
+    app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+    auth = getAuth(app);
+  } catch (error: any) {
+    console.error("Firebase Auth initialization error:", error.message);
+  }
+
+  try {
+    if (app) {
+      db = getFirestore(app);
+    }
+  } catch (error: any) {
+    console.error("Firebase Firestore initialization error:", error.message);
+  }
+
+  try {
+    if (app) {
+      storage = getStorage(app);
+    }
+  } catch (error: any) {
+    console.error("Firebase Storage initialization error:", error.message);
+  }
+} else {
+  console.warn("Firebase config not found. Firebase services disabled.");
+}
+
+export { app, auth, db, storage };
 export default app;

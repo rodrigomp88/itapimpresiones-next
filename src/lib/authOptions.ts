@@ -21,6 +21,10 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Faltan credenciales");
         }
+        if (!auth) {
+          console.warn("Firebase auth not available. Login disabled.");
+          return null;
+        }
         try {
           const userCredential = await signInWithEmailAndPassword(
             auth,

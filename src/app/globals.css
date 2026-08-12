@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 /* Variables CSS para el tema */
 :root {
   --color-primary: #196ee6;
