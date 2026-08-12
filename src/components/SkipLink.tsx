@@ -13,10 +13,10 @@ interface SkipLinkProps {
  * Componente SkipLink para mejorar la accesibilidad
  * Permite saltar a secciones importantes del sitio
  */
-const SkipLink: React.FC<SkipLinkProps> = ({ 
-  href, 
-  children, 
-  className = "" 
+const SkipLink: React.FC<SkipLinkProps> = ({
+  href,
+  children,
+  className = "",
 }) => {
   return (
     <motion.a

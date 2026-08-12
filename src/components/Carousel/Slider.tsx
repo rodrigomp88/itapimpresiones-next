@@ -24,7 +24,9 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
     const timer = setInterval(() => {
       setCurrent((prev) => {
         const next = prev === slides.length - 1 ? 0 : prev + 1;
-        setAnnounceText(`Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`);
+        setAnnounceText(
+          `Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`
+        );
         return next;
       });
     }, 5000);
@@ -33,36 +35,39 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
   }, [slides.length, isPlaying]);
 
   // Navegación por teclado
-  const handleKeyDown = useCallback((event: KeyboardEvent) => {
-    if (slides.length <= 1) return;
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (slides.length <= 1) return;
 
-    switch (event.key) {
-      case "ArrowLeft":
-        event.preventDefault();
-        setIsPlaying(false);
-        prevSlide();
-        break;
-      case "ArrowRight":
-        event.preventDefault();
-        setIsPlaying(false);
-        nextSlide();
-        break;
-      case "Home":
-        event.preventDefault();
-        setIsPlaying(false);
-        goToSlide(0);
-        break;
-      case "End":
-        event.preventDefault();
-        setIsPlaying(false);
-        goToSlide(slides.length - 1);
-        break;
-      case " ":
-        event.preventDefault();
-        setIsPlaying(!isPlaying);
-        break;
-    }
-  }, [slides.length, isPlaying]);
+      switch (event.key) {
+        case "ArrowLeft":
+          event.preventDefault();
+          setIsPlaying(false);
+          prevSlide();
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          setIsPlaying(false);
+          nextSlide();
+          break;
+        case "Home":
+          event.preventDefault();
+          setIsPlaying(false);
+          goToSlide(0);
+          break;
+        case "End":
+          event.preventDefault();
+          setIsPlaying(false);
+          goToSlide(slides.length - 1);
+          break;
+        case " ":
+          event.preventDefault();
+          setIsPlaying(!isPlaying);
+          break;
+      }
+    },
+    [slides.length, isPlaying]
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -72,39 +77,48 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
   const nextSlide = () => {
     const next = current === slides.length - 1 ? 0 : current + 1;
     setCurrent(next);
-    setAnnounceText(`Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`);
+    setAnnounceText(
+      `Slide ${next + 1} de ${slides.length}: ${slides[next].heading}`
+    );
   };
 
   const prevSlide = () => {
     const prev = current === 0 ? slides.length - 1 : current - 1;
     setCurrent(prev);
-    setAnnounceText(`Slide ${prev + 1} de ${slides.length}: ${slides[prev].heading}`);
+    setAnnounceText(
+      `Slide ${prev + 1} de ${slides.length}: ${slides[prev].heading}`
+    );
   };
 
   const goToSlide = (index: number) => {
     setCurrent(index);
-    setAnnounceText(`Slide ${index + 1} de ${slides.length}: ${slides[index].heading}`);
+    setAnnounceText(
+      `Slide ${index + 1} de ${slides.length}: ${slides[index].heading}`
+    );
   };
 
   if (!slides || slides.length === 0) {
     return (
-      <div className="flex items-center justify-center h-[500px] bg-gray-200" role="alert">
+      <div
+        className="flex items-center justify-center h-[500px] bg-gray-200"
+        role="alert"
+      >
         No hay imágenes
       </div>
     );
   }
 
   return (
-    <section 
+    <section
       className="relative w-full h-[600px] md:h-[500px] overflow-hidden group bg-white dark:bg-black"
       role="region"
       aria-label="Carrusel de imágenes"
       aria-roledescription="carrusel"
     >
       {/* Live region para anunciar cambios a lectores de pantalla */}
-      <div 
-        className="sr-only" 
-        aria-live="polite" 
+      <div
+        className="sr-only"
+        aria-live="polite"
         aria-atomic="true"
         role="status"
       >
@@ -115,7 +129,11 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
       <button
         onClick={() => setIsPlaying(!isPlaying)}
         className="sr-only"
-        aria-label={isPlaying ? "Pausar carrusel automático" : "Reanudar carrusel automático"}
+        aria-label={
+          isPlaying
+            ? "Pausar carrusel automático"
+            : "Reanudar carrusel automático"
+        }
       >
         {isPlaying ? "Pausar" : "Reanudar"}
       </button>
@@ -137,11 +155,9 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
 
           {/* Content Container */}
           <div className="relative z-10 h-full max-w-7xl mx-auto px-4 md:px-12">
-            
             {isMobile ? (
               // LAYOUT MÓVIL: imagen arriba, texto abajo
               <div className="h-full flex flex-col items-center justify-center space-y-6">
-                
                 {/* Imagen ARRIBA en móvil */}
                 <motion.div
                   className="flex items-center justify-center"
@@ -158,7 +174,8 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                     className="max-h-[320px] w-auto object-contain drop-shadow-2xl"
                     sizes="(max-width: 768px) 100vw, 320px"
                     onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgdmlld0JveD0iMCAwIDMyMCAzMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMzIwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
+                      e.currentTarget.src =
+                        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgdmlld0JveD0iMCAwIDMyMCAzMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMzIwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+";
                     }}
                   />
                 </motion.div>
@@ -188,7 +205,6 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
             ) : (
               // LAYOUT DESKTOP: texto izquierda, imagen derecha
               <div className="h-full grid md:grid-cols-2 items-center">
-                
                 {/* Texto IZQUIERDA en desktop */}
                 <motion.div
                   className="flex flex-col items-start text-left space-y-5 pr-8"
@@ -227,7 +243,8 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                     className="max-h-[450px] w-auto object-contain drop-shadow-2xl"
                     sizes="(min-width: 769px) 50vw, 450px"
                     onError={(e) => {
-                      e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDQ1MCA0NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0NTAiIGhlaWdodD0iNDUwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+';
+                      e.currentTarget.src =
+                        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDUwIiBoZWlnaHQ9IjQ1MCIgdmlld0JveD0iMCAwIDQ1MCA0NTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0NTAiIGhlaWdodD0iNDUwIiBmaWxsPSIjRjNGNEY2Ii8+Cjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iMC4zNWVtIiBmaWxsPSIjOUI5QkE0IiBmb250LXNpemU9IjE0Ij5ObyBJbWFnZTwvdGV4dD4KPC9zdmc+";
                     }}
                   />
                 </motion.div>
@@ -242,7 +259,10 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
         <>
           {/* Botones de navegación */}
           <div className="sr-only">
-            <p>Use las flechas del teclado para navegar, Home para ir al primer slide, End para el último, y Espacio para pausar/reanudar.</p>
+            <p>
+              Use las flechas del teclado para navegar, Home para ir al primer
+              slide, End para el último, y Espacio para pausar/reanudar.
+            </p>
           </div>
 
           <button
@@ -251,20 +271,24 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
             aria-label={`Slide anterior (${current === 0 ? slides.length : current} de ${slides.length})`}
             aria-describedby="carousel-instructions"
           >
-            <span className="text-lg md:text-2xl" aria-hidden="true">‹</span>
+            <span className="text-lg md:text-2xl" aria-hidden="true">
+              ‹
+            </span>
           </button>
-          
+
           <button
             onClick={nextSlide}
             className="absolute top-1/2 right-2 md:right-4 transform -translate-y-1/2 bg-slate-200 hover:bg-slate-300 dark:text-white rounded-full p-2 md:p-3 transition-colors backdrop-blur-sm opacity-70 md:opacity-0 group-hover:opacity-100 z-20"
             aria-label={`Slide siguiente (${current === slides.length - 1 ? 1 : current + 2} de ${slides.length})`}
             aria-describedby="carousel-instructions"
           >
-            <span className="text-lg md:text-2xl" aria-hidden="true">›</span>
+            <span className="text-lg md:text-2xl" aria-hidden="true">
+              ›
+            </span>
           </button>
 
           {/* Indicadores de puntos */}
-          <nav 
+          <nav
             className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20"
             aria-label="Navegación de slides"
             role="tablist"
@@ -290,8 +314,11 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
 
           {/* Instrucciones ocultas para lectores de pantalla */}
           <div id="carousel-instructions" className="sr-only">
-            Carrusel de {slides.length} slides. Use las flechas izquierda y derecha para navegar. 
-            {isPlaying ? "Reproducción automática activa." : "Reproducción automática pausada."}
+            Carrusel de {slides.length} slides. Use las flechas izquierda y
+            derecha para navegar.
+            {isPlaying
+              ? "Reproducción automática activa."
+              : "Reproducción automática pausada."}
           </div>
         </>
       )}

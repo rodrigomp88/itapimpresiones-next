@@ -106,7 +106,10 @@ async function getProductBySlug(slug: string): Promise<Product | null> {
 
         return productData as Product;
       } catch (error) {
-        console.error("Servidor: Error al obtener el producto por slug:", error);
+        console.error(
+          "Servidor: Error al obtener el producto por slug:",
+          error
+        );
         return null;
       }
     },
@@ -136,14 +139,16 @@ export async function generateStaticParams() {
 
 // Función para obtener la URL de la imagen
 function getImageUrl(image: ProductImage | string): string {
-  if (typeof image === 'string') {
+  if (typeof image === "string") {
     return image;
   }
   return image.url;
 }
 
 // Función para generar metadata dinámica
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
@@ -154,12 +159,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://itapimpresiones.com";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://itapimpresiones.com";
   const productUrl = `${baseUrl}/producto/${product.slug}`;
 
   return {
     title: `${product.name} | Itap Impresiones`,
-    description: product.description || `Comprar ${product.name} - ${product.category} - Precio: $${product.price}`,
+    description:
+      product.description ||
+      `Comprar ${product.name} - ${product.category} - Precio: $${product.price}`,
     keywords: [
       product.name,
       product.category,
@@ -173,31 +181,39 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ],
     openGraph: {
       title: product.name,
-      description: product.description || `Comprar ${product.name} - ${product.category}`,
+      description:
+        product.description || `Comprar ${product.name} - ${product.category}`,
       url: productUrl,
       siteName: "Itap Impresiones",
-      images: product.images.length > 0 ? [
-        {
-          url: getImageUrl(product.images[0]),
-          width: 1200,
-          height: 630,
-          alt: product.name,
-        }
-      ] : [
-        {
-          url: `${baseUrl}/images/logoblack.png`,
-          width: 1200,
-          height: 630,
-          alt: "Itap Impresiones",
-        }
-      ],
+      images:
+        product.images.length > 0
+          ? [
+              {
+                url: getImageUrl(product.images[0]),
+                width: 1200,
+                height: 630,
+                alt: product.name,
+              },
+            ]
+          : [
+              {
+                url: `${baseUrl}/images/logoblack.png`,
+                width: 1200,
+                height: 630,
+                alt: "Itap Impresiones",
+              },
+            ],
       locale: "es_AR",
     },
     twitter: {
       card: "summary_large_image",
       title: product.name,
-      description: product.description || `Comprar ${product.name} - ${product.category}`,
-      images: product.images.length > 0 ? [getImageUrl(product.images[0])] : [`${baseUrl}/images/logoblack.png`],
+      description:
+        product.description || `Comprar ${product.name} - ${product.category}`,
+      images:
+        product.images.length > 0
+          ? [getImageUrl(product.images[0])]
+          : [`${baseUrl}/images/logoblack.png`],
     },
     alternates: {
       canonical: productUrl,
@@ -233,31 +249,35 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Product",
-            "name": product?.name,
-            "description": product?.description || `Comprar ${product?.name} - ${product?.category}`,
-            "image": product?.images?.map(img => getImageUrl(img)) || [],
-            "offers": {
+            name: product?.name,
+            description:
+              product?.description ||
+              `Comprar ${product?.name} - ${product?.category}`,
+            image: product?.images?.map((img) => getImageUrl(img)) || [],
+            offers: {
               "@type": "Offer",
-              "url": `${process.env.NEXT_PUBLIC_SITE_URL || "https://itapimpresiones.com"}/producto/${product?.slug}`,
-              "priceCurrency": "ARS",
-              "price": product?.price,
-              "availability": product?.pause ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "seller": {
+              url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://itapimpresiones.com"}/producto/${product?.slug}`,
+              priceCurrency: "ARS",
+              price: product?.price,
+              availability: product?.pause
+                ? "https://schema.org/OutOfStock"
+                : "https://schema.org/InStock",
+              seller: {
                 "@type": "Organization",
-                "name": "Itap Impresiones"
-              }
+                name: "Itap Impresiones",
+              },
             },
-            "category": product?.category,
-            "brand": {
+            category: product?.category,
+            brand: {
               "@type": "Brand",
-              "name": "Itap Impresiones"
+              name: "Itap Impresiones",
             },
-            "aggregateRating": {
+            aggregateRating: {
               "@type": "AggregateRating",
-              "ratingValue": "4.8",
-              "reviewCount": "24"
-            }
-          })
+              ratingValue: "4.8",
+              reviewCount: "24",
+            },
+          }),
         }}
       />
       <ProductDetailsClient product={product!} />

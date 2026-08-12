@@ -25,9 +25,7 @@ const firebaseConfig: FirebaseConfig = {
 };
 
 const hasValidConfig = Boolean(
-  firebaseConfig.apiKey &&
-  firebaseConfig.authDomain &&
-  firebaseConfig.projectId
+  firebaseConfig.apiKey && firebaseConfig.authDomain && firebaseConfig.projectId
 );
 
 let app: FirebaseApp | null = null;
@@ -36,7 +34,10 @@ let db: Firestore | null = null;
 let storage: FirebaseStorage | null = null;
 
 if (hasValidConfig) {
-  console.log("Firebase config loaded:", { apiKey: firebaseConfig.apiKey?.substring(0, 10) + "...", projectId: firebaseConfig.projectId });
+  console.log("Firebase config loaded:", {
+    apiKey: firebaseConfig.apiKey?.substring(0, 10) + "...",
+    projectId: firebaseConfig.projectId,
+  });
   try {
     app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
     auth = getAuth(app);

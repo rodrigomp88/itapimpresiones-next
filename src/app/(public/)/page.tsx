@@ -90,7 +90,10 @@ const Home = () => {
                   text: "Uniformes profesionales que reflejan tu identidad.",
                 },
               ].map((item, i) => (
-                <div key={i} className="flex flex-col gap-4 group cursor-pointer">
+                <div
+                  key={i}
+                  className="flex flex-col gap-4 group cursor-pointer"
+                >
                   <div className="relative w-full bg-slate-200 rounded-xl overflow-hidden aspect-[16/10]">
                     <Image
                       src={item.img}

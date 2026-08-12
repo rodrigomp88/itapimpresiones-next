@@ -1,12 +1,16 @@
-import { useState } from 'react';
-import { z } from 'zod';
+import { useState } from "react";
+import { z } from "zod";
 
 type ValidationSchema = z.ZodSchema<any>;
 type FormData = Record<string, any>;
 type ValidationErrors<T> = Partial<Record<keyof T, string>>;
 
-export function useFormValidation<T extends FormData>(schema: ValidationSchema) {
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors<T>>({});
+export function useFormValidation<T extends FormData>(
+  schema: ValidationSchema
+) {
+  const [validationErrors, setValidationErrors] = useState<ValidationErrors<T>>(
+    {}
+  );
 
   const validate = (data: T): boolean => {
     const result = schema.safeParse(data);
@@ -28,7 +32,7 @@ export function useFormValidation<T extends FormData>(schema: ValidationSchema) 
   };
 
   const setError = (field: keyof T, message: string) => {
-    setValidationErrors(prev => ({ ...prev, [field]: message }));
+    setValidationErrors((prev) => ({ ...prev, [field]: message }));
   };
 
   return {

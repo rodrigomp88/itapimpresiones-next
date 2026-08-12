@@ -327,7 +327,9 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                       add_photo_alternate
                     </span>
                     <span>
-                      {state.userLogo ? "Cambiar Logo" : "Subir y Previsualizar Logo"}
+                      {state.userLogo
+                        ? "Cambiar Logo"
+                        : "Subir y Previsualizar Logo"}
                     </span>
                   </button>
                 </div>

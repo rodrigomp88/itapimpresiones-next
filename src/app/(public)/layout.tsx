@@ -17,15 +17,15 @@ export default function PublicLayout({
       <SkipLink href="#footer">Saltar al pie de página</SkipLink>
 
       <Navbar />
-      
-      <main 
-        id="main-content" 
+
+      <main
+        id="main-content"
         className="min-h-screen px-5 lg:px-20"
         tabIndex={-1}
       >
         {children}
       </main>
-      
+
       <Footer />
     </MobileLayout>
   );

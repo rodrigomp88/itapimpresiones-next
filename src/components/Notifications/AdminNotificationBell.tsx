@@ -22,12 +22,15 @@ const AdminNotificationBell = () => {
       q,
       (snapshot) => {
         const unreadOrders = snapshot.docs.map(
-          (doc) => ({ id: doc.id, ...doc.data() } as Order)
+          (doc) => ({ id: doc.id, ...doc.data() }) as Order
         );
         setNotifications(unreadOrders);
       },
       (error) => {
-        console.log("Admin notification listener error (likely permissions):", error.code);
+        console.log(
+          "Admin notification listener error (likely permissions):",
+          error.code
+        );
         // Supress UI crash, just valid empty notifications
       }
     );

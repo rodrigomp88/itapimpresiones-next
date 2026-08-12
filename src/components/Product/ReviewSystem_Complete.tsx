@@ -590,7 +590,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       )}
          {" "}
     </div>
-  ); 
-}; 
+  );
+};
 
 export default ReviewSystem;

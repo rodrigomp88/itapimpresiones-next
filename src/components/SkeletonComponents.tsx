@@ -8,10 +8,15 @@ import SkeletonLoader from "./SkeletonLoader";
  */
 
 // Skeleton para cards de productos en grid
-export const ProductGridSkeleton: React.FC<{ count?: number }> = ({ count = 4 }) => (
+export const ProductGridSkeleton: React.FC<{ count?: number }> = ({
+  count = 4,
+}) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     {Array.from({ length: count }).map((_, i) => (
-      <div key={i} className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
+      <div
+        key={i}
+        className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden"
+      >
         <SkeletonLoader variant="product" className="h-64" />
         <div className="p-4 space-y-3">
           <SkeletonLoader variant="text" width="80%" height="1.25rem" />
@@ -27,10 +32,15 @@ export const ProductGridSkeleton: React.FC<{ count?: number }> = ({ count = 4 })
 );
 
 // Skeleton para cards de productos en scroll horizontal (móvil)
-export const ProductHorizontalSkeleton: React.FC<{ count?: number }> = ({ count = 4 }) => (
+export const ProductHorizontalSkeleton: React.FC<{ count?: number }> = ({
+  count = 4,
+}) => (
   <div className="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-4 px-4 snap-x">
     {Array.from({ length: count }).map((_, i) => (
-      <div key={i} className="min-w-[240px] bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 snap-center">
+      <div
+        key={i}
+        className="min-w-[240px] bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 snap-center"
+      >
         <SkeletonLoader variant="product" className="h-32 rounded-t-xl" />
         <div className="p-4 space-y-3">
           <SkeletonLoader variant="text" width="90%" height="1rem" />
@@ -62,7 +72,10 @@ export const FormSkeleton: React.FC<{ fields?: number }> = ({ fields = 3 }) => (
 export const ListSkeleton: React.FC<{ items?: number }> = ({ items = 5 }) => (
   <div className="space-y-4">
     {Array.from({ length: items }).map((_, i) => (
-      <div key={i} className="flex items-center space-x-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div
+        key={i}
+        className="flex items-center space-x-4 p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800"
+      >
         <SkeletonLoader variant="avatar" width="3rem" height="3rem" />
         <div className="flex-1 space-y-2">
           <SkeletonLoader variant="text" width="60%" height="1rem" />
@@ -94,9 +107,9 @@ export const BannerSkeleton: React.FC = () => (
 );
 
 // Skeleton para tablas
-export const TableSkeleton: React.FC<{ rows?: number; cols?: number }> = ({ 
-  rows = 5, 
-  cols = 4 
+export const TableSkeleton: React.FC<{ rows?: number; cols?: number }> = ({
+  rows = 5,
+  cols = 4,
 }) => (
   <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
     <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
@@ -106,11 +119,11 @@ export const TableSkeleton: React.FC<{ rows?: number; cols?: number }> = ({
       {Array.from({ length: rows }).map((_, i) => (
         <div key={i} className="p-4 flex items-center space-x-4">
           {Array.from({ length: cols }).map((_, j) => (
-            <SkeletonLoader 
-              key={j} 
-              variant="text" 
-              width={j === 0 ? "60%" : "30%"} 
-              height="1rem" 
+            <SkeletonLoader
+              key={j}
+              variant="text"
+              width={j === 0 ? "60%" : "30%"}
+              height="1rem"
             />
           ))}
         </div>
@@ -120,10 +133,15 @@ export const TableSkeleton: React.FC<{ rows?: number; cols?: number }> = ({
 );
 
 // Skeleton para dashboards/cards analytics
-export const AnalyticsCardSkeleton: React.FC<{ count?: number }> = ({ count = 4 }) => (
+export const AnalyticsCardSkeleton: React.FC<{ count?: number }> = ({
+  count = 4,
+}) => (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     {Array.from({ length: count }).map((_, i) => (
-      <div key={i} className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6">
+      <div
+        key={i}
+        className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-6"
+      >
         <div className="flex items-center justify-between">
           <div className="space-y-2">
             <SkeletonLoader variant="text" width="60%" height="1rem" />
@@ -146,5 +164,5 @@ export default {
   ListSkeleton,
   BannerSkeleton,
   TableSkeleton,
-  AnalyticsCardSkeleton
+  AnalyticsCardSkeleton,
 };

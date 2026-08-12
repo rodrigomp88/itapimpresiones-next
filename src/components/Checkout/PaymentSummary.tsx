@@ -42,7 +42,11 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
           <div key={item.id} className="flex items-center gap-3">
             <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-lg overflow-hidden flex-shrink-0">
               <img
-                src={typeof item.images[0] === "string" ? item.images[0] : item.images[0]?.url || "/placeholder.png"}
+                src={
+                  typeof item.images[0] === "string"
+                    ? item.images[0]
+                    : item.images[0]?.url || "/placeholder.png"
+                }
                 alt={item.name}
                 className="w-full h-full object-cover"
               />
@@ -66,14 +70,18 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
       <div className="space-y-3 mb-6">
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
-          <span className="text-zinc-900 dark:text-zinc-100">{formatPrice(cartTotalAmount)}</span>
+          <span className="text-zinc-900 dark:text-zinc-100">
+            {formatPrice(cartTotalAmount)}
+          </span>
         </div>
 
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">Envío</span>
           <span className="text-zinc-900 dark:text-zinc-100">
             {costs.shippingCost === 0 ? (
-              <span className="text-green-600 dark:text-green-400">¡Gratis!</span>
+              <span className="text-green-600 dark:text-green-400">
+                ¡Gratis!
+              </span>
             ) : (
               formatPrice(costs.shippingCost)
             )}
@@ -82,12 +90,16 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">IVA (21%)</span>
-          <span className="text-zinc-900 dark:text-zinc-100">{formatPrice(costs.taxAmount)}</span>
+          <span className="text-zinc-900 dark:text-zinc-100">
+            {formatPrice(costs.taxAmount)}
+          </span>
         </div>
 
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 space-y-2">
           <div className="flex justify-between text-lg font-semibold">
-            <span className="text-zinc-900 dark:text-zinc-100">Total del pedido</span>
+            <span className="text-zinc-900 dark:text-zinc-100">
+              Total del pedido
+            </span>
             <span className="text-zinc-900 dark:text-zinc-100">
               {formatPrice(costs.finalTotal)}
             </span>
@@ -95,7 +107,9 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 
           {/* Seña (50%) */}
           <div className="flex justify-between text-sm bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
-            <span className="text-blue-700 dark:text-blue-300 font-medium">Seña requerida (50%)</span>
+            <span className="text-blue-700 dark:text-blue-300 font-medium">
+              Seña requerida (50%)
+            </span>
             <span className="text-blue-800 dark:text-blue-200 font-bold">
               {formatPrice(costs.depositAmount)}
             </span>
@@ -125,7 +139,8 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
           💰 Sistema de pagos
         </p>
         <p className="text-amber-700 dark:text-amber-300 text-xs">
-          Pagás el 50% ahora para confirmar tu pedido. El resto se paga al finalizar el trabajo.
+          Pagás el 50% ahora para confirmar tu pedido. El resto se paga al
+          finalizar el trabajo.
         </p>
       </div>
 
@@ -139,7 +154,8 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
             </span>
           </div>
           <p className="text-blue-700 dark:text-blue-300 text-xs">
-            Pedido: {currentOrder.orderStatus} | Pago: {currentOrder.paymentStatus}
+            Pedido: {currentOrder.orderStatus} | Pago:{" "}
+            {currentOrder.paymentStatus}
           </p>
         </div>
       )}

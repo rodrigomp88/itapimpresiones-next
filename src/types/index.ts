@@ -59,9 +59,23 @@ export interface OrderItem {
   imageURL: string;
 }
 
-export type PaymentStatus = "pending" | "processing" | "approved" | "rejected" | "cancelled" | "refunded" | "expired";
+export type PaymentStatus =
+  | "pending"
+  | "processing"
+  | "approved"
+  | "rejected"
+  | "cancelled"
+  | "refunded"
+  | "expired";
 
-export type OrderStatus = "pending" | "confirmed" | "processing" | "shipped" | "delivered" | "cancelled" | "refunded";
+export type OrderStatus =
+  | "pending"
+  | "confirmed"
+  | "processing"
+  | "shipped"
+  | "delivered"
+  | "cancelled"
+  | "refunded";
 
 export interface PaymentDetails {
   status: string;

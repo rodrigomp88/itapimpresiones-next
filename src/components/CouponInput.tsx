@@ -84,10 +84,11 @@ export default function CouponInput({
                 Cupón {appliedCoupon.code}
               </p>
               <p className="text-green-600 dark:text-green-400 text-xs">
-                -{appliedCoupon.type === "percentage" 
-                  ? `${appliedCoupon.value}%` 
-                  : `$${appliedCoupon.value.toLocaleString("es-AR")}`}
-                {" "}= -${appliedCoupon.discount.toLocaleString("es-AR")}
+                -
+                {appliedCoupon.type === "percentage"
+                  ? `${appliedCoupon.value}%`
+                  : `$${appliedCoupon.value.toLocaleString("es-AR")}`}{" "}
+                = -${appliedCoupon.discount.toLocaleString("es-AR")}
               </p>
             </div>
           </div>
@@ -121,9 +122,11 @@ export default function CouponInput({
           {isLoading ? "..." : "Aplicar"}
         </button>
       </div>
-      
+
       {message && (
-        <p className={`text-xs ${isError ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"}`}>
+        <p
+          className={`text-xs ${isError ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"}`}
+        >
           {message}
         </p>
       )}

@@ -32,7 +32,9 @@ const AddProduct = () => {
   const [isPending, startTransition] = useTransition();
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedImages, setSelectedImages] = useState<ImagePreview[]>([]);
-  const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof ProductFormData, string>>>({});
+  const [validationErrors, setValidationErrors] = useState<
+    Partial<Record<keyof ProductFormData, string>>
+  >({});
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -79,13 +81,13 @@ const AddProduct = () => {
 
     // Extraer valores para validación
     const formValues = {
-      name: formData.get('name') as string,
-      price: parseFloat(formData.get('price') as string),
-      unity: parseInt(formData.get('unity') as string),
-      category: formData.get('category') as string,
-      description: formData.get('description') as string,
-      size: formData.get('size') as string || undefined,
-      bagType: formData.get('bagType') as string || undefined,
+      name: formData.get("name") as string,
+      price: parseFloat(formData.get("price") as string),
+      unity: parseInt(formData.get("unity") as string),
+      category: formData.get("category") as string,
+      description: formData.get("description") as string,
+      size: (formData.get("size") as string) || undefined,
+      bagType: (formData.get("bagType") as string) || undefined,
     };
 
     // Validar con ZOD
@@ -162,7 +164,9 @@ const AddProduct = () => {
                 <label className="block text-sm font-medium">Nombre</label>
                 <input name="name" className="input" required />
                 {validationErrors.name && (
-                  <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.name}
+                  </p>
                 )}
 
                 <div className="grid grid-cols-2 gap-4">
@@ -176,7 +180,9 @@ const AddProduct = () => {
                       required
                     />
                     {validationErrors.price && (
-                      <p className="text-red-500 text-sm mt-1">{validationErrors.price}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {validationErrors.price}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -190,7 +196,9 @@ const AddProduct = () => {
                       required
                     />
                     {validationErrors.unity && (
-                      <p className="text-red-500 text-sm mt-1">{validationErrors.unity}</p>
+                      <p className="text-red-500 text-sm mt-1">
+                        {validationErrors.unity}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -198,7 +206,9 @@ const AddProduct = () => {
                 <label className="block text-sm font-medium">Categoría</label>
                 <input name="category" className="input" required />
                 {validationErrors.category && (
-                  <p className="text-red-500 text-sm mt-1">{validationErrors.category}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.category}
+                  </p>
                 )}
                 <label className="block text-sm font-medium">Descripción</label>
                 <textarea
@@ -207,7 +217,9 @@ const AddProduct = () => {
                   required
                 />
                 {validationErrors.description && (
-                  <p className="text-red-500 text-sm mt-1">{validationErrors.description}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.description}
+                  </p>
                 )}
                 <label className="block text-sm font-medium">Tamaño</label>
                 <input name="size" className="input" />

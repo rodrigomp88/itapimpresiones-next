@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { PaymentMethod, PAYMENT_METHODS, BANK_TRANSFER_INFO } from "@/types/payment";
+import {
+  PaymentMethod,
+  PAYMENT_METHODS,
+  BANK_TRANSFER_INFO,
+} from "@/types/payment";
 
 interface PaymentMethodSelectorProps {
   selectedMethod: PaymentMethod;
@@ -28,7 +32,7 @@ export default function PaymentMethodSelector({
       <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
         Método de pago
       </p>
-      
+
       <div className="space-y-2">
         {availableMethods.map((method) => (
           <label
@@ -82,7 +86,7 @@ export default function PaymentMethodSelector({
               {showTransferDetails ? "Ocultar" : "Mostrar"}
             </button>
           </div>
-          
+
           {showTransferDetails && (
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
@@ -92,7 +96,9 @@ export default function PaymentMethodSelector({
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">Tipo de cuenta:</span>
+                <span className="text-blue-700 dark:text-blue-300">
+                  Tipo de cuenta:
+                </span>
                 <span className="text-blue-900 dark:text-blue-100 font-medium">
                   {BANK_TRANSFER_INFO.accountType}
                 </span>
@@ -110,13 +116,16 @@ export default function PaymentMethodSelector({
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">Titular:</span>
+                <span className="text-blue-700 dark:text-blue-300">
+                  Titular:
+                </span>
                 <span className="text-blue-900 dark:text-blue-100 font-medium">
                   {BANK_TRANSFER_INFO.holder}
                 </span>
               </div>
               <p className="text-blue-600 dark:text-blue-400 mt-2 pt-2 border-t border-blue-200 dark:border-blue-700">
-                ⚠️ Envianos el comprobante por WhatsApp o email para confirmar el pago.
+                ⚠️ Envianos el comprobante por WhatsApp o email para confirmar
+                el pago.
               </p>
             </div>
           )}
@@ -127,9 +136,12 @@ export default function PaymentMethodSelector({
       {selectedMethod === "cash" && (
         <div className="mt-3 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
           <p className="text-xs text-amber-800 dark:text-amber-200">
-            💵 Tu pedido quedará reservado. Pagás el total cuando retires en nuestro local.
+            💵 Tu pedido quedará reservado. Pagás el total cuando retires en
+            nuestro local.
             <br />
-            <span className="font-medium">Dirección: Av. Ejemplo 1234, CABA</span>
+            <span className="font-medium">
+              Dirección: Av. Ejemplo 1234, CABA
+            </span>
           </p>
         </div>
       )}

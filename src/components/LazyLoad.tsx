@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Suspense, lazy, ComponentType, createElement } from 'react';
-import LoadingSpinner, { SectionLoadingSpinner } from './LoadingSpinner';
+import { Suspense, lazy, ComponentType, createElement } from "react";
+import LoadingSpinner, { SectionLoadingSpinner } from "./LoadingSpinner";
 
 // Hook para lazy loading de componentes
 export function lazyLoad<T extends ComponentType<any>>(
@@ -11,7 +11,9 @@ export function lazyLoad<T extends ComponentType<any>>(
   const LazyComponent = lazy(importFunc);
 
   return (props: React.ComponentProps<T>) => (
-    <Suspense fallback={fallback ? createElement(fallback) : <SectionLoadingSpinner />}>
+    <Suspense
+      fallback={fallback ? createElement(fallback) : <SectionLoadingSpinner />}
+    >
       <LazyComponent {...props} />
     </Suspense>
   );
@@ -27,11 +29,9 @@ interface LazyWrapperProps {
 export const LazyWrapper: React.FC<LazyWrapperProps> = ({
   children,
   fallback,
-  className = ''
+  className = "",
 }) => (
-  <Suspense
-    fallback={fallback || <SectionLoadingSpinner />}
-  >
+  <Suspense fallback={fallback || <SectionLoadingSpinner />}>
     {children}
   </Suspense>
 );

@@ -3,7 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 import { onAuthStateChanged, User as FirebaseUser } from "firebase/auth";
 import { auth, db } from "@/firebase/config";
 import { Order } from "@/types";
@@ -34,7 +41,7 @@ const OrderConfirmationPage: React.FC = () => {
 
       try {
         setIsLoading(true);
-        
+
         // Buscar la orden más reciente del usuario
         const ordersQuery = query(
           collection(db, "orders"),
@@ -44,12 +51,12 @@ const OrderConfirmationPage: React.FC = () => {
         );
 
         const ordersSnapshot = await getDocs(ordersQuery);
-        
+
         if (!ordersSnapshot.empty) {
           const orderData = ordersSnapshot.docs[0].data() as Order;
           setOrder({
             ...orderData,
-            id: ordersSnapshot.docs[0].id
+            id: ordersSnapshot.docs[0].id,
           });
         } else {
           setError("No se encontró ninguna orden.");
@@ -81,7 +88,7 @@ const OrderConfirmationPage: React.FC = () => {
           month: "long",
           day: "numeric",
           hour: "2-digit",
-          minute: "2-digit"
+          minute: "2-digit",
         });
       }
       return new Date(date).toLocaleDateString("es-AR", {
@@ -89,7 +96,7 @@ const OrderConfirmationPage: React.FC = () => {
         month: "long",
         day: "numeric",
         hour: "2-digit",
-        minute: "2-digit"
+        minute: "2-digit",
       });
     } catch {
       return "Fecha no disponible";
@@ -131,15 +138,26 @@ const OrderConfirmationPage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="text-center">
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 dark:bg-red-900/20 mb-4">
-            <svg className="h-6 w-6 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="h-6 w-6 text-red-600 dark:text-red-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
           </div>
           <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
             {error || "Orden no encontrada"}
           </h3>
           <p className="text-zinc-500 dark:text-zinc-400 mb-6">
-            No pudimos encontrar la información de tu orden. Si crees que esto es un error, por favor contáctanos.
+            No pudimos encontrar la información de tu orden. Si crees que esto
+            es un error, por favor contáctanos.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -172,14 +190,18 @@ const OrderConfirmationPage: React.FC = () => {
         >
           Inicio
         </Link>
-        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+          /
+        </span>
         <Link
           className="text-gray-500 dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors"
           href="/orders"
         >
           Mis Órdenes
         </Link>
-        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+        <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+          /
+        </span>
         <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
           Confirmación
         </span>
@@ -188,8 +210,18 @@ const OrderConfirmationPage: React.FC = () => {
       {/* Header de éxito */}
       <div className="text-center mb-8">
         <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900/20 mb-4">
-          <svg className="h-8 w-8 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          <svg
+            className="h-8 w-8 text-green-600 dark:text-green-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
@@ -213,7 +245,9 @@ const OrderConfirmationPage: React.FC = () => {
               </p>
             </div>
             <div className="mt-3 sm:mt-0">
-              <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getOrderStatusColor(order.orderStatus)}`}>
+              <span
+                className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${getOrderStatusColor(order.orderStatus)}`}
+              >
                 {order.orderStatus}
               </span>
             </div>
@@ -228,9 +262,18 @@ const OrderConfirmationPage: React.FC = () => {
                 Información de Contacto
               </h3>
               <div className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-                <p><span className="font-medium">Nombre:</span> {shippingAddress.name}</p>
-                <p><span className="font-medium">Email:</span> {shippingAddress.mail}</p>
-                <p><span className="font-medium">Teléfono:</span> {shippingAddress.phone}</p>
+                <p>
+                  <span className="font-medium">Nombre:</span>{" "}
+                  {shippingAddress.name}
+                </p>
+                <p>
+                  <span className="font-medium">Email:</span>{" "}
+                  {shippingAddress.mail}
+                </p>
+                <p>
+                  <span className="font-medium">Teléfono:</span>{" "}
+                  {shippingAddress.phone}
+                </p>
               </div>
             </div>
 
@@ -241,9 +284,15 @@ const OrderConfirmationPage: React.FC = () => {
               </h3>
               <div className="text-sm text-zinc-600 dark:text-zinc-400">
                 <p>{shippingAddress.address}</p>
-                <p>{shippingAddress.city}, {shippingAddress.province} {shippingAddress.postalCode}</p>
+                <p>
+                  {shippingAddress.city}, {shippingAddress.province}{" "}
+                  {shippingAddress.postalCode}
+                </p>
                 {shippingAddress.notes && (
-                  <p className="mt-2"><span className="font-medium">Notas:</span> {shippingAddress.notes}</p>
+                  <p className="mt-2">
+                    <span className="font-medium">Notas:</span>{" "}
+                    {shippingAddress.notes}
+                  </p>
                 )}
               </div>
             </div>

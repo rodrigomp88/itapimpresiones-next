@@ -52,7 +52,7 @@ const filterSlice = createSlice({
       }
     },
     // Note: Since color is not yet a property on Product type in the current codebase context,
-    // we will implement a placeholder or assume it might be added later. 
+    // we will implement a placeholder or assume it might be added later.
     // For now, we'll keep it simple or skip if the property doesn't exist.
     // Assuming 'color' might be part of description or a future field.
     // We will skip strict color filtering for now to avoid breaking types if 'color' is missing.
@@ -63,7 +63,7 @@ const filterSlice = createSlice({
     ) {
       const { products, customizable } = action.payload;
       if (customizable) {
-        // Assuming all products in this shop are customizable for now, 
+        // Assuming all products in this shop are customizable for now,
         // or we filter based on a property if it existed.
         // For this specific business, most items are customizable.
         // We can filter by a 'customizable' flag if added to Product type.
@@ -72,11 +72,16 @@ const filterSlice = createSlice({
       } else {
         state.filteredProducts = products;
       }
-    }
+    },
   },
 });
 
-export const { FILTER_BY_CATEGORY, FILTER_BY_PRICE, FILTER_BY_SIZE, FILTER_BY_CUSTOMIZATION } = filterSlice.actions;
+export const {
+  FILTER_BY_CATEGORY,
+  FILTER_BY_PRICE,
+  FILTER_BY_SIZE,
+  FILTER_BY_CUSTOMIZATION,
+} = filterSlice.actions;
 
 export const selectFilteredProducts = (state: RootState) =>
   state.filter.filteredProducts;

@@ -4,7 +4,17 @@ import TestNotificationButton from "./TestNotificationButton";
 import SystemHealth from "@/components/Admin/SystemHealth";
 import AnalyticsDashboard from "@/components/Admin/AnalyticsDashboard";
 import AlertsPanel from "@/components/Admin/AlertsPanel";
-import { FaShoppingBag, FaUsers, FaMoneyBillWave, FaBox, FaArrowRight, FaClipboardList, FaCalendarAlt, FaCreditCard, FaExclamationTriangle } from "react-icons/fa";
+import {
+  FaShoppingBag,
+  FaUsers,
+  FaMoneyBillWave,
+  FaBox,
+  FaArrowRight,
+  FaClipboardList,
+  FaCalendarAlt,
+  FaCreditCard,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 
 export const dynamic = "force-dynamic";
 
@@ -12,12 +22,13 @@ async function getDashboardStats() {
   if (!adminDb) return null;
 
   try {
-    const [ordersSnap, usersSnap, productsSnap, submissionsSnap] = await Promise.all([
-      adminDb.collection("orders").orderBy("createdAt", "desc").get(),
-      adminDb.collection("users").get(),
-      adminDb.collection("products").get(),
-      adminDb.collection("contact_submissions").get(),
-    ]);
+    const [ordersSnap, usersSnap, productsSnap, submissionsSnap] =
+      await Promise.all([
+        adminDb.collection("orders").orderBy("createdAt", "desc").get(),
+        adminDb.collection("users").get(),
+        adminDb.collection("products").get(),
+        adminDb.collection("contact_submissions").get(),
+      ]);
 
     const totalOrders = ordersSnap.size;
     const totalUsers = usersSnap.size;
@@ -25,38 +36,51 @@ async function getDashboardStats() {
     const totalSubmissions = submissionsSnap.size;
 
     // Calcular estadísticas de ingresos
-    const ordersData = ordersSnap.docs.map(doc => doc.data());
-    const totalRevenue = ordersData.reduce((acc, data) => acc + (data.orderAmount || 0), 0);
-    const depositRevenue = ordersData.reduce((acc, data) => acc + (data.depositAmount || 0), 0);
+    const ordersData = ordersSnap.docs.map((doc) => doc.data());
+    const totalRevenue = ordersData.reduce(
+      (acc, data) => acc + (data.orderAmount || 0),
+      0
+    );
+    const depositRevenue = ordersData.reduce(
+      (acc, data) => acc + (data.depositAmount || 0),
+      0
+    );
 
     // Estadísticas por estado de orden
-    const ordersByStatus = ordersData.reduce((acc, order) => {
-      const status = order.orderStatus || 'pending';
-      acc[status] = (acc[status] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const ordersByStatus = ordersData.reduce(
+      (acc, order) => {
+        const status = order.orderStatus || "pending";
+        acc[status] = (acc[status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     // Estadísticas por estado de pago
-    const ordersByPaymentStatus = ordersData.reduce((acc, order) => {
-      const status = order.paymentStatus || 'pending';
-      acc[status] = (acc[status] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
+    const ordersByPaymentStatus = ordersData.reduce(
+      (acc, order) => {
+        const status = order.paymentStatus || "pending";
+        acc[status] = (acc[status] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
 
     // Ingresos del mes actual
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const monthlyRevenue = ordersData
-      .filter(order => order.createdAt?.toDate() >= startOfMonth)
+      .filter((order) => order.createdAt?.toDate() >= startOfMonth)
       .reduce((acc, data) => acc + (data.orderAmount || 0), 0);
 
     // Órdenes pendientes de pago
-    const pendingPayments = ordersData.filter(order =>
-      order.paymentStatus === 'pending' ||
-      (order.remainingAmount && order.remainingAmount > 0)
+    const pendingPayments = ordersData.filter(
+      (order) =>
+        order.paymentStatus === "pending" ||
+        (order.remainingAmount && order.remainingAmount > 0)
     ).length;
 
-    const recentOrders = ordersSnap.docs.slice(0, 5).map(doc => ({
+    const recentOrders = ordersSnap.docs.slice(0, 5).map((doc) => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate().toISOString(),
@@ -87,8 +111,12 @@ const AdminDashboardPage = async () => {
   if (!stats) {
     return (
       <div className="p-8 text-center">
-        <h2 className="text-xl font-bold text-red-500">Error cargando el dashboard</h2>
-        <p className="text-gray-500">Verifique la conexión con Firebase Admin SDK.</p>
+        <h2 className="text-xl font-bold text-red-500">
+          Error cargando el dashboard
+        </h2>
+        <p className="text-gray-500">
+          Verifique la conexión con Firebase Admin SDK.
+        </p>
       </div>
     );
   }
@@ -132,7 +160,9 @@ const AdminDashboardPage = async () => {
     <div className="p-6 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
+            Dashboard
+          </h1>
           <p className="text-zinc-500 dark:text-zinc-400 mt-1">
             Resumen general de tu tienda
           </p>
@@ -151,9 +181,7 @@ const AdminDashboardPage = async () => {
             className={`p-6 rounded-2xl border ${card.border} bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md transition-shadow`}
           >
             <div className="flex justify-between items-start mb-4">
-              <div className={`p-3 rounded-xl ${card.bg}`}>
-                {card.icon}
-              </div>
+              <div className={`p-3 rounded-xl ${card.bg}`}>{card.icon}</div>
             </div>
             <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">
               {card.title}
@@ -187,25 +215,41 @@ const AdminDashboardPage = async () => {
             {Object.entries(stats.ordersByStatus).map(([status, count]) => (
               <div key={status} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    status === 'confirmed' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400' :
-                    status === 'processing' ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400' :
-                    status === 'shipped' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400' :
-                    status === 'delivered' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
-                    status === 'cancelled' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
-                    status === 'refunded' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400' :
-                    'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
-                  }`}>
-                    {status === 'confirmed' ? 'Confirmadas' :
-                     status === 'processing' ? 'Procesando' :
-                     status === 'shipped' ? 'Enviadas' :
-                     status === 'delivered' ? 'Entregadas' :
-                     status === 'cancelled' ? 'Canceladas' :
-                     status === 'refunded' ? 'Reembolsadas' :
-                     'Pendientes'}
+                  <span
+                    className={`px-2 py-1 text-xs font-medium rounded-full ${
+                      status === "confirmed"
+                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                        : status === "processing"
+                          ? "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400"
+                          : status === "shipped"
+                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400"
+                            : status === "delivered"
+                              ? "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
+                              : status === "cancelled"
+                                ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
+                                : status === "refunded"
+                                  ? "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400"
+                                  : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
+                    }`}
+                  >
+                    {status === "confirmed"
+                      ? "Confirmadas"
+                      : status === "processing"
+                        ? "Procesando"
+                        : status === "shipped"
+                          ? "Enviadas"
+                          : status === "delivered"
+                            ? "Entregadas"
+                            : status === "cancelled"
+                              ? "Canceladas"
+                              : status === "refunded"
+                                ? "Reembolsadas"
+                                : "Pendientes"}
                   </span>
                 </div>
-                <span className="font-bold text-zinc-900 dark:text-white">{count}</span>
+                <span className="font-bold text-zinc-900 dark:text-white">
+                  {count}
+                </span>
               </div>
             ))}
           </div>
@@ -217,28 +261,44 @@ const AdminDashboardPage = async () => {
             Estados de Pago
           </h2>
           <div className="space-y-4">
-            {Object.entries(stats.ordersByPaymentStatus).map(([status, count]) => (
-              <div key={status} className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                    status === 'approved' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
-                    status === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                    status === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
-                    status === 'cancelled' ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400' :
-                    status === 'refunded' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400' :
-                    'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
-                  }`}>
-                    {status === 'approved' ? 'Aprobados' :
-                     status === 'pending' ? 'Pendientes' :
-                     status === 'rejected' ? 'Rechazados' :
-                     status === 'cancelled' ? 'Cancelados' :
-                     status === 'refunded' ? 'Reembolsados' :
-                     status}
+            {Object.entries(stats.ordersByPaymentStatus).map(
+              ([status, count]) => (
+                <div key={status} className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        status === "approved"
+                          ? "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
+                          : status === "pending"
+                            ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
+                            : status === "rejected"
+                              ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
+                              : status === "cancelled"
+                                ? "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+                                : status === "refunded"
+                                  ? "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400"
+                                  : "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                      }`}
+                    >
+                      {status === "approved"
+                        ? "Aprobados"
+                        : status === "pending"
+                          ? "Pendientes"
+                          : status === "rejected"
+                            ? "Rechazados"
+                            : status === "cancelled"
+                              ? "Cancelados"
+                              : status === "refunded"
+                                ? "Reembolsados"
+                                : status}
+                    </span>
+                  </div>
+                  <span className="font-bold text-zinc-900 dark:text-white">
+                    {count}
                   </span>
                 </div>
-                <span className="font-bold text-zinc-900 dark:text-white">{count}</span>
-              </div>
-            ))}
+              )
+            )}
           </div>
         </div>
       </div>
@@ -263,7 +323,10 @@ const AdminDashboardPage = async () => {
             </div>
           ) : (
             stats.recentOrders.map((order: any) => (
-              <div key={order.id} className="p-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors flex items-center justify-between">
+              <div
+                key={order.id}
+                className="p-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors flex items-center justify-between"
+              >
                 <div className="flex items-center gap-4">
                   <div className="p-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
                     <FaBox className="text-zinc-400" />
@@ -281,10 +344,15 @@ const AdminDashboardPage = async () => {
                   <p className="font-bold text-zinc-900 dark:text-white">
                     ${(order.orderAmount || 0).toLocaleString("es-AR")}
                   </p>
-                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${order.orderStatus === "entregado" ? "bg-green-100 text-green-700" :
-                    order.orderStatus === "pendiente" ? "bg-yellow-100 text-yellow-700" :
-                      "bg-blue-100 text-blue-700"
-                    }`}>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-full font-medium ${
+                      order.orderStatus === "entregado"
+                        ? "bg-green-100 text-green-700"
+                        : order.orderStatus === "pendiente"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-blue-100 text-blue-700"
+                    }`}
+                  >
                     {order.orderStatus || "Pendiente"}
                   </span>
                 </div>

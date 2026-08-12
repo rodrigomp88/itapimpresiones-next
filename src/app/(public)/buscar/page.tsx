@@ -15,11 +15,11 @@ const SearchPage: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useIsMobile();
-  
+
   // Estados locales para UI
   const [showFilters, setShowFilters] = useState(!isMobile);
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
-  
+
   // Hook de búsqueda
   const search = useSearch();
 
@@ -37,12 +37,12 @@ const SearchPage: React.FC = () => {
     const category = searchParams.get("category");
     const priceMin = searchParams.get("priceMin");
     const priceMax = searchParams.get("priceMax");
-    
+
     const filters: any = {};
     if (category) filters.category = category;
     if (priceMin) filters.priceMin = parseFloat(priceMin);
     if (priceMax) filters.priceMax = parseFloat(priceMax);
-    
+
     if (Object.keys(filters).length > 0) {
       search.setFilters(filters);
     }
@@ -52,7 +52,7 @@ const SearchPage: React.FC = () => {
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     search.setSearchQuery(query);
-    
+
     // Actualizar URL sin recargar página
     const newParams = new URLSearchParams(searchParams);
     if (query) {
@@ -66,20 +66,22 @@ const SearchPage: React.FC = () => {
   // Manejar cambios en filtros
   const handleFiltersChange = (filters: any) => {
     search.setFilters(filters);
-    
+
     // Actualizar URL
     const newParams = new URLSearchParams(searchParams);
-    
+
     // Limpiar filtros previos
     newParams.delete("category");
     newParams.delete("priceMin");
     newParams.delete("priceMax");
-    
+
     // Agregar nuevos filtros
     if (filters.category) newParams.set("category", filters.category);
-    if (filters.priceMin !== undefined) newParams.set("priceMin", filters.priceMin.toString());
-    if (filters.priceMax !== undefined) newParams.set("priceMax", filters.priceMax.toString());
-    
+    if (filters.priceMin !== undefined)
+      newParams.set("priceMin", filters.priceMin.toString());
+    if (filters.priceMax !== undefined)
+      newParams.set("priceMax", filters.priceMax.toString());
+
     router.replace(`/buscar?${newParams.toString()}`);
   };
 
@@ -99,13 +101,17 @@ const SearchPage: React.FC = () => {
           >
             Inicio
           </Link>
-          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+            /
+          </span>
           <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
             Búsqueda
           </span>
           {searchQuery && (
             <>
-              <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+              <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+                /
+              </span>
               <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
                 {searchQuery}
               </span>
@@ -118,7 +124,7 @@ const SearchPage: React.FC = () => {
           <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-6">
             Buscar Productos
           </h1>
-          
+
           {/* Barra de búsqueda */}
           <div className="max-w-3xl">
             <SearchBar
@@ -153,7 +159,9 @@ const SearchPage: React.FC = () => {
         {/* Contenido principal */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Panel de filtros - Desktop siempre visible, móvil condicional */}
-          <div className={`${isMobile ? 'block' : 'block'} ${isMobile && !showFilters ? 'hidden' : ''}`}>
+          <div
+            className={`${isMobile ? "block" : "block"} ${isMobile && !showFilters ? "hidden" : ""}`}
+          >
             <div className="sticky top-24">
               <SearchFilters
                 filters={search.filters}

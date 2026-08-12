@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HiInformationCircle, HiTruck, HiCreditCard, HiTag } from "react-icons/hi";
+import {
+  HiInformationCircle,
+  HiTruck,
+  HiCreditCard,
+  HiTag,
+} from "react-icons/hi";
 
 interface PriceBreakdownProps {
   subtotal: number;
@@ -52,28 +57,30 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
       name: "Envío Estándar",
       price: subtotal >= freeShippingThreshold ? 0 : 800,
       estimatedDays: "5-7 días",
-      description: "Entrega en días hábiles"
+      description: "Entrega en días hábiles",
     },
     {
       id: "express",
       name: "Envío Express",
       price: 1500,
       estimatedDays: "2-3 días",
-      description: "Entrega rápida"
+      description: "Entrega rápida",
     },
     {
       id: "same_day",
       name: "Mismo Día",
       price: 2500,
       estimatedDays: "Mismo día",
-      description: "Solo CABA y GBA"
-    }
+      description: "Solo CABA y GBA",
+    },
   ];
 
   // Calcular precios
   const calculatedTax = (subtotal - discount) * (taxRate / 100);
   const finalSubtotal = subtotal - discount;
-  const finalShipping = shippingOptions.find(option => option.id === selectedShipping)?.price || 0;
+  const finalShipping =
+    shippingOptions.find((option) => option.id === selectedShipping)?.price ||
+    0;
   const finalTax = calculatedTax;
   const total = finalSubtotal + finalShipping + finalTax;
 
@@ -109,7 +116,9 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
   const freeShippingStatus = getFreeShippingStatus();
 
   return (
-    <div className={`bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 ${className}`}>
+    <div
+      className={`bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 ${className}`}
+    >
       {/* Header */}
       <div className="p-6 border-b border-zinc-200 dark:border-zinc-700">
         <div className="flex items-center justify-between">
@@ -130,23 +139,27 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
           <div className="mt-4">
             <div className="flex items-center justify-between text-sm mb-2">
               <span className="text-zinc-600 dark:text-zinc-400">
-                Envío gratis en compras superiores a {formatPrice(freeShippingThreshold)}
+                Envío gratis en compras superiores a{" "}
+                {formatPrice(freeShippingThreshold)}
               </span>
               {freeShippingStatus === "almost" && (
                 <span className="text-orange-600 dark:text-orange-400 font-medium">
-                  ¡Te faltan solo {formatPrice(freeShippingThreshold - subtotal)}!
+                  ¡Te faltan solo{" "}
+                  {formatPrice(freeShippingThreshold - subtotal)}!
                 </span>
               )}
             </div>
             <div className="w-full bg-zinc-200 dark:bg-zinc-700 rounded-full h-2">
               <motion.div
                 className={`h-2 rounded-full ${
-                  freeShippingStatus === "almost" 
-                    ? "bg-gradient-to-r from-orange-400 to-orange-600" 
+                  freeShippingStatus === "almost"
+                    ? "bg-gradient-to-r from-orange-400 to-orange-600"
                     : "bg-gradient-to-r from-blue-400 to-blue-600"
                 }`}
                 initial={{ width: 0 }}
-                animate={{ width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%` }}
+                animate={{
+                  width: `${Math.min((subtotal / freeShippingThreshold) * 100, 100)}%`,
+                }}
                 transition={{ duration: 0.5 }}
               />
             </div>
@@ -178,9 +191,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                 </span>
               )}
             </div>
-            <span className="font-medium">
-              -{formatPrice(discount)}
-            </span>
+            <span className="font-medium">-{formatPrice(discount)}</span>
           </div>
         )}
 
@@ -195,16 +206,24 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
               <span className="text-zinc-600 dark:text-zinc-400">Envío</span>
             </div>
             <div className="text-right">
-              <span className={`font-medium ${
-                finalShipping === 0 
-                  ? "text-green-600 dark:text-green-400" 
-                  : "text-zinc-900 dark:text-white"
-              }`}>
+              <span
+                className={`font-medium ${
+                  finalShipping === 0
+                    ? "text-green-600 dark:text-green-400"
+                    : "text-zinc-900 dark:text-white"
+                }`}
+              >
                 {finalShipping === 0 ? "GRATIS" : formatPrice(finalShipping)}
               </span>
-              {shippingOptions.find(option => option.id === selectedShipping) && (
+              {shippingOptions.find(
+                (option) => option.id === selectedShipping
+              ) && (
                 <div className="text-xs text-zinc-500 dark:text-zinc-400">
-                  {shippingOptions.find(option => option.id === selectedShipping)?.estimatedDays}
+                  {
+                    shippingOptions.find(
+                      (option) => option.id === selectedShipping
+                    )?.estimatedDays
+                  }
                 </div>
               )}
             </div>
@@ -243,12 +262,16 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                       </div>
                     </div>
                     <div className="text-right">
-                      <span className={`font-medium ${
-                        option.price === 0 
-                          ? "text-green-600 dark:text-green-400" 
-                          : "text-zinc-900 dark:text-white"
-                      }`}>
-                        {option.price === 0 ? "GRATIS" : formatPrice(option.price)}
+                      <span
+                        className={`font-medium ${
+                          option.price === 0
+                            ? "text-green-600 dark:text-green-400"
+                            : "text-zinc-900 dark:text-white"
+                        }`}
+                      >
+                        {option.price === 0
+                          ? "GRATIS"
+                          : formatPrice(option.price)}
                       </span>
                     </div>
                   </label>
@@ -315,7 +338,10 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
         <div className="pt-4 border-t border-zinc-200 dark:border-zinc-700">
           <div className="text-xs text-zinc-500 dark:text-zinc-400 space-y-1">
             <p>• Los precios incluyen IVA</p>
-            <p>• Envío gratis en compras superiores a {formatPrice(freeShippingThreshold)}</p>
+            <p>
+              • Envío gratis en compras superiores a{" "}
+              {formatPrice(freeShippingThreshold)}
+            </p>
             <p>• Los tiempos de entrega son estimados</p>
           </div>
         </div>

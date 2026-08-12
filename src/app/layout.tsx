@@ -3,10 +3,10 @@ import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap', // Optimizar para Core Web Vitals
+  subsets: ["latin"],
+  display: "swap", // Optimizar para Core Web Vitals
   preload: true,
-  variable: '--font-inter',
+  variable: "--font-inter",
 });
 
 const geistSans = Geist({
@@ -89,10 +89,21 @@ export default function RootLayout({
       <head>
         {/* Preconnects para performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://www.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://firestore.googleapis.com" />
-        <link rel="preconnect" href="https://firebaseinstallations.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://firebaseinstallations.googleapis.com"
+        />
 
         {/* DNS prefetch para recursos externos */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -100,8 +111,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.gstatic.com" />
 
         {/* Critical CSS inlining para mejor FCP */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             /* Critical CSS para above-the-fold content */
             body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
             .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -116,8 +128,9 @@ export default function RootLayout({
             .flex { display: flex; }
             .items-center { align-items: center; }
             .justify-center { justify-content: center; }
-          `
-        }} />
+          `,
+          }}
+        />
 
         {/* Fonts optimizadas */}
         <link
@@ -139,8 +152,9 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/images/carousel3.png" />
 
         {/* Script para evitar FOUC en cambio de tema */}
-        <script dangerouslySetInnerHTML={{
-          __html: `
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
             (function() {
               try {
                 var theme = localStorage.getItem('itap-theme');
@@ -154,38 +168,39 @@ export default function RootLayout({
                 // Si es 'light' o no hay tema, no hacer nada (por defecto es claro)
               } catch (e) {}
             })();
-          `
-        }} />
+          `,
+          }}
+        />
       </head>
-  <body
-    className={`font-display antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
-    suppressHydrationWarning
-  >
-    {/* Main content landmark */}
-    <div id="main-content">
-        <Providers>
-          <SessionHandler />
-          <ServiceWorkerRegister />
-          <PWAInstaller />
-          {children}
+      <body
+        className={`font-display antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
+        suppressHydrationWarning
+      >
+        {/* Main content landmark */}
+        <div id="main-content">
+          <Providers>
+            <SessionHandler />
+            <ServiceWorkerRegister />
+            <PWAInstaller />
+            {children}
 
-          {/* Navegación móvil - solo visible en dispositivos móviles */}
-          <MobileNavigationWrapper />
+            {/* Navegación móvil - solo visible en dispositivos móviles */}
+            <MobileNavigationWrapper />
 
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                url: "https://itapimpresiones.vercel.app",
-                logo: "https://itapimpresiones.vercel.app/android-chrome-512x512.png",
-              }),
-            }}
-          />
-        </Providers>
-    </div>
-  </body>
-</html>
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "Organization",
+                  url: "https://itapimpresiones.vercel.app",
+                  logo: "https://itapimpresiones.vercel.app/android-chrome-512x512.png",
+                }),
+              }}
+            />
+          </Providers>
+        </div>
+      </body>
+    </html>
   );
 }

@@ -1,11 +1,11 @@
-import * as Sentry from '@sentry/nextjs';
+import * as Sentry from "@sentry/nextjs";
 
 // Configuraciรณn de Sentry para el cliente
 export const initSentry = () => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
     environment: process.env.NODE_ENV,
-    tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+    tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,
 
     integrations: [
       Sentry.httpIntegration(),
@@ -17,8 +17,10 @@ export const initSentry = () => {
       // Filtrar errores de navegaciรณn que no son crรญticos
       if (event.exception) {
         const error = hint.originalException as Error;
-        if (error?.message?.includes('Loading chunk') ||
-            error?.message?.includes('ChunkLoadError')) {
+        if (
+          error?.message?.includes("Loading chunk") ||
+          error?.message?.includes("ChunkLoadError")
+        ) {
           return null; // Ignorar errores de chunks que se resuelven solos
         }
       }
@@ -26,7 +28,7 @@ export const initSentry = () => {
       // Agregar contexto adicional
       event.tags = {
         ...event.tags,
-        component: 'frontend',
+        component: "frontend",
       };
 
       return event;
@@ -35,8 +37,7 @@ export const initSentry = () => {
     // Configuraciรณn de breadcrumbs
     beforeBreadcrumb: (breadcrumb, hint) => {
       // Filtrar breadcrumbs innecesarios
-      if (breadcrumb.category === 'console' &&
-          breadcrumb.level === 'log') {
+      if (breadcrumb.category === "console" && breadcrumb.level === "log") {
         return null;
       }
 
@@ -57,12 +58,12 @@ export const captureError = (
     }
 
     if (context) {
-      Object.keys(context).forEach(key => {
+      Object.keys(context).forEach((key) => {
         scope.setTag(key, context[key]);
       });
     }
 
-    scope.setTag('component', 'frontend');
+    scope.setTag("component", "frontend");
     Sentry.captureException(error);
   });
 };
@@ -70,17 +71,17 @@ export const captureError = (
 // Funciรณn helper para capturar mensajes
 export const captureMessage = (
   message: string,
-  level: Sentry.SeverityLevel = 'info',
+  level: Sentry.SeverityLevel = "info",
   context?: Record<string, any>
 ) => {
   Sentry.withScope((scope) => {
     if (context) {
-      Object.keys(context).forEach(key => {
+      Object.keys(context).forEach((key) => {
         scope.setTag(key, context[key]);
       });
     }
 
-    scope.setTag('component', 'frontend');
+    scope.setTag("component", "frontend");
     Sentry.captureMessage(message, level);
   });
 };
@@ -94,9 +95,9 @@ export const startTransaction = (name: string, op: string) => {
 // Funciรณn para trackear navegaciรณn
 export const trackNavigation = (from: string, to: string) => {
   Sentry.addBreadcrumb({
-    category: 'navigation',
+    category: "navigation",
     message: `Navigation from ${from} to ${to}`,
-    level: 'info',
+    level: "info",
   });
 };
 
@@ -106,9 +107,9 @@ export const trackUserAction = (
   details?: Record<string, any>
 ) => {
   Sentry.addBreadcrumb({
-    category: 'user',
+    category: "user",
     message: `User action: ${action}`,
-    level: 'info',
+    level: "info",
     data: details,
   });
 };

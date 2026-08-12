@@ -26,7 +26,7 @@ export const useFilters = (products: Product[]) => {
 
   // Función para actualizar filtros
   const updateFilter = (key: keyof FilterState, value: any) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       [key]: value,
     }));
@@ -50,36 +50,42 @@ export const useFilters = (products: Product[]) => {
 
     // Filtrar por categorías
     if (filters.categories.length > 0) {
-      filtered = filtered.filter(product => 
+      filtered = filtered.filter((product) =>
         filters.categories.includes(product.category || "")
       );
     }
 
     // Filtrar por tallas
     if (filters.sizes.length > 0) {
-      filtered = filtered.filter(product => {
+      filtered = filtered.filter((product) => {
         if (!product.size) return false;
-        const productSizes = Array.isArray(product.size) ? product.size : [product.size];
-        return filters.sizes.some(size => productSizes.includes(size));
+        const productSizes = Array.isArray(product.size)
+          ? product.size
+          : [product.size];
+        return filters.sizes.some((size) => productSizes.includes(size));
       });
     }
 
     // Filtrar por colores
     if (filters.colors.length > 0) {
-      filtered = filtered.filter(product => {
+      filtered = filtered.filter((product) => {
         if (!product.color) return false;
-        const productColors = Array.isArray(product.color) ? product.color : [product.color];
-        return filters.colors.some(color => productColors.includes(color));
+        const productColors = Array.isArray(product.color)
+          ? product.color
+          : [product.color];
+        return filters.colors.some((color) => productColors.includes(color));
       });
     }
 
     // Filtrar por personalización
     if (filters.customizable !== null) {
-      filtered = filtered.filter(product => product.pause === filters.customizable);
+      filtered = filtered.filter(
+        (product) => product.pause === filters.customizable
+      );
     }
 
     // Filtrar por rango de precios
-    filtered = filtered.filter(product => {
+    filtered = filtered.filter((product) => {
       const price = parseFloat(product.price?.toString() || "0");
       return price >= filters.priceRange[0] && price <= filters.priceRange[1];
     });

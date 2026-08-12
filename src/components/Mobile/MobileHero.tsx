@@ -20,7 +20,7 @@ const MobileHero = () => {
                 decoding="async"
               />
             </div>
-            <motion.h1 
+            <motion.h1
               className="text-3xl font-extrabold text-gray-900 dark:text-white mb-2 leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,8 @@ const MobileHero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              El toque final para tu identidad corporativa. Personaliza con bordado de alta calidad.
+              El toque final para tu identidad corporativa. Personaliza con
+              bordado de alta calidad.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}

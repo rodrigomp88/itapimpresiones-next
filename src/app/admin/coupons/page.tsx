@@ -2,9 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { db } from "@/firebase/config";
-import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { Coupon, CouponType } from "@/types/coupon";
-import { NotiflixSuccess, NotiflixFailure } from "@/components/Notiflix/Notiflix";
+import {
+  NotiflixSuccess,
+  NotiflixFailure,
+} from "@/components/Notiflix/Notiflix";
 
 export default function CouponsAdminPage() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
@@ -53,7 +64,12 @@ export default function CouponsAdminPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.code || !formData.value || !formData.validFrom || !formData.validUntil) {
+    if (
+      !formData.code ||
+      !formData.value ||
+      !formData.validFrom ||
+      !formData.validUntil
+    ) {
       NotiflixFailure("Completá todos los campos requeridos");
       return;
     }
@@ -182,7 +198,10 @@ export default function CouponsAdminPage() {
           <h2 className="text-lg font-semibold mb-4 text-zinc-900 dark:text-white">
             {editingCoupon ? "Editar Cupón" : "Crear Nuevo Cupón"}
           </h2>
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
             <div>
               <label className="block text-sm font-medium mb-1 text-zinc-700 dark:text-zinc-300">
                 Código *
@@ -190,7 +209,9 @@ export default function CouponsAdminPage() {
               <input
                 type="text"
                 value={formData.code}
-                onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, code: e.target.value })
+                }
                 placeholder="Ej: VERANO20"
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                 required
@@ -203,7 +224,12 @@ export default function CouponsAdminPage() {
               </label>
               <select
                 value={formData.type}
-                onChange={(e) => setFormData({ ...formData, type: e.target.value as CouponType })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    type: e.target.value as CouponType,
+                  })
+                }
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
               >
                 <option value="percentage">Porcentaje (%)</option>
@@ -218,7 +244,9 @@ export default function CouponsAdminPage() {
               <input
                 type="number"
                 value={formData.value}
-                onChange={(e) => setFormData({ ...formData, value: Number(e.target.value) })}
+                onChange={(e) =>
+                  setFormData({ ...formData, value: Number(e.target.value) })
+                }
                 min="0"
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                 required
@@ -232,7 +260,12 @@ export default function CouponsAdminPage() {
               <input
                 type="number"
                 value={formData.minPurchase}
-                onChange={(e) => setFormData({ ...formData, minPurchase: Number(e.target.value) })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    minPurchase: Number(e.target.value),
+                  })
+                }
                 min="0"
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
               />
@@ -245,7 +278,9 @@ export default function CouponsAdminPage() {
               <input
                 type="date"
                 value={formData.validFrom}
-                onChange={(e) => setFormData({ ...formData, validFrom: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, validFrom: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                 required
               />
@@ -258,7 +293,9 @@ export default function CouponsAdminPage() {
               <input
                 type="date"
                 value={formData.validUntil}
-                onChange={(e) => setFormData({ ...formData, validUntil: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, validUntil: e.target.value })
+                }
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                 required
               />
@@ -271,7 +308,12 @@ export default function CouponsAdminPage() {
               <input
                 type="number"
                 value={formData.usageLimit}
-                onChange={(e) => setFormData({ ...formData, usageLimit: Number(e.target.value) })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    usageLimit: Number(e.target.value),
+                  })
+                }
                 min="0"
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
               />
@@ -284,7 +326,12 @@ export default function CouponsAdminPage() {
               <input
                 type="number"
                 value={formData.maxDiscount}
-                onChange={(e) => setFormData({ ...formData, maxDiscount: Number(e.target.value) })}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    maxDiscount: Number(e.target.value),
+                  })
+                }
                 min="0"
                 disabled={formData.type !== "percentage"}
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white disabled:opacity-50"
@@ -298,7 +345,9 @@ export default function CouponsAdminPage() {
               <input
                 type="text"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
                 placeholder="Ej: Descuento de verano 2025"
                 className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
               />
@@ -309,10 +358,14 @@ export default function CouponsAdminPage() {
                 <input
                   type="checkbox"
                   checked={formData.isActive}
-                  onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, isActive: e.target.checked })
+                  }
                   className="rounded"
                 />
-                <span className="text-sm text-zinc-700 dark:text-zinc-300">Cupón activo</span>
+                <span className="text-sm text-zinc-700 dark:text-zinc-300">
+                  Cupón activo
+                </span>
               </label>
             </div>
 
@@ -340,12 +393,24 @@ export default function CouponsAdminPage() {
         <table className="w-full">
           <thead className="bg-zinc-50 dark:bg-zinc-800">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Código</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Descuento</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Validez</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Usos</th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">Estado</th>
-              <th className="px-4 py-3 text-right text-xs font-semibold text-zinc-600 dark:text-zinc-400">Acciones</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Código
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Descuento
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Validez
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Usos
+              </th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Estado
+              </th>
+              <th className="px-4 py-3 text-right text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-200 dark:divide-zinc-700">
@@ -357,26 +422,37 @@ export default function CouponsAdminPage() {
               </tr>
             ) : (
               coupons.map((coupon) => (
-                <tr key={coupon.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+                <tr
+                  key={coupon.id}
+                  className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+                >
                   <td className="px-4 py-3">
                     <span className="font-mono font-bold text-zinc-900 dark:text-white">
                       {coupon.code}
                     </span>
                     {coupon.description && (
-                      <p className="text-xs text-zinc-500">{coupon.description}</p>
+                      <p className="text-xs text-zinc-500">
+                        {coupon.description}
+                      </p>
                     )}
                   </td>
                   <td className="px-4 py-3 text-sm text-zinc-900 dark:text-white">
-                    {coupon.type === "percentage" ? `${coupon.value}%` : `$${coupon.value.toLocaleString()}`}
+                    {coupon.type === "percentage"
+                      ? `${coupon.value}%`
+                      : `$${coupon.value.toLocaleString()}`}
                     {coupon.minPurchase && (
-                      <p className="text-xs text-zinc-500">Mín: ${coupon.minPurchase.toLocaleString()}</p>
+                      <p className="text-xs text-zinc-500">
+                        Mín: ${coupon.minPurchase.toLocaleString()}
+                      </p>
                     )}
                   </td>
                   <td className="px-4 py-3 text-xs text-zinc-600 dark:text-zinc-400">
-                    {coupon.validFrom.toLocaleDateString()} - {coupon.validUntil.toLocaleDateString()}
+                    {coupon.validFrom.toLocaleDateString()} -{" "}
+                    {coupon.validUntil.toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3 text-sm text-zinc-900 dark:text-white">
-                    {coupon.usageCount}{coupon.usageLimit ? `/${coupon.usageLimit}` : ""}
+                    {coupon.usageCount}
+                    {coupon.usageLimit ? `/${coupon.usageLimit}` : ""}
                   </td>
                   <td className="px-4 py-3">
                     <button

@@ -61,7 +61,11 @@ html.dark {
 }
 
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
   font-size: 24px;
 }
 
@@ -134,9 +138,15 @@ select:focus-visible {
     line-height: 1.5;
   }
 
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
 }
 
 /* Alto contraste para mejor accesibilidad */
@@ -250,7 +260,7 @@ select:focus-visible {
 
 /* Material icons fix con vendor prefixes */
 .material-icons-outlined {
-  font-family: 'Material Icons Outlined';
+  font-family: "Material Icons Outlined";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -261,7 +271,7 @@ select:focus-visible {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 }

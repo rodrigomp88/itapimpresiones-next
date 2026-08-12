@@ -15,24 +15,30 @@ export const useIsMobile = (): boolean => {
       // Verificar por tamaño de pantalla
       const screenWidth = window.innerWidth;
       const isMobileBySize = screenWidth < 768;
-      
+
       // Verificar por user agent
       const userAgent = navigator.userAgent.toLowerCase();
       const mobileKeywords = [
-        'mobile', 'android', 'iphone', 'ipad', 'tablet', 
-        'blackberry', 'windows phone', 'webos'
+        "mobile",
+        "android",
+        "iphone",
+        "ipad",
+        "tablet",
+        "blackberry",
+        "windows phone",
+        "webos",
       ];
-      const isMobileByUA = mobileKeywords.some(keyword => 
+      const isMobileByUA = mobileKeywords.some((keyword) =>
         userAgent.includes(keyword)
       );
 
       // Verificar por capacidades táctiles
-      const hasTouchScreen = 'ontouchstart' in window || 
-                            navigator.maxTouchPoints > 0;
-      
+      const hasTouchScreen =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
       // Combinar todas las verificaciones
       const result = isMobileBySize || (isMobileByUA && hasTouchScreen);
-      
+
       setIsMobile(result);
     };
 
@@ -40,11 +46,11 @@ export const useIsMobile = (): boolean => {
     checkIsMobile();
 
     // Verificar al cambiar el tamaño de la ventana
-    window.addEventListener('resize', checkIsMobile);
+    window.addEventListener("resize", checkIsMobile);
 
     // Cleanup
     return () => {
-      window.removeEventListener('resize', checkIsMobile);
+      window.removeEventListener("resize", checkIsMobile);
     };
   }, []);
 

@@ -10,7 +10,9 @@ const FailurePageContent: React.FC = () => {
   const orderId = searchParams.get("order_id");
 
   useEffect(() => {
-    NotiflixFailure("El pago no pudo ser procesado. Por favor intenta nuevamente.");
+    NotiflixFailure(
+      "El pago no pudo ser procesado. Por favor intenta nuevamente."
+    );
   }, []);
 
   return (
@@ -39,8 +41,9 @@ const FailurePageContent: React.FC = () => {
           </h1>
 
           <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-            El pago no pudo ser procesado. Esto puede deberse a fondos insuficientes,
-            datos incorrectos de la tarjeta, o problemas temporales con el servicio de pago.
+            El pago no pudo ser procesado. Esto puede deberse a fondos
+            insuficientes, datos incorrectos de la tarjeta, o problemas
+            temporales con el servicio de pago.
           </p>
 
           {orderId && (
@@ -50,7 +53,8 @@ const FailurePageContent: React.FC = () => {
               </h2>
               <div className="space-y-2 text-sm">
                 <p>
-                  <span className="font-medium">Número de orden:</span> {orderId}
+                  <span className="font-medium">Número de orden:</span>{" "}
+                  {orderId}
                 </p>
                 <p>
                   <span className="font-medium">Estado:</span>{" "}
@@ -96,7 +100,13 @@ const FailurePageContent: React.FC = () => {
 
 const FailurePage: React.FC = () => {
   return (
-    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+    <Suspense
+      fallback={
+        <div className="flex-grow flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        </div>
+      }
+    >
       <FailurePageContent />
     </Suspense>
   );

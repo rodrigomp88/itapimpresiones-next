@@ -75,7 +75,8 @@ const SuccessPageContent: React.FC = () => {
           </h1>
 
           <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-            Tu orden ha sido confirmada exitosamente. Recibirás un email con los detalles de envío.
+            Tu orden ha sido confirmada exitosamente. Recibirás un email con los
+            detalles de envío.
           </p>
 
           {orderId && (
@@ -85,12 +86,14 @@ const SuccessPageContent: React.FC = () => {
               </h2>
               <div className="space-y-2 text-sm">
                 <p>
-                  <span className="font-medium">Número de orden:</span> {orderId}
+                  <span className="font-medium">Número de orden:</span>{" "}
+                  {orderId}
                 </p>
                 {orderData && (
                   <>
                     <p>
-                      <span className="font-medium">Total:</span> ${orderData.orderAmount?.toLocaleString("es-AR")}
+                      <span className="font-medium">Total:</span> $
+                      {orderData.orderAmount?.toLocaleString("es-AR")}
                     </p>
                     <p>
                       <span className="font-medium">Estado:</span>{" "}
@@ -126,7 +129,13 @@ const SuccessPageContent: React.FC = () => {
 
 const SuccessPage: React.FC = () => {
   return (
-    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+    <Suspense
+      fallback={
+        <div className="flex-grow flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        </div>
+      }
+    >
       <SuccessPageContent />
     </Suspense>
   );

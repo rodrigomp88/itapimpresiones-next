@@ -11,21 +11,21 @@ export const useKeyboardNavigation = (
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
-        case 'Enter':
+        case "Enter":
           onEnter?.();
           break;
-        case 'Escape':
+        case "Escape":
           onEscape?.();
           break;
-        case ' ':
+        case " ":
           event.preventDefault();
           onSpace?.();
           break;
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onEnter, onEscape, onSpace]);
 };
 
@@ -44,10 +44,12 @@ export const useFocusTrap = (isActive: boolean = false) => {
     );
 
     const firstElement = focusableElements[0] as HTMLElement;
-    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+    const lastElement = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
 
     const handleTabKey = (event: KeyboardEvent) => {
-      if (event.key !== 'Tab') return;
+      if (event.key !== "Tab") return;
 
       if (event.shiftKey) {
         if (document.activeElement === firstElement) {
@@ -62,11 +64,11 @@ export const useFocusTrap = (isActive: boolean = false) => {
       }
     };
 
-    container.addEventListener('keydown', handleTabKey);
+    container.addEventListener("keydown", handleTabKey);
     firstElement?.focus();
 
     return () => {
-      container.removeEventListener('keydown', handleTabKey);
+      container.removeEventListener("keydown", handleTabKey);
     };
   }, [isActive]);
 
@@ -84,7 +86,7 @@ export const useLiveRegion = (announcements: string[] = []) => {
     setCurrentIndex(announcements.length - 1);
   };
 
-  const currentMessage = currentIndex >= 0 ? announcements[currentIndex] : '';
+  const currentMessage = currentIndex >= 0 ? announcements[currentIndex] : "";
 
   return { announce, currentMessage };
 };
@@ -98,17 +100,17 @@ export const useKeyboardUser = () => {
   useEffect(() => {
     const handleMouseDown = () => setIsKeyboardUser(false);
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Tab') {
+      if (e.key === "Tab") {
         setIsKeyboardUser(true);
       }
     };
 
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 

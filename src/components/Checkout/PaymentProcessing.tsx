@@ -37,18 +37,26 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-zinc-600 dark:text-zinc-400">Total del pedido</span>
-              <span className="font-medium">${order.orderAmount.toLocaleString("es-AR")}</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                Total del pedido
+              </span>
+              <span className="font-medium">
+                ${order.orderAmount.toLocaleString("es-AR")}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-600 dark:text-zinc-400">Seña a pagar ahora</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                Seña a pagar ahora
+              </span>
               <span className="font-medium text-blue-600 dark:text-blue-400">
                 ${order.depositAmount.toLocaleString("es-AR")}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-zinc-600 dark:text-zinc-400">Restante</span>
-              <span className="font-medium">${order.remainingAmount.toLocaleString("es-AR")}</span>
+              <span className="font-medium">
+                ${order.remainingAmount.toLocaleString("es-AR")}
+              </span>
             </div>
           </div>
         </div>

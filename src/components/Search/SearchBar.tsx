@@ -33,10 +33,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   // Búsquedas populares como fallback
   const popularSearches = [
     "Remeras personalizadas",
-    "Bolsas ecológicas", 
+    "Bolsas ecológicas",
     "Gorras bordadas",
     "Buzos corporativos",
-    "Indumentaria laboral"
+    "Indumentaria laboral",
   ];
 
   const allSuggestions = suggestions.length > 0 ? suggestions : popularSearches;
@@ -68,13 +68,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setHighlightedIndex(prev => 
+        setHighlightedIndex((prev) =>
           prev < allSuggestions.length - 1 ? prev + 1 : 0
         );
         break;
       case "ArrowUp":
         e.preventDefault();
-        setHighlightedIndex(prev => 
+        setHighlightedIndex((prev) =>
           prev > 0 ? prev - 1 : allSuggestions.length - 1
         );
         break;
@@ -125,17 +125,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <div className={`relative w-full max-w-2xl ${className}`}>
       <form onSubmit={handleSubmit} className="relative">
-        <div className={`relative flex items-center bg-white dark:bg-zinc-800 border-2 rounded-xl transition-all duration-200 ${
-          isFocused 
-            ? "border-blue-500 shadow-lg ring-2 ring-blue-500/20" 
-            : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600"
-        }`}>
-          
+        <div
+          className={`relative flex items-center bg-white dark:bg-zinc-800 border-2 rounded-xl transition-all duration-200 ${
+            isFocused
+              ? "border-blue-500 shadow-lg ring-2 ring-blue-500/20"
+              : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600"
+          }`}
+        >
           {/* Icono de búsqueda */}
           <div className="pl-4 pr-2">
-            <HiSearch className={`w-5 h-5 transition-colors ${
-              isFocused ? "text-blue-500" : "text-zinc-400"
-            }`} />
+            <HiSearch
+              className={`w-5 h-5 transition-colors ${
+                isFocused ? "text-blue-500" : "text-zinc-400"
+              }`}
+            />
           </div>
 
           {/* Input */}
@@ -191,7 +194,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     key={index}
                     onClick={() => handleSuggestionSelect(suggestion)}
                     className={`w-full text-left px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors flex items-center gap-3 ${
-                      highlightedIndex === index ? "bg-blue-50 dark:bg-blue-900/20" : ""
+                      highlightedIndex === index
+                        ? "bg-blue-50 dark:bg-blue-900/20"
+                        : ""
                     }`}
                   >
                     {value.length === 0 && (
@@ -202,9 +207,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       {suggestion}
                     </span>
                     {value.length > 0 && (
-                      <span className="text-xs text-zinc-400">
-                        Buscar
-                      </span>
+                      <span className="text-xs text-zinc-400">Buscar</span>
                     )}
                   </button>
                 ))}

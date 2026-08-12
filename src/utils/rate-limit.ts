@@ -1,40 +1,47 @@
-import rateLimit from 'express-rate-limit';
-import { logSecurity } from './logger';
+import rateLimit from "express-rate-limit";
+import { logSecurity } from "./logger";
 
 // Rate limiter para APIs generales
 export const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // límite de 100 requests por windowMs
   message: {
-    error: 'Too many requests from this IP, please try again later.',
+    error: "Too many requests from this IP, please try again later.",
     retryAfter: 15 * 60, // segundos
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   handler: (req, res) => {
-    logSecurity('RATE_LIMIT_EXCEEDED', {
-      ip: req.ip,
-      url: req.url,
-      userAgent: req.get('User-Agent'),
-      method: req.method,
-    }, req.ip);
+    logSecurity(
+      "RATE_LIMIT_EXCEEDED",
+      {
+        ip: req.ip,
+        url: req.url,
+        userAgent: req.get("User-Agent"),
+        method: req.method,
+      },
+      req.ip
+    );
 
     res.status(429).json({
-      error: 'Too many requests from this IP, please try again later.',
-      retryAfter: Math.ceil(res.getHeader('Retry-After') as number / 60) + ' minutes',
+      error: "Too many requests from this IP, please try again later.",
+      retryAfter:
+        Math.ceil((res.getHeader("Retry-After") as number) / 60) + " minutes",
     });
   },
   skip: (req) => {
     // Skip rate limiting for health checks and static assets
-    return req.url?.startsWith('/api/health') ||
-           req.url?.startsWith('/_next/static') ||
-           req.url?.includes('favicon') ||
-           req.url?.includes('.png') ||
-           req.url?.includes('.jpg') ||
-           req.url?.includes('.jpeg') ||
-           req.url?.includes('.gif') ||
-           req.url?.includes('.svg') ||
-           req.url?.includes('.ico');
+    return (
+      req.url?.startsWith("/api/health") ||
+      req.url?.startsWith("/_next/static") ||
+      req.url?.includes("favicon") ||
+      req.url?.includes(".png") ||
+      req.url?.includes(".jpg") ||
+      req.url?.includes(".jpeg") ||
+      req.url?.includes(".gif") ||
+      req.url?.includes(".svg") ||
+      req.url?.includes(".ico")
+    );
   },
 });
 
@@ -43,23 +50,28 @@ export const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 5, // límite de 5 intentos de login por windowMs
   message: {
-    error: 'Too many authentication attempts, please try again later.',
+    error: "Too many authentication attempts, please try again later.",
     retryAfter: 15 * 60,
   },
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {
-    logSecurity('AUTH_RATE_LIMIT_EXCEEDED', {
-      ip: req.ip,
-      url: req.url,
-      userAgent: req.get('User-Agent'),
-      method: req.method,
-      email: req.body?.email, // Log attempted email if available
-    }, req.ip);
+    logSecurity(
+      "AUTH_RATE_LIMIT_EXCEEDED",
+      {
+        ip: req.ip,
+        url: req.url,
+        userAgent: req.get("User-Agent"),
+        method: req.method,
+        email: req.body?.email, // Log attempted email if available
+      },
+      req.ip
+    );
 
     res.status(429).json({
-      error: 'Too many authentication attempts, please try again later.',
-      retryAfter: Math.ceil(res.getHeader('Retry-After') as number / 60) + ' minutes',
+      error: "Too many authentication attempts, please try again later.",
+      retryAfter:
+        Math.ceil((res.getHeader("Retry-After") as number) / 60) + " minutes",
     });
   },
 });
@@ -69,22 +81,27 @@ export const orderLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hora
   max: 10, // máximo 10 órdenes por hora por IP
   message: {
-    error: 'Order creation limit exceeded. Please try again later.',
+    error: "Order creation limit exceeded. Please try again later.",
     retryAfter: 60 * 60,
   },
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {
-    logSecurity('ORDER_RATE_LIMIT_EXCEEDED', {
-      ip: req.ip,
-      url: req.url,
-      userAgent: req.get('User-Agent'),
-      method: req.method,
-    }, req.ip);
+    logSecurity(
+      "ORDER_RATE_LIMIT_EXCEEDED",
+      {
+        ip: req.ip,
+        url: req.url,
+        userAgent: req.get("User-Agent"),
+        method: req.method,
+      },
+      req.ip
+    );
 
     res.status(429).json({
-      error: 'Order creation limit exceeded. Please try again later.',
-      retryAfter: Math.ceil(res.getHeader('Retry-After') as number / 60) + ' minutes',
+      error: "Order creation limit exceeded. Please try again later.",
+      retryAfter:
+        Math.ceil((res.getHeader("Retry-After") as number) / 60) + " minutes",
     });
   },
 });
@@ -94,22 +111,27 @@ export const contactLimiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 1 hora
   max: 3, // máximo 3 mensajes de contacto por hora
   message: {
-    error: 'Contact form submission limit exceeded. Please try again later.',
+    error: "Contact form submission limit exceeded. Please try again later.",
     retryAfter: 60 * 60,
   },
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {
-    logSecurity('CONTACT_RATE_LIMIT_EXCEEDED', {
-      ip: req.ip,
-      url: req.url,
-      userAgent: req.get('User-Agent'),
-      method: req.method,
-    }, req.ip);
+    logSecurity(
+      "CONTACT_RATE_LIMIT_EXCEEDED",
+      {
+        ip: req.ip,
+        url: req.url,
+        userAgent: req.get("User-Agent"),
+        method: req.method,
+      },
+      req.ip
+    );
 
     res.status(429).json({
-      error: 'Contact form submission limit exceeded. Please try again later.',
-      retryAfter: Math.ceil(res.getHeader('Retry-After') as number / 60) + ' minutes',
+      error: "Contact form submission limit exceeded. Please try again later.",
+      retryAfter:
+        Math.ceil((res.getHeader("Retry-After") as number) / 60) + " minutes",
     });
   },
 });
@@ -119,22 +141,27 @@ export const adminLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 50, // límite de 50 operaciones admin por windowMs
   message: {
-    error: 'Admin operation limit exceeded.',
+    error: "Admin operation limit exceeded.",
     retryAfter: 15 * 60,
   },
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {
-    logSecurity('ADMIN_RATE_LIMIT_EXCEEDED', {
-      ip: req.ip,
-      url: req.url,
-      userAgent: req.get('User-Agent'),
-      method: req.method,
-    }, req.ip);
+    logSecurity(
+      "ADMIN_RATE_LIMIT_EXCEEDED",
+      {
+        ip: req.ip,
+        url: req.url,
+        userAgent: req.get("User-Agent"),
+        method: req.method,
+      },
+      req.ip
+    );
 
     res.status(429).json({
-      error: 'Admin operation limit exceeded.',
-      retryAfter: Math.ceil(res.getHeader('Retry-After') as number / 60) + ' minutes',
+      error: "Admin operation limit exceeded.",
+      retryAfter:
+        Math.ceil((res.getHeader("Retry-After") as number) / 60) + " minutes",
     });
   },
 });
@@ -142,7 +169,7 @@ export const adminLimiter = rateLimit({
 // Middleware para logging de rate limits (se puede usar para analytics)
 export const rateLimitLogger = (req: any, res: any, next: any) => {
   const originalJson = res.json;
-  res.json = function(data: any) {
+  res.json = function (data: any) {
     if (res.statusCode === 429) {
       // Ya se loguea en los handlers individuales
     }
@@ -165,16 +192,20 @@ export const createRateLimit = (
     standardHeaders: true,
     legacyHeaders: false,
     handler: (req, res) => {
-      logSecurity(eventName, {
-        ip: req.ip,
-        url: req.url,
-        userAgent: req.get('User-Agent'),
-        method: req.method,
-      }, req.ip);
+      logSecurity(
+        eventName,
+        {
+          ip: req.ip,
+          url: req.url,
+          userAgent: req.get("User-Agent"),
+          method: req.method,
+        },
+        req.ip
+      );
 
       res.status(429).json({
         error: message,
-        retryAfter: Math.ceil(windowMs / 60000) + ' minutes',
+        retryAfter: Math.ceil(windowMs / 60000) + " minutes",
       });
     },
   });

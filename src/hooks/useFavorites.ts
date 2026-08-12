@@ -24,12 +24,12 @@ export const useFavorites = () => {
   // Validar ID del producto antes de agregar
   const addToFavorites = useCallback((productId: string) => {
     // Validar que el ID sea un string válido
-    if (!productId || typeof productId !== 'string' || productId.length > 255) {
+    if (!productId || typeof productId !== "string" || productId.length > 255) {
       console.warn("ID de producto inválido:", productId);
       return;
     }
 
-    setFavorites(prev => {
+    setFavorites((prev) => {
       if (!prev.includes(productId)) {
         return [...prev, productId];
       }
@@ -38,27 +38,30 @@ export const useFavorites = () => {
   }, []);
 
   const removeFromFavorites = useCallback((productId: string) => {
-    setFavorites(prev => prev.filter(id => id !== productId));
+    setFavorites((prev) => prev.filter((id) => id !== productId));
   }, []);
 
   const toggleFavorite = useCallback((productId: string) => {
-    if (!productId || typeof productId !== 'string') {
+    if (!productId || typeof productId !== "string") {
       console.warn("ID de producto inválido para toggle:", productId);
       return;
     }
 
-    setFavorites(prev => {
+    setFavorites((prev) => {
       if (prev.includes(productId)) {
-        return prev.filter(id => id !== productId);
+        return prev.filter((id) => id !== productId);
       } else {
         return [...prev, productId];
       }
     });
   }, []);
 
-  const isFavorite = useCallback((productId: string) => {
-    return favorites.includes(productId);
-  }, [favorites]);
+  const isFavorite = useCallback(
+    (productId: string) => {
+      return favorites.includes(productId);
+    },
+    [favorites]
+  );
 
   const clearFavorites = useCallback(() => {
     setFavorites([]);

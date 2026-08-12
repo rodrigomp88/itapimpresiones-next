@@ -2,7 +2,11 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaExclamationTriangle, FaCheckCircle, FaInfoCircle } from "react-icons/fa";
+import {
+  FaExclamationTriangle,
+  FaCheckCircle,
+  FaInfoCircle,
+} from "react-icons/fa";
 
 interface ErrorFeedbackProps {
   error?: string;
@@ -17,7 +21,7 @@ export const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({
   success,
   info,
   type = "error",
-  className = ""
+  className = "",
 }) => {
   const getIcon = () => {
     switch (type) {
@@ -68,7 +72,10 @@ interface FieldErrorProps {
   touched?: boolean;
 }
 
-export const FieldError: React.FC<FieldErrorProps> = ({ error, touched = true }) => {
+export const FieldError: React.FC<FieldErrorProps> = ({
+  error,
+  touched = true,
+}) => {
   if (!error || !touched) return null;
 
   return (
@@ -107,11 +114,12 @@ export const InputField: React.FC<InputFieldProps> = ({
   const inputClasses = `
     w-full px-3 py-2 rounded-md border transition-all duration-200
     focus:ring-2 focus:ring-primary/50 focus:border-primary
-    ${error && touched 
-      ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10" 
-      : success && touched
-      ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
-      : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+    ${
+      error && touched
+        ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10"
+        : success && touched
+          ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
+          : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
     }
     ${className}
   `.trim();
@@ -124,15 +132,17 @@ export const InputField: React.FC<InputFieldProps> = ({
       <div className="relative">
         {icon && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className={`text-gray-400 ${error ? 'text-red-400' : success ? 'text-green-400' : ''}`}>
+            <span
+              className={`text-gray-400 ${error ? "text-red-400" : success ? "text-green-400" : ""}`}
+            >
               {icon}
             </span>
           </div>
         )}
         <input
-          className={`${inputClasses} ${icon ? 'pl-10' : ''}`}
+          className={`${inputClasses} ${icon ? "pl-10" : ""}`}
           {...props}
-          aria-invalid={error && touched ? 'true' : 'false'}
+          aria-invalid={error && touched ? "true" : "false"}
           aria-describedby={error && touched ? `${props.id}-error` : undefined}
         />
         {success && touched && (
@@ -164,11 +174,12 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
   const inputClasses = `
     w-full px-3 py-2 rounded-md border transition-all duration-200 resize-none
     focus:ring-2 focus:ring-primary/50 focus:border-primary
-    ${error && touched 
-      ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10" 
-      : success && touched
-      ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
-      : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+    ${
+      error && touched
+        ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10"
+        : success && touched
+          ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
+          : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
     }
     ${className}
   `.trim();
@@ -181,7 +192,7 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
       <textarea
         className={inputClasses}
         {...props}
-        aria-invalid={error && touched ? 'true' : 'false'}
+        aria-invalid={error && touched ? "true" : "false"}
         aria-describedby={error && touched ? `${props.id}-error` : undefined}
       />
       <FieldError error={error} touched={touched} />
@@ -209,11 +220,12 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   const inputClasses = `
     w-full px-3 py-2 rounded-md border transition-all duration-200
     focus:ring-2 focus:ring-primary/50 focus:border-primary
-    ${error && touched 
-      ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10" 
-      : success && touched
-      ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
-      : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
+    ${
+      error && touched
+        ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/10"
+        : success && touched
+          ? "border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/10"
+          : "border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800"
     }
     ${className}
   `.trim();
@@ -226,7 +238,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
       <select
         className={inputClasses}
         {...props}
-        aria-invalid={error && touched ? 'true' : 'false'}
+        aria-invalid={error && touched ? "true" : "false"}
         aria-describedby={error && touched ? `${props.id}-error` : undefined}
       >
         {options.map((option) => (

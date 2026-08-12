@@ -12,7 +12,7 @@ interface ProductDetailsState {
   minQty: number;
 }
 
-type ProductDetailsAction = 
+type ProductDetailsAction =
   | { type: "SET_SELECTED_IMAGE"; payload: number }
   | { type: "SET_USER_LOGO"; payload: string | null }
   | { type: "SET_LOGO_POS"; payload: { x: number; y: number } }
@@ -25,7 +25,10 @@ type ProductDetailsAction =
   | { type: "RESET_LOGO_STATE" }
   | { type: "INITIALIZE_QUANTITY"; payload: number };
 
-const productDetailsReducer = (state: ProductDetailsState, action: ProductDetailsAction): ProductDetailsState => {
+const productDetailsReducer = (
+  state: ProductDetailsState,
+  action: ProductDetailsAction
+): ProductDetailsState => {
   switch (action.type) {
     case "SET_SELECTED_IMAGE":
       return { ...state, selectedImage: action.payload };
@@ -49,9 +52,14 @@ const productDetailsReducer = (state: ProductDetailsState, action: ProductDetail
     case "SET_IS_CART_ADDED":
       return { ...state, isCartAdded: action.payload };
     case "RESET_LOGO_STATE":
-        return { ...state, userLogo: null, logoPos: { x: 50, y: 50 }, logoSize: 30 };
+      return {
+        ...state,
+        userLogo: null,
+        logoPos: { x: 50, y: 50 },
+        logoSize: 30,
+      };
     case "INITIALIZE_QUANTITY":
-        return { ...state, quantity: action.payload };
+      return { ...state, quantity: action.payload };
     default:
       return state;
   }

@@ -8,7 +8,10 @@ interface ProductListProps {
   lastElementRef?: (node: HTMLDivElement) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ products, lastElementRef }) => {
+const ProductList: React.FC<ProductListProps> = ({
+  products,
+  lastElementRef,
+}) => {
   if (!products || products.length === 0) {
     return (
       <div className="text-center py-10 col-span-full">

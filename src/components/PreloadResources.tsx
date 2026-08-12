@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 // Componente para preload de recursos críticos
 const PreloadResources: React.FC = () => {
@@ -9,15 +9,15 @@ const PreloadResources: React.FC = () => {
     const preloadFonts = () => {
       const fontLinks = [
         {
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap',
-          rel: 'preload',
-          as: 'style',
-          onload: "this.onload=null;this.rel='stylesheet'"
-        }
+          href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+          rel: "preload",
+          as: "style",
+          onload: "this.onload=null;this.rel='stylesheet'",
+        },
       ];
 
-      fontLinks.forEach(font => {
-        const link = document.createElement('link');
+      fontLinks.forEach((font) => {
+        const link = document.createElement("link");
         link.href = font.href;
         link.rel = font.rel;
         link.as = font.as;
@@ -29,12 +29,12 @@ const PreloadResources: React.FC = () => {
     // Preload de imágenes críticas
     const preloadCriticalImages = () => {
       const criticalImages = [
-        '/images/logoblack.png',
-        '/images/logowhite.png',
-        '/images/carousel0.png'
+        "/images/logoblack.png",
+        "/images/logowhite.png",
+        "/images/carousel0.png",
       ];
 
-      criticalImages.forEach(src => {
+      criticalImages.forEach((src) => {
         const img = new Image();
         img.src = src;
       });
@@ -43,10 +43,11 @@ const PreloadResources: React.FC = () => {
     // Preload de scripts importantes
     const preloadScripts = () => {
       // Preload Firebase scripts si es necesario
-      const firebaseScript = document.createElement('link');
-      firebaseScript.rel = 'preload';
-      firebaseScript.href = 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-      firebaseScript.as = 'script';
+      const firebaseScript = document.createElement("link");
+      firebaseScript.rel = "preload";
+      firebaseScript.href =
+        "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      firebaseScript.as = "script";
       document.head.appendChild(firebaseScript);
     };
 

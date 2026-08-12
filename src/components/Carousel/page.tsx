@@ -39,9 +39,9 @@ const Carousel: React.FC = () => {
     <div className="relative h-[600px] flex items-center justify-center overflow-hidden">
       {/* Overlay gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent z-10"></div>
-      
+
       {/* Background image with parallax effect */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{ backgroundImage: `url(${sliderData[currentSlide].image})` }}
       ></div>
@@ -65,7 +65,10 @@ const Carousel: React.FC = () => {
             <p className="text-lg md:text-xl font-light text-slate-100 max-w-lg leading-relaxed opacity-90">
               {sliderData[currentSlide].desc}
             </p>
-            <Link href="/tienda" className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-semibold hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+            <Link
+              href="/tienda"
+              className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-semibold hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            >
               Ver Servicios
             </Link>
           </motion.div>

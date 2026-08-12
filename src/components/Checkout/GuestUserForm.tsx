@@ -10,7 +10,10 @@ import { HiLockClosed } from "react-icons/hi";
 interface GuestUserFormProps {
   guestUser: GuestUser;
   onUpdateField: (field: keyof GuestUser, value: string) => void;
-  onSubmit: (appliedCoupon?: AppliedCoupon, paymentMethod?: PaymentMethod) => void;
+  onSubmit: (
+    appliedCoupon?: AppliedCoupon,
+    paymentMethod?: PaymentMethod
+  ) => void;
   isSubmitting: boolean;
   error: string | null;
   validationErrors: Partial<Record<keyof GuestUser, string>>;
@@ -24,7 +27,8 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
   error,
   validationErrors,
 }) => {
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('mercadopago');
+  const [paymentMethod, setPaymentMethod] =
+    useState<PaymentMethod>("mercadopago");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -165,8 +169,10 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
                 type="radio"
                 name="paymentMethod"
                 value="mercadopago"
-                checked={paymentMethod === 'mercadopago'}
-                onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
+                checked={paymentMethod === "mercadopago"}
+                onChange={(e) =>
+                  setPaymentMethod(e.target.value as PaymentMethod)
+                }
                 className="w-4 h-4 text-blue-600"
               />
               <div className="flex-1">
@@ -184,8 +190,10 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
                 type="radio"
                 name="paymentMethod"
                 value="transfer"
-                checked={paymentMethod === 'transfer'}
-                onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
+                checked={paymentMethod === "transfer"}
+                onChange={(e) =>
+                  setPaymentMethod(e.target.value as PaymentMethod)
+                }
                 className="w-4 h-4 text-blue-600"
               />
               <div className="flex-1">
@@ -219,7 +227,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
               </div>
             )}
           </button>
-          
+
           <p className="mt-3 text-center text-xs text-zinc-500 dark:text-zinc-400">
             Al continuar, aceptas nuestros términos y condiciones de envío
           </p>

@@ -112,14 +112,22 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
     }
 
     return filtered;
-  }, [filteredProducts, state.selectedColor, state.selectedBagType, state.category]);
+  }, [
+    filteredProducts,
+    state.selectedColor,
+    state.selectedBagType,
+    state.category,
+  ]);
 
   // --- BÚSQUEDA ---
   const searchFiltered = useMemo(() => {
     return state.searchQuery
-      ? colorAndBagFiltered.filter((p) =>
-          p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
-          p.description?.toLowerCase().includes(state.searchQuery.toLowerCase())
+      ? colorAndBagFiltered.filter(
+          (p) =>
+            p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+            p.description
+              ?.toLowerCase()
+              .includes(state.searchQuery.toLowerCase())
         )
       : colorAndBagFiltered;
   }, [colorAndBagFiltered, state.searchQuery]);
@@ -148,7 +156,6 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   const productsPerPage = 12;
   const observer = useRef<IntersectionObserver | null>(null);
 
-
   useEffect(() => {
     if (sortedProducts.length > 0) {
       setDisplayedProducts(sortedProducts.slice(0, productsPerPage));
@@ -161,20 +168,31 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
     const startIndex = (nextPage - 1) * productsPerPage;
     const endIndex = nextPage * productsPerPage;
     const newProducts = sortedProducts.slice(startIndex, endIndex);
-    setDisplayedProducts(prev => [...prev, ...newProducts]);
+    setDisplayedProducts((prev) => [...prev, ...newProducts]);
     setPage(nextPage);
   }, [page, sortedProducts, productsPerPage]);
 
-  const lastProductRef = useCallback((node: HTMLDivElement) => {
-    if (state.isLoading) return;
-    if (observer.current) observer.current.disconnect();
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && displayedProducts.length < sortedProducts.length) {
-        loadMoreProducts();
-      }
-    });
-    if (node) observer.current.observe(node);
-  }, [state.isLoading, displayedProducts.length, sortedProducts.length, loadMoreProducts]);
+  const lastProductRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (state.isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (
+          entries[0].isIntersecting &&
+          displayedProducts.length < sortedProducts.length
+        ) {
+          loadMoreProducts();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [
+      state.isLoading,
+      displayedProducts.length,
+      sortedProducts.length,
+      loadMoreProducts,
+    ]
+  );
 
   return (
     <div className="w-full">
@@ -183,21 +201,22 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-transparent rounded-full blur-3xl"></div>
-        
+
         <div className="relative max-w-screen-xl mx-auto px-6 py-32 sm:py-40 lg:py-24 min-h-[600px] sm:min-h-[700px]">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
             <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
-
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 dark:text-white leading-tight">
                 Descubre Nuestra
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  {" "}Tienda
+                  {" "}
+                  Tienda
                 </span>
               </h1>
 
               <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                Explora nuestra selección de productos personalizados de alta calidad.
-                Desde remeras hasta bolsas, encontrá todo lo que necesitás para tu marca.
+                Explora nuestra selección de productos personalizados de alta
+                calidad. Desde remeras hasta bolsas, encontrá todo lo que
+                necesitás para tu marca.
               </p>
 
               {/* Estadísticas - Ocultas en mobile muy pequeño */}
@@ -230,12 +249,26 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <button
-                  onClick={() => document.getElementById('product-list')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() =>
+                    document
+                      .getElementById("product-list")
+                      ?.scrollIntoView({ behavior: "smooth" })
+                  }
                   className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl active:scale-95 group"
                 >
                   Explorar Productos
-                  <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg
+                    className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </button>
                 <button className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-white border border-slate-200 text-slate-700 text-sm font-semibold tracking-wide hover:bg-slate-50 transition-all duration-300 hover:border-slate-300 hover:shadow-md active:scale-95">
@@ -266,8 +299,18 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
           {/* Barra de Búsqueda */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
             </div>
             <input
@@ -300,8 +343,16 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                       : "hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105"
                   }`}
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
                 <button
@@ -312,12 +363,20 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                       : "hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-105"
                   }`}
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 000 2h.01a1 1 0 100-2H3zM3 14a1 1 0 100 2h14a1 1 0 100-2H3zM3 9a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM9 9a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1zM9 14a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clipRule="evenodd" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3 4a1 1 0 000 2h.01a1 1 0 100-2H3zM3 14a1 1 0 100 2h14a1 1 0 100-2H3zM3 9a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM9 9a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1zM9 14a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </button>
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <span className="text-zinc-600 dark:text-zinc-400 text-sm">
                   Ordenar por:
@@ -335,7 +394,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               </div>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             <aside className="col-span-12 md:col-span-3">
               <ProductFilter
@@ -364,7 +423,10 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                   ))}
                 </div>
               ) : (
-                <ProductList products={displayedProducts} lastElementRef={lastProductRef} />
+                <ProductList
+                  products={displayedProducts}
+                  lastElementRef={lastProductRef}
+                />
               )}
             </main>
           </div>

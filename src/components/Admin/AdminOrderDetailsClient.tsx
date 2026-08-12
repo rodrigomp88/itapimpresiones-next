@@ -82,7 +82,9 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
   ];
 
   const isChatActive =
-    order.orderStatus !== "delivered" && order.orderStatus !== "cancelled" && order.orderStatus !== "refunded";
+    order.orderStatus !== "delivered" &&
+    order.orderStatus !== "cancelled" &&
+    order.orderStatus !== "refunded";
 
   return (
     <div className="grid md:grid-cols-3 gap-8">
@@ -111,63 +113,82 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
         </div>
 
         <div className="p-4 bg-white dark:bg-black border dark:border-gray-700 rounded-lg">
-          <h3 className="font-semibold mb-2 text-lg">
-            Información de Pago
-          </h3>
+          <h3 className="font-semibold mb-2 text-lg">Información de Pago</h3>
           <div className="space-y-3">
             <p>
               <strong>Estado de Pago:</strong>{" "}
-              <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                order.paymentStatus === 'approved' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' :
-                order.paymentStatus === 'pending' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400' :
-                order.paymentStatus === 'rejected' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400' :
-                order.paymentStatus === 'cancelled' ? 'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400' :
-                'bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400'
-              }`}>
-                {order.paymentStatus === 'approved' ? 'Aprobado' :
-                 order.paymentStatus === 'pending' ? 'Pendiente' :
-                 order.paymentStatus === 'rejected' ? 'Rechazado' :
-                 order.paymentStatus === 'cancelled' ? 'Cancelado' :
-                 order.paymentStatus === 'refunded' ? 'Reembolsado' :
-                 'No especificado'}
+              <span
+                className={`px-2 py-1 text-xs font-medium rounded-full ${
+                  order.paymentStatus === "approved"
+                    ? "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
+                    : order.paymentStatus === "pending"
+                      ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400"
+                      : order.paymentStatus === "rejected"
+                        ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
+                        : order.paymentStatus === "cancelled"
+                          ? "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+                          : "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+                }`}
+              >
+                {order.paymentStatus === "approved"
+                  ? "Aprobado"
+                  : order.paymentStatus === "pending"
+                    ? "Pendiente"
+                    : order.paymentStatus === "rejected"
+                      ? "Rechazado"
+                      : order.paymentStatus === "cancelled"
+                        ? "Cancelado"
+                        : order.paymentStatus === "refunded"
+                          ? "Reembolsado"
+                          : "No especificado"}
               </span>
             </p>
 
             {/* Información de seña si existe */}
             {order.depositAmount && (
               <div className="border-t pt-3 space-y-2">
-                <h4 className="font-medium text-sm">Sistema de Pagos Parciales</h4>
+                <h4 className="font-medium text-sm">
+                  Sistema de Pagos Parciales
+                </h4>
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">Seña pagada:</span>
+                    <span className="text-gray-600 dark:text-gray-400">
+                      Seña pagada:
+                    </span>
                     <p className="font-semibold text-green-600 dark:text-green-400">
                       ${order.depositAmount.toLocaleString("es-AR")}
                     </p>
                   </div>
                   {order.remainingAmount && (
                     <div>
-                      <span className="text-gray-600 dark:text-gray-400">Restante:</span>
+                      <span className="text-gray-600 dark:text-gray-400">
+                        Restante:
+                      </span>
                       <p className="font-semibold text-orange-600 dark:text-orange-400">
                         ${order.remainingAmount.toLocaleString("es-AR")}
                       </p>
                     </div>
                   )}
                 </div>
-                {order.remainingAmount && order.remainingAmount > 0 && order.orderStatus === "processing" && (
-                  <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded p-3 mt-2">
-                    <div className="flex items-center justify-between">
-                      <p className="text-orange-800 dark:text-orange-200 text-xs">
-                        💰 El cliente debe pagar ${order.remainingAmount.toLocaleString("es-AR")} restante al finalizar el trabajo.
-                      </p>
-                      <button
-                        onClick={() => setSelectedStatus("delivered")}
-                        className="ml-3 px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded transition-colors"
-                      >
-                        Marcar Pagado
-                      </button>
+                {order.remainingAmount &&
+                  order.remainingAmount > 0 &&
+                  order.orderStatus === "processing" && (
+                    <div className="bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded p-3 mt-2">
+                      <div className="flex items-center justify-between">
+                        <p className="text-orange-800 dark:text-orange-200 text-xs">
+                          💰 El cliente debe pagar $
+                          {order.remainingAmount.toLocaleString("es-AR")}{" "}
+                          restante al finalizar el trabajo.
+                        </p>
+                        <button
+                          onClick={() => setSelectedStatus("delivered")}
+                          className="ml-3 px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-xs font-medium rounded transition-colors"
+                        >
+                          Marcar Pagado
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
             )}
             {order.paymentId && (
@@ -179,18 +200,24 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
               <>
                 {order.paymentDetails.payment_method_id && (
                   <p>
-                    <strong>Método:</strong> {order.paymentDetails.payment_method_id}
+                    <strong>Método:</strong>{" "}
+                    {order.paymentDetails.payment_method_id}
                   </p>
                 )}
                 {order.paymentDetails.date_approved && (
                   <p>
                     <strong>Fecha de Aprobación:</strong>{" "}
-                    {new Date(order.paymentDetails.date_approved).toLocaleString("es-AR")}
+                    {new Date(
+                      order.paymentDetails.date_approved
+                    ).toLocaleString("es-AR")}
                   </p>
                 )}
                 {order.paymentDetails.transaction_amount && (
                   <p>
-                    <strong>Monto:</strong> ${order.paymentDetails.transaction_amount.toLocaleString("es-AR")}
+                    <strong>Monto:</strong> $
+                    {order.paymentDetails.transaction_amount.toLocaleString(
+                      "es-AR"
+                    )}
                   </p>
                 )}
               </>
@@ -209,14 +236,17 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
           <div className="space-y-3">
             {order.updatedAt && (
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600 dark:text-gray-400">Última actualización:</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Última actualización:
+                </span>
                 <span className="font-medium">
                   {new Date(order.updatedAt).toLocaleString("es-AR")}
                 </span>
               </div>
             )}
             <div className="text-xs text-gray-500 dark:text-gray-400">
-              Sistema registra automáticamente todos los cambios de estado para auditoría.
+              Sistema registra automáticamente todos los cambios de estado para
+              auditoría.
             </div>
           </div>
         </div>
@@ -226,7 +256,9 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
           <div className="flex items-center gap-4">
             <select
               value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value as Order['orderStatus'])}
+              onChange={(e) =>
+                setSelectedStatus(e.target.value as Order["orderStatus"])
+              }
               className="select flex-grow"
               disabled={isUpdatingStatus}
             >

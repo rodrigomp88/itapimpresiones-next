@@ -44,7 +44,7 @@ const UserNotificationBell = () => {
       q,
       (snapshot) => {
         const unreadOrders = snapshot.docs.map(
-          (doc) => ({ id: doc.id, ...doc.data() } as Order)
+          (doc) => ({ id: doc.id, ...doc.data() }) as Order
         );
         setNotifications(unreadOrders);
       },

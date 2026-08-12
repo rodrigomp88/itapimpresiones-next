@@ -22,11 +22,9 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children }) => {
       {/* Contenido principal optimizado para móvil */}
       <main className="min-h-screen">
         {/* El mismo contenido de la página pero con padding móvil */}
-        <div className="px-4 pb-24">
-          {children}
-        </div>
+        <div className="px-4 pb-24">{children}</div>
       </main>
-      
+
       {/* Navegación Bottom Bar */}
       <MobileNavigation />
     </div>

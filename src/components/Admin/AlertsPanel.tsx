@@ -2,14 +2,47 @@
 
 import { useState, useEffect } from "react";
 import { db } from "@/firebase/config";
-import { collection, query, orderBy, limit, onSnapshot, doc, updateDoc, where, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  doc,
+  updateDoc,
+  where,
+  Timestamp,
+} from "firebase/firestore";
 import { Alert, AlertType, AlertCategory } from "@/lib/alerts";
 
-const alertTypeStyles: Record<AlertType, { bg: string; border: string; icon: string; text: string }> = {
-  error: { bg: "bg-red-50 dark:bg-red-900/20", border: "border-red-200 dark:border-red-800", icon: "🔴", text: "text-red-800 dark:text-red-200" },
-  warning: { bg: "bg-amber-50 dark:bg-amber-900/20", border: "border-amber-200 dark:border-amber-800", icon: "🟡", text: "text-amber-800 dark:text-amber-200" },
-  info: { bg: "bg-blue-50 dark:bg-blue-900/20", border: "border-blue-200 dark:border-blue-800", icon: "🔵", text: "text-blue-800 dark:text-blue-200" },
-  success: { bg: "bg-green-50 dark:bg-green-900/20", border: "border-green-200 dark:border-green-800", icon: "🟢", text: "text-green-800 dark:text-green-200" },
+const alertTypeStyles: Record<
+  AlertType,
+  { bg: string; border: string; icon: string; text: string }
+> = {
+  error: {
+    bg: "bg-red-50 dark:bg-red-900/20",
+    border: "border-red-200 dark:border-red-800",
+    icon: "🔴",
+    text: "text-red-800 dark:text-red-200",
+  },
+  warning: {
+    bg: "bg-amber-50 dark:bg-amber-900/20",
+    border: "border-amber-200 dark:border-amber-800",
+    icon: "🟡",
+    text: "text-amber-800 dark:text-amber-200",
+  },
+  info: {
+    bg: "bg-blue-50 dark:bg-blue-900/20",
+    border: "border-blue-200 dark:border-blue-800",
+    icon: "🔵",
+    text: "text-blue-800 dark:text-blue-200",
+  },
+  success: {
+    bg: "bg-green-50 dark:bg-green-900/20",
+    border: "border-green-200 dark:border-green-800",
+    icon: "🟢",
+    text: "text-green-800 dark:text-green-200",
+  },
 };
 
 const categoryIcons: Record<AlertCategory, string> = {
@@ -37,18 +70,22 @@ export default function AlertsPanel() {
       limit(50)
     );
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const alertsData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt?.toDate() || new Date(),
-      })) as Alert[];
-      setAlerts(alertsData);
-      setIsLoading(false);
-    }, (error) => {
-      console.error("Error escuchando alertas:", error);
-      setIsLoading(false);
-    });
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        const alertsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          createdAt: doc.data().createdAt?.toDate() || new Date(),
+        })) as Alert[];
+        setAlerts(alertsData);
+        setIsLoading(false);
+      },
+      (error) => {
+        console.error("Error escuchando alertas:", error);
+        setIsLoading(false);
+      }
+    );
 
     return () => unsubscribe();
   }, []);
@@ -61,13 +98,16 @@ export default function AlertsPanel() {
     }
   };
 
-  const filteredAlerts = filter === "all" 
-    ? alerts 
-    : alerts.filter(a => a.type === filter);
+  const filteredAlerts =
+    filter === "all" ? alerts : alerts.filter((a) => a.type === filter);
 
-  const unreadCount = alerts.filter(a => !a.isRead).length;
-  const errorCount = alerts.filter(a => a.type === "error" && !a.isRead).length;
-  const warningCount = alerts.filter(a => a.type === "warning" && !a.isRead).length;
+  const unreadCount = alerts.filter((a) => !a.isRead).length;
+  const errorCount = alerts.filter(
+    (a) => a.type === "error" && !a.isRead
+  ).length;
+  const warningCount = alerts.filter(
+    (a) => a.type === "warning" && !a.isRead
+  ).length;
 
   const formatTime = (date: Date) => {
     const now = new Date();
@@ -125,19 +165,23 @@ export default function AlertsPanel() {
 
         {/* Filtros */}
         <div className="flex gap-2 mt-3 flex-wrap">
-          {(["all", "error", "warning", "info", "success"] as const).map((type) => (
-            <button
-              key={type}
-              onClick={() => setFilter(type)}
-              className={`px-3 py-1 text-xs rounded-full transition-colors ${
-                filter === type
-                  ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-                  : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
-              }`}
-            >
-              {type === "all" ? "Todas" : type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
+          {(["all", "error", "warning", "info", "success"] as const).map(
+            (type) => (
+              <button
+                key={type}
+                onClick={() => setFilter(type)}
+                className={`px-3 py-1 text-xs rounded-full transition-colors ${
+                  filter === type
+                    ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
+                    : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                }`}
+              >
+                {type === "all"
+                  ? "Todas"
+                  : type.charAt(0).toUpperCase() + type.slice(1)}
+              </button>
+            )
+          )}
         </div>
       </div>
 
@@ -146,7 +190,9 @@ export default function AlertsPanel() {
         {filteredAlerts.length === 0 ? (
           <div className="p-8 text-center text-zinc-500 dark:text-zinc-400">
             <p className="text-2xl mb-2">✅</p>
-            <p>No hay alertas {filter !== "all" ? `de tipo "${filter}"` : ""}</p>
+            <p>
+              No hay alertas {filter !== "all" ? `de tipo "${filter}"` : ""}
+            </p>
           </div>
         ) : (
           filteredAlerts.map((alert) => {
@@ -163,7 +209,9 @@ export default function AlertsPanel() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-xs">{styles.icon}</span>
-                      <h3 className={`text-sm font-medium ${!alert.isRead ? styles.text : "text-zinc-700 dark:text-zinc-300"}`}>
+                      <h3
+                        className={`text-sm font-medium ${!alert.isRead ? styles.text : "text-zinc-700 dark:text-zinc-300"}`}
+                      >
                         {alert.title}
                       </h3>
                       <span className="text-xs text-zinc-400 dark:text-zinc-500">

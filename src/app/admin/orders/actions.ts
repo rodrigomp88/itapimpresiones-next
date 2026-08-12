@@ -31,7 +31,8 @@ export async function updateOrderStatusAction(
   newStatus: string
 ) {
   try {
-    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+    if (!adminDb)
+      return { success: false, error: "Firebase Admin no inicializado." };
 
     const orderRef = adminDb.collection("orders").doc(orderId);
     const orderSnap = await orderRef.get();
@@ -68,7 +69,11 @@ export async function updateOrderStatusAction(
     // Actualizar stock automáticamente cuando la orden pasa a processing
     await updateStockOnOrderStatusChange(orderId, newStatus);
 
-    if (newStatus === "delivered" || newStatus === "cancelled" || newStatus === "refunded") {
+    if (
+      newStatus === "delivered" ||
+      newStatus === "cancelled" ||
+      newStatus === "refunded"
+    ) {
       await deleteChatSubcollection(orderId);
     }
 
@@ -80,7 +85,10 @@ export async function updateOrderStatusAction(
   }
 }
 
-export async function updateStockOnOrderStatusChange(orderId: string, newStatus: string) {
+export async function updateStockOnOrderStatusChange(
+  orderId: string,
+  newStatus: string
+) {
   try {
     if (!adminDb) return;
 
@@ -115,7 +123,9 @@ export async function updateStockOnOrderStatusChange(orderId: string, newStatus:
               updatedAt: Timestamp.now(),
             });
 
-            console.log(`Stock updated for product ${item.id}: ${currentStock} -> ${newStock}`);
+            console.log(
+              `Stock updated for product ${item.id}: ${currentStock} -> ${newStock}`
+            );
           }
         }
       } catch (error) {
@@ -131,13 +141,18 @@ export async function sendAdminMessageAction(orderId: string, text: string) {
   if (!text.trim())
     return { success: false, error: "El mensaje no puede estar vacío." };
   try {
-    if (!adminDb) return { success: false, error: "Firebase Admin no inicializado." };
+    if (!adminDb)
+      return { success: false, error: "Firebase Admin no inicializado." };
 
     const orderRef = adminDb.collection("orders").doc(orderId);
     const orderSnap = await orderRef.get();
 
     const currentStatus = orderSnap.data()?.orderStatus;
-    if (currentStatus === "delivered" || currentStatus === "cancelled" || currentStatus === "refunded") {
+    if (
+      currentStatus === "delivered" ||
+      currentStatus === "cancelled" ||
+      currentStatus === "refunded"
+    ) {
       return {
         success: false,
         error: "No se puede chatear en una orden finalizada.",

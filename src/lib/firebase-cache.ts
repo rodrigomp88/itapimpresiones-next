@@ -18,15 +18,15 @@ class FirebaseCache {
    */
   get<T>(key: string): T | null {
     const entry = this.cache.get(key) as CacheEntry<T> | undefined;
-    
+
     if (!entry) return null;
-    
+
     // Verificar si expiró
     if (Date.now() > entry.expiresAt) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return entry.data;
   }
 
@@ -84,18 +84,18 @@ export const firebaseCache = new FirebaseCache();
 
 // TTL constants
 export const CACHE_TTL = {
-  PRODUCTS_LIST: 5 * 60 * 1000,      // 5 minutos para lista de productos
-  PRODUCT_DETAIL: 10 * 60 * 1000,    // 10 minutos para detalle de producto
-  CATEGORIES: 30 * 60 * 1000,         // 30 minutos para categorías
-  USER_DATA: 2 * 60 * 1000,           // 2 minutos para datos de usuario
+  PRODUCTS_LIST: 5 * 60 * 1000, // 5 minutos para lista de productos
+  PRODUCT_DETAIL: 10 * 60 * 1000, // 10 minutos para detalle de producto
+  CATEGORIES: 30 * 60 * 1000, // 30 minutos para categorías
+  USER_DATA: 2 * 60 * 1000, // 2 minutos para datos de usuario
 } as const;
 
 // Cache keys helpers
 export const CACHE_KEYS = {
-  productsList: () => 'products:list',
+  productsList: () => "products:list",
   productBySlug: (slug: string) => `products:slug:${slug}`,
   productById: (id: string) => `products:id:${id}`,
-  categories: () => 'categories:all',
+  categories: () => "categories:all",
   userOrders: (userId: string) => `orders:user:${userId}`,
 } as const;
 
@@ -115,9 +115,9 @@ export async function cachedQuery<T>(
 
   // Ejecutar consulta
   const result = await queryFn();
-  
+
   // Guardar en caché
   firebaseCache.set(key, result, ttl);
-  
+
   return result;
 }

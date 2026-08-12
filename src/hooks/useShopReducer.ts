@@ -27,7 +27,10 @@ type ShopAction =
   | { type: "SET_SELECTED_BAG_TYPE"; payload: string }
   | { type: "SET_SEARCH_QUERY"; payload: string }
   | { type: "SET_VIEW_MODE"; payload: "grid" | "list" }
-  | { type: "SET_PRICE_RANGE"; payload: { minPrice: number; maxPrice: number } };
+  | {
+      type: "SET_PRICE_RANGE";
+      payload: { minPrice: number; maxPrice: number };
+    };
 
 const shopReducer = (state: ShopState, action: ShopAction): ShopState => {
   switch (action.type) {
@@ -52,7 +55,12 @@ const shopReducer = (state: ShopState, action: ShopAction): ShopState => {
     case "SET_VIEW_MODE":
       return { ...state, viewMode: action.payload };
     case "SET_PRICE_RANGE":
-      return { ...state, minPrice: action.payload.minPrice, maxPrice: action.payload.maxPrice, price: action.payload.maxPrice };
+      return {
+        ...state,
+        minPrice: action.payload.minPrice,
+        maxPrice: action.payload.maxPrice,
+        price: action.payload.maxPrice,
+      };
     default:
       return state;
   }

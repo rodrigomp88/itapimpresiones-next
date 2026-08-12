@@ -49,7 +49,8 @@ const PendingPageContent: React.FC = () => {
               </h2>
               <div className="space-y-2 text-sm">
                 <p>
-                  <span className="font-medium">Número de orden:</span> {orderId}
+                  <span className="font-medium">Número de orden:</span>{" "}
+                  {orderId}
                 </p>
                 <p>
                   <span className="font-medium">Estado:</span>{" "}
@@ -95,7 +96,13 @@ const PendingPageContent: React.FC = () => {
 
 const PendingPage: React.FC = () => {
   return (
-    <Suspense fallback={<div className="flex-grow flex items-center justify-center"><div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div></div>}>
+    <Suspense
+      fallback={
+        <div className="flex-grow flex items-center justify-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+        </div>
+      }
+    >
       <PendingPageContent />
     </Suspense>
   );

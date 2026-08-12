@@ -3,31 +3,39 @@
 
 const formatMessage = (level: string, message: string, meta?: any) => {
   const timestamp = new Date().toISOString();
-  const metaStr = meta ? ` | ${JSON.stringify(meta)}` : '';
+  const metaStr = meta ? ` | ${JSON.stringify(meta)}` : "";
   return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;
 };
 
 export const logger = {
-  error: (message: string, meta?: any) => console.error(formatMessage('error', message, meta)),
-  warn: (message: string, meta?: any) => console.warn(formatMessage('warn', message, meta)),
-  info: (message: string, meta?: any) => console.info(formatMessage('info', message, meta)),
-  http: (message: string, meta?: any) => console.log(formatMessage('http', message, meta)),
+  error: (message: string, meta?: any) =>
+    console.error(formatMessage("error", message, meta)),
+  warn: (message: string, meta?: any) =>
+    console.warn(formatMessage("warn", message, meta)),
+  info: (message: string, meta?: any) =>
+    console.info(formatMessage("info", message, meta)),
+  http: (message: string, meta?: any) =>
+    console.log(formatMessage("http", message, meta)),
   debug: (message: string, meta?: any) => {
-    if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
-      console.debug(formatMessage('debug', message, meta));
+    if (
+      typeof process !== "undefined" &&
+      process.env.NODE_ENV === "development"
+    ) {
+      console.debug(formatMessage("debug", message, meta));
     }
   },
-  security: (message: string, meta?: any) => console.error(formatMessage('security', message, meta)),
+  security: (message: string, meta?: any) =>
+    console.error(formatMessage("security", message, meta)),
   log: (level: string, message: string, meta?: any) => {
     console.log(formatMessage(level, message, meta));
-  }
+  },
 };
 
 // Logger específico para requests HTTP (simplificado)
 export const httpLogger = {
   log: (level: string, message: string, meta?: any) => {
     console.log(formatMessage(level, message, meta));
-  }
+  },
 };
 
 // Función helper para logging de requests
@@ -39,9 +47,9 @@ export const logRequest = (
   userAgent?: string,
   ip?: string
 ) => {
-  const level = statusCode >= 400 ? 'warn' : 'http';
+  const level = statusCode >= 400 ? "warn" : "http";
 
-  httpLogger.log(level, 'HTTP Request', {
+  httpLogger.log(level, "HTTP Request", {
     method,
     url,
     statusCode,
@@ -58,7 +66,7 @@ export const logError = (
   context?: Record<string, any>,
   userId?: string
 ) => {
-  logger.error('Application Error', {
+  logger.error("Application Error", {
     error: {
       name: error.name,
       message: error.message,
@@ -77,7 +85,7 @@ export const logSecurity = (
   ip?: string,
   userId?: string
 ) => {
-  logger.log('security', `SECURITY: ${event}`, {
+  logger.log("security", `SECURITY: ${event}`, {
     details,
     ip,
     userId,
@@ -91,7 +99,7 @@ export const logPerformance = (
   duration: number,
   metadata?: Record<string, any>
 ) => {
-  logger.info('Performance Metric', {
+  logger.info("Performance Metric", {
     operation,
     duration: `${duration}ms`,
     metadata,

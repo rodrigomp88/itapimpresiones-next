@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { HiFilter, HiX, HiStar, HiChevronDown, HiChevronUp } from "react-icons/hi";
+import {
+  HiFilter,
+  HiX,
+  HiStar,
+  HiChevronDown,
+  HiChevronUp,
+} from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 import { SearchFilters as SearchFiltersType } from "@/hooks/useSearch";
 
@@ -28,31 +34,42 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
       id: "category",
       title: "Categoría",
       isOpen: true,
-      content: <CategoryFilter filters={filters} onFiltersChange={onFiltersChange} />,
+      content: (
+        <CategoryFilter filters={filters} onFiltersChange={onFiltersChange} />
+      ),
     },
     {
       id: "price",
       title: "Precio",
       isOpen: true,
-      content: <PriceFilter filters={filters} onFiltersChange={onFiltersChange} />,
+      content: (
+        <PriceFilter filters={filters} onFiltersChange={onFiltersChange} />
+      ),
     },
     {
       id: "rating",
       title: "Calificación",
       isOpen: true,
-      content: <RatingFilter filters={filters} onFiltersChange={onFiltersChange} />,
+      content: (
+        <RatingFilter filters={filters} onFiltersChange={onFiltersChange} />
+      ),
     },
     {
       id: "availability",
       title: "Disponibilidad",
       isOpen: false,
-      content: <AvailabilityFilter filters={filters} onFiltersChange={onFiltersChange} />,
+      content: (
+        <AvailabilityFilter
+          filters={filters}
+          onFiltersChange={onFiltersChange}
+        />
+      ),
     },
   ]);
 
   const toggleSection = (sectionId: string) => {
-    setSections(prev =>
-      prev.map(section =>
+    setSections((prev) =>
+      prev.map((section) =>
         section.id === sectionId
           ? { ...section, isOpen: !section.isOpen }
           : section
@@ -65,11 +82,15 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
   };
 
   const hasActiveFilters = Object.keys(filters).some(
-    key => filters[key as keyof SearchFiltersType] !== undefined && filters[key as keyof SearchFiltersType] !== ""
+    (key) =>
+      filters[key as keyof SearchFiltersType] !== undefined &&
+      filters[key as keyof SearchFiltersType] !== ""
   );
 
   return (
-    <div className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 ${className}`}>
+    <div
+      className={`bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 ${className}`}
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
@@ -105,7 +126,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
                 <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
                   {filters.category}
                   <button
-                    onClick={() => onFiltersChange({ ...filters, category: undefined })}
+                    onClick={() =>
+                      onFiltersChange({ ...filters, category: undefined })
+                    }
                     className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
@@ -116,7 +139,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
                 <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
                   Desde ${filters.priceMin.toLocaleString()}
                   <button
-                    onClick={() => onFiltersChange({ ...filters, priceMin: undefined })}
+                    onClick={() =>
+                      onFiltersChange({ ...filters, priceMin: undefined })
+                    }
                     className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
@@ -127,7 +152,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
                 <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
                   Hasta ${filters.priceMax.toLocaleString()}
                   <button
-                    onClick={() => onFiltersChange({ ...filters, priceMax: undefined })}
+                    onClick={() =>
+                      onFiltersChange({ ...filters, priceMax: undefined })
+                    }
                     className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
@@ -138,7 +165,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
                 <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
                   {filters.rating}+ estrellas
                   <button
-                    onClick={() => onFiltersChange({ ...filters, rating: undefined })}
+                    onClick={() =>
+                      onFiltersChange({ ...filters, rating: undefined })
+                    }
                     className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
@@ -149,7 +178,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
                 <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
                   En stock
                   <button
-                    onClick={() => onFiltersChange({ ...filters, inStock: false })}
+                    onClick={() =>
+                      onFiltersChange({ ...filters, inStock: false })
+                    }
                     className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
@@ -164,7 +195,10 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
       {/* Secciones de filtros */}
       <div className="space-y-4">
         {sections.map((section) => (
-          <div key={section.id} className="border-b border-zinc-200 dark:border-zinc-700 pb-4 last:border-b-0">
+          <div
+            key={section.id}
+            className="border-b border-zinc-200 dark:border-zinc-700 pb-4 last:border-b-0"
+          >
             <button
               onClick={() => toggleSection(section.id)}
               className="flex items-center justify-between w-full text-left"
@@ -208,7 +242,10 @@ const CategoryFilter: React.FC<{
   return (
     <div className="space-y-2">
       {categories.map((category) => (
-        <label key={category} className="flex items-center gap-3 cursor-pointer">
+        <label
+          key={category}
+          className="flex items-center gap-3 cursor-pointer"
+        >
           <input
             type="radio"
             name="category"
@@ -277,7 +314,7 @@ const PriceFilter: React.FC<{
           />
         </div>
       </div>
-      
+
       {/* Rangos predefinidos */}
       <div className="space-y-2">
         <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
@@ -291,11 +328,13 @@ const PriceFilter: React.FC<{
         ].map((range) => (
           <button
             key={range.label}
-            onClick={() => onFiltersChange({ 
-              ...filters, 
-              priceMin: range.min, 
-              priceMax: range.max 
-            })}
+            onClick={() =>
+              onFiltersChange({
+                ...filters,
+                priceMin: range.min,
+                priceMax: range.max,
+              })
+            }
             className="block w-full text-left px-3 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-lg transition-colors"
           >
             {range.label}

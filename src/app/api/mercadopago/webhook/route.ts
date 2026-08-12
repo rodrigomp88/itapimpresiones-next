@@ -26,13 +26,19 @@ export async function POST(request: NextRequest) {
 
     if (!payment) {
       console.error("Pago no encontrado:", paymentId);
-      return NextResponse.json({ error: "Pago no encontrado" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Pago no encontrado" },
+        { status: 404 }
+      );
     }
 
     const externalReference = payment.external_reference;
     if (!externalReference) {
       console.error("Referencia externa no encontrada");
-      return NextResponse.json({ error: "Referencia externa no encontrada" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Referencia externa no encontrada" },
+        { status: 400 }
+      );
     }
 
     // Actualizar orden en Firestore
@@ -41,12 +47,16 @@ export async function POST(request: NextRequest) {
 
     if (!orderSnap.exists()) {
       console.error("Orden no encontrada:", externalReference);
-      return NextResponse.json({ error: "Orden no encontrada" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Orden no encontrada" },
+        { status: 404 }
+      );
     }
 
     // Obtener información de la orden para determinar si es seña o pago completo
     const orderData = orderSnap.data();
-    const isDepositPayment = orderData?.depositAmount && orderData?.remainingAmount;
+    const isDepositPayment =
+      orderData?.depositAmount && orderData?.remainingAmount;
     const depositAmount = orderData?.depositAmount || 0;
     const totalAmount = orderData?.orderAmount || 0;
 
@@ -58,7 +68,8 @@ export async function POST(request: NextRequest) {
       case "approved":
         if (isDepositPayment && payment.transaction_amount) {
           // Si hay seña configurada, verificar si el pago corresponde a la seña
-          if (payment.transaction_amount <= depositAmount * 1.1) { // 10% de tolerancia
+          if (payment.transaction_amount <= depositAmount * 1.1) {
+            // 10% de tolerancia
             // Es el pago de la seña
             orderStatus = "confirmed";
             paymentStatus = "approved";
@@ -111,15 +122,16 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
     });
 
-    console.log(`Orden ${externalReference} actualizada: ${orderStatus} (${paymentStatus})`);
+    console.log(
+      `Orden ${externalReference} actualizada: ${orderStatus} (${paymentStatus})`
+    );
 
     return NextResponse.json({
       received: true,
       orderId: externalReference,
       status: orderStatus,
-      paymentStatus: paymentStatus
+      paymentStatus: paymentStatus,
     });
-
   } catch (error) {
     console.error("Error procesando webhook:", error);
     return NextResponse.json(

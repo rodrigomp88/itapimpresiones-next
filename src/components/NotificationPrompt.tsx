@@ -12,15 +12,19 @@ interface NotificationPromptProps {
   userId?: string;
 }
 
-export default function NotificationPrompt({ userId }: NotificationPromptProps) {
-  const [status, setStatus] = useState<NotificationPermission | "unsupported" | "loading">("loading");
+export default function NotificationPrompt({
+  userId,
+}: NotificationPromptProps) {
+  const [status, setStatus] = useState<
+    NotificationPermission | "unsupported" | "loading"
+  >("loading");
   const [isRequesting, setIsRequesting] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
     const currentStatus = getNotificationPermissionStatus();
     setStatus(currentStatus);
-    
+
     // Mostrar prompt si aún no se decidió
     if (currentStatus === "default") {
       // Esperar un poco antes de mostrar
@@ -47,7 +51,7 @@ export default function NotificationPrompt({ userId }: NotificationPromptProps) 
     setIsRequesting(true);
     try {
       const token = await requestNotificationPermission();
-      
+
       if (token && userId) {
         await saveUserToken(userId, token);
         setStatus("granted");
@@ -71,12 +75,20 @@ export default function NotificationPrompt({ userId }: NotificationPromptProps) 
   };
 
   // No mostrar si ya se decidió o no soporta
-  if (status === "loading" || status === "unsupported" || status === "granted" || status === "denied") {
+  if (
+    status === "loading" ||
+    status === "unsupported" ||
+    status === "granted" ||
+    status === "denied"
+  ) {
     return null;
   }
 
   // No mostrar si ya se descartó antes
-  if (typeof window !== "undefined" && localStorage.getItem("notification-prompt-dismissed")) {
+  if (
+    typeof window !== "undefined" &&
+    localStorage.getItem("notification-prompt-dismissed")
+  ) {
     return null;
   }
 

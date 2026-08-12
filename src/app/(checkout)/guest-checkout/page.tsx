@@ -12,15 +12,15 @@ import PaymentSummary from "@/components/Checkout/PaymentSummary";
 import PaymentProcessing from "@/components/Checkout/PaymentProcessing";
 import SuccessPage from "@/components/Checkout/SuccessPage";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  HiShoppingCart, 
-  HiUser, 
-  HiArrowLeft, 
-  HiCreditCard, 
-  HiCheckCircle, 
+import {
+  HiShoppingCart,
+  HiUser,
+  HiArrowLeft,
+  HiCreditCard,
+  HiCheckCircle,
   HiExclamationCircle,
   HiX,
-  HiShieldCheck
+  HiShieldCheck,
 } from "react-icons/hi";
 
 const GuestCheckoutPage: React.FC = () => {
@@ -50,7 +50,10 @@ const GuestCheckoutPage: React.FC = () => {
   }, [cartItems.length, step, router]);
 
   // Handlers con tipos explícitos
-  const handleGuestUserFormSubmit = (appliedCoupon: AppliedCoupon | undefined, paymentMethod: PaymentMethod) => {
+  const handleGuestUserFormSubmit = (
+    appliedCoupon: AppliedCoupon | undefined,
+    paymentMethod: PaymentMethod
+  ) => {
     createGuestOrder(appliedCoupon, paymentMethod);
   };
 
@@ -72,7 +75,7 @@ const GuestCheckoutPage: React.FC = () => {
                 onGuestCheckout={() => {}}
                 onUserCheckout={() => router.push("/checkout")}
               />
-              
+
               <div className="mt-6">
                 <GuestUserForm
                   guestUser={guestUser}
@@ -144,7 +147,9 @@ const GuestCheckoutPage: React.FC = () => {
             <HiArrowLeft className="w-4 h-4" />
             Carrito
           </Link>
-          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">/</span>
+          <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
+            /
+          </span>
           <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
             {step === "checkout" && "Finalizar Compra"}
             {step === "payment" && "Procesar Pago"}
@@ -156,9 +161,15 @@ const GuestCheckoutPage: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
-              {step === "checkout" && <HiShoppingCart className="w-6 h-6 text-blue-600 dark:text-blue-400" />}
-              {step === "payment" && <HiCreditCard className="w-6 h-6 text-blue-600 dark:text-blue-400" />}
-              {step === "success" && <HiCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />}
+              {step === "checkout" && (
+                <HiShoppingCart className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              )}
+              {step === "payment" && (
+                <HiCreditCard className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              )}
+              {step === "success" && (
+                <HiCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+              )}
             </div>
             <div>
               <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
@@ -167,48 +178,64 @@ const GuestCheckoutPage: React.FC = () => {
                 {step === "success" && "¡Pedido confirmado!"}
               </h1>
               <p className="text-zinc-600 dark:text-zinc-400 mt-1">
-                {step === "checkout" && "Completa tus datos para realizar la compra"}
+                {step === "checkout" &&
+                  "Completa tus datos para realizar la compra"}
                 {step === "payment" && "Confirma tu pedido y procede al pago"}
-                {step === "success" && "Tu pedido ha sido procesado exitosamente"}
+                {step === "success" &&
+                  "Tu pedido ha sido procesado exitosamente"}
               </p>
             </div>
           </div>
 
           {/* Progress indicator */}
           <div className="flex items-center gap-4">
-            <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-              step === "checkout" 
-                ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
-            }`}>
+            <div
+              className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                step === "checkout"
+                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                  : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
+              }`}
+            >
               <HiUser className="w-4 h-4" />
               Datos
             </div>
-            
-            <div className={`w-8 h-px ${
-              step !== "checkout" ? "bg-green-300 dark:bg-green-600" : "bg-gray-300 dark:bg-zinc-600"
-            }`} />
-            
-            <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-              step === "payment"
-                ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                : step === "success"
-                ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
-                : "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400"
-            }`}>
+
+            <div
+              className={`w-8 h-px ${
+                step !== "checkout"
+                  ? "bg-green-300 dark:bg-green-600"
+                  : "bg-gray-300 dark:bg-zinc-600"
+              }`}
+            />
+
+            <div
+              className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                step === "payment"
+                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                  : step === "success"
+                    ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
+                    : "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400"
+              }`}
+            >
               <HiCreditCard className="w-4 h-4" />
               Pago
             </div>
-            
-            <div className={`w-8 h-px ${
-              step === "success" ? "bg-green-300 dark:bg-green-600" : "bg-gray-300 dark:bg-zinc-600"
-            }`} />
-            
-            <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
-              step === "success"
-                ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
-                : "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400"
-            }`}>
+
+            <div
+              className={`w-8 h-px ${
+                step === "success"
+                  ? "bg-green-300 dark:bg-green-600"
+                  : "bg-gray-300 dark:bg-zinc-600"
+              }`}
+            />
+
+            <div
+              className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
+                step === "success"
+                  ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
+                  : "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400"
+              }`}
+            >
               <HiCheckCircle className="w-4 h-4" />
               Confirmado
             </div>
@@ -254,7 +281,8 @@ const GuestCheckoutPage: React.FC = () => {
                   Compra 100% segura
                 </p>
                 <p className="text-blue-700 dark:text-blue-300 text-xs">
-                  Tus datos están protegidos. Podrás crear una cuenta después de la compra si lo deseas.
+                  Tus datos están protegidos. Podrás crear una cuenta después de
+                  la compra si lo deseas.
                 </p>
               </div>
             </div>

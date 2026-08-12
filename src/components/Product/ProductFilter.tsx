@@ -121,14 +121,14 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     {cat === "Todas"
                       ? "grid_view"
                       : cat === "Bolsas"
-                      ? "shopping_bag"
-                      : cat === "Gorras"
-                      ? "sports_baseball"
-                      : cat === "Remeras"
-                      ? "checkroom"
-                      : cat === "Buzos"
-                      ? "styler"
-                      : "category"}
+                        ? "shopping_bag"
+                        : cat === "Gorras"
+                          ? "sports_baseball"
+                          : cat === "Remeras"
+                            ? "checkroom"
+                            : cat === "Buzos"
+                              ? "styler"
+                              : "category"}
                   </span>
                   <p
                     className={`text-sm font-medium leading-normal ${

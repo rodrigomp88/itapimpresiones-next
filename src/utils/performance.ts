@@ -12,7 +12,7 @@ export const useDebouncedSearch = (query: string, delay: number = 300) => {
     const timeoutId = setTimeout(() => {
       return query;
     }, delay);
-    
+
     return () => clearTimeout(timeoutId);
   }, [query, delay]);
 };
@@ -29,7 +29,7 @@ export const useMemoizedProductFilter = (
 ) => {
   return useMemo(() => {
     let filtered = products;
-    
+
     // Filtrado por color
     if (selectedColor !== "Todos") {
       filtered = filtered.filter((p) => {
@@ -40,22 +40,23 @@ export const useMemoizedProductFilter = (
         });
       });
     }
-    
+
     // Filtrado por tipo de bolsa
     if (selectedBagType !== "Todos" && category === "Bolsas") {
       filtered = filtered.filter(
         (p) => p.bagType === selectedBagType.toLowerCase()
       );
     }
-    
+
     // Búsqueda por texto
     if (searchQuery) {
-      filtered = filtered.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description?.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.description?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    
+
     return filtered;
   }, [products, searchQuery, selectedColor, selectedBagType, category]);
 };
@@ -66,7 +67,7 @@ export const useMemoizedProductFilter = (
 export const useMemoizedSort = (products: any[], sortBy: string) => {
   return useMemo(() => {
     const sorted = [...products];
-    
+
     switch (sortBy) {
       case "price-low":
         return sorted.sort((a, b) => a.price - b.price);
@@ -74,7 +75,8 @@ export const useMemoizedSort = (products: any[], sortBy: string) => {
         return sorted.sort((a, b) => b.price - a.price);
       case "newest":
         return sorted.sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          (a, b) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         );
       case "popular":
       default:

@@ -33,7 +33,7 @@ async function getOrderAndMessages(
 
   // Convertir todos los campos Timestamp a strings serializables
   const serializeTimestamp = (timestamp: any) => {
-    if (timestamp && typeof timestamp.toDate === 'function') {
+    if (timestamp && typeof timestamp.toDate === "function") {
       return timestamp.toDate().toISOString();
     }
     return timestamp;

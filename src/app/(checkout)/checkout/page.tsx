@@ -56,8 +56,11 @@ const CheckoutPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shippingCost, setShippingCost] = useState(0);
   const [taxAmount, setTaxAmount] = useState(0);
-  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(null);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('mercadopago');
+  const [appliedCoupon, setAppliedCoupon] = useState<AppliedCoupon | null>(
+    null
+  );
+  const [paymentMethod, setPaymentMethod] =
+    useState<PaymentMethod>("mercadopago");
 
   const cartItems = useAppSelector(selectCartItems);
   const cartTotalAmount = useAppSelector(selectCartTotalAmount);
@@ -68,7 +71,9 @@ const CheckoutPage: React.FC = () => {
 
   // Calcular montos de seña (sobre el subtotal con descuento)
   const depositPercentage = 50;
-  const depositAmount = Math.round(subtotalAfterDiscount * (depositPercentage / 100));
+  const depositAmount = Math.round(
+    subtotalAfterDiscount * (depositPercentage / 100)
+  );
   const remainingAmount = subtotalAfterDiscount - depositAmount;
 
   useEffect(() => {
@@ -89,16 +94,16 @@ const CheckoutPage: React.FC = () => {
     if (shippingAddress.province && cartTotalAmount > 0) {
       // Costo de envío basado en provincia (ejemplo simple)
       const shippingRates: { [key: string]: number } = {
-        'Buenos Aires': 500,
-        'Córdoba': 800,
-        'Santa Fe': 700,
-        'Mendoza': 900,
-        'Tucumán': 1000,
-        'Entre Ríos': 750,
-        'Salta': 1100,
-        'Chaco': 850,
-        'Corrientes': 800,
-        'Misiones': 950,
+        "Buenos Aires": 500,
+        Córdoba: 800,
+        "Santa Fe": 700,
+        Mendoza: 900,
+        Tucumán: 1000,
+        "Entre Ríos": 750,
+        Salta: 1100,
+        Chaco: 850,
+        Corrientes: 800,
+        Misiones: 950,
       };
 
       const baseShipping = shippingRates[shippingAddress.province] || 600;
@@ -155,25 +160,32 @@ const CheckoutPage: React.FC = () => {
     }
   }, [sessionStatus, session, firebaseUser, isFirebaseLoading, router]);
 
-  const handleShippingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleShippingChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
   // Validar stock antes del checkout (solo para productos físicos)
-  const validateStockAvailability = (): { isValid: boolean; errors: string[] } => {
+  const validateStockAvailability = (): {
+    isValid: boolean;
+    errors: string[];
+  } => {
     const errors: string[] = [];
 
     cartItems.forEach((item) => {
       // Solo validar stock para productos físicos
       if (item.stockType === "physical" && item.stock < item.cartQuantity) {
-        errors.push(`${item.name}: Solo hay ${item.stock} unidades disponibles (solicitaste ${item.cartQuantity})`);
+        errors.push(
+          `${item.name}: Solo hay ${item.stock} unidades disponibles (solicitaste ${item.cartQuantity})`
+        );
       }
     });
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   };
 
@@ -187,14 +199,18 @@ const CheckoutPage: React.FC = () => {
     // Validar stock antes del checkout
     const stockValidation = validateStockAvailability();
     if (!stockValidation.isValid) {
-      NotiflixFailure(`Problemas de stock: ${stockValidation.errors.join(", ")}`);
+      NotiflixFailure(
+        `Problemas de stock: ${stockValidation.errors.join(", ")}`
+      );
       return;
     }
 
     // Validar con ZOD
     const validationResult = shippingAddressSchema.safeParse(shippingAddress);
     if (!validationResult.success) {
-      const errors = validationResult.error.issues.map(issue => issue.message).join(", ");
+      const errors = validationResult.error.issues
+        .map((issue) => issue.message)
+        .join(", ");
       NotiflixFailure(`Errores en el formulario: ${errors}`);
       return;
     }
@@ -249,20 +265,23 @@ const CheckoutPage: React.FC = () => {
       );
 
       // Crear preferencia de pago en MercadoPago
-      const paymentResponse = await fetch("/api/mercadopago/create-preference", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          orderId,
-          items: orderItems,
-          totalAmount: depositAmount, // Solo cobrar la seña inicialmente
-          fullAmount: cartTotalAmount, // Guardar el monto total para referencia
-          shippingAddress,
-          userEmail: firebaseUser.email,
-        }),
-      });
+      const paymentResponse = await fetch(
+        "/api/mercadopago/create-preference",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            orderId,
+            items: orderItems,
+            totalAmount: depositAmount, // Solo cobrar la seña inicialmente
+            fullAmount: cartTotalAmount, // Guardar el monto total para referencia
+            shippingAddress,
+            userEmail: firebaseUser.email,
+          }),
+        }
+      );
 
       if (!paymentResponse.ok) {
         throw new Error("Error al crear la preferencia de pago");
@@ -280,10 +299,11 @@ const CheckoutPage: React.FC = () => {
 
       // Redirigir a MercadoPago (o simulación)
       window.location.href = paymentData.initPoint;
-
     } catch (error) {
       console.error("Error al procesar la orden:", error);
-      NotiflixFailure("Hubo un problema al procesar tu orden. Por favor intenta nuevamente.");
+      NotiflixFailure(
+        "Hubo un problema al procesar tu orden. Por favor intenta nuevamente."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -487,7 +507,12 @@ const CheckoutPage: React.FC = () => {
                     name="notes"
                     placeholder="Ej: Tocar timbre, dejar en conserjería, etc."
                     value={shippingAddress.notes}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setShippingAddress({...shippingAddress, notes: e.target.value})}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setShippingAddress({
+                        ...shippingAddress,
+                        notes: e.target.value,
+                      })
+                    }
                     className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
                     rows={3}
                   />
@@ -510,7 +535,7 @@ const CheckoutPage: React.FC = () => {
                 </p>
                 <CouponInput
                   cartTotal={cartTotalAmount}
-                  categories={cartItems.map(item => item.category)}
+                  categories={cartItems.map((item) => item.category)}
                   onCouponApplied={setAppliedCoupon}
                   appliedCoupon={appliedCoupon}
                 />
@@ -519,23 +544,33 @@ const CheckoutPage: React.FC = () => {
               {/* Resumen de costos detallado */}
               <div className="mb-6 space-y-3">
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
-                  <span className="text-zinc-900 dark:text-zinc-100">${cartTotalAmount.toLocaleString("es-AR")}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    Subtotal
+                  </span>
+                  <span className="text-zinc-900 dark:text-zinc-100">
+                    ${cartTotalAmount.toLocaleString("es-AR")}
+                  </span>
                 </div>
 
                 {/* Mostrar descuento del cupón */}
                 {appliedCoupon && (
                   <div className="flex justify-between text-sm text-green-600 dark:text-green-400">
                     <span>Descuento ({appliedCoupon.code})</span>
-                    <span>-${appliedCoupon.discount.toLocaleString("es-AR")}</span>
+                    <span>
+                      -${appliedCoupon.discount.toLocaleString("es-AR")}
+                    </span>
                   </div>
                 )}
 
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-zinc-400">Envío</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    Envío
+                  </span>
                   <span className="text-zinc-900 dark:text-zinc-100">
                     {shippingCost === 0 ? (
-                      <span className="text-green-600 dark:text-green-400">¡Gratis!</span>
+                      <span className="text-green-600 dark:text-green-400">
+                        ¡Gratis!
+                      </span>
                     ) : (
                       `$${shippingCost.toLocaleString("es-AR")}`
                     )}
@@ -543,21 +578,32 @@ const CheckoutPage: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between text-sm">
-                  <span className="text-zinc-600 dark:text-zinc-400">IVA (21%)</span>
-                  <span className="text-zinc-900 dark:text-zinc-100">${Math.round(taxAmount).toLocaleString("es-AR")}</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    IVA (21%)
+                  </span>
+                  <span className="text-zinc-900 dark:text-zinc-100">
+                    ${Math.round(taxAmount).toLocaleString("es-AR")}
+                  </span>
                 </div>
 
                 <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 space-y-2">
                   <div className="flex justify-between text-base font-semibold">
-                    <span className="text-zinc-900 dark:text-zinc-100">Total del pedido</span>
                     <span className="text-zinc-900 dark:text-zinc-100">
-                      ${Math.round(cartTotalAmount + shippingCost + taxAmount).toLocaleString("es-AR")}
+                      Total del pedido
+                    </span>
+                    <span className="text-zinc-900 dark:text-zinc-100">
+                      $
+                      {Math.round(
+                        cartTotalAmount + shippingCost + taxAmount
+                      ).toLocaleString("es-AR")}
                     </span>
                   </div>
 
                   {/* Seña (50%) */}
                   <div className="flex justify-between text-sm bg-blue-50 dark:bg-blue-900/20 p-2 rounded">
-                    <span className="text-blue-700 dark:text-blue-300 font-medium">Seña requerida (50%)</span>
+                    <span className="text-blue-700 dark:text-blue-300 font-medium">
+                      Seña requerida (50%)
+                    </span>
                     <span className="text-blue-800 dark:text-blue-200 font-bold">
                       ${depositAmount.toLocaleString("es-AR")}
                     </span>
@@ -578,7 +624,8 @@ const CheckoutPage: React.FC = () => {
                     💰 Sistema de pagos
                   </p>
                   <p className="text-amber-700 dark:text-amber-300 text-xs">
-                    Pagás el 50% ahora para confirmar tu pedido. El resto se paga al finalizar el trabajo.
+                    Pagás el 50% ahora para confirmar tu pedido. El resto se
+                    paga al finalizar el trabajo.
                   </p>
                 </div>
 
@@ -617,7 +664,8 @@ const CheckoutPage: React.FC = () => {
 
               <div className="mt-4 text-center">
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Al confirmar, aceptas nuestros términos y condiciones de envío.
+                  Al confirmar, aceptas nuestros términos y condiciones de
+                  envío.
                 </p>
               </div>
             </div>

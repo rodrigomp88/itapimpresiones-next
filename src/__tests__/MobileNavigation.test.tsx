@@ -71,7 +71,7 @@ describe("MobileNavigation", () => {
     // El badge debe aparecer cuando hay items en el carrito
     const cartButton = screen.getByText("Carrito").closest("a");
     expect(cartButton).toBeInTheDocument();
-    
+
     // Buscar el badge por el conteo
     expect(screen.getByText("3")).toBeInTheDocument();
   });
@@ -82,7 +82,7 @@ describe("MobileNavigation", () => {
 
     const serviciosButton = screen.getByText("Servicios").closest("a");
     expect(serviciosButton).toBeInTheDocument();
-    
+
     // Verificar que tiene las clases de transformación especiales
     expect(serviciosButton).toHaveClass("transform", "-translate-y-1");
   });
@@ -109,10 +109,10 @@ describe("MobileNavigation", () => {
   test("debe renderizar sin errores en modo oscuro", () => {
     document.documentElement.classList.add("dark");
     renderWithProvider();
-    
+
     expect(screen.getByText("Inicio")).toBeInTheDocument();
     expect(screen.getByText("Tienda")).toBeInTheDocument();
-    
+
     document.documentElement.classList.remove("dark");
   });
 

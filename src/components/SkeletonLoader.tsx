@@ -24,21 +24,26 @@ const SkeletonLoader: React.FC<SkeletonLoaderProps> = ({
   rounded = true,
   animated = true,
 }) => {
-  const baseClasses = "bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700";
-  
+  const baseClasses =
+    "bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700";
+
   const variantClasses = {
     product: "w-full h-64",
     banner: "w-full h-48 md:h-64",
     avatar: "w-10 h-10",
     text: "h-4",
-    button: "h-10 w-24"
+    button: "h-10 w-24",
   };
 
   const roundedClass = rounded ? "rounded-lg" : "";
-  const animatedClass = animated ? "animate-pulse bg-[length:200%_100%] animate-shimmer" : "";
+  const animatedClass = animated
+    ? "animate-pulse bg-[length:200%_100%] animate-shimmer"
+    : "";
 
   const style = {
-    width: width || (variantClasses[variant] as string).split(" ")[1]?.replace("h-", "w-"),
+    width:
+      width ||
+      (variantClasses[variant] as string).split(" ")[1]?.replace("h-", "w-"),
     height: height || (variantClasses[variant] as string).split(" ")[0],
   };
 

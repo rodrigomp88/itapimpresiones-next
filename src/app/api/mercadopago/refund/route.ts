@@ -71,7 +71,6 @@ export async function POST(request: NextRequest) {
       status: "completed",
       note: "Reembolso simulado - implementar con credenciales reales de MercadoPago",
     });
-
   } catch (error) {
     console.error("Error procesando reembolso:", error);
     return NextResponse.json(

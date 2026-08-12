@@ -27,14 +27,14 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   hasMore = false,
   className = "",
 }) => {
-  const [sortBy, setSortBy] = useState('relevance');
+  const [sortBy, setSortBy] = useState("relevance");
 
   const sortOptions = [
-    { value: 'relevance', label: 'Más relevante' },
-    { value: 'price_asc', label: 'Precio: menor a mayor' },
-    { value: 'price_desc', label: 'Precio: mayor a menor' },
-    { value: 'rating', label: 'Mejor calificados' },
-    { value: 'newest', label: 'Más recientes' },
+    { value: "relevance", label: "Más relevante" },
+    { value: "price_asc", label: "Precio: menor a mayor" },
+    { value: "price_desc", label: "Precio: mayor a menor" },
+    { value: "rating", label: "Mejor calificados" },
+    { value: "newest", label: "Más recientes" },
   ];
 
   if (loading && products.length === 0) {
@@ -49,19 +49,22 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
   if (error) {
     return (
-      <div className={`flex flex-col items-center justify-center py-12 ${className}`}>
+      <div
+        className={`flex flex-col items-center justify-center py-12 ${className}`}
+      >
         <div className="text-center">
           <div className="w-16 h-16 mx-auto mb-4 text-red-400">
-            <span className="material-symbols-outlined" style={{ fontSize: '64px' }}>
+            <span
+              className="material-symbols-outlined"
+              style={{ fontSize: "64px" }}
+            >
               error
             </span>
           </div>
           <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">
             Error en la búsqueda
           </h3>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-4">
-            {error}
-          </p>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -75,10 +78,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
   if (products.length === 0) {
     return (
-      <div className={`flex flex-col items-center justify-center py-12 ${className}`}>
+      <div
+        className={`flex flex-col items-center justify-center py-12 ${className}`}
+      >
         <div className="text-center max-w-md">
           <div className="w-16 h-16 mx-auto mb-4 text-zinc-400">
-            <span className="material-symbols-outlined" style={{ fontSize: '64px' }}>
+            <span
+              className="material-symbols-outlined"
+              style={{ fontSize: "64px" }}
+            >
               search_off
             </span>
           </div>
@@ -86,10 +94,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             No se encontraron resultados
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400 mb-6">
-            {searchQuery 
+            {searchQuery
               ? `No encontramos productos para "${searchQuery}"`
-              : "No hay productos que coincidan con tus filtros"
-            }
+              : "No hay productos que coincidan con tus filtros"}
           </p>
           <div className="space-y-2 text-sm text-zinc-500 dark:text-zinc-400">
             <p>💡 Intenta:</p>
@@ -127,12 +134,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({
           {/* Selector de ordenamiento */}
           <div className="relative">
             <button
-              onClick={() => setSortBy(sortBy === 'relevance' ? 'price_asc' : 'relevance')}
+              onClick={() =>
+                setSortBy(sortBy === "relevance" ? "price_asc" : "relevance")
+              }
               className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700"
             >
               <span className="material-symbols-outlined !text-lg">sort</span>
               <span>
-                {sortOptions.find(option => option.value === sortBy)?.label || 'Ordenar'}
+                {sortOptions.find((option) => option.value === sortBy)?.label ||
+                  "Ordenar"}
               </span>
             </button>
           </div>

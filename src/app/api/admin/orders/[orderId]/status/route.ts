@@ -11,10 +11,7 @@ export async function PATCH(
     const { status } = await request.json();
 
     if (!status) {
-      return NextResponse.json(
-        { error: "Estado requerido" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Estado requerido" }, { status: 400 });
     }
 
     const result = await updateOrderStatusAction(orderId, status);
@@ -22,10 +19,7 @@ export async function PATCH(
     if (result.success) {
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json(
-        { error: result.error },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: result.error }, { status: 500 });
     }
   } catch (error) {
     console.error("Error updating order status:", error);

@@ -1,12 +1,21 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { collection, query, where, orderBy, limit, getDocs, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  orderBy,
+  limit,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 import { db } from "@/firebase/config";
 import { Product } from "@/types";
 
 export interface RecommendationType {
-  type: 'related' | 'upselling' | 'bought_together' | 'viewed_together';
+  type: "related" | "upselling" | "bought_together" | "viewed_together";
   reason: string;
   score: number;
 }
@@ -16,9 +25,15 @@ export interface RecommendedProduct extends Product {
 }
 
 export const useRecommendations = (currentProduct?: Product) => {
-  const [relatedProducts, setRelatedProducts] = useState<RecommendedProduct[]>([]);
-  const [upsellingProducts, setUpsellingProducts] = useState<RecommendedProduct[]>([]);
-  const [boughtTogetherProducts, setBoughtTogetherProducts] = useState<RecommendedProduct[]>([]);
+  const [relatedProducts, setRelatedProducts] = useState<RecommendedProduct[]>(
+    []
+  );
+  const [upsellingProducts, setUpsellingProducts] = useState<
+    RecommendedProduct[]
+  >([]);
+  const [boughtTogetherProducts, setBoughtTogetherProducts] = useState<
+    RecommendedProduct[]
+  >([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,19 +52,19 @@ export const useRecommendations = (currentProduct?: Product) => {
 
       const querySnapshot = await getDocs(q);
       const products: RecommendedProduct[] = [];
-      
+
       querySnapshot.forEach((doc) => {
         const product = { id: doc.id, ...doc.data() } as Product;
-        
+
         // Excluir el producto actual
         if (product.id !== currentProduct.id) {
           products.push({
             ...product,
             recommendation: {
-              type: 'related',
+              type: "related",
               reason: `Más productos de ${currentProduct.category}`,
               score: 0.8,
-            }
+            },
           });
         }
       });
@@ -79,21 +94,22 @@ export const useRecommendations = (currentProduct?: Product) => {
 
       const querySnapshot = await getDocs(q);
       const products: RecommendedProduct[] = [];
-      
+
       querySnapshot.forEach((doc) => {
         const product = { id: doc.id, ...doc.data() } as Product;
-        
+
         // Excluir el producto actual
         if (product.id !== currentProduct.id) {
           products.push({
             ...product,
             recommendation: {
-              type: 'upselling',
-              reason: product.price > currentProduct.price 
-                ? "Versión premium disponible"
-                : "Alternativa similar",
+              type: "upselling",
+              reason:
+                product.price > currentProduct.price
+                  ? "Versión premium disponible"
+                  : "Alternativa similar",
               score: 0.6,
-            }
+            },
           });
         }
       });
@@ -121,21 +137,23 @@ export const useRecommendations = (currentProduct?: Product) => {
 
       const querySnapshot = await getDocs(q);
       const products: RecommendedProduct[] = [];
-      
+
       querySnapshot.forEach((doc) => {
         const product = { id: doc.id, ...doc.data() } as Product;
-        
+
         // Excluir el producto actual y productos ya recomendados
-        if (product.id !== currentProduct.id && 
-            !relatedProducts.find(p => p.id === product.id) &&
-            !upsellingProducts.find(p => p.id === product.id)) {
+        if (
+          product.id !== currentProduct.id &&
+          !relatedProducts.find((p) => p.id === product.id) &&
+          !upsellingProducts.find((p) => p.id === product.id)
+        ) {
           products.push({
             ...product,
             recommendation: {
-              type: 'bought_together',
+              type: "bought_together",
               reason: "Otros clientes también compraron",
               score: 0.7,
-            }
+            },
           });
         }
       });
@@ -147,69 +165,75 @@ export const useRecommendations = (currentProduct?: Product) => {
   }, [currentProduct, relatedProducts, upsellingProducts]);
 
   // Función para obtener recomendaciones generales para homepage
-  const getGeneralRecommendations = useCallback(async (limit_count: number = 8) => {
-    try {
-      const q = query(
-        collection(db, "products"),
-        where("pause", "==", false),
-        orderBy("averageRating", "desc"),
-        limit(limit_count)
-      );
+  const getGeneralRecommendations = useCallback(
+    async (limit_count: number = 8) => {
+      try {
+        const q = query(
+          collection(db, "products"),
+          where("pause", "==", false),
+          orderBy("averageRating", "desc"),
+          limit(limit_count)
+        );
 
-      const querySnapshot = await getDocs(q);
-      const products: RecommendedProduct[] = [];
-      
-      querySnapshot.forEach((doc) => {
-        const product = { id: doc.id, ...doc.data() } as Product;
-        products.push({
-          ...product,
-          recommendation: {
-            type: 'related',
-            reason: "Productos destacados",
-            score: 0.5,
-          }
+        const querySnapshot = await getDocs(q);
+        const products: RecommendedProduct[] = [];
+
+        querySnapshot.forEach((doc) => {
+          const product = { id: doc.id, ...doc.data() } as Product;
+          products.push({
+            ...product,
+            recommendation: {
+              type: "related",
+              reason: "Productos destacados",
+              score: 0.5,
+            },
+          });
         });
-      });
 
-      return products;
-    } catch (err) {
-      console.error("Error fetching general recommendations:", err);
-      return [];
-    }
-  }, []);
+        return products;
+      } catch (err) {
+        console.error("Error fetching general recommendations:", err);
+        return [];
+      }
+    },
+    []
+  );
 
   // Función para obtener productos por categoría
-  const getProductsByCategory = useCallback(async (category: string, limit_count: number = 6) => {
-    try {
-      const q = query(
-        collection(db, "products"),
-        where("category", "==", category),
-        where("pause", "==", false),
-        orderBy("createdAt", "desc"),
-        limit(limit_count)
-      );
+  const getProductsByCategory = useCallback(
+    async (category: string, limit_count: number = 6) => {
+      try {
+        const q = query(
+          collection(db, "products"),
+          where("category", "==", category),
+          where("pause", "==", false),
+          orderBy("createdAt", "desc"),
+          limit(limit_count)
+        );
 
-      const querySnapshot = await getDocs(q);
-      const products: RecommendedProduct[] = [];
-      
-      querySnapshot.forEach((doc) => {
-        const product = { id: doc.id, ...doc.data() } as Product;
-        products.push({
-          ...product,
-          recommendation: {
-            type: 'related',
-            reason: `Más productos de ${category}`,
-            score: 0.9,
-          }
+        const querySnapshot = await getDocs(q);
+        const products: RecommendedProduct[] = [];
+
+        querySnapshot.forEach((doc) => {
+          const product = { id: doc.id, ...doc.data() } as Product;
+          products.push({
+            ...product,
+            recommendation: {
+              type: "related",
+              reason: `Más productos de ${category}`,
+              score: 0.9,
+            },
+          });
         });
-      });
 
-      return products;
-    } catch (err) {
-      console.error("Error fetching products by category:", err);
-      return [];
-    }
-  }, []);
+        return products;
+      } catch (err) {
+        console.error("Error fetching products by category:", err);
+        return [];
+      }
+    },
+    []
+  );
 
   // Cargar recomendaciones cuando cambia el producto actual
   useEffect(() => {
@@ -226,7 +250,12 @@ export const useRecommendations = (currentProduct?: Product) => {
         setLoading(false);
       });
     }
-  }, [currentProduct, getRelatedProducts, getUpsellingProducts, getBoughtTogetherProducts]);
+  }, [
+    currentProduct,
+    getRelatedProducts,
+    getUpsellingProducts,
+    getBoughtTogetherProducts,
+  ]);
 
   // Memoizar todos los productos recomendados
   const allRecommendations = useMemo(() => {

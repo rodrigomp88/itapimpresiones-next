@@ -35,8 +35,12 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
           </h3>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-zinc-600 dark:text-zinc-400">Número de orden</span>
-              <span className="font-medium">#{order.guestOrderToken?.slice(-8)}</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                Número de orden
+              </span>
+              <span className="font-medium">
+                #{order.guestOrderToken?.slice(-8)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-zinc-600 dark:text-zinc-400">Estado</span>
@@ -45,11 +49,17 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-600 dark:text-zinc-400">Total del pedido</span>
-              <span className="font-medium">${order.orderAmount.toLocaleString("es-AR")}</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                Total del pedido
+              </span>
+              <span className="font-medium">
+                ${order.orderAmount.toLocaleString("es-AR")}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-zinc-600 dark:text-zinc-400">Seña pagada</span>
+              <span className="text-zinc-600 dark:text-zinc-400">
+                Seña pagada
+              </span>
               <span className="font-medium text-blue-600 dark:text-blue-400">
                 ${order.depositAmount.toLocaleString("es-AR")}
               </span>
@@ -63,7 +73,9 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
           ¿Qué sigue ahora?
         </h4>
         <ul className="text-blue-800 dark:text-blue-200 text-sm space-y-1">
-          <li>• Recibirás un email de confirmación en {order?.guestUser.email}</li>
+          <li>
+            • Recibirás un email de confirmación en {order?.guestUser.email}
+          </li>
           <li>• Nos pondremos en contacto para confirmar los detalles</li>
           <li>• Comenzaremos a trabajar en tu pedido</li>
           <li>• Te notificaremos cuando esté listo para el envío</li>

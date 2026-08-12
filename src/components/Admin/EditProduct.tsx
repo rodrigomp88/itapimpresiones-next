@@ -26,7 +26,9 @@ const COLORS = [
 
 const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
   const [isPending, startTransition] = useTransition();
-  const [validationErrors, setValidationErrors] = useState<Partial<Record<keyof ProductFormData, string>>>({});
+  const [validationErrors, setValidationErrors] = useState<
+    Partial<Record<keyof ProductFormData, string>>
+  >({});
 
   const [existingImages, setExistingImages] = useState<ProductImage[]>(
     product.images.map((img: any) =>
@@ -102,13 +104,13 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
 
     // Extraer valores para validación
     const formValues = {
-      name: formData.get('name') as string,
-      price: parseFloat(formData.get('price') as string),
-      unity: parseInt(formData.get('unity') as string),
-      category: formData.get('category') as string,
-      description: formData.get('description') as string,
-      size: formData.get('size') as string || undefined,
-      bagType: formData.get('bagType') as string || undefined,
+      name: formData.get("name") as string,
+      price: parseFloat(formData.get("price") as string),
+      unity: parseInt(formData.get("unity") as string),
+      category: formData.get("category") as string,
+      description: formData.get("description") as string,
+      size: (formData.get("size") as string) || undefined,
+      bagType: (formData.get("bagType") as string) || undefined,
     };
 
     // Validar con ZOD
@@ -144,7 +146,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               required
             />
             {validationErrors.name && (
-              <p className="text-red-500 text-sm mt-1">{validationErrors.name}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {validationErrors.name}
+              </p>
             )}
 
             <div className="grid grid-cols-2 gap-4">
@@ -159,7 +163,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   required
                 />
                 {validationErrors.price && (
-                  <p className="text-red-500 text-sm mt-1">{validationErrors.price}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.price}
+                  </p>
                 )}
               </div>
               <div>
@@ -172,7 +178,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   required
                 />
                 {validationErrors.unity && (
-                  <p className="text-red-500 text-sm mt-1">{validationErrors.unity}</p>
+                  <p className="text-red-500 text-sm mt-1">
+                    {validationErrors.unity}
+                  </p>
                 )}
               </div>
             </div>
@@ -185,7 +193,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               required
             />
             {validationErrors.category && (
-              <p className="text-red-500 text-sm mt-1">{validationErrors.category}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {validationErrors.category}
+              </p>
             )}
             <label className="text-sm font-semibold">Descripción</label>
             <textarea
@@ -195,7 +205,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               required
             />
             {validationErrors.description && (
-              <p className="text-red-500 text-sm mt-1">{validationErrors.description}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {validationErrors.description}
+              </p>
             )}
             <label className="text-sm font-semibold">Tamaño</label>
             <input name="size" defaultValue={product.size} className="input" />

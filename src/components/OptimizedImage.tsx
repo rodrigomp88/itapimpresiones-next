@@ -40,7 +40,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   onLoad,
   onError,
   sizes,
-  loading = "lazy"
+  loading = "lazy",
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -62,7 +62,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       },
       {
         rootMargin: "50px 0px", // Precarga antes de que sea visible
-        threshold: 0.1
+        threshold: 0.1,
       }
     );
 
@@ -84,13 +84,13 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   // Si es lazy loading y no está visible aún, mostrar skeleton
   if (loading === "lazy" && !priority && imageSrc === "" && imgRef.current) {
     return (
-      <div 
-        ref={imgRef} 
+      <div
+        ref={imgRef}
         className={`relative overflow-hidden ${fill ? "w-full h-full" : ""}`}
         style={!fill ? { width, height } : undefined}
       >
-        <SkeletonLoader 
-          variant={fill ? "product" : "banner"} 
+        <SkeletonLoader
+          variant={fill ? "product" : "banner"}
           className={className}
           animated={true}
         />
@@ -99,7 +99,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   }
 
   return (
-    <div 
+    <div
       ref={imgRef}
       className={`relative overflow-hidden ${fill ? "w-full h-full" : ""} ${className}`}
       style={!fill ? { width, height } : undefined}
@@ -133,13 +133,13 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       <motion.div
         className="absolute inset-0 w-full h-full"
         initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ 
+        animate={{
           opacity: isLoaded ? 1 : 0,
-          scale: isLoaded ? 1 : 1.1 
+          scale: isLoaded ? 1 : 1.1,
         }}
-        transition={{ 
+        transition={{
           duration: 0.5,
-          ease: "easeOut"
+          ease: "easeOut",
         }}
       >
         <Image

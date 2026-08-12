@@ -17,7 +17,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
       <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
         ¿Cómo quieres finalizar tu compra?
       </h2>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Opción Guest Checkout */}
         <motion.div
@@ -39,7 +39,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               </p>
             </div>
           </div>
-          
+
           <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -54,7 +54,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               <span>Opción de crear cuenta después</span>
             </div>
           </div>
-          
+
           <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-800 rounded text-center">
             <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
               ✓ Recomendado para primera compra
@@ -82,7 +82,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               </p>
             </div>
           </div>
-          
+
           <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-zinc-400 rounded-full"></div>
@@ -99,7 +99,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
           </div>
         </motion.div>
       </div>
-      
+
       {/* Info adicional */}
       <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg">
         <div className="flex items-start gap-3">
@@ -111,8 +111,9 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               ¿Primera vez comprando aquí?
             </p>
             <p className="text-amber-700 dark:text-amber-300 text-xs">
-              Te recomendamos usar "Continuar como invitado" para una experiencia más rápida. 
-              Podrás crear tu cuenta después de completar la compra.
+              Te recomendamos usar "Continuar como invitado" para una
+              experiencia más rápida. Podrás crear tu cuenta después de
+              completar la compra.
             </p>
           </div>
         </div>
