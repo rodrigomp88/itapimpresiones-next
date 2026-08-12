@@ -23,7 +23,7 @@ import EditProduct from "./EditProduct";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Helper para obtener URL segura (maneja compatibilidad antigua vs nueva)
-const getImageUrl = (images: any[]): string => {
+const getImageUrl = (images: (string | ProductImage)[]): string => {
   if (!images || images.length === 0) return "/placeholder.png";
   const firstImage = images[0];
   if (typeof firstImage === "string") return firstImage; // Legacy
@@ -61,10 +61,10 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
     return products;
   }, [search, categoryFilter, initialProducts]);
 
-  const handleDelete = (productId: string, productSlug: string) => {
+  const handleDelete = (productId: string) => {
     if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
       startTransition(async () => {
-        const result = await deleteProductAction(productId, productSlug);
+        const result = await deleteProductAction(productId);
         if (result.success) {
           NotiflixSuccess("Producto eliminado.");
         } else {
@@ -220,7 +220,7 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                       <span className="text-sm hidden sm:inline">Editar</span>
                     </button>
                     <button
-                      onClick={() => handleDelete(product.id, product.slug)}
+                      onClick={() => handleDelete(product.id)}
                       disabled={isPending}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-100 hover:bg-red-200 dark:bg-red-900/20 dark:hover:bg-red-900/40 text-red-700 dark:text-red-400 transition-colors disabled:opacity-50"
                     >

@@ -4,12 +4,9 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { selectCartTotalQuantity } from "@/redux/slice/cartSlice";
 
 const MobileNavigation = () => {
   const pathname = usePathname();
-  const cartItemCount = useSelector(selectCartTotalQuantity);
 
   const navigationItems = [
     {

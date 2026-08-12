@@ -81,7 +81,7 @@ export enum MercadoPagoErrorType {
 export interface CategorizedError {
   type: MercadoPagoErrorType;
   message: string;
-  originalError: any;
+  originalError: unknown;
   retryable: boolean;
   timestamp: Date;
 }
@@ -89,14 +89,15 @@ export interface CategorizedError {
 /**
  * Categoriza un error según su tipo y origen
  */
-export function categorizeMercadoPagoError(error: any): CategorizedError {
+export function categorizeMercadoPagoError(error: unknown): CategorizedError {
   const timestamp = new Date();
+  const errorObj = error as { code?: string; message?: string; response?: unknown };
 
   // Error de autenticación
   if (
-    error.code === "PA_UNAUTHORIZED_RESULT_FROM_POLICIES" ||
-    error.message?.includes("UNAUTHORIZED") ||
-    error.message?.includes("authentication")
+    errorObj.code === "PA_UNAUTHORIZED_RESULT_FROM_POLICIES" ||
+    errorObj.message?.includes("UNAUTHORIZED") ||
+    errorObj.message?.includes("authentication")
   ) {
     return {
       type: MercadoPagoErrorType.AUTHENTICATION_ERROR,
@@ -109,9 +110,9 @@ export function categorizeMercadoPagoError(error: any): CategorizedError {
 
   // Error de validación
   if (
-    error.code?.startsWith("invalid_") ||
-    error.message?.includes("validation") ||
-    error.message?.includes("required")
+    errorObj.code?.startsWith("invalid_") ||
+    errorObj.message?.includes("validation") ||
+    errorObj.message?.includes("required")
   ) {
     return {
       type: MercadoPagoErrorType.VALIDATION_ERROR,
@@ -124,9 +125,9 @@ export function categorizeMercadoPagoError(error: any): CategorizedError {
 
   // Error de rate limiting
   if (
-    error.code === "429" ||
-    error.message?.includes("rate limit") ||
-    error.message?.includes("too many requests")
+    errorObj.code === "429" ||
+    errorObj.message?.includes("rate limit") ||
+    errorObj.message?.includes("too many requests")
   ) {
     return {
       type: MercadoPagoErrorType.RATE_LIMIT_ERROR,
@@ -139,10 +140,10 @@ export function categorizeMercadoPagoError(error: any): CategorizedError {
 
   // Error de red/conexión
   if (
-    error.code?.startsWith("NETWORK") ||
-    error.message?.includes("network") ||
-    error.message?.includes("timeout") ||
-    !error.response
+    errorObj.code?.startsWith("NETWORK") ||
+    errorObj.message?.includes("network") ||
+    errorObj.message?.includes("timeout") ||
+    !errorObj.response
   ) {
     return {
       type: MercadoPagoErrorType.NETWORK_ERROR,
@@ -155,8 +156,8 @@ export function categorizeMercadoPagoError(error: any): CategorizedError {
 
   // Error de lógica de negocio
   if (
-    error.code?.startsWith("business_") ||
-    error.message?.includes("business logic")
+    errorObj.code?.startsWith("business_") ||
+    errorObj.message?.includes("business logic")
   ) {
     return {
       type: MercadoPagoErrorType.BUSINESS_LOGIC_ERROR,
@@ -168,7 +169,7 @@ export function categorizeMercadoPagoError(error: any): CategorizedError {
   }
 
   // Error de servicio externo
-  if (error.code >= 500) {
+  if (errorObj.code && parseInt(errorObj.code) >= 500) {
     return {
       type: MercadoPagoErrorType.EXTERNAL_SERVICE_ERROR,
       message: "Error del servicio externo (Mercado Pago)",
@@ -200,7 +201,7 @@ export interface MercadoPagoTransactionLog {
   status: "success" | "error" | "warning";
   errorType?: MercadoPagoErrorType;
   responseTime?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 /**

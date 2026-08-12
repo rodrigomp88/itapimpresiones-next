@@ -12,15 +12,13 @@ export async function POST(request: NextRequest) {
   const {
     orderId,
     items,
-    totalAmount,
-    fullAmount,
     shippingAddress,
     userEmail,
   } = await request.json();
 
   try {
     // Crear items para MercadoPago
-    const preferenceItems = items.map((item: any) => ({
+    const preferenceItems = items.map((item: { id: string; name: string; cartQuantity: number; price: number }) => ({
       id: item.id,
       title: item.name,
       quantity: item.cartQuantity,
@@ -58,14 +56,16 @@ export async function POST(request: NextRequest) {
       initPoint: response.init_point,
       sandboxInitPoint: response.sandbox_init_point,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating MercadoPago preference:", error);
+
+    const errorObj = error as { code?: string; message?: string };
 
     // En desarrollo, si es un error de credenciales, devolver una respuesta simulada
     if (
       process.env.NODE_ENV === "development" &&
-      (error.code === "PA_UNAUTHORIZED_RESULT_FROM_POLICIES" ||
-        error.message?.includes("UNAUTHORIZED"))
+      (errorObj.code === "PA_UNAUTHORIZED_RESULT_FROM_POLICIES" ||
+        errorObj.message?.includes("UNAUTHORIZED"))
     ) {
       console.log(
         "🔧 Modo desarrollo: Usando respuesta simulada de MercadoPago"
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: "Error al crear la preferencia de pago",
-        details: error.message,
+        details: errorObj.message,
       },
       { status: 500 }
     );

@@ -137,8 +137,9 @@ const AddProduct = () => {
         }
         NotiflixSuccess("Producto añadido con éxito.");
         closeModal();
-      } catch (error: any) {
-        NotiflixFailure(error.message || "Error al añadir el producto.");
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : "Error al añadir el producto.";
+        NotiflixFailure(errorMessage);
       }
     });
   };

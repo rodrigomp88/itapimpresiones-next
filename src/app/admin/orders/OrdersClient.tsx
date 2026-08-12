@@ -104,19 +104,6 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
     );
   };
 
-  const getStatusLabel = (status: string) => {
-    const labels: Record<string, string> = {
-      pending: "Pendiente",
-      confirmed: "Confirmada",
-      processing: "Procesando",
-      shipped: "Enviada",
-      delivered: "Entregada",
-      cancelled: "Cancelada",
-      refunded: "Reembolsada",
-    };
-    return labels[status] || status;
-  };
-
   const getPaymentStatusLabel = (status?: string) => {
     if (!status) return "No especificado";
 

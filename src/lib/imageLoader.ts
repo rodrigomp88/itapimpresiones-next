@@ -6,8 +6,6 @@ interface ImageLoaderProps {
 
 export default function customImageLoader({
   src,
-  width,
-  quality,
 }: ImageLoaderProps): string {
   return src;
 }

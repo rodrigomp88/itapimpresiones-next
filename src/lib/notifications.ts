@@ -90,7 +90,7 @@ export async function requestNotificationPermission(): Promise<string | null> {
  * Suscribe un listener para mensajes en primer plano
  */
 export function onForegroundMessage(
-  callback: (payload: any) => void
+  callback: (payload: { notification?: { title?: string; body?: string }; data?: Record<string, unknown> }) => void
 ): () => void {
   const messagingInstance = getMessagingInstance();
   if (!messagingInstance) return () => {};

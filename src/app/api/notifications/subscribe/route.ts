@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const { userId, token } = await request.json();
+    const { userId } = await request.json();
 
     if (!userId) {
       return NextResponse.json(

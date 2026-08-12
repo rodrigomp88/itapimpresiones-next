@@ -17,8 +17,8 @@ async function getAllOrders(): Promise<Order[]> {
     const items = data.orderItems || data.cartItems || [];
 
     // Convertir todos los campos Timestamp a strings serializables
-    const serializeTimestamp = (timestamp: any) => {
-      if (timestamp && typeof timestamp.toDate === "function") {
+    const serializeTimestamp = (timestamp: { toDate?: () => Date } | string | undefined) => {
+      if (timestamp && typeof timestamp === "object" && typeof timestamp.toDate === "function") {
         return timestamp.toDate().toISOString();
       }
       return timestamp;

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import useSearch from "@/hooks/useSearch";
+import useSearch, { SearchFilters as SearchFiltersType } from "@/hooks/useSearch";
 import SearchBar from "@/components/Search/SearchBar";
 import SearchFilters from "@/components/Search/SearchFilters";
 import SearchResultsSimple from "@/components/Search/SearchResultsSimple";
@@ -39,7 +39,7 @@ const SearchPageContent: React.FC = () => {
     const priceMin = searchParams.get("priceMin");
     const priceMax = searchParams.get("priceMax");
 
-    const filters: any = {};
+    const filters: SearchFiltersType = {};
     if (category) filters.category = category;
     if (priceMin) filters.priceMin = parseFloat(priceMin);
     if (priceMax) filters.priceMax = parseFloat(priceMax);
@@ -65,7 +65,7 @@ const SearchPageContent: React.FC = () => {
   };
 
   // Manejar cambios en filtros
-  const handleFiltersChange = (filters: any) => {
+  const handleFiltersChange = (filters: SearchFiltersType) => {
     search.setFilters(filters);
 
     // Actualizar URL

@@ -37,8 +37,8 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({
     return `Actualización en la orden #${order.id.slice(0, 6)}.`;
   };
 
-  const formatDate = (timestamp: any) => {
-    if (timestamp && typeof timestamp.toDate === "function") {
+  const formatDate = (timestamp: { toDate?: () => Date } | string | undefined) => {
+    if (timestamp && typeof timestamp === "object" && typeof timestamp.toDate === "function") {
       return timestamp.toDate().toLocaleDateString("es-AR");
     }
     if (typeof timestamp === "string") {

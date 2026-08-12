@@ -11,8 +11,6 @@ import {
 
 interface PriceBreakdownProps {
   subtotal: number;
-  shipping?: number;
-  tax?: number;
   discount?: number;
   couponCode?: string;
   freeShippingThreshold?: number;
@@ -33,8 +31,6 @@ interface ShippingOption {
 
 const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
   subtotal,
-  shipping = 0,
-  tax = 0,
   discount = 0,
   couponCode = "",
   freeShippingThreshold = 5000,

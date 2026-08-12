@@ -32,7 +32,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [slides.length, isPlaying]);
+  }, [slides.length, isPlaying]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Navegación por teclado
   const handleKeyDown = useCallback(
@@ -66,7 +66,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
           break;
       }
     },
-    [slides.length, isPlaying]
+    [slides.length, isPlaying] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {

@@ -5,16 +5,14 @@ import { HiCreditCard, HiShieldCheck } from "react-icons/hi";
 
 interface PaymentProcessingProps {
   order: GuestOrder | null;
-  onPaymentComplete: (paymentData: any) => void;
+  onPaymentComplete: (paymentData: Record<string, unknown>) => void;
   isProcessing: boolean;
-  error: string | null;
 }
 
 const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
   order,
   onPaymentComplete,
   isProcessing,
-  error,
 }) => {
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-8 shadow-sm">

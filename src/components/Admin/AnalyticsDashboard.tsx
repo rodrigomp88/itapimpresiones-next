@@ -52,79 +52,78 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
   );
   const [loading, setLoading] = useState(true);
   const [dateRange, setDateRange] = useState("7d");
-  const [selectedMetric, setSelectedMetric] = useState("revenue");
-
-  // Datos simulados (en producción vendrían de Firebase Analytics/GA4)
-  const mockAnalyticsData: AnalyticsData = {
-    totalRevenue: 245680,
-    totalOrders: 156,
-    conversionRate: 3.2,
-    avgOrderValue: 1575,
-    topProducts: [
-      {
-        id: "1",
-        name: "Camiseta Personalizada",
-        revenue: 45600,
-        orders: 28,
-        conversionRate: 4.2,
-      },
-      {
-        id: "2",
-        name: "Bolsa Troquel",
-        revenue: 38900,
-        orders: 22,
-        conversionRate: 3.8,
-      },
-      {
-        id: "3",
-        name: "Gorra Bordada",
-        revenue: 32400,
-        orders: 18,
-        conversionRate: 3.1,
-      },
-      {
-        id: "4",
-        name: "Bolsa Manija",
-        revenue: 28600,
-        orders: 19,
-        conversionRate: 2.9,
-      },
-      {
-        id: "5",
-        name: "Remera Algodón",
-        revenue: 25100,
-        orders: 16,
-        conversionRate: 2.7,
-      },
-    ],
-    revenueByDay: [
-      { date: "2025-12-10", revenue: 28400, orders: 18 },
-      { date: "2025-12-11", revenue: 35200, orders: 22 },
-      { date: "2025-12-12", revenue: 29800, orders: 19 },
-      { date: "2025-12-13", revenue: 42600, orders: 27 },
-      { date: "2025-12-14", revenue: 38100, orders: 24 },
-      { date: "2025-12-15", revenue: 35900, orders: 23 },
-      { date: "2025-12-16", revenue: 31680, orders: 20 },
-    ],
-    trafficSources: [
-      { source: "Búsqueda Orgánica", visits: 1240, conversions: 45 },
-      { source: "Directo", visits: 890, conversions: 38 },
-      { source: "Redes Sociales", visits: 567, conversions: 22 },
-      { source: "Email Marketing", visits: 234, conversions: 18 },
-      { source: "Referencias", visits: 189, conversions: 12 },
-    ],
-    deviceStats: {
-      desktop: 45.2,
-      mobile: 42.8,
-      tablet: 12.0,
-    },
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_selectedMetric, setSelectedMetric] = useState("revenue");
 
   useEffect(() => {
     // Simular carga de datos
     setLoading(true);
+    const mockData: AnalyticsData = {
+      totalRevenue: 245680,
+      totalOrders: 156,
+      conversionRate: 3.2,
+      avgOrderValue: 1575,
+      topProducts: [
+        {
+          id: "1",
+          name: "Camiseta Personalizada",
+          revenue: 45600,
+          orders: 28,
+          conversionRate: 4.2,
+        },
+        {
+          id: "2",
+          name: "Bolsa Troquel",
+          revenue: 38900,
+          orders: 22,
+          conversionRate: 3.8,
+        },
+        {
+          id: "3",
+          name: "Gorra Bordada",
+          revenue: 32400,
+          orders: 18,
+          conversionRate: 3.1,
+        },
+        {
+          id: "4",
+          name: "Bolsa Manija",
+          revenue: 28600,
+          orders: 19,
+          conversionRate: 2.9,
+        },
+        {
+          id: "5",
+          name: "Remera Algodón",
+          revenue: 25100,
+          orders: 16,
+          conversionRate: 2.7,
+        },
+      ],
+      revenueByDay: [
+        { date: "2025-12-10", revenue: 28400, orders: 18 },
+        { date: "2025-12-11", revenue: 35200, orders: 22 },
+        { date: "2025-12-12", revenue: 29800, orders: 19 },
+        { date: "2025-12-13", revenue: 42600, orders: 27 },
+        { date: "2025-12-14", revenue: 38100, orders: 24 },
+        { date: "2025-12-15", revenue: 35900, orders: 23 },
+        { date: "2025-12-16", revenue: 31680, orders: 20 },
+      ],
+      trafficSources: [
+        { source: "Búsqueda Orgánica", visits: 1240, conversions: 45 },
+        { source: "Directo", visits: 890, conversions: 38 },
+        { source: "Redes Sociales", visits: 567, conversions: 22 },
+        { source: "Email Marketing", visits: 234, conversions: 18 },
+        { source: "Referencias", visits: 189, conversions: 12 },
+      ],
+      deviceStats: {
+        desktop: 45.2,
+        mobile: 42.8,
+        tablet: 12.0,
+      },
+    };
     setTimeout(() => {
-      setAnalyticsData(mockAnalyticsData);
+      setAnalyticsData(mockData);
       setLoading(false);
     }, 1000);
   }, [dateRange]);
@@ -151,7 +150,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
     title: string;
     value: string | number;
     change?: number;
-    icon: React.ComponentType<any>;
+    icon: React.ComponentType<{ className?: string }>;
     color?: string;
   }) => {
     const colorClasses = {
@@ -319,7 +318,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
             Fuentes de Tráfico
           </h3>
           <div className="space-y-4">
-            {analyticsData.trafficSources.map((source, index) => (
+            {analyticsData.trafficSources.map((source) => (
               <div
                 key={source.source}
                 className="flex items-center justify-between"

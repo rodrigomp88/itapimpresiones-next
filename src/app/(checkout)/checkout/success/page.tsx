@@ -11,7 +11,7 @@ const SuccessPageContent: React.FC = () => {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id");
 
-  const [orderData, setOrderData] = useState<any>(null);
+  const [orderData, setOrderData] = useState<{ orderAmount?: number; orderStatus?: string } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

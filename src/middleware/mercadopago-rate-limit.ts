@@ -226,7 +226,7 @@ export const MercadoPagoRateLimitUtils = {
     let activeEntries = 0;
     let totalRequests = 0;
 
-    for (const [key, data] of rateLimitStore.entries()) {
+    for (const [, data] of rateLimitStore.entries()) {
       if (data.resetTime > now) {
         activeEntries++;
         totalRequests += data.count;

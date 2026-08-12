@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     // 🛡️ Aplicar rate limiting para formularios de contacto
     const rateLimitResult = await new Promise((resolve) => {
-      contactLimiter(request as any, {} as any, () => resolve("allowed"));
+      contactLimiter(request as unknown as Parameters<typeof contactLimiter>[0], {} as Parameters<typeof contactLimiter>[1], () => resolve("allowed"));
     });
 
     // Si es un error de rate limit, devolver la respuesta apropiada

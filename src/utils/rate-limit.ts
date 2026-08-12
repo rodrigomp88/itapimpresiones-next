@@ -167,9 +167,9 @@ export const adminLimiter = rateLimit({
 });
 
 // Middleware para logging de rate limits (se puede usar para analytics)
-export const rateLimitLogger = (req: any, res: any, next: any) => {
+export const rateLimitLogger = (req: { ip?: string; url?: string; method?: string }, res: { json: (data: unknown) => unknown; statusCode: number; getHeader: (name: string) => unknown }, next: () => void) => {
   const originalJson = res.json;
-  res.json = function (data: any) {
+  res.json = function (data: unknown) {
     if (res.statusCode === 429) {
       // Ya se loguea en los handlers individuales
     }

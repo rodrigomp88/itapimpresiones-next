@@ -94,7 +94,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
 
   // Helper para obtener rating del producto
   const getProductRating = (product: RecommendedProduct): number => {
-    const productWithRating = product as any;
+    const productWithRating = product as RecommendedProduct & { averageRating?: number };
     return productWithRating.averageRating || 0;
   };
 

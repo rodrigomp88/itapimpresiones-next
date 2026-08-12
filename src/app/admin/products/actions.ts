@@ -69,8 +69,9 @@ async function deleteImages(imageUrls: string[]) {
       const decodedPath = decodeURIComponent(pathPart.split("?")[0]);
       const file = bucket.file(decodedPath);
       await file.delete();
-    } catch (error: any) {
-      console.error(`Failed to delete image at ${url}:`, error.message);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      console.error(`Failed to delete image at ${url}:`, errorMessage);
     }
   }
 }
@@ -153,12 +154,11 @@ export async function editProductAction(productId: string, formData: FormData) {
 
 export async function deleteProductAction(
   productId: string,
-  _productSlug: string
 ) {
   try {
     if (!adminDb) return { success: false, error: "Admin no init" };
     await adminDb.collection("products").doc(productId).delete();
-  } catch (error) {
+  } catch {
     return { success: false, error: "No se pudo eliminar el producto." };
   }
   revalidatePath("/admin/products");
@@ -176,7 +176,7 @@ export async function togglePauseProductAction(
       .collection("products")
       .doc(productId)
       .update({ pause: !currentState });
-  } catch (error) {
+  } catch {
     return { success: false, error: "No se pudo cambiar el estado." };
   }
   revalidatePath("/admin/products");

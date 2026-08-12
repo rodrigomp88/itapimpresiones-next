@@ -25,10 +25,11 @@ export async function POST() {
     const firebaseToken = await adminAuth.createCustomToken(session.user.id);
 
     return NextResponse.json({ firebaseToken });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating custom token:", error);
+    const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
     return NextResponse.json(
-      { error: error.message || "Internal Server Error" },
+      { error: errorMessage },
       { status: 500 }
     );
   }

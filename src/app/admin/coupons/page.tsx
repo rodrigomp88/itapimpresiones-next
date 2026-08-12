@@ -164,7 +164,7 @@ export default function CouponsAdminPage() {
       });
       NotiflixSuccess(coupon.isActive ? "Cupón desactivado" : "Cupón activado");
       fetchCoupons();
-    } catch (error) {
+    } catch {
       NotiflixFailure("Error al cambiar estado");
     }
   };

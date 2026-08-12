@@ -51,10 +51,11 @@ const RegisterPage = () => {
 
       // No iniciamos sesión en NextAuth automáticamente aquí.
       // Forzamos al usuario a verificar y luego loguearse.
-    } catch (error: any) {
-      if (error.code === "auth/email-already-in-use") {
+    } catch (error: unknown) {
+      const errorObj = error as { code?: string };
+      if (errorObj.code === "auth/email-already-in-use") {
         setError("Este correo electrónico ya está registrado.");
-      } else if (error.code === "auth/weak-password") {
+      } else if (errorObj.code === "auth/weak-password") {
         setError("La contraseña debe tener al menos 6 caracteres.");
       } else {
         setError("Ocurrió un error inesperado. Por favor, inténtelo de nuevo.");

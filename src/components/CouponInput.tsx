@@ -58,7 +58,7 @@ export default function CouponInput({
         setMessage(result.message);
         setIsError(true);
       }
-    } catch (error) {
+    } catch {
       setMessage("Error al validar el cupón");
       setIsError(true);
     } finally {

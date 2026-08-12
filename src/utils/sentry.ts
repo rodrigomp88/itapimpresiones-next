@@ -35,7 +35,7 @@ export const initSentry = () => {
     },
 
     // Configuraciรณn de breadcrumbs
-    beforeBreadcrumb: (breadcrumb, hint) => {
+    beforeBreadcrumb: (breadcrumb) => {
       // Filtrar breadcrumbs innecesarios
       if (breadcrumb.category === "console" && breadcrumb.level === "log") {
         return null;
@@ -49,7 +49,7 @@ export const initSentry = () => {
 // Funciรณn helper para capturar errores con contexto
 export const captureError = (
   error: Error,
-  context?: Record<string, any>,
+  context?: Record<string, unknown>,
   userId?: string
 ) => {
   Sentry.withScope((scope) => {
@@ -59,7 +59,7 @@ export const captureError = (
 
     if (context) {
       Object.keys(context).forEach((key) => {
-        scope.setTag(key, context[key]);
+        scope.setTag(key, String(context[key]));
       });
     }
 
@@ -72,12 +72,12 @@ export const captureError = (
 export const captureMessage = (
   message: string,
   level: Sentry.SeverityLevel = "info",
-  context?: Record<string, any>
+  context?: Record<string, unknown>
 ) => {
   Sentry.withScope((scope) => {
     if (context) {
       Object.keys(context).forEach((key) => {
-        scope.setTag(key, context[key]);
+        scope.setTag(key, String(context[key]));
       });
     }
 
@@ -104,7 +104,7 @@ export const trackNavigation = (from: string, to: string) => {
 // Funciรณn para trackear user actions
 export const trackUserAction = (
   action: string,
-  details?: Record<string, any>
+  details?: Record<string, unknown>
 ) => {
   Sentry.addBreadcrumb({
     category: "user",

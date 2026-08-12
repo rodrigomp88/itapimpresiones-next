@@ -46,7 +46,7 @@ export interface SlideData {
   desc: string;
   ctaLink?: string;
   ctaText?: string;
-  createdAt?: any;
+  createdAt?: string | { toDate?: () => Date };
 }
 
 export type Banner = SlideData;

@@ -6,13 +6,10 @@ import AnalyticsDashboard from "@/components/Admin/AnalyticsDashboard";
 import AlertsPanel from "@/components/Admin/AlertsPanel";
 import {
   FaShoppingBag,
-  FaUsers,
   FaMoneyBillWave,
   FaBox,
   FaArrowRight,
-  FaClipboardList,
   FaCalendarAlt,
-  FaCreditCard,
   FaExclamationTriangle,
 } from "react-icons/fa";
 
@@ -322,7 +319,7 @@ const AdminDashboardPage = async () => {
               No hay órdenes recientes
             </div>
           ) : (
-            stats.recentOrders.map((order: any) => (
+            stats.recentOrders.map((order: { id: string; createdAt: string; orderAmount?: number; orderStatus?: string }) => (
               <div
                 key={order.id}
                 className="p-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors flex items-center justify-between"

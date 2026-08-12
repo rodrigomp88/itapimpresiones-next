@@ -21,7 +21,7 @@ export const useDebouncedSearch = (query: string, delay: number = 300) => {
  * Función memoizada para filtrar productos
  */
 export const useMemoizedProductFilter = (
-  products: any[],
+  products: Array<{ name: string; description?: string; images?: Array<string | { color?: string }>; bagType?: string }>,
   searchQuery: string,
   selectedColor: string,
   selectedBagType: string,
@@ -34,7 +34,7 @@ export const useMemoizedProductFilter = (
     if (selectedColor !== "Todos") {
       filtered = filtered.filter((p) => {
         if (!p.images || p.images.length === 0) return false;
-        return p.images.some((img: any) => {
+        return p.images.some((img) => {
           if (typeof img === "string") return false;
           return img.color === selectedColor;
         });
@@ -64,7 +64,7 @@ export const useMemoizedProductFilter = (
 /**
  * Memoización para ordenamiento
  */
-export const useMemoizedSort = (products: any[], sortBy: string) => {
+export const useMemoizedSort = (products: Array<{ price: number; createdAt: string }>, sortBy: string) => {
   return useMemo(() => {
     const sorted = [...products];
 

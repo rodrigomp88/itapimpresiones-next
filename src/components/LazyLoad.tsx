@@ -4,13 +4,16 @@ import { Suspense, lazy, ComponentType, createElement } from "react";
 import { SectionLoadingSpinner } from "./LoadingSpinner";
 
 // Hook para lazy loading de componentes
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function lazyLoad<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fallback?: ComponentType<any>
 ) {
   const LazyComponent = lazy(importFunc);
 
-  return (props: React.ComponentProps<T>) => (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return (props: React.ComponentProps<any>) => (
     <Suspense
       fallback={fallback ? createElement(fallback) : <SectionLoadingSpinner />}
     >
@@ -29,7 +32,6 @@ interface LazyWrapperProps {
 export const LazyWrapper: React.FC<LazyWrapperProps> = ({
   children,
   fallback,
-  className = "",
 }) => (
   <Suspense fallback={fallback || <SectionLoadingSpinner />}>
     {children}

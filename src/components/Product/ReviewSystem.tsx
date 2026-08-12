@@ -49,65 +49,64 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
     verified: false,
   });
 
-  const mockReviews: Review[] = [
-    {
-      id: "1",
-      userId: "user1",
-      userName: "María González",
-      productId,
-      rating: 5,
-      title: "Excelente calidad",
-      comment:
-        "Muy buena calidad de impresión, el color se mantuvo igual a la prueba. Llegó en tiempo y forma. Lo recomiendo.",
-      verified: true,
-      createdAt: "2025-12-10T10:30:00Z",
-      helpful: 12,
-      images: ["/images/review1.jpg"],
-    },
-    {
-      id: "2",
-      userId: "user2",
-      userName: "Carlos Rodríguez",
-      productId,
-      rating: 4,
-      title: "Buen producto",
-      comment:
-        "Cumple con lo esperado. La tela es de buena calidad y la impresión quedó bien definida.",
-      verified: true,
-      createdAt: "2025-12-08T15:45:00Z",
-      helpful: 8,
-    },
-    {
-      id: "3",
-      userId: "user3",
-      userName: "Ana Martínez",
-      productId,
-      rating: 5,
-      title: "Perfecto",
-      comment:
-        "Exactamente lo que necesitaba. El diseño quedó hermoso y la calidad es excepcional.",
-      verified: true,
-      createdAt: "2025-12-05T09:15:00Z",
-      helpful: 15,
-    },
-    {
-      id: "4",
-      userId: "user4",
-      userName: "Luis Fernández",
-      productId,
-      rating: 3,
-      title: "Está bien",
-      comment:
-        "El producto está bien pero tardó un poco más de lo esperado en llegar.",
-      verified: false,
-      createdAt: "2025-12-03T14:20:00Z",
-      helpful: 3,
-    },
-  ];
-
   useEffect(() => {
+    const reviews: Review[] = [
+      {
+        id: "1",
+        userId: "user1",
+        userName: "María González",
+        productId,
+        rating: 5,
+        title: "Excelente calidad",
+        comment:
+          "Muy buena calidad de impresión, el color se mantuvo igual a la prueba. Llegó en tiempo y forma. Lo recomiendo.",
+        verified: true,
+        createdAt: "2025-12-10T10:30:00Z",
+        helpful: 12,
+        images: ["/images/review1.jpg"],
+      },
+      {
+        id: "2",
+        userId: "user2",
+        userName: "Carlos Rodríguez",
+        productId,
+        rating: 4,
+        title: "Buen producto",
+        comment:
+          "Cumple con lo esperado. La tela es de buena calidad y la impresión quedó bien definida.",
+        verified: true,
+        createdAt: "2025-12-08T15:45:00Z",
+        helpful: 8,
+      },
+      {
+        id: "3",
+        userId: "user3",
+        userName: "Ana Martínez",
+        productId,
+        rating: 5,
+        title: "Perfecto",
+        comment:
+          "Exactamente lo que necesitaba. El diseño quedó hermoso y la calidad es excepcional.",
+        verified: true,
+        createdAt: "2025-12-05T09:15:00Z",
+        helpful: 15,
+      },
+      {
+        id: "4",
+        userId: "user4",
+        userName: "Luis Fernández",
+        productId,
+        rating: 3,
+        title: "Está bien",
+        comment:
+          "El producto está bien pero tardó un poco más de lo esperado en llegar.",
+        verified: false,
+        createdAt: "2025-12-03T14:20:00Z",
+        helpful: 3,
+      },
+    ];
     setTimeout(() => {
-      setReviews(mockReviews);
+      setReviews(reviews);
       setLoading(false);
     }, 1000);
   }, [productId]);
@@ -200,7 +199,7 @@ const ReviewSystem: React.FC<ReviewSystemProps> = ({
       setFormData({ rating: 0, title: "", comment: "", verified: false });
       setShowForm(false);
       Notiflix.Notify.success("¡Reseña enviada exitosamente!");
-    } catch (error) {
+    } catch {
       Notiflix.Notify.failure(
         "Error al enviar la reseña. Inténtalo nuevamente."
       );

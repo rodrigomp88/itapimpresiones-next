@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { z } from "zod";
 
-type ValidationSchema = z.ZodSchema<any>;
-type FormData = Record<string, any>;
+type ValidationSchema = z.ZodSchema<unknown>;
+type FormData = Record<string, unknown>;
 type ValidationErrors<T> = Partial<Record<keyof T, string>>;
 
 export function useFormValidation<T extends FormData>(

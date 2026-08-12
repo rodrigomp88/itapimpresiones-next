@@ -17,7 +17,6 @@ const InAppNotificationHandler = () => {
         const unsubscribe = onMessage(messaging, (payload) => {
           console.log("In-app message received: ", payload);
 
-          const title = payload.notification?.title;
           const body = payload.notification?.body;
 
           if (body) {

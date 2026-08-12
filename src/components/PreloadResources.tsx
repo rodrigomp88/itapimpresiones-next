@@ -21,7 +21,7 @@ const PreloadResources: React.FC = () => {
         link.href = font.href;
         link.rel = font.rel;
         link.as = font.as;
-        if (font.onload) link.onload = new Function(font.onload) as any;
+        if (font.onload) link.onload = new Function(font.onload) as () => void;
         document.head.appendChild(link);
       });
     };

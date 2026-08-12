@@ -25,7 +25,7 @@ export const useFilters = (products: Product[]) => {
   const [showFilters, setShowFilters] = useState(false);
 
   // Función para actualizar filtros
-  const updateFilter = (key: keyof FilterState, value: any) => {
+  const updateFilter = (key: keyof FilterState, value: FilterState[keyof FilterState]) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,

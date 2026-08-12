@@ -58,7 +58,6 @@ export async function POST(request: NextRequest) {
     const isDepositPayment =
       orderData?.depositAmount && orderData?.remainingAmount;
     const depositAmount = orderData?.depositAmount || 0;
-    const totalAmount = orderData?.orderAmount || 0;
 
     // Mapear estado de MercadoPago a nuestro estado interno
     let orderStatus: OrderStatus = orderData?.orderStatus || "pending";

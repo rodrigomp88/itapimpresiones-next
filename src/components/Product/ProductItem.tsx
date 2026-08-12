@@ -101,7 +101,7 @@ const ProductItem: React.FC<Product> = ({
               const color = typeof img !== "string" ? img.color : "Todos";
               if (color === "Todos") return null;
 
-              const colorMap: any = {
+              const colorMap: Record<string, string> = {
                 Blanco: "bg-gray-100 border-gray-300",
                 Negro: "bg-black",
                 Rojo: "bg-red-500",

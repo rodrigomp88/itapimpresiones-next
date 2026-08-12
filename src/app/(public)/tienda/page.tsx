@@ -83,7 +83,7 @@ async function getProducts(): Promise<Product[]> {
           // Normalización de imágenes: asegurar que siempre sean array de objetos
           let safeImages: (ProductImage | string)[] = [];
           if (Array.isArray(data.images)) {
-            safeImages = data.images.map((img: any) => {
+            safeImages = data.images.map((img: string | ProductImage) => {
               // Si es string, conviértelo al nuevo formato
               if (typeof img === "string") {
                 return { url: img, color: "Todos" };

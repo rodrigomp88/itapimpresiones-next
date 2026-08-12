@@ -21,7 +21,7 @@ interface ValidateRequest {
 export async function POST(request: NextRequest) {
   try {
     const body: ValidateRequest = await request.json();
-    const { code, cartTotal, userId, categories = [] } = body;
+    const { code, cartTotal, categories = [] } = body;
 
     if (!code || code.trim() === "") {
       return NextResponse.json<CouponValidationResult>({

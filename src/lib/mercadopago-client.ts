@@ -34,7 +34,7 @@ export class MercadoPagoClient {
   private async executeWithRetry<T>(
     operation: () => Promise<T>,
     operationName: string,
-    metadata: Record<string, any> = {}
+    metadata: Record<string, unknown> = {}
   ): Promise<T> {
     let lastError: CategorizedError | null = null;
 
@@ -121,8 +121,8 @@ export class MercadoPagoClient {
    */
   async getPayment(
     paymentId: string,
-    metadata: Record<string, any> = {}
-  ): Promise<any> {
+    metadata: Record<string, unknown> = {}
+  ): Promise<unknown> {
     return this.executeWithRetry(
       () => this.payment.get({ id: paymentId }),
       "get_payment",
@@ -134,11 +134,11 @@ export class MercadoPagoClient {
    * Crea una preferencia de pago con validación y reintentos
    */
   async createPreference(
-    preferenceData: any,
-    metadata: Record<string, any> = {}
-  ): Promise<any> {
+    preferenceData: Parameters<Preference["create"]>[0]["body"],
+    metadata: Record<string, unknown> = {}
+  ): Promise<unknown> {
     // Validar datos de entrada
-    this.validatePreferenceData(preferenceData);
+    this.validatePreferenceData(preferenceData as unknown as Record<string, unknown>);
 
     return this.executeWithRetry(
       () => this.preference.create({ body: preferenceData }),
@@ -150,21 +150,23 @@ export class MercadoPagoClient {
   /**
    * Valida datos de la preferencia antes de crear
    */
-  private validatePreferenceData(data: any): void {
+  private validatePreferenceData(data: Record<string, unknown>): void {
     if (!data.items || !Array.isArray(data.items) || data.items.length === 0) {
       throw new Error("Items array is required and must not be empty");
     }
 
-    if (!data.payer || !data.payer.email) {
+    const payer = data.payer as { email?: string } | undefined;
+    if (!payer || !payer.email) {
       throw new Error("Payer email is required");
     }
 
-    if (!data.back_urls || !data.back_urls.success) {
+    const backUrls = data.back_urls as { success?: string } | undefined;
+    if (!backUrls || !backUrls.success) {
       throw new Error("Success URL is required");
     }
 
     // Validar items
-    data.items.forEach((item: any, index: number) => {
+    (data.items as Array<{ title?: string; quantity?: number; unit_price?: number }>).forEach((item, index) => {
       if (!item.title || !item.quantity || !item.unit_price) {
         throw new Error(
           `Item ${index + 1} is missing required fields (title, quantity, unit_price)`
@@ -182,9 +184,8 @@ export class MercadoPagoClient {
    */
   async createRefund(
     paymentId: string,
-    refundData: any = {},
-    metadata: Record<string, any> = {}
-  ): Promise<any> {
+    refundData: { amount?: number; reason?: string } = {},
+  ): Promise<unknown> {
     // Implementación simulada de reembolso
     // TODO: Implementar con el SDK correcto de Mercado Pago
     console.log(`Simulated refund for payment ${paymentId}:`, refundData);
@@ -204,8 +205,8 @@ export class MercadoPagoClient {
    */
   async getRefund(
     refundId: string,
-    metadata: Record<string, any> = {}
-  ): Promise<any> {
+    metadata: Record<string, unknown> = {}
+  ): Promise<unknown> {
     return this.executeWithRetry(
       () => this.payment.get({ id: refundId }),
       "get_refund",
@@ -218,8 +219,8 @@ export class MercadoPagoClient {
    */
   async cancelPayment(
     paymentId: string,
-    metadata: Record<string, any> = {}
-  ): Promise<any> {
+    metadata: Record<string, unknown> = {}
+  ): Promise<unknown> {
     return this.executeWithRetry(
       () => this.payment.cancel({ id: paymentId }),
       "cancel_payment",
@@ -257,7 +258,7 @@ export const MercadoPagoValidation = {
   /**
    * Valida datos de preferencia según estándares de Mercado Pago
    */
-  validatePreferenceInput(data: any): { isValid: boolean; errors: string[] } {
+  validatePreferenceInput(data: Record<string, unknown>): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
     if (!data) {
@@ -271,16 +272,18 @@ export const MercadoPagoValidation = {
       errors.push("At least one item is required");
     }
 
-    if (!data.payer || !data.payer.email) {
+    const payer = data.payer as { email?: string } | undefined;
+    if (!payer || !payer.email) {
       errors.push("Payer email is required");
     }
 
-    if (!data.back_urls || !data.back_urls.success) {
+    const backUrls = data.back_urls as { success?: string } | undefined;
+    if (!backUrls || !backUrls.success) {
       errors.push("Success URL is required");
     }
 
     if (data.items) {
-      data.items.forEach((item: any, index: number) => {
+      (data.items as Array<{ title?: string; quantity?: number; unit_price?: number }>).forEach((item, index) => {
         if (!item.title || typeof item.title !== "string") {
           errors.push(
             `Item ${index + 1}: title is required and must be a string`
@@ -316,7 +319,7 @@ export const MercadoPagoValidation = {
   /**
    * Valida datos de reembolso
    */
-  validateRefundData(data: any): { isValid: boolean; errors: string[] } {
+  validateRefundData(data: { amount?: unknown; reason?: unknown }): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
     if (!data) {

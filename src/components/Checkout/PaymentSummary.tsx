@@ -17,7 +17,6 @@ interface PaymentSummaryProps {
     finalTotal: number;
   };
   currentOrder: GuestOrder | null;
-  step: string;
 }
 
 const PaymentSummary: React.FC<PaymentSummaryProps> = ({
@@ -25,7 +24,6 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   cartTotalAmount,
   costs,
   currentOrder,
-  step,
 }) => {
   const formatPrice = (price: number) => {
     return `$${price.toLocaleString("es-AR", { minimumFractionDigits: 0 })}`;

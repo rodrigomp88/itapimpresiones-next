@@ -14,8 +14,6 @@ interface GuestUserFormProps {
     paymentMethod?: PaymentMethod
   ) => void;
   isSubmitting: boolean;
-  error: string | null;
-  validationErrors: Partial<Record<keyof GuestUser, string>>;
 }
 
 const GuestUserForm: React.FC<GuestUserFormProps> = ({
@@ -23,8 +21,6 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
   onUpdateField,
   onSubmit,
   isSubmitting,
-  error,
-  validationErrors,
 }) => {
   const [paymentMethod, setPaymentMethod] =
     useState<PaymentMethod>("mercadopago");

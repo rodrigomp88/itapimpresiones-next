@@ -23,7 +23,7 @@ export interface GuestUser {
 export interface GuestOrder {
   id?: string;
   guestUser: GuestUser;
-  orderItems: any[];
+  orderItems: Array<{ id: string; name: string; price: number; cartQuantity: number; imageURL: string }>;
   orderAmount: number;
   depositAmount: number;
   remainingAmount: number;

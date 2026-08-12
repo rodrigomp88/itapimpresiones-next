@@ -81,8 +81,6 @@ const GuestCheckoutPage: React.FC = () => {
                   onUpdateField={updateGuestUser}
                   onSubmit={handleGuestUserFormSubmit}
                   isSubmitting={isSubmitting}
-                  error={error}
-                  validationErrors={{}}
                 />
               </div>
             </div>
@@ -94,7 +92,6 @@ const GuestCheckoutPage: React.FC = () => {
                 cartTotalAmount={cartTotalAmount}
                 costs={costs}
                 currentOrder={currentOrder}
-                step={step}
               />
             </div>
           </div>
@@ -107,7 +104,6 @@ const GuestCheckoutPage: React.FC = () => {
               order={currentOrder}
               onPaymentComplete={handlePaymentComplete}
               isProcessing={isSubmitting}
-              error={error}
             />
           </div>
         );

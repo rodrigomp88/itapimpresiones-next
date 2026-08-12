@@ -32,7 +32,7 @@ const useSlider = () => {
         clearInterval(slideInterval.current);
       }
     };
-  }, [currentSlide]);
+  }, [currentSlide]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { nextSlide, prevSlide, goToSlide, currentSlide, sliderData };
 };

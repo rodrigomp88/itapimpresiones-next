@@ -30,8 +30,9 @@ try {
     adminStorage = admin.storage();
     adminMessaging = admin.messaging();
   }
-} catch (error: any) {
-  console.error("Firebase Admin SDK initialization error:", error.message);
+} catch (error: unknown) {
+  const errorMessage = error instanceof Error ? error.message : "Unknown error";
+  console.error("Firebase Admin SDK initialization error:", errorMessage);
 }
 
 export { admin, adminAuth, adminDb, adminStorage, adminMessaging };

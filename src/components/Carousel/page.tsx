@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Link from "next/link";
@@ -32,9 +32,9 @@ const Carousel: React.FC = () => {
   const { currentSlide, nextSlide, prevSlide, goToSlide, sliderData } =
     useSlider();
 
-  const handleClickIndicator = (index: number) => {
+  const handleClickIndicator = useCallback((index: number) => {
     goToSlide(index);
-  };
+  }, [goToSlide]);
 
   return (
     <div className="relative h-[600px] flex items-center justify-center overflow-hidden">

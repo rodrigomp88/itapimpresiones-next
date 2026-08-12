@@ -1,22 +1,22 @@
 // Logger simplificado compatible con Edge Runtime
 // Usa console para logging básico
 
-const formatMessage = (level: string, message: string, meta?: any) => {
+const formatMessage = (level: string, message: string, meta?: Record<string, unknown>) => {
   const timestamp = new Date().toISOString();
   const metaStr = meta ? ` | ${JSON.stringify(meta)}` : "";
   return `[${timestamp}] ${level.toUpperCase()}: ${message}${metaStr}`;
 };
 
 export const logger = {
-  error: (message: string, meta?: any) =>
+  error: (message: string, meta?: Record<string, unknown>) =>
     console.error(formatMessage("error", message, meta)),
-  warn: (message: string, meta?: any) =>
+  warn: (message: string, meta?: Record<string, unknown>) =>
     console.warn(formatMessage("warn", message, meta)),
-  info: (message: string, meta?: any) =>
+  info: (message: string, meta?: Record<string, unknown>) =>
     console.info(formatMessage("info", message, meta)),
-  http: (message: string, meta?: any) =>
+  http: (message: string, meta?: Record<string, unknown>) =>
     console.log(formatMessage("http", message, meta)),
-  debug: (message: string, meta?: any) => {
+  debug: (message: string, meta?: Record<string, unknown>) => {
     if (
       typeof process !== "undefined" &&
       process.env.NODE_ENV === "development"
@@ -24,16 +24,16 @@ export const logger = {
       console.debug(formatMessage("debug", message, meta));
     }
   },
-  security: (message: string, meta?: any) =>
+  security: (message: string, meta?: Record<string, unknown>) =>
     console.error(formatMessage("security", message, meta)),
-  log: (level: string, message: string, meta?: any) => {
+  log: (level: string, message: string, meta?: Record<string, unknown>) => {
     console.log(formatMessage(level, message, meta));
   },
 };
 
 // Logger específico para requests HTTP (simplificado)
 export const httpLogger = {
-  log: (level: string, message: string, meta?: any) => {
+  log: (level: string, message: string, meta?: Record<string, unknown>) => {
     console.log(formatMessage(level, message, meta));
   },
 };
@@ -63,7 +63,7 @@ export const logRequest = (
 // Función helper para logging de errores
 export const logError = (
   error: Error,
-  context?: Record<string, any>,
+  context?: Record<string, unknown>,
   userId?: string
 ) => {
   logger.error("Application Error", {
@@ -81,7 +81,7 @@ export const logError = (
 // Función helper para logging de seguridad
 export const logSecurity = (
   event: string,
-  details: Record<string, any>,
+  details: Record<string, unknown>,
   ip?: string,
   userId?: string
 ) => {
@@ -97,7 +97,7 @@ export const logSecurity = (
 export const logPerformance = (
   operation: string,
   duration: number,
-  metadata?: Record<string, any>
+  metadata?: Record<string, unknown>
 ) => {
   logger.info("Performance Metric", {
     operation,

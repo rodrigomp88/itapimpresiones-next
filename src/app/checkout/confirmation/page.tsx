@@ -85,7 +85,7 @@ const OrderConfirmationPage: React.FC = () => {
     }
   }, [sessionStatus, isFirebaseLoading, router]);
 
-  const formatDate = (date: any) => {
+  const formatDate = (date: Date | string | number) => {
     try {
       if (date instanceof Date) {
         return date.toLocaleDateString("es-AR", {

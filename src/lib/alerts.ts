@@ -25,7 +25,7 @@ export interface Alert {
   category: AlertCategory;
   title: string;
   message: string;
-  data?: Record<string, any>;
+  data?: Record<string, unknown>;
   isRead: boolean;
   createdAt: Date;
 }
@@ -38,7 +38,7 @@ export async function createAlert(
   category: AlertCategory,
   title: string,
   message: string,
-  data?: Record<string, any>
+  data?: Record<string, unknown>
 ): Promise<string | null> {
   try {
     const alertRef = await addDoc(collection(db, "alerts"), {
@@ -223,7 +223,7 @@ export async function getAlertCounts(): Promise<Record<AlertType, number>> {
     });
 
     return counts;
-  } catch (error) {
+  } catch {
     return { error: 0, warning: 0, info: 0, success: 0 };
   }
 }

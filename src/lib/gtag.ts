@@ -10,7 +10,7 @@ export const pageview = (url: string) => {
 };
 
 // E-commerce tracking events
-export const trackAddToCart = (product: any) => {
+export const trackAddToCart = (product: { id: string; name: string; price: number; category?: string }) => {
   if (!GA_TRACKING_ID) return;
 
   window.gtag("event", "add_to_cart", {
@@ -28,7 +28,7 @@ export const trackAddToCart = (product: any) => {
   });
 };
 
-export const trackRemoveFromCart = (product: any) => {
+export const trackRemoveFromCart = (product: { id: string; name: string; price: number; category?: string }) => {
   if (!GA_TRACKING_ID) return;
 
   window.gtag("event", "remove_from_cart", {
@@ -46,7 +46,7 @@ export const trackRemoveFromCart = (product: any) => {
   });
 };
 
-export const trackBeginCheckout = (cartItems: any[], totalValue: number) => {
+export const trackBeginCheckout = (cartItems: Array<{ id: string; name: string; price: number; category?: string; quantity?: number }>, totalValue: number) => {
   if (!GA_TRACKING_ID) return;
 
   window.gtag("event", "begin_checkout", {
@@ -75,7 +75,7 @@ export const trackAddPaymentInfo = (
   });
 };
 
-export const trackPurchase = (orderData: any) => {
+export const trackPurchase = (orderData: { id: string; total: number; items?: Array<{ id: string; name: string; price: number; category?: string; quantity?: number }> }) => {
   if (!GA_TRACKING_ID) return;
 
   window.gtag("event", "purchase", {
@@ -83,7 +83,7 @@ export const trackPurchase = (orderData: any) => {
     value: orderData.total,
     currency: "ARS",
     items:
-      orderData.items?.map((item: any) => ({
+      orderData.items?.map((item) => ({
         item_id: item.id,
         item_name: item.name,
         category: item.category,
@@ -110,7 +110,7 @@ export const trackSearch = (searchTerm: string) => {
   });
 };
 
-export const trackViewItem = (product: any) => {
+export const trackViewItem = (product: { id: string; name: string; price: number; category?: string }) => {
   if (!GA_TRACKING_ID) return;
 
   window.gtag("event", "view_item", {

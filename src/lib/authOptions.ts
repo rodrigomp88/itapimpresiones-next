@@ -41,8 +41,9 @@ export const authOptions: AuthOptions = {
             };
           }
           return null;
-        } catch (error: any) {
-          console.error("Error de autenticación de Firebase:", error.code);
+        } catch (error: unknown) {
+          const errorObj = error as { code?: string };
+          console.error("Error de autenticación de Firebase:", errorObj.code);
           return null;
         }
       },
@@ -66,8 +67,9 @@ export const authOptions: AuthOptions = {
             displayName: user.name ?? undefined,
             photoURL: user.image ?? undefined,
           });
-        } catch (error: any) {
-          if (error.code === "auth/user-not-found") {
+        } catch (error: unknown) {
+          const errorObj = error as { code?: string };
+          if (errorObj.code === "auth/user-not-found") {
             // 2. Si no existe por UID, verificamos si existe por EMAIL
             // (Caso: Usuario registrado con contraseña intenta entrar con Google)
             try {
@@ -76,9 +78,10 @@ export const authOptions: AuthOptions = {
                 `Usuario ya existe con email ${user.email} (UID: ${existingUser.uid}). Se vinculará en JWT.`
               );
               // No hacemos nada, dejaremos que el callback JWT unifique el ID.
-            } catch (emailError: any) {
+            } catch (emailError: unknown) {
               // 3. Si no existe ni por UID ni por Email, lo CREAMOS
-              if (emailError.code === "auth/user-not-found") {
+              const emailErrorObj = emailError as { code?: string };
+              if (emailErrorObj.code === "auth/user-not-found") {
                 console.log(
                   `Creando nuevo usuario para Google UID: ${user.id}`
                 );
@@ -112,7 +115,7 @@ export const authOptions: AuthOptions = {
           } else {
             token.id = user.id;
           }
-        } catch (error) {
+        } catch {
           // Si falla (o es un registro nuevo puro), usamos el ID que viene de NextAuth
           token.id = user.id;
         }

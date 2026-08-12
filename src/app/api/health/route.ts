@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { logPerformance } from "@/utils/logger";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const startTime = Date.now();
 
   try {
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
         "Content-Type": "application/json",
       },
     });
-  } catch (error) {
+  } catch {
     const duration = Date.now() - startTime;
     logPerformance("health-check-error", duration);
 

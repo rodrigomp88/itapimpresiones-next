@@ -32,7 +32,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
   >({});
 
   const [existingImages, setExistingImages] = useState<ProductImage[]>(
-    product.images.map((img: any) =>
+    product.images.map((img: string | ProductImage) =>
       typeof img === "string" ? { url: img, color: "Todos" } : img
     )
   );
