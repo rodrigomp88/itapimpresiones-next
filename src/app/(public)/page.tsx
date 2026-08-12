@@ -90,16 +90,7 @@ const Home = () => {
                   text: "Uniformes profesionales que reflejan tu identidad.",
                 },
               ].map((item, i) => (
-                <div key={i} className="flex flex-col gap-4 group cursor-pointer">
-                  <div className="relative w-full bg-slate-200 rounded-xl overflow-hidden aspect-[16/10]">
-                    <Image
-                      src={item.img}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
+                <div key={i} className="flex flex-col gap-4">
                   <div>
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">

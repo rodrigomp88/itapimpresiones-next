@@ -25,12 +25,6 @@ const ServicesPage = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div className="relative lg:h-[500px] flex items-center justify-center">
-                                <div className="relative z-10 w-full max-w-[600px] aspect-video rounded-2xl overflow-hidden shadow-2xl transform rotate-1 hover:rotate-0 transition-all duration-500">
-                                    <div className="w-full h-full bg-center bg-cover" style={{ backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.1)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5PY7LV3YqwD2BxvMqektS007AbbWRbhvceeMS_pv4TT9SSniZNV3Zy718c-ZwhHAMTg5sccxIjGX2eyxin0wUEH9dkY2JNf-P9qnFaLFP3LLtHby4zqF1FJc-9T8QBLy1Z0NMZO-aGuHQlZLy_xnmfvxsQ8zPYqTRTsQP4JU_3RzOrm-kKJrmZ0sMpUAUOoI_N1dVOjc7BkQBkhKEj1VYq2AwMDXsw__MygX4hFyLkRBWik4aO1dupf9PFKsVN8S8fRhjv-6zzfg")' }}></div>
-                                </div>
-                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/30 blur-3xl rounded-full -z-0"></div>
-                            </div>
                         </div>
                         <div className="flex justify-center gap-2 mt-12 lg:absolute lg:bottom-12 lg:left-1/2 lg:-translate-x-1/2">
                             <div className="w-8 h-2 bg-white rounded-full shadow-sm"></div>
@@ -58,7 +52,7 @@ const ServicesPage = () => {
                 <div className="max-w-4xl mx-auto">
                     <div className="flex flex-col md:flex-row gap-8">
                         {/* Serigrafía Feature */}
-                        <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark">
+                        <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
                             <h3 className="text-2xl font-bold tracking-tight dark:text-white">
                                 Serigrafía
                             </h3>
@@ -89,7 +83,7 @@ const ServicesPage = () => {
                             </ul>
                         </div>
                         {/* DTF Feature */}
-                        <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark">
+                        <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
                             <h3 className="text-2xl font-bold tracking-tight dark:text-white">
                                 DTF (Direct to Film)
                             </h3>

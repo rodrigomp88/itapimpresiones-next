@@ -187,10 +187,6 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
         <div className="relative max-w-screen-xl mx-auto px-6 py-32 sm:py-40 lg:py-24 min-h-[600px] sm:min-h-[700px]">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
             <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
-              <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium w-fit mx-auto lg:mx-0">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                🚀 Nueva Colección Disponible - ¡ACTUALIZADO!
-              </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 dark:text-white leading-tight">
                 Descubre Nuestra
