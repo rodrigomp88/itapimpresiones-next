@@ -153,7 +153,7 @@ const Navbar = () => {
 
               {/* Solo mostramos el badge si hay items */}
               {cartTotalQuantity > 0 && (
-                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white animate-in zoom-in duration-300">
+                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-cta text-xs text-white animate-in zoom-in duration-300">
                   {cartTotalQuantity > 99 ? "99+" : cartTotalQuantity}
                 </span>
               )}
@@ -172,7 +172,7 @@ const Navbar = () => {
                   </p>
                   <button
                     onClick={logoutUser}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointer"
+                    className="bg-cta text-white px-3 py-1 rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
                   >
                     Salir
                   </button>
@@ -308,7 +308,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     logoutUser();
                     closeSidebar();
                   }}
-                  className="bg-red-500 text-white px-3 py-1 rounded-md text-sm hover:bg-red-600 transition-all cursor-pointer"
+                  className="bg-cta text-white px-3 py-1 rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
                 >
                   Salir
                 </button>

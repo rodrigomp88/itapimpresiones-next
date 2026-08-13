@@ -189,7 +189,7 @@ const AdminDesignPage = () => {
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg transition-colors font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-primary-dark hover:bg-primary text-white rounded-lg transition-colors font-medium"
         >
           <FaPlus />
           <span>Agregar Banner</span>
@@ -249,7 +249,7 @@ const AdminDesignPage = () => {
                     {banner.desc}
                   </p>
                   <div className="flex items-center justify-between pt-2">
-                    <span className="text-xs px-2 py-1 bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 rounded">
+                    <span className="text-xs px-2 py-1 bg-primary/10 dark:bg-primary/20 text-primary-dark dark:text-primary-light rounded">
                       {banner.ctaText || "Sin botón"}
                     </span>
                     <button
@@ -294,7 +294,7 @@ const AdminDesignPage = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="block w-full text-sm text-zinc-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                  className="block w-full text-sm text-zinc-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary-dark hover:file:bg-primary/20"
                   required
                 />
               </div>
@@ -308,8 +308,8 @@ const AdminDesignPage = () => {
                   type="text"
                   value={heading}
                   onChange={(e) => setHeading(e.target.value)}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
-                  placeholder="Ej: Oferta de Invierno"
+                   className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary outline-none"
+                   placeholder="Ej: Oferta de Invierno"
                   required
                 />
               </div>
@@ -322,7 +322,7 @@ const AdminDesignPage = () => {
                 <textarea
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none h-20 resize-none"
+                   className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary outline-none h-20 resize-none"
                   placeholder="Ej: Descuentos increíbles en todas las gorras..."
                   required
                 />
@@ -370,7 +370,7 @@ const AdminDesignPage = () => {
                           setCustomUrl(e.target.value);
                           setCtaLink(e.target.value);
                         }}
-                        className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
+                        className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary outline-none"
                         placeholder="Ej: https://google.com o /ruta-interna"
                       />
                     )}
@@ -385,7 +385,7 @@ const AdminDesignPage = () => {
                     type="text"
                     value={ctaText}
                     onChange={(e) => setCtaText(e.target.value)}
-                    className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
+                    className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary outline-none"
                     placeholder="Ej: Ver Ofertas"
                   />
                 </div>
@@ -402,7 +402,7 @@ const AdminDesignPage = () => {
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="px-4 py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                   className="px-4 py-2 bg-primary-dark hover:bg-primary text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   {uploading ? (
                     <>

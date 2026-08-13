@@ -53,7 +53,7 @@ export default async function AdminLayout({
           <div className="flex justify-between items-center h-16">
             {/* Logo/Title */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-xl">A</span>
               </div>
               <div>
@@ -71,7 +71,7 @@ export default async function AdminLayout({
               <AdminNotificationBell />
               <Link
                 href="/"
-                className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-violet-500 dark:hover:text-violet-400 transition-colors"
+                className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-primary dark:hover:text-primary-light transition-colors"
               >
                 Volver al sitio
               </Link>
@@ -86,7 +86,7 @@ export default async function AdminLayout({
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:text-violet-600 dark:hover:text-violet-400 transition-colors whitespace-nowrap"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:text-primary dark:hover:text-primary-light transition-colors whitespace-nowrap"
                 >
                   <Icon className="text-base" />
                   {link.label}

@@ -67,7 +67,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
       processing:
         "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400",
       shipped:
-        "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400",
+        "bg-primary/10 text-primary-dark dark:bg-primary/20 dark:text-primary-light",
       delivered:
         "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
       cancelled: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400",
@@ -181,7 +181,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
             placeholder="Buscar por ID, cliente o email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
 
@@ -189,7 +189,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
         >
           {statuses.map((status) => (
             <option key={status} value={status}>
@@ -202,7 +202,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         <select
           value={paymentStatusFilter}
           onChange={(e) => setPaymentStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
         >
           <option value="Todos">Todos los pagos</option>
           <option value="pending">Pago pendiente</option>
@@ -270,7 +270,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         {filteredOrders.length > 0 && (
           <button
             onClick={handleSelectAll}
-            className="flex items-center gap-2 text-sm text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors"
+            className="flex items-center gap-2 text-sm text-primary-dark dark:text-primary-light hover:text-primary dark:hover:text-primary-light transition-colors"
           >
             {selectedOrders.length === filteredOrders.length ? (
               <>
@@ -307,18 +307,18 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
                     type="checkbox"
                     checked={selectedOrders.includes(order.id)}
                     onChange={() => handleSelectOrder(order.id)}
-                    className="w-4 h-4 text-violet-600 bg-gray-100 border-gray-300 rounded focus:ring-violet-500 dark:focus:ring-violet-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary-dark dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                 </div>
 
                 {/* Order Info */}
                 <div className="flex-1 space-y-3">
                   <div className="flex items-center gap-3">
-                    <FaShoppingBag className="text-violet-500 text-xl" />
+                    <FaShoppingBag className="text-primary text-xl" />
                     <div>
                       <Link
                         href={`/admin/orders/${order.id}`}
-                        className="font-semibold text-violet-500 hover:text-violet-600 dark:text-violet-400 dark:hover:text-violet-300"
+                        className="font-semibold text-primary hover:text-primary-dark dark:text-primary-light dark:hover:text-primary-light"
                       >
                         #{order.id.slice(0, 8)}
                       </Link>
@@ -365,7 +365,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
                 {/* Action Button */}
                 <Link
                   href={`/admin/orders/${order.id}`}
-                  className="flex items-center gap-2 px-4 py-2 bg-violet-500 hover:bg-violet-600 text-white rounded-xl transition-colors text-sm font-medium"
+                  className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-xl transition-colors text-sm font-medium"
                 >
                   <FaEye />
                   Ver Detalles

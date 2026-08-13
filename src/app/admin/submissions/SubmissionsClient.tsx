@@ -58,7 +58,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
       case "bags":
         return <MdShoppingBag className="text-green-500" />;
       case "apparel":
-        return <MdOutlineInventory2 className="text-purple-500" />;
+        return <MdOutlineInventory2 className="text-primary" />;
       default:
         return <FaFilter className="text-gray-500" />;
     }
@@ -71,7 +71,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
       case "bags":
         return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-green-200 dark:border-green-800";
       case "apparel":
-        return "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border-purple-200 dark:border-purple-800";
+        return "bg-primary/10 text-primary-dark dark:bg-primary/20 dark:text-primary-light border-primary/20 dark:border-primary-dark";
       default:
         return "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-200 dark:border-gray-700";
     }

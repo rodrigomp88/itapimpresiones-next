@@ -147,9 +147,9 @@ const AdminDashboardPage = async () => {
       title: "Órdenes",
       value: stats.totalOrders,
       subtitle: `${stats.ordersByStatus.confirmed || 0} confirmadas`,
-      icon: <FaShoppingBag className="text-purple-500 text-2xl" />,
-      bg: "bg-purple-100 dark:bg-purple-900/20",
-      border: "border-purple-200 dark:border-purple-800",
+      icon: <FaShoppingBag className="text-primary text-2xl" />,
+      bg: "bg-primary/10 dark:bg-primary/20",
+      border: "border-primary/20 dark:border-primary-dark",
     },
   ];
 
@@ -219,7 +219,7 @@ const AdminDashboardPage = async () => {
                         : status === "processing"
                           ? "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400"
                           : status === "shipped"
-                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-400"
+                            ? "bg-primary/10 text-primary-dark dark:bg-primary/20 dark:text-primary-light"
                             : status === "delivered"
                               ? "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400"
                               : status === "cancelled"
