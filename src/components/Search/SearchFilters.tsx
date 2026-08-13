@@ -95,7 +95,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <HiFilter className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-prussian-blue dark:text-white">
             Filtros
           </h3>
         </div>
@@ -203,7 +203,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
               onClick={() => toggleSection(section.id)}
               className="flex items-center justify-between w-full text-left"
             >
-              <h4 className="text-sm font-semibold text-zinc-900 dark:text-white">
+              <h4 className="text-sm font-semibold text-prussian-blue dark:text-white">
                 {section.title}
               </h4>
               {section.isOpen ? (
@@ -298,7 +298,7 @@ const PriceFilter: React.FC<{
             value={minPrice}
             onChange={(e) => handleMinPriceChange(e.target.value)}
             placeholder="$0"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
           />
         </div>
         <div>
@@ -310,7 +310,7 @@ const PriceFilter: React.FC<{
             value={maxPrice}
             onChange={(e) => handleMaxPriceChange(e.target.value)}
             placeholder="Sin límite"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
           />
         </div>
       </div>

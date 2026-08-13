@@ -163,7 +163,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">
+        <h2 className="text-3xl font-bold text-prussian-blue dark:text-white">
           Órdenes
         </h2>
         <p className="text-zinc-500 dark:text-zinc-400 mt-1">
@@ -181,7 +181,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
             placeholder="Buscar por ID, cliente o email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           />
         </div>
 
@@ -189,7 +189,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         >
           {statuses.map((status) => (
             <option key={status} value={status}>
@@ -202,7 +202,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         <select
           value={paymentStatusFilter}
           onChange={(e) => setPaymentStatusFilter(e.target.value)}
-          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
         >
           <option value="Todos">Todos los pagos</option>
           <option value="pending">Pago pendiente</option>
@@ -345,7 +345,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
                     </div>
                     <div className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400">
                       <FaDollarSign className="text-zinc-400" />
-                      <span className="font-semibold text-zinc-900 dark:text-white">
+                      <span className="font-semibold text-prussian-blue dark:text-white">
                         ${order.orderAmount.toLocaleString("es-AR")}
                       </span>
                     </div>

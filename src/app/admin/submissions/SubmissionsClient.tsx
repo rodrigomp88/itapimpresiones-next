@@ -93,7 +93,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
+          <h1 className="text-3xl font-bold text-prussian-blue dark:text-white tracking-tight">
             Cotizaciones
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 mt-1">
@@ -110,7 +110,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
               placeholder="Buscar por nombre o email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full sm:w-64 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none"
+              className="pl-10 pr-4 py-2 w-full sm:w-64 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all outline-none"
             />
           </div>
         </div>
@@ -167,7 +167,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
               <div className="bg-zinc-100 dark:bg-zinc-800 p-6 rounded-full mb-4">
                 <FaFilter className="text-4xl text-zinc-400" />
               </div>
-              <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">
+              <h3 className="text-xl font-semibold text-prussian-blue dark:text-white">
                 No se encontraron cotizaciones
               </h3>
               <p className="text-zinc-500 dark:text-zinc-400 mt-2">
@@ -194,7 +194,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
                       {getFormTypeIcon(submission.formType)}
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-zinc-900 dark:text-white line-clamp-1">
+                      <h3 className="font-bold text-lg text-prussian-blue dark:text-white line-clamp-1">
                         {submission.name}
                       </h3>
                       <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
@@ -217,7 +217,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
                         <p className="text-xs text-zinc-500 uppercase tracking-wider">
                           Servicio
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-200 truncate">
+                        <p className="font-medium text-prussian-blue dark:text-zinc-200 truncate">
                           {submission.service}
                         </p>
                       </div>
@@ -227,7 +227,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
                         <p className="text-xs text-zinc-500 uppercase tracking-wider">
                           Cantidad
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-200">
+                        <p className="font-medium text-prussian-blue dark:text-zinc-200">
                           {submission.quantity}
                         </p>
                       </div>
@@ -237,7 +237,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
                         <p className="text-xs text-zinc-500 uppercase tracking-wider">
                           Tamaño
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-200">
+                        <p className="font-medium text-prussian-blue dark:text-zinc-200">
                           {submission.bagSize}
                         </p>
                       </div>
@@ -247,7 +247,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
                         <p className="text-xs text-zinc-500 uppercase tracking-wider">
                           Tipo
                         </p>
-                        <p className="font-medium text-zinc-900 dark:text-zinc-200">
+                        <p className="font-medium text-prussian-blue dark:text-zinc-200">
                           {submission.productType}
                         </p>
                       </div>

@@ -12,7 +12,7 @@ const MobileHero = () => {
         <div className="flex flex-col items-center text-center">
           <div className="w-full max-w-sm mx-auto animate-fade-in">
             <div className="relative mb-6">
-              <div className="absolute inset-0 bg-blue-200 dark:bg-blue-500/20 blur-3xl rounded-full opacity-50 transform scale-75 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="absolute inset-0 bg-primary/20 dark:bg-blue-500/20 blur-3xl rounded-full opacity-50 transform scale-75 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
               <Image
                 alt="Gorras exclusivas personalizadas con logo corporativo"
                 width={384}

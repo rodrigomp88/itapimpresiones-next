@@ -157,7 +157,7 @@ const AdminDashboardPage = async () => {
     <div className="p-6 max-w-7xl mx-auto space-y-8">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
+          <h1 className="text-3xl font-bold text-prussian-blue dark:text-white">
             Dashboard
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 mt-1">
@@ -183,7 +183,7 @@ const AdminDashboardPage = async () => {
             <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">
               {card.title}
             </p>
-            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mt-1">
+            <h3 className="text-2xl font-bold text-prussian-blue dark:text-white mt-1">
               {card.value}
             </h3>
             {card.subtitle && (
@@ -205,7 +205,7 @@ const AdminDashboardPage = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Orders by Status */}
         <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm p-6">
-          <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">
+          <h2 className="text-xl font-bold text-prussian-blue dark:text-white mb-6">
             Órdenes por Estado
           </h2>
           <div className="space-y-4">
@@ -244,7 +244,7 @@ const AdminDashboardPage = async () => {
                                 : "Pendientes"}
                   </span>
                 </div>
-                <span className="font-bold text-zinc-900 dark:text-white">
+                <span className="font-bold text-prussian-blue dark:text-white">
                   {count}
                 </span>
               </div>
@@ -254,7 +254,7 @@ const AdminDashboardPage = async () => {
 
         {/* Payment Status Breakdown */}
         <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm p-6">
-          <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-6">
+          <h2 className="text-xl font-bold text-prussian-blue dark:text-white mb-6">
             Estados de Pago
           </h2>
           <div className="space-y-4">
@@ -290,7 +290,7 @@ const AdminDashboardPage = async () => {
                                 : status}
                     </span>
                   </div>
-                  <span className="font-bold text-zinc-900 dark:text-white">
+                  <span className="font-bold text-prussian-blue dark:text-white">
                     {count}
                   </span>
                 </div>
@@ -303,7 +303,7 @@ const AdminDashboardPage = async () => {
       {/* Recent Orders Section */}
       <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
+          <h2 className="text-xl font-bold text-prussian-blue dark:text-white">
             Órdenes Recientes
           </h2>
           <Link
@@ -329,7 +329,7 @@ const AdminDashboardPage = async () => {
                     <FaBox className="text-zinc-400" />
                   </div>
                   <div>
-                    <p className="font-medium text-zinc-900 dark:text-white">
+                    <p className="font-medium text-prussian-blue dark:text-white">
                       Orden #{order.id.slice(0, 8)}
                     </p>
                     <p className="text-sm text-zinc-500">
@@ -338,7 +338,7 @@ const AdminDashboardPage = async () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-zinc-900 dark:text-white">
+                  <p className="font-bold text-prussian-blue dark:text-white">
                     ${(order.orderAmount || 0).toLocaleString("es-AR")}
                   </p>
                   <span

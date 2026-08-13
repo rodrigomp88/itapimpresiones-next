@@ -4,7 +4,7 @@ import ContactForm from "@/components/ContactForm";
 
 const ServicesPage = () => {
   return (
-    <div className="bg-white dark:bg-slate-900 font-display text-slate-900 dark:text-white antialiased">
+    <div className="bg-white dark:bg-slate-900 font-display text-prussian-blue dark:text-white antialiased">
       <main className="flex-grow">
         <section
           className="relative bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 overflow-hidden"

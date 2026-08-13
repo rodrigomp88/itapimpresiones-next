@@ -14,7 +14,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
 }) => {
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm">
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+      <h2 className="text-xl font-bold text-prussian-blue dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
         ¿Cómo quieres finalizar tu compra?
       </h2>
 
@@ -31,7 +31,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               <HiShoppingCart className="w-6 h-6 text-secondary dark:text-secondary-light" />
             </div>
             <div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+              <h3 className="font-semibold text-prussian-blue dark:text-zinc-100">
                 Continuar como invitado
               </h3>
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -74,7 +74,7 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
               <HiUser className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
             </div>
             <div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
+              <h3 className="font-semibold text-prussian-blue dark:text-zinc-100">
                 Iniciar sesión / Registrarse
               </h3>
               <p className="text-sm text-zinc-600 dark:text-zinc-400">

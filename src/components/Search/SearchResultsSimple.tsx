@@ -61,7 +61,7 @@ const SearchResultsSimple: React.FC<SearchResultsProps> = ({
               error
             </span>
           </div>
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">
+          <h3 className="text-lg font-semibold text-prussian-blue dark:text-white mb-2">
             Error en la búsqueda
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400 mb-4">{error}</p>
@@ -90,7 +90,7 @@ const SearchResultsSimple: React.FC<SearchResultsProps> = ({
               search_off
             </span>
           </div>
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">
+          <h3 className="text-lg font-semibold text-prussian-blue dark:text-white mb-2">
             No se encontraron resultados
           </h3>
           <p className="text-zinc-600 dark:text-zinc-400 mb-6">
@@ -117,7 +117,7 @@ const SearchResultsSimple: React.FC<SearchResultsProps> = ({
       {/* Header con controles */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
+          <h2 className="text-lg font-semibold text-prussian-blue dark:text-white">
             Resultados de búsqueda
           </h2>
           {searchQuery && (

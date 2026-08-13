@@ -145,7 +145,7 @@ const GuestCheckoutPage: React.FC = () => {
           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
             /
           </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+          <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
             {step === "checkout" && "Finalizar Compra"}
             {step === "payment" && "Procesar Pago"}
             {step === "success" && "Pedido Confirmado"}
@@ -167,7 +167,7 @@ const GuestCheckoutPage: React.FC = () => {
               )}
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-zinc-900 dark:text-white">
+              <h1 className="text-3xl font-bold text-prussian-blue dark:text-white">
                 {step === "checkout" && "Compra sin registro"}
                 {step === "payment" && "Procesar Pago"}
                 {step === "success" && "¡Pedido confirmado!"}

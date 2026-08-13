@@ -82,7 +82,7 @@ const CartPage: React.FC = () => {
             <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
               /
             </span>
-            <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+            <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
               Carrito de Compras
             </span>
           </div>
@@ -93,7 +93,7 @@ const CartPage: React.FC = () => {
             >
               shopping_cart
             </span>
-            <p className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+            <p className="text-3xl font-bold text-prussian-blue dark:text-zinc-100 mb-2">
               Tu carrito está vacío
             </p>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -124,13 +124,13 @@ const CartPage: React.FC = () => {
           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
             /
           </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+          <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
             Carrito de Compras
           </span>
         </div>
 
         <div className="flex flex-wrap justify-between gap-3 pb-8">
-          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold min-w-72">
+          <p className="text-prussian-blue dark:text-zinc-100 text-4xl font-bold min-w-72">
             Tu Carrito
           </p>
         </div>
@@ -161,7 +161,7 @@ const CartPage: React.FC = () => {
                         <div className="flex justify-between items-start pr-8">
                           <Link
                             href={`/producto/${cart.slug}`}
-                            className="text-zinc-900 dark:text-zinc-100 font-semibold text-sm line-clamp-2 mb-1"
+                            className="text-prussian-blue dark:text-zinc-100 font-semibold text-sm line-clamp-2 mb-1"
                           >
                             {cart.name}
                           </Link>
@@ -194,7 +194,7 @@ const CartPage: React.FC = () => {
                             +
                           </button>
                         </div>
-                        <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                        <p className="text-sm font-semibold text-prussian-blue dark:text-zinc-100">
                           Subtotal: $
                           {(cart.price * cart.cartQuantity).toLocaleString(
                             "es-AR"
@@ -223,19 +223,19 @@ const CartPage: React.FC = () => {
               <table className="w-full">
                 <thead className="border-b border-zinc-200 dark:border-zinc-700">
                   <tr className="bg-zinc-50 dark:bg-zinc-800/50">
-                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase">
+                    <th className="px-6 py-3 text-left text-prussian-blue dark:text-zinc-300 w-2/5 text-xs font-semibold uppercase">
                       Producto
                     </th>
-                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                    <th className="px-6 py-3 text-left text-prussian-blue dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                       Precio
                     </th>
-                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                    <th className="px-6 py-3 text-left text-prussian-blue dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                       Cantidad
                     </th>
-                    <th className="px-6 py-3 text-left text-zinc-900 dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
+                    <th className="px-6 py-3 text-left text-prussian-blue dark:text-zinc-300 w-1/5 text-xs font-semibold uppercase">
                       Subtotal
                     </th>
-                    <th className="px-6 py-3 text-right text-zinc-900 dark:text-zinc-300 w-auto text-xs font-semibold uppercase"></th>
+                    <th className="px-6 py-3 text-right text-prussian-blue dark:text-zinc-300 w-auto text-xs font-semibold uppercase"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -260,7 +260,7 @@ const CartPage: React.FC = () => {
                             <div>
                               <Link
                                 href={`/producto/${cart.slug}`}
-                                className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold hover:text-primary"
+                                className="text-prussian-blue dark:text-zinc-100 text-sm font-semibold hover:text-primary"
                               >
                                 {cart.name}
                               </Link>
@@ -324,7 +324,7 @@ const CartPage: React.FC = () => {
           {/* RESUMEN DEL PEDIDO (Fixed en desktop) */}
           <div className="lg:col-span-1">
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-6 sticky top-24 shadow-sm">
-              <h2 className="text-zinc-900 dark:text-zinc-100 text-xl font-bold pb-4 border-b border-zinc-200 dark:border-zinc-700">
+              <h2 className="text-prussian-blue dark:text-zinc-100 text-xl font-bold pb-4 border-b border-zinc-200 dark:border-zinc-700">
                 Resumen
               </h2>
               <div className="space-y-4 py-4">
@@ -332,7 +332,7 @@ const CartPage: React.FC = () => {
                   <span className="text-gray-600 dark:text-gray-300">
                     Subtotal
                   </span>
-                  <span className="text-zinc-900 dark:text-zinc-100 font-medium">
+                  <span className="text-prussian-blue dark:text-zinc-100 font-medium">
                     ${cartTotalAmount.toLocaleString("es-AR")}
                   </span>
                 </div>
@@ -347,7 +347,7 @@ const CartPage: React.FC = () => {
               </div>
               <div className="border-t border-zinc-200 dark:border-zinc-700 pt-4">
                 <div className="flex justify-between font-bold text-lg">
-                  <span className="text-zinc-900 dark:text-zinc-100">
+                  <span className="text-prussian-blue dark:text-zinc-100">
                     Total
                   </span>
                   <span className="text-cta dark:text-cta">
@@ -364,7 +364,7 @@ const CartPage: React.FC = () => {
                 </button>
                 <Link
                   href="/tienda"
-                  className="w-full flex items-center justify-center rounded-lg h-12 bg-zinc-50 dark:bg-zinc-700/50 text-zinc-900 dark:text-zinc-100 text-base font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
+                  className="w-full flex items-center justify-center rounded-lg h-12 bg-zinc-50 dark:bg-zinc-700/50 text-prussian-blue dark:text-zinc-100 text-base font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
                 >
                   Continuar Comprando
                 </Link>

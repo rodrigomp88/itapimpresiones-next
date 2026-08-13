@@ -100,7 +100,7 @@ const PWAInstaller: React.FC = () => {
           </div>
 
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">
+            <h3 className="text-sm font-semibold text-prussian-blue dark:text-white">
               Instalar Itap Impresiones
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">

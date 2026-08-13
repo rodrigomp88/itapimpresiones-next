@@ -57,7 +57,7 @@ export default async function AdminLayout({
                 <span className="text-white font-bold text-xl">A</span>
               </div>
               <div>
-                <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+                <h2 className="text-lg font-bold text-prussian-blue dark:text-white">
                   Panel Admin
                 </h2>
                 <p className="text-xs text-zinc-500 dark:text-zinc-400">

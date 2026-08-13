@@ -54,7 +54,7 @@ const SystemHealth = () => {
             <FaExclamationTriangle className="text-yellow-500 mt-1" />
           )}
           <div>
-            <h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
+            <h4 className="font-semibold text-prussian-blue dark:text-zinc-100">
               Permisos de Firestore
             </h4>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -76,7 +76,7 @@ const SystemHealth = () => {
             <FaExclamationTriangle className="text-red-500 mt-1" />
           )}
           <div>
-            <h4 className="font-semibold text-zinc-900 dark:text-zinc-100">
+            <h4 className="font-semibold text-prussian-blue dark:text-zinc-100">
               Dispositivo de Notificaciones
             </h4>
             <p className="text-sm text-zinc-600 dark:text-zinc-400">

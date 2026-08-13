@@ -20,7 +20,7 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
         <div className="mx-auto w-16 h-16 bg-primary/10 dark:bg-primary/15 rounded-full flex items-center justify-center mb-4">
           <HiCreditCard className="w-8 h-8 text-primary dark:text-primary-light" />
         </div>
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+        <h2 className="text-2xl font-bold text-prussian-blue dark:text-zinc-100 mb-2">
           Procesar Pago
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400">
@@ -30,7 +30,7 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
 
       {order && (
         <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          <h3 className="font-semibold text-prussian-blue dark:text-zinc-100 mb-4">
             Resumen del pedido
           </h3>
           <div className="space-y-2 text-sm">

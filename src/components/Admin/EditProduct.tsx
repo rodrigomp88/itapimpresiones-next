@@ -293,7 +293,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                 {newImages.map((img, index) => (
                   <div
                     key={`new-${index}`}
-                    className="flex items-center gap-2 bg-blue-50 dark:bg-blue-900/20 p-2 rounded border border-blue-200"
+                    className="flex items-center gap-2 bg-primary/5 dark:bg-primary/20 p-2 rounded border border-blue-200"
                   >
                     <Image
                       src={img.preview}

@@ -102,7 +102,7 @@ export default function NotificationPrompt({
             <span className="text-xl">🔔</span>
           </div>
           <div className="flex-1">
-            <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">
+            <h3 className="text-sm font-semibold text-prussian-blue dark:text-white">
               ¿Querés recibir notificaciones?
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">
@@ -118,7 +118,7 @@ export default function NotificationPrompt({
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                className="px-3 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white transition-colors"
               >
                 Ahora no
               </button>

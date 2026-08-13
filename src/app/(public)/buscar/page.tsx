@@ -105,7 +105,7 @@ const SearchPageContent: React.FC = () => {
           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
             /
           </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+          <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
             Búsqueda
           </span>
           {searchQuery && (
@@ -113,7 +113,7 @@ const SearchPageContent: React.FC = () => {
               <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
                 /
               </span>
-              <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+              <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
                 {searchQuery}
               </span>
             </>
@@ -122,7 +122,7 @@ const SearchPageContent: React.FC = () => {
 
         {/* Header con búsqueda */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-6">
+          <h1 className="text-3xl font-bold text-prussian-blue dark:text-white mb-6">
             Buscar Productos
           </h1>
 

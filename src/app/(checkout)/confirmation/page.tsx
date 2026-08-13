@@ -22,7 +22,7 @@ export default function OrderConfirmationPage() {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+        <h1 className="text-3xl font-bold text-prussian-blue dark:text-zinc-100 mb-2">
           ¡Pedido Confirmado!
         </h1>
         <p className="text-lg text-zinc-600 dark:text-zinc-400">
@@ -71,7 +71,7 @@ export default function OrderConfirmationPage() {
         </Link>
         <Link
           href="/"
-          className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-zinc-700 dark:text-zinc-200 hover:text-prussian-blue dark:hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         >
           Volver al Inicio
         </Link>

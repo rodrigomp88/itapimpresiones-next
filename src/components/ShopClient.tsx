@@ -291,7 +291,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               Inicio
             </a>
             <span className="text-zinc-600 dark:text-zinc-400 text-sm">/</span>
-            <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+            <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
               Productos
             </span>
           </div>
@@ -324,7 +324,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
 
           <div className="flex flex-wrap justify-between gap-4 items-center">
             <div className="flex min-w-72 flex-col gap-2">
-              <h2 className="text-zinc-900 dark:text-zinc-100 text-2xl font-bold">
+              <h2 className="text-prussian-blue dark:text-zinc-100 text-2xl font-bold">
                 Explora Nuestros Productos
               </h2>
               <p className="text-zinc-600 dark:text-zinc-400 text-base">

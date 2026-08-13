@@ -157,7 +157,7 @@ const OrderConfirmationPage: React.FC = () => {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
+          <h3 className="text-lg font-medium text-prussian-blue dark:text-zinc-100 mb-2">
             {error || "Orden no encontrada"}
           </h3>
           <p className="text-zinc-500 dark:text-zinc-400 mb-6">
@@ -207,7 +207,7 @@ const OrderConfirmationPage: React.FC = () => {
         <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
           /
         </span>
-        <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+        <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
           Confirmación
         </span>
       </div>
@@ -229,7 +229,7 @@ const OrderConfirmationPage: React.FC = () => {
             />
           </svg>
         </div>
-        <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+        <h1 className="text-3xl font-bold text-prussian-blue dark:text-zinc-100 mb-2">
           ¡Pedido Confirmado!
         </h1>
         <p className="text-lg text-zinc-600 dark:text-zinc-400">
@@ -242,7 +242,7 @@ const OrderConfirmationPage: React.FC = () => {
         <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-700">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+              <h2 className="text-lg font-semibold text-prussian-blue dark:text-zinc-100">
                 Orden #{order.id.slice(-8).toUpperCase()}
               </h2>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">
@@ -263,7 +263,7 @@ const OrderConfirmationPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Información de contacto */}
             <div>
-              <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-3">
+              <h3 className="text-sm font-medium text-prussian-blue dark:text-zinc-100 mb-3">
                 Información de Contacto
               </h3>
               <div className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
@@ -284,7 +284,7 @@ const OrderConfirmationPage: React.FC = () => {
 
             {/* Dirección de envío */}
             <div>
-              <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-3">
+              <h3 className="text-sm font-medium text-prussian-blue dark:text-zinc-100 mb-3">
                 Dirección de Envío
               </h3>
               <div className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -308,7 +308,7 @@ const OrderConfirmationPage: React.FC = () => {
       {/* Productos de la orden */}
       <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl overflow-hidden mb-6">
         <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-700">
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+          <h3 className="text-lg font-semibold text-prussian-blue dark:text-zinc-100">
             Productos Solicitados
           </h3>
         </div>
@@ -332,14 +332,14 @@ const OrderConfirmationPage: React.FC = () => {
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                <h4 className="text-sm font-medium text-prussian-blue dark:text-zinc-100 truncate">
                   {item.name}
                 </h4>
                 <p className="text-sm text-zinc-500 dark:text-zinc-400">
                   Cantidad: {item.cartQuantity}
                 </p>
               </div>
-              <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <div className="text-sm font-medium text-prussian-blue dark:text-zinc-100">
                 ${(item.price * item.cartQuantity).toLocaleString("es-AR")}
               </div>
             </div>
@@ -351,13 +351,13 @@ const OrderConfirmationPage: React.FC = () => {
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
-              <span className="text-zinc-900 dark:text-zinc-100">
+              <span className="text-prussian-blue dark:text-zinc-100">
                 ${order.orderAmount.toLocaleString("es-AR")}
               </span>
             </div>
             <div className="flex justify-between text-lg font-semibold border-t border-zinc-200 dark:border-zinc-700 pt-2">
-              <span className="text-zinc-900 dark:text-zinc-100">Total</span>
-              <span className="text-zinc-900 dark:text-zinc-100">
+              <span className="text-prussian-blue dark:text-zinc-100">Total</span>
+              <span className="text-prussian-blue dark:text-zinc-100">
                 ${order.orderAmount.toLocaleString("es-AR")}
               </span>
             </div>
@@ -406,7 +406,7 @@ const OrderConfirmationPage: React.FC = () => {
         </Link>
         <Link
           href="/"
-          className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-zinc-700 dark:text-zinc-200 hover:text-prussian-blue dark:hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         >
           Volver al Inicio
         </Link>

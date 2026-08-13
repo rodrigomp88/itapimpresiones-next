@@ -73,7 +73,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           <span className="material-symbols-outlined text-primary">
             filter_list
           </span>
-          <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+          <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
             Filtros
           </h3>
         </div>
@@ -92,7 +92,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
         <div className="p-6 flex flex-col gap-6 border-t border-zinc-200 dark:border-zinc-800 animate-in slide-in-from-top-2 duration-200">
           {/* Categories Filter */}
           <div className="flex flex-col gap-4">
-            <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+            <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
               Categorías
             </h3>
             <div className="flex flex-col gap-1">
@@ -147,10 +147,10 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
           {/* Price Filter */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+            <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
               Precio
             </h3>
-            <p className="text-center text-lg font-medium text-zinc-900 dark:text-zinc-100">
+            <p className="text-center text-lg font-medium text-prussian-blue dark:text-zinc-100">
               ${Number(currentPrice).toLocaleString("es-AR")}
             </p>
             <div className="mt-2">
@@ -170,7 +170,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           {onColorChange && (
             <>
               <div className="flex flex-col gap-3">
-                <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+                <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
                   Color
                 </h3>
                 <div className="grid grid-cols-6 gap-2">
@@ -199,7 +199,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           {selectedCategory === "Bolsas" && onBagTypeChange && (
             <>
               <div className="flex flex-col gap-3">
-                <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+                <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
                   Tipo de Bolsa
                 </h3>
                 <div className="flex flex-col gap-2">
@@ -224,7 +224,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
           {/* Sizes Filter */}
           <div className="flex flex-col gap-3">
-            <h3 className="text-zinc-900 dark:text-zinc-100 text-base font-bold leading-normal">
+            <h3 className="text-prussian-blue dark:text-zinc-100 text-base font-bold leading-normal">
               Talle
             </h3>
             <div className="grid grid-cols-4 gap-2">

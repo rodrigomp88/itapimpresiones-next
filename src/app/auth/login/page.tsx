@@ -61,7 +61,7 @@ const LoginPage = () => {
       className="bg-white dark:bg-zinc-900 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8"
     >
       <div className="text-center mb-8">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+        <h1 className="text-2xl font-bold text-prussian-blue dark:text-white mb-2">
           ¡Hola de nuevo!
         </h1>
         <p className="text-sm text-zinc-500 dark:text-zinc-400">
@@ -111,7 +111,7 @@ const LoginPage = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full pl-11 pr-4 py-3 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
             />
           </div>
 
@@ -123,7 +123,7 @@ const LoginPage = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full pl-11 pr-4 py-3 bg-zinc-50 dark:bg-black/40 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
             />
           </div>
         </div>

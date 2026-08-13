@@ -169,7 +169,7 @@ export function RegistrationMark({
  */
 export function InkSplash({
   className,
-  color = "#E01358",
+  color = "var(--color-raspberry-red)",
   scale = 1,
 }: {
   className?: string;

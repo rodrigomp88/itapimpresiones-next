@@ -86,7 +86,7 @@ const ProductItem: React.FC<Product> = ({
 
         <div className="flex flex-col p-4 gap-2 flex-grow">
           <h3
-            className="text-zinc-900 dark:text-zinc-100 font-bold text-lg truncate"
+            className="text-prussian-blue dark:text-zinc-100 font-bold text-lg truncate"
             title={name}
           >
             {name}

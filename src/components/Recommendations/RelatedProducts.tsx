@@ -122,7 +122,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
       <div className="p-6 border-b border-zinc-200 dark:border-zinc-700">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
+            <h3 className="text-xl font-bold text-prussian-blue dark:text-white">
               {getDynamicTitle()}
             </h3>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
@@ -145,9 +145,9 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
               disabled={tab.products.length === 0}
               className={`flex-1 px-4 py-2 text-sm font-medium rounded-md transition-all ${
                 activeTab === tab.id
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm"
+                  ? "bg-white dark:bg-zinc-700 text-prussian-blue dark:text-white shadow-sm"
                   : tab.products.length > 0
-                    ? "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                    ? "text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white"
                     : "text-zinc-400 dark:text-zinc-600 cursor-not-allowed"
               }`}
             >
@@ -219,7 +219,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                             e.preventDefault();
                             // TODO: Implementar agregar al carrito
                           }}
-                          className="bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white p-2 rounded-full shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                          className="bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white p-2 rounded-full shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
                         >
                           <HiShoppingCart className="w-4 h-4" />
                         </button>
@@ -228,7 +228,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
 
                     {/* Content */}
                     <div className="p-4">
-                      <h4 className="font-semibold text-zinc-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
+                      <h4 className="font-semibold text-prussian-blue dark:text-white mb-2 line-clamp-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
                         {product.name}
                       </h4>
 
@@ -261,7 +261,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                       {/* Price and CTA */}
                       <div className="flex items-center justify-between">
                         <div>
-                          <span className="text-lg font-bold text-zinc-900 dark:text-white">
+                          <span className="text-lg font-bold text-prussian-blue dark:text-white">
                             ${product.price.toLocaleString("es-AR")}
                           </span>
                           {product.recommendation?.score && (

@@ -54,7 +54,7 @@ export default function PaymentMethodSelector({
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <span className="text-lg">{method.icon}</span>
-                <span className="font-medium text-zinc-900 dark:text-white text-sm">
+                <span className="font-medium text-prussian-blue dark:text-white text-sm">
                   {method.name}
                 </span>
                 {method.processingTime && (

@@ -33,7 +33,7 @@ const BagsPage = () => {
       </div>
 
       {/* FeatureSection */}
-      <div className="flex flex-col gap-10 px-4 py-10 @container text-slate-900 dark:text-white max-w-screen-xl mx-auto">
+      <div className="flex flex-col gap-10 px-4 py-10 @container text-prussian-blue dark:text-white max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4">
           <h1 className="tracking-tight text-4xl font-extrabold leading-tight @[480px]:text-5xl @[480px]:font-extrabold @[480px]:leading-tight max-w-[720px]">
             ¿Por qué elegir nuestras bolsas?
@@ -136,7 +136,7 @@ const BagsPage = () => {
       </div>
 
       {/* Gallery Section */}
-      <section className="flex flex-col gap-10 px-4 py-10 text-slate-900 dark:text-white max-w-screen-xl mx-auto">
+      <section className="flex flex-col gap-10 px-4 py-10 text-prussian-blue dark:text-white max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4">
           <h2 className="tracking-tight text-4xl font-bold leading-tight @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight max-w-[720px]">
             Nuestro Trabajo

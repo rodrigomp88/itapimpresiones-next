@@ -70,7 +70,7 @@ const SuccessPageContent: React.FC = () => {
             </svg>
           </div>
 
-          <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
+          <h1 className="text-3xl font-bold text-prussian-blue dark:text-zinc-100 mb-4">
             ¡Pago Aprobado!
           </h1>
 
@@ -81,7 +81,7 @@ const SuccessPageContent: React.FC = () => {
 
           {orderId && (
             <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 mb-8 text-left">
-              <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+              <h2 className="text-lg font-semibold text-prussian-blue dark:text-zinc-100 mb-4">
                 Detalles de la Orden
               </h2>
               <div className="space-y-2 text-sm">

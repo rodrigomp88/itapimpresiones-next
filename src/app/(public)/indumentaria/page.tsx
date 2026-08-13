@@ -246,7 +246,7 @@ const ApparelPage = () => {
                     Nombre de la Empresa
                   </label>
                   <input
-                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
+                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
                     id="company-name"
                     type="text"
                   />
@@ -260,7 +260,7 @@ const ApparelPage = () => {
                       Email
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="email"
                       type="email"
                     />
@@ -273,7 +273,7 @@ const ApparelPage = () => {
                       Teléfono
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="phone"
                       type="tel"
                     />
@@ -288,7 +288,7 @@ const ApparelPage = () => {
                       Tipo de Producto
                     </label>
                     <select
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="product-type"
                     >
                       <option>Remeras</option>
@@ -306,7 +306,7 @@ const ApparelPage = () => {
                       Cantidad Estimada
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="quantity"
                       type="number"
                     />

@@ -154,7 +154,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
               Tienda
             </Link>
             <span className="text-zinc-600 dark:text-zinc-400 text-sm">/</span>
-            <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+            <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
               {product.name}
             </span>
           </div>
@@ -273,7 +273,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
             {/* Info y Controles */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <h1 className="text-zinc-900 dark:text-zinc-100 text-4xl font-extrabold">
+                <h1 className="text-prussian-blue dark:text-zinc-100 text-4xl font-extrabold">
                   {product.name}
                 </h1>
                 <p className="text-zinc-600 dark:text-zinc-400 text-base">
@@ -286,7 +286,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
 
               {product.size && (
                 <div className="flex flex-col gap-3">
-                  <h3 className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold">
+                  <h3 className="text-prussian-blue dark:text-zinc-100 text-sm font-semibold">
                     Talle/Tamaño
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -354,7 +354,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                           className={`flex items-center justify-center rounded-lg h-12 w-12 border transition-colors ${
                             state.quantity <= minQty
                               ? "border-zinc-200 bg-zinc-100 text-zinc-400 cursor-not-allowed dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-600"
-                              : "border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+                              : "border-zinc-300 bg-white text-prussian-blue hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
                           }`}
                           disabled={state.quantity <= minQty}
                         >
@@ -362,12 +362,12 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                             remove
                           </span>
                         </button>
-                        <span className="text-zinc-900 dark:text-zinc-100 text-xl font-bold w-12 text-center select-none">
+                        <span className="text-prussian-blue dark:text-zinc-100 text-xl font-bold w-12 text-center select-none">
                           {isClient ? state.quantity : minQty}
                         </span>
                         <button
                           onClick={incrementQuantity}
-                          className="flex items-center justify-center rounded-lg h-12 w-12 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                          className="flex items-center justify-center rounded-lg h-12 w-12 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-prussian-blue dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                         >
                           <span className="material-symbols-outlined">add</span>
                         </button>

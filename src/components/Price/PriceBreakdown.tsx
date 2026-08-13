@@ -118,12 +118,12 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
       {/* Header */}
       <div className="p-6 border-b border-zinc-200 dark:border-zinc-700">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-zinc-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-prussian-blue dark:text-white">
             Resumen de Precios
           </h3>
           <button
             onClick={() => setIsBreakdownVisible(!isBreakdownVisible)}
-            className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+            className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white"
           >
             <HiInformationCircle className="w-4 h-4" />
             {isBreakdownVisible ? "Ocultar detalles" : "Ver detalles"}
@@ -170,7 +170,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
           <span className="text-zinc-600 dark:text-zinc-400">
             Subtotal ({/* Aquí iría el número de items */} productos)
           </span>
-          <span className="font-medium text-zinc-900 dark:text-white">
+          <span className="font-medium text-prussian-blue dark:text-white">
             {formatPrice(subtotal)}
           </span>
         </div>
@@ -206,7 +206,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                 className={`font-medium ${
                   finalShipping === 0
                     ? "text-green-600 dark:text-green-400"
-                    : "text-zinc-900 dark:text-white"
+                    : "text-prussian-blue dark:text-white"
                 }`}
               >
                 {finalShipping === 0 ? "GRATIS" : formatPrice(finalShipping)}
@@ -249,7 +249,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                         className="w-4 h-4 text-primary"
                       />
                       <div>
-                        <div className="font-medium text-zinc-900 dark:text-white text-sm">
+                        <div className="font-medium text-prussian-blue dark:text-white text-sm">
                           {option.name}
                         </div>
                         <div className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -262,7 +262,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                         className={`font-medium ${
                           option.price === 0
                             ? "text-green-600 dark:text-green-400"
-                            : "text-zinc-900 dark:text-white"
+                            : "text-prussian-blue dark:text-white"
                         }`}
                       >
                         {option.price === 0
@@ -285,7 +285,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
               IVA ({taxRate}%)
             </span>
           </div>
-          <span className="font-medium text-zinc-900 dark:text-white">
+          <span className="font-medium text-prussian-blue dark:text-white">
             {formatPrice(finalTax)}
           </span>
         </div>
@@ -294,10 +294,10 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-4">
           {/* Total */}
           <div className="flex items-center justify-between">
-            <span className="text-lg font-semibold text-zinc-900 dark:text-white">
+            <span className="text-lg font-semibold text-prussian-blue dark:text-white">
               Total
             </span>
-            <span className="text-xl font-bold text-zinc-900 dark:text-white">
+            <span className="text-xl font-bold text-prussian-blue dark:text-white">
               {formatPrice(total)}
             </span>
           </div>
@@ -312,7 +312,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                 value={couponInput}
                 onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                 placeholder="Código de descuento"
-                className="flex-1 px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary"
+                className="flex-1 px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary"
               />
               <button
                 onClick={handleApplyCoupon}

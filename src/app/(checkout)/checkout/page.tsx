@@ -338,14 +338,14 @@ const CheckoutPage: React.FC = () => {
           <span className="text-gray-500 dark:text-gray-400 text-sm font-medium">
             /
           </span>
-          <span className="text-zinc-900 dark:text-zinc-100 text-sm font-medium">
+          <span className="text-prussian-blue dark:text-zinc-100 text-sm font-medium">
             Finalizar Compra
           </span>
         </div>
 
         {/* Title */}
         <div className="flex flex-wrap justify-between gap-3 pb-8">
-          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold min-w-72">
+          <p className="text-prussian-blue dark:text-zinc-100 text-4xl font-bold min-w-72">
             Detalles de Envío
           </p>
         </div>
@@ -357,7 +357,7 @@ const CheckoutPage: React.FC = () => {
           {/* Formulario de Dirección */}
           <div className="lg:col-span-2">
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+              <h2 className="text-xl font-bold text-prussian-blue dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
                 Información de Contacto
               </h2>
               <div className="space-y-5">
@@ -375,7 +375,7 @@ const CheckoutPage: React.FC = () => {
                     placeholder="Ej: Juan Pérez"
                     value={shippingAddress.name}
                     onChange={handleShippingChange}
-                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                     required
                   />
                 </div>
@@ -395,7 +395,7 @@ const CheckoutPage: React.FC = () => {
                       placeholder="Ej: juan@mail.com"
                       value={shippingAddress.mail}
                       onChange={handleShippingChange}
-                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                       required
                     />
                   </div>
@@ -413,7 +413,7 @@ const CheckoutPage: React.FC = () => {
                       placeholder="Ej: +54 9 11..."
                       value={shippingAddress.phone}
                       onChange={handleShippingChange}
-                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                       required
                     />
                   </div>
@@ -433,7 +433,7 @@ const CheckoutPage: React.FC = () => {
                     placeholder="Ej: Calle Ficticia 123, Piso 4, Depto B"
                     value={shippingAddress.address}
                     onChange={handleShippingChange}
-                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                     required
                   />
                 </div>
@@ -453,7 +453,7 @@ const CheckoutPage: React.FC = () => {
                       placeholder="Ej: Buenos Aires"
                       value={shippingAddress.city}
                       onChange={handleShippingChange}
-                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                       required
                     />
                   </div>
@@ -471,7 +471,7 @@ const CheckoutPage: React.FC = () => {
                       placeholder="Ej: 1000"
                       value={shippingAddress.postalCode}
                       onChange={handleShippingChange}
-                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                       required
                     />
                   </div>
@@ -492,7 +492,7 @@ const CheckoutPage: React.FC = () => {
                       placeholder="Ej: Buenos Aires"
                       value={shippingAddress.province}
                       onChange={handleShippingChange}
-                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                      className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                       required
                     />
                   </div>
@@ -517,7 +517,7 @@ const CheckoutPage: React.FC = () => {
                         notes: e.target.value,
                       })
                     }
-                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+                    className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
                     rows={3}
                   />
                 </div>
@@ -528,7 +528,7 @@ const CheckoutPage: React.FC = () => {
           {/* Resumen del Pedido (Sidebar) */}
           <div className="lg:col-span-1">
             <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 sticky top-24 shadow-sm">
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+              <h2 className="text-xl font-bold text-prussian-blue dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
                 Tu Pedido
               </h2>
 
@@ -551,7 +551,7 @@ const CheckoutPage: React.FC = () => {
                   <span className="text-zinc-600 dark:text-zinc-400">
                     Subtotal
                   </span>
-                  <span className="text-zinc-900 dark:text-zinc-100">
+                  <span className="text-prussian-blue dark:text-zinc-100">
                     ${cartTotalAmount.toLocaleString("es-AR")}
                   </span>
                 </div>
@@ -570,7 +570,7 @@ const CheckoutPage: React.FC = () => {
                   <span className="text-zinc-600 dark:text-zinc-400">
                     Envío
                   </span>
-                  <span className="text-zinc-900 dark:text-zinc-100">
+                  <span className="text-prussian-blue dark:text-zinc-100">
                     {shippingCost === 0 ? (
                       <span className="text-green-600 dark:text-green-400">
                         ¡Gratis!
@@ -585,17 +585,17 @@ const CheckoutPage: React.FC = () => {
                   <span className="text-zinc-600 dark:text-zinc-400">
                     IVA (21%)
                   </span>
-                  <span className="text-zinc-900 dark:text-zinc-100">
+                  <span className="text-prussian-blue dark:text-zinc-100">
                     ${Math.round(taxAmount).toLocaleString("es-AR")}
                   </span>
                 </div>
 
                 <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 space-y-2">
                   <div className="flex justify-between text-base font-semibold">
-                    <span className="text-zinc-900 dark:text-zinc-100">
+                    <span className="text-prussian-blue dark:text-zinc-100">
                       Total del pedido
                     </span>
-                    <span className="text-zinc-900 dark:text-zinc-100">
+                    <span className="text-prussian-blue dark:text-zinc-100">
                       $
                       {Math.round(
                         cartTotalAmount + shippingCost + taxAmount

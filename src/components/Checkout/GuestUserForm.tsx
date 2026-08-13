@@ -36,7 +36,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
 
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm">
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+      <h2 className="text-xl font-bold text-prussian-blue dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
         Información de contacto
       </h2>
 
@@ -51,7 +51,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
               type="text"
               value={guestUser.name}
               onChange={(e) => handleFieldChange("name", e.target.value)}
-              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
               placeholder="Ej: Juan Pérez"
               required
             />
@@ -65,7 +65,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
               type="tel"
               value={guestUser.phone}
               onChange={(e) => handleFieldChange("phone", e.target.value)}
-              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
               placeholder="Ej: +54 9 11..."
               required
             />
@@ -81,7 +81,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
             type="email"
             value={guestUser.email}
             onChange={(e) => handleFieldChange("email", e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
             placeholder="Ej: juan@email.com"
             required
           />
@@ -96,7 +96,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
             type="text"
             value={guestUser.address}
             onChange={(e) => handleFieldChange("address", e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
             placeholder="Ej: Calle Ficticia 123, Piso 4, Depto B"
             required
           />
@@ -112,7 +112,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
               type="text"
               value={guestUser.city}
               onChange={(e) => handleFieldChange("city", e.target.value)}
-              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
               placeholder="Ej: Buenos Aires"
               required
             />
@@ -126,7 +126,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
               type="text"
               value={guestUser.postalCode}
               onChange={(e) => handleFieldChange("postalCode", e.target.value)}
-              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white placeholder-zinc-400"
+              className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white placeholder-zinc-400"
               placeholder="Ej: 1000"
               required
             />
@@ -141,7 +141,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
           <select
             value={guestUser.province}
             onChange={(e) => handleFieldChange("province", e.target.value)}
-            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-zinc-900 dark:text-white"
+            className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-prussian-blue dark:text-white"
             required
           >
             <option value="">Seleccionar provincia</option>
@@ -155,7 +155,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
 
         {/* Método de pago */}
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-6">
-          <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-4">
+          <h3 className="text-lg font-medium text-prussian-blue dark:text-zinc-100 mb-4">
             Método de pago
           </h3>
           <div className="space-y-3">
@@ -171,7 +171,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
                 className="w-4 h-4 text-primary"
               />
               <div className="flex-1">
-                <span className="font-medium text-zinc-900 dark:text-zinc-100">
+                <span className="font-medium text-prussian-blue dark:text-zinc-100">
                   MercadoPago
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -192,7 +192,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
                 className="w-4 h-4 text-primary"
               />
               <div className="flex-1">
-                <span className="font-medium text-zinc-900 dark:text-zinc-100">
+                <span className="font-medium text-prussian-blue dark:text-zinc-100">
                   Transferencia bancaria
                 </span>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">

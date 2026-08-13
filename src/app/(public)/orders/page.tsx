@@ -74,7 +74,7 @@ const OrdersPage = async () => {
                     {new Date(order.createdAt).toLocaleDateString("es-AR")}
                   </td>
                   <td className="p-4">
-                    <span className="px-2 py-1 text-sm rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    <span className="px-2 py-1 text-sm rounded-full bg-primary/10 text-primary-dark dark:bg-blue-900 dark:text-blue-200">
                       {order.orderStatus}
                     </span>
                   </td>

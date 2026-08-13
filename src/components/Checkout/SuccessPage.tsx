@@ -20,7 +20,7 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
         <div className="mx-auto w-20 h-20 bg-secondary/10 dark:bg-secondary/30 rounded-full flex items-center justify-center mb-6">
           <HiCheckCircle className="w-10 h-10 text-secondary dark:text-secondary" />
         </div>
-        <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
+        <h2 className="text-3xl font-bold text-prussian-blue dark:text-zinc-100 mb-2">
           ¡Pedido confirmado!
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400 text-lg">
@@ -30,7 +30,7 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
 
       {order && (
         <div className="bg-zinc-50 dark:bg-zinc-800/50 rounded-lg p-6 mb-8">
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          <h3 className="font-semibold text-prussian-blue dark:text-zinc-100 mb-4">
             Detalles del pedido
           </h3>
           <div className="space-y-3 text-sm">

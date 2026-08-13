@@ -32,10 +32,10 @@ const alertTypeStyles: Record<
     text: "text-amber-800 dark:text-amber-200",
   },
   info: {
-    bg: "bg-blue-50 dark:bg-blue-900/20",
+    bg: "bg-primary/5 dark:bg-primary/20",
     border: "border-blue-200 dark:border-blue-800",
     icon: "🔵",
-    text: "text-blue-800 dark:text-blue-200",
+    text: "text-primary-dark dark:text-primary-light",
   },
   success: {
     bg: "bg-green-50 dark:bg-green-900/20",
@@ -139,7 +139,7 @@ export default function AlertsPanel() {
       {/* Header */}
       <div className="p-4 border-b border-zinc-200 dark:border-zinc-700">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+          <h2 className="text-lg font-bold text-prussian-blue dark:text-white flex items-center gap-2">
             🚨 Alertas del Sistema
             {unreadCount > 0 && (
               <span className="px-2 py-0.5 text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-full">

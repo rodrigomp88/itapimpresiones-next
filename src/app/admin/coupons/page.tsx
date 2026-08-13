@@ -180,7 +180,7 @@ export default function CouponsAdminPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
+        <h1 className="text-2xl font-bold text-prussian-blue dark:text-white">
           🎟️ Cupones de Descuento
         </h1>
         <button
@@ -194,7 +194,7 @@ export default function CouponsAdminPage() {
       {/* Formulario */}
       {showForm && (
         <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4 text-zinc-900 dark:text-white">
+          <h2 className="text-lg font-semibold mb-4 text-prussian-blue dark:text-white">
             {editingCoupon ? "Editar Cupón" : "Crear Nuevo Cupón"}
           </h2>
           <form
@@ -212,7 +212,7 @@ export default function CouponsAdminPage() {
                   setFormData({ ...formData, code: e.target.value })
                 }
                 placeholder="Ej: VERANO20"
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
                 required
               />
             </div>
@@ -229,7 +229,7 @@ export default function CouponsAdminPage() {
                     type: e.target.value as CouponType,
                   })
                 }
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
               >
                 <option value="percentage">Porcentaje (%)</option>
                 <option value="fixed">Monto Fijo ($)</option>
@@ -247,7 +247,7 @@ export default function CouponsAdminPage() {
                   setFormData({ ...formData, value: Number(e.target.value) })
                 }
                 min="0"
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
                 required
               />
             </div>
@@ -266,7 +266,7 @@ export default function CouponsAdminPage() {
                   })
                 }
                 min="0"
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
               />
             </div>
 
@@ -280,7 +280,7 @@ export default function CouponsAdminPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, validFrom: e.target.value })
                 }
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
                 required
               />
             </div>
@@ -295,7 +295,7 @@ export default function CouponsAdminPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, validUntil: e.target.value })
                 }
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
                 required
               />
             </div>
@@ -314,7 +314,7 @@ export default function CouponsAdminPage() {
                   })
                 }
                 min="0"
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
               />
             </div>
 
@@ -333,7 +333,7 @@ export default function CouponsAdminPage() {
                 }
                 min="0"
                 disabled={formData.type !== "percentage"}
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white disabled:opacity-50"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white disabled:opacity-50"
               />
             </div>
 
@@ -348,7 +348,7 @@ export default function CouponsAdminPage() {
                   setFormData({ ...formData, description: e.target.value })
                 }
                 placeholder="Ej: Descuento de verano 2025"
-                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                className="w-full px-3 py-2 border rounded-lg bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-prussian-blue dark:text-white"
               />
             </div>
 
@@ -372,7 +372,7 @@ export default function CouponsAdminPage() {
               <button
                 type="button"
                 onClick={resetForm}
-                className="px-4 py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                className="px-4 py-2 text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white"
               >
                 Cancelar
               </button>
@@ -426,7 +426,7 @@ export default function CouponsAdminPage() {
                   className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
                 >
                   <td className="px-4 py-3">
-                    <span className="font-mono font-bold text-zinc-900 dark:text-white">
+                    <span className="font-mono font-bold text-prussian-blue dark:text-white">
                       {coupon.code}
                     </span>
                     {coupon.description && (
@@ -435,7 +435,7 @@ export default function CouponsAdminPage() {
                       </p>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-sm text-zinc-900 dark:text-white">
+                  <td className="px-4 py-3 text-sm text-prussian-blue dark:text-white">
                     {coupon.type === "percentage"
                       ? `${coupon.value}%`
                       : `$${coupon.value.toLocaleString()}`}
@@ -449,7 +449,7 @@ export default function CouponsAdminPage() {
                     {coupon.validFrom.toLocaleDateString()} -{" "}
                     {coupon.validUntil.toLocaleDateString()}
                   </td>
-                  <td className="px-4 py-3 text-sm text-zinc-900 dark:text-white">
+                  <td className="px-4 py-3 text-sm text-prussian-blue dark:text-white">
                     {coupon.usageCount}
                     {coupon.usageLimit ? `/${coupon.usageLimit}` : ""}
                   </td>

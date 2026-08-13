@@ -180,7 +180,7 @@ const AdminDesignPage = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
+          <h1 className="text-2xl font-bold text-prussian-blue dark:text-white">
             Diseño de Página
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400">
@@ -208,7 +208,7 @@ const AdminDesignPage = () => {
       {/* Banners Grid */}
       <div className="bg-white dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 overflow-hidden">
         <div className="p-6 border-b border-zinc-200 dark:border-zinc-700">
-          <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+          <h2 className="text-lg font-bold text-prussian-blue dark:text-white">
             Banners del Carrusel Principal
           </h2>
         </div>
@@ -242,7 +242,7 @@ const AdminDesignPage = () => {
 
                 {/* Content */}
                 <div className="p-4 space-y-2">
-                  <h3 className="font-bold text-zinc-900 dark:text-white truncate">
+                  <h3 className="font-bold text-prussian-blue dark:text-white truncate">
                     {banner.heading}
                   </h3>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 h-10">
@@ -272,7 +272,7 @@ const AdminDesignPage = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="design-modal-title">
           <div className="bg-white dark:bg-zinc-800 rounded-xl w-full max-w-lg shadow-2xl p-6 relative">
             <div className="flex justify-between items-center mb-6">
-              <h3 id="design-modal-title" className="text-xl font-bold text-zinc-900 dark:text-white">
+              <h3 id="design-modal-title" className="text-xl font-bold text-prussian-blue dark:text-white">
                 Nuevo Banner
               </h3>
               <button
@@ -308,7 +308,7 @@ const AdminDesignPage = () => {
                   type="text"
                   value={heading}
                   onChange={(e) => setHeading(e.target.value)}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
+                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
                   placeholder="Ej: Oferta de Invierno"
                   required
                 />
@@ -322,7 +322,7 @@ const AdminDesignPage = () => {
                 <textarea
                   value={desc}
                   onChange={(e) => setDesc(e.target.value)}
-                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 outline-none h-20 resize-none"
+                  className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none h-20 resize-none"
                   placeholder="Ej: Descuentos increíbles en todas las gorras..."
                   required
                 />
@@ -343,7 +343,7 @@ const AdminDesignPage = () => {
                         if (val !== "custom") setCtaLink(val);
                         else setCtaLink(customUrl);
                       }}
-                      className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white"
+                      className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white"
                     >
                       <option value="/tienda">Tienda (General)</option>
                       <option value="/tienda?category=Remeras">
@@ -370,7 +370,7 @@ const AdminDesignPage = () => {
                           setCustomUrl(e.target.value);
                           setCtaLink(e.target.value);
                         }}
-                        className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
+                        className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
                         placeholder="Ej: https://google.com o /ruta-interna"
                       />
                     )}
@@ -385,7 +385,7 @@ const AdminDesignPage = () => {
                     type="text"
                     value={ctaText}
                     onChange={(e) => setCtaText(e.target.value)}
-                    className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
+                    className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 outline-none"
                     placeholder="Ej: Ver Ofertas"
                   />
                 </div>

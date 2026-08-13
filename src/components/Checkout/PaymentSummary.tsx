@@ -31,7 +31,7 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-6 shadow-sm sticky top-24">
-      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+      <h2 className="text-xl font-bold text-prussian-blue dark:text-zinc-100 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
         Tu Pedido
       </h2>
 
@@ -54,13 +54,13 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
               />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-zinc-900 dark:text-zinc-100 truncate">
+              <h3 className="font-medium text-prussian-blue dark:text-zinc-100 truncate">
                 {item.name}
               </h3>
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
                 Cantidad: {item.cartQuantity}
               </p>
-              <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <p className="text-sm font-medium text-prussian-blue dark:text-zinc-100">
                 {formatPrice(item.price * item.cartQuantity)}
               </p>
             </div>
@@ -72,14 +72,14 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
       <div className="space-y-3 mb-6">
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">Subtotal</span>
-          <span className="text-zinc-900 dark:text-zinc-100">
+          <span className="text-prussian-blue dark:text-zinc-100">
             {formatPrice(cartTotalAmount)}
           </span>
         </div>
 
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">Envío</span>
-          <span className="text-zinc-900 dark:text-zinc-100">
+          <span className="text-prussian-blue dark:text-zinc-100">
             {costs.shippingCost === 0 ? (
               <span className="text-green-600 dark:text-green-400">
                 ¡Gratis!
@@ -92,17 +92,17 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 
         <div className="flex justify-between text-sm">
           <span className="text-zinc-600 dark:text-zinc-400">IVA (21%)</span>
-          <span className="text-zinc-900 dark:text-zinc-100">
+          <span className="text-prussian-blue dark:text-zinc-100">
             {formatPrice(costs.taxAmount)}
           </span>
         </div>
 
         <div className="border-t border-zinc-200 dark:border-zinc-700 pt-3 space-y-2">
           <div className="flex justify-between text-lg font-semibold">
-            <span className="text-zinc-900 dark:text-zinc-100">
+            <span className="text-prussian-blue dark:text-zinc-100">
               Total del pedido
             </span>
-            <span className="text-zinc-900 dark:text-zinc-100">
+            <span className="text-prussian-blue dark:text-zinc-100">
               {formatPrice(costs.finalTotal)}
             </span>
           </div>

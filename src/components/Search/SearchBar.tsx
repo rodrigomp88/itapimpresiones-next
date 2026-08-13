@@ -151,7 +151,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             onBlur={() => setTimeout(() => setIsFocused(false), 150)} // Delay para permitir clicks en sugerencias
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className="flex-1 py-3 pr-10 bg-transparent border-0 outline-none text-zinc-900 dark:text-white placeholder-zinc-500 dark:placeholder-zinc-400"
+            className="flex-1 py-3 pr-10 bg-transparent border-0 outline-none text-prussian-blue dark:text-white placeholder-zinc-500 dark:placeholder-zinc-400"
             autoComplete="off"
           />
 
@@ -195,7 +195,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                     onClick={() => handleSuggestionSelect(suggestion)}
                     className={`w-full text-left px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors flex items-center gap-3 ${
                       highlightedIndex === index
-                        ? "bg-blue-50 dark:bg-blue-900/20"
+                        ? "bg-primary/5 dark:bg-primary/20"
                         : ""
                     }`}
                   >
@@ -203,7 +203,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                       <HiTrendingUp className="w-4 h-4 text-zinc-400" />
                     )}
                     <HiSearch className="w-4 h-4 text-zinc-400" />
-                    <span className="text-zinc-900 dark:text-white flex-1">
+                    <span className="text-prussian-blue dark:text-white flex-1">
                       {suggestion}
                     </span>
                     {value.length > 0 && (
