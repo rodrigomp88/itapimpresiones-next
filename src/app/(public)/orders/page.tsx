@@ -65,7 +65,7 @@ const OrdersPage = async () => {
                   key={order.id}
                   className="border-t border-gray-200 dark:border-gray-700"
                 >
-                  <td className="p-4 font-medium text-violet-500 hover:underline">
+                  <td className="p-4 font-medium text-primary hover:underline">
                     <Link href={`/orders/${order.id}`}>
                       {order.id.slice(0, 8)}...
                     </Link>

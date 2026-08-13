@@ -117,7 +117,7 @@ const OrderConfirmationPage: React.FC = () => {
       case "en preparación":
         return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300";
       case "enviada":
-        return "bg-purple-100 text-purple-800 dark:bg-purple-900/20 dark:text-purple-300";
+        return "bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300";
       case "entregada":
         return "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300";
       case "cancelada":

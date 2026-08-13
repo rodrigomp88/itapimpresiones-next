@@ -52,7 +52,7 @@ const Home = () => {
 
             <div className="mt-12 flex justify-center">
               <Link href="/tienda">
-                <button className="px-8 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                <button className="px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors">
                   Ver Toda la Tienda
                 </button>
               </Link>

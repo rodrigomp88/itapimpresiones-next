@@ -37,7 +37,7 @@ const CheckoutSummary: React.FC = () => {
         <span className="text-lg font-bold">
           Total ({cartTotalQuantity} items)
         </span>
-        <p className="text-2xl font-bold text-violet-600 dark:text-violet-400">
+        <p className="text-2xl font-bold text-primary dark:text-blue-400">
           ${cartTotalAmount.toLocaleString("es-AR")}
         </p>
       </div>

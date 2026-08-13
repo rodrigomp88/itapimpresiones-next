@@ -199,7 +199,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                                 ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
                                 : product.recommendation.type === "upselling"
                                   ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                                  : "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200"
+                                  : "bg-blue-50 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
                             }`}
                           >
                             {product.recommendation.type === "related" &&

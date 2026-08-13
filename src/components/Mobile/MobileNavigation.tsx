@@ -56,7 +56,7 @@ const MobileNavigation = () => {
               <div className="relative">
                 {item.isActive && (
                   <motion.div
-                    className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl"
+                    className="absolute -inset-2 bg-gradient-to-r from-blue-500/20 to-blue-500/20 rounded-2xl"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0 }}
@@ -65,7 +65,7 @@ const MobileNavigation = () => {
                 <span
                   className={`material-symbols-outlined text-2xl relative transition-all duration-300 ${
                     item.isActive
-                      ? "text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text drop-shadow-sm"
+                      ? "text-transparent bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text drop-shadow-sm"
                       : "text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-200"
                   }`}
                 >
