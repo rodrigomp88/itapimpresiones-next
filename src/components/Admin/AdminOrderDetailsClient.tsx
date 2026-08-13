@@ -337,7 +337,7 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
                 <div
                   className={`max-w-xs p-3 rounded-lg ${
                     msg.sender === "tienda"
-                      ? "bg-violet-500 text-white"
+                      ? "bg-primary text-white"
                       : "bg-gray-200 dark:bg-gray-700"
                   }`}
                 >

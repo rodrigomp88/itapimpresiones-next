@@ -105,14 +105,14 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
             placeholder="Buscar producto..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
 
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+          className="px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>
@@ -183,7 +183,7 @@ const AdminProductsClient: React.FC<{ initialProducts: Product[] }> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <FaDollarSign className="text-violet-500" />
+                    <FaDollarSign className="text-primary" />
                     <span className="text-xl font-bold text-prussian-blue dark:text-white">
                       ${product.price.toLocaleString("es-AR")}
                     </span>

@@ -156,7 +156,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
     const colorClasses = {
       blue: "bg-blue-500 text-white",
       green: "bg-green-500 text-white",
-      purple: "bg-purple-500 text-white",
+      purple: "bg-primary text-white",
       orange: "bg-orange-500 text-white",
     };
 
@@ -382,7 +382,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-purple-500 h-2 rounded-full"
+                className="bg-primary h-2 rounded-full"
                 style={{ width: `${analyticsData.deviceStats.tablet}%` }}
               ></div>
             </div>

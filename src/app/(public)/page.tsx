@@ -148,7 +148,7 @@ const Home = () => {
         </section>
 
         {/* Logos clientes */}
-        <section className="w-full py-20 bg-slate-50 dark:bg-slate-950">
+        <section className="w-full py-20 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold mb-12">Confían en Nosotros</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">

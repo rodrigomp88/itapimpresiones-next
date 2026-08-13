@@ -37,7 +37,7 @@ const SystemHealth = () => {
       className="bg-white dark:bg-zinc-800 p-6 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm"
     >
       <div className="flex items-center gap-3 mb-4">
-        <FaServer className="text-violet-500 text-xl" />
+        <FaServer className="text-primary text-xl" />
         <h3 className="text-lg font-bold text-zinc-800 dark:text-zinc-100">
           Estado del Sistema
         </h3>
