@@ -17,7 +17,7 @@ export default function CheckoutLayout({
             className="h-10 w-auto dark:hidden"
           />
           <img
-            src="/images/brand/logo-horizontal-blanco.svg"
+            src="/images/brand/logo-horizontal.svg"
             alt="ITAP Impresiones"
             className="h-10 w-auto hidden dark:block"
           />

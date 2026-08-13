@@ -60,9 +60,14 @@ const Navbar = () => {
           <Link href="/" className="flex items-center gap-3">
             <div className="size-8">
               <img
+                src="/images/brand/isotipo-fondo-claro.svg"
+                alt="ITAP Impresiones"
+                className="w-full h-full dark:hidden"
+              />
+              <img
                 src="/images/brand/isotipo.svg"
                 alt="ITAP Impresiones"
-                className="w-full h-full"
+                className="w-full h-full hidden dark:block"
               />
             </div>
             <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">

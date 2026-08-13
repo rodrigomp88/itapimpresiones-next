@@ -9,12 +9,12 @@ const Footer = () => {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12">
         <div className="flex flex-col items-center justify-center text-center gap-6">
           <img
-            src="/images/brand/logo-horizontal.svg"
+            src="/images/brand/logo-horizontal-fondo-claro.svg"
             alt="ITAP Impresiones"
             className="h-12 w-auto dark:hidden"
           />
           <img
-            src="/images/brand/logo-horizontal-blanco.svg"
+            src="/images/brand/logo-horizontal.svg"
             alt="ITAP Impresiones"
             className="h-12 w-auto hidden dark:block"
           />

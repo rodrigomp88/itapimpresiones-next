@@ -24,7 +24,7 @@ export default function AuthLayout({
             <img
               alt="Logo ITAP Impresiones"
               className="mx-auto h-12 w-auto hidden dark:block"
-              src="/images/brand/logo-horizontal-blanco.svg"
+              src="/images/brand/logo-horizontal.svg"
             />
           </Link>
         </div>
