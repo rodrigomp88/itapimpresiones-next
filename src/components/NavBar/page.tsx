@@ -57,22 +57,17 @@ const Navbar = () => {
         aria-label="Navegación principal"
       >
         <div className="flex items-center justify-between whitespace-nowrap px-6 lg:px-12 py-4 max-w-[1440px] mx-auto">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="size-8">
-              <img
-                src="/images/brand/isotipo-fondo-claro.svg"
-                alt="ITAP Impresiones"
-                className="w-full h-full dark:hidden"
-              />
-              <img
-                src="/images/brand/isotipo.svg"
-                alt="ITAP Impresiones"
-                className="w-full h-full hidden dark:block"
-              />
-            </div>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-              ITAP Impresiones
-            </h2>
+          <Link href="/" className="flex items-center">
+            <img
+              src="/images/brand/logo-horizontal-fondo-claro.svg"
+              alt="ITAP Impresiones"
+              className="h-10 w-auto dark:hidden"
+            />
+            <img
+              src="/images/brand/logo-horizontal.svg"
+              alt="ITAP Impresiones"
+              className="h-10 w-auto hidden dark:block"
+            />
           </Link>
 
           <div className="hidden md:flex flex-1 justify-end items-center gap-10">
