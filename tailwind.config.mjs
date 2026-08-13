@@ -58,8 +58,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-jakarta)', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         'sm': '6px',

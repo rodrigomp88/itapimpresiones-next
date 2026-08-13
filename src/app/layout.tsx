@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 import Providers from "./providers";
@@ -11,6 +12,15 @@ import { initSentry } from "../utils/sentry";
 
 // Inicializar Sentry
 initSentry();
+
+// Self-host Plus Jakarta Sans via next/font (eliminates external requests)
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  preload: true,
+  variable: "--font-jakarta",
+});
 
 export const metadata: Metadata = {
   title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
@@ -65,15 +75,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning className={jakarta.variable}>
       <head>
-        {/* Preconnects para performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        {/* Preconnects para Firebase */}
         <link
           rel="preconnect"
           href="https://www.gstatic.com"
@@ -86,8 +90,6 @@ export default function RootLayout({
         />
 
         {/* DNS prefetch para recursos externos */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link rel="dns-prefetch" href="//www.gstatic.com" />
 
         {/* Critical CSS inlining para mejor FCP */}
@@ -95,9 +97,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
             /* Critical CSS para above-the-fold content */
-            body { margin: 0; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; }
+            body { margin: 0; font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif; }
             .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-            .font-display { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
             /* Loading states */
             .animate-spin { animation: spin 1s linear infinite; }
@@ -112,11 +113,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Fonts optimizadas */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        {/* Material Symbols - loaded async */}
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
           rel="stylesheet"
@@ -145,7 +142,6 @@ export default function RootLayout({
                     document.documentElement.classList.add('dark');
                   }
                 }
-                // Si es 'light' o no hay tema, no hacer nada (por defecto es claro)
               } catch (e) {}
             })();
           `,
@@ -153,7 +149,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`font-display antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
+        className={`antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
         suppressHydrationWarning
       >
         {/* Main content landmark */}

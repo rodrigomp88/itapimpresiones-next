@@ -29,20 +29,6 @@ const nextConfig = {
       },
     };
 
-    // Compression de assets
-    if (!isServer) {
-      config.optimization.minimizer = [
-        ...config.optimization.minimizer,
-        new (require('terser-webpack-plugin'))({
-          terserOptions: {
-            compress: {
-              drop_console: process.env.NODE_ENV === 'production',
-            },
-          },
-        }),
-      ];
-    }
-
     return config;
   },
 
@@ -94,7 +80,6 @@ const nextConfig = {
   // Experimental features para performance
   experimental: {
     optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion'],
-    optimizeCss: true,
     scrollRestoration: true,
   },
 

@@ -16,7 +16,7 @@
   --color-accent: #E01358;
   --color-background-light: #f9fafb;
   --color-background-dark: #1A2333;
-  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
   color-scheme: light;
 }
 
