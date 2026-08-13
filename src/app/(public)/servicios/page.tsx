@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 
@@ -21,7 +21,7 @@ const ServicesPage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
                   <a
-                    className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all transform hover:-translate-y-0.5"
+                    className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-sm font-semibold tracking-wide hover:bg-primary-dark shadow-lg shadow-primary/20 transition-all transform hover:-translate-y-0.5"
                     href="#portfolio"
                   >
                     Ver Productos

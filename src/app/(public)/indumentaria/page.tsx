@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Image from "next/image";
 
 const ApparelPage = () => {
@@ -27,7 +27,7 @@ const ApparelPage = () => {
                   </p>
                   <div className="pt-4">
                     <a
-                      className="inline-flex cursor-pointer items-center justify-center rounded-full h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white text-base font-semibold shadow-lg hover:shadow-blue-500/30"
+                      className="inline-flex cursor-pointer items-center justify-center rounded-full h-14 px-10 bg-primary hover:bg-primary-dark text-white text-base font-semibold shadow-lg hover:shadow-primary/30"
                       href="#quote-form"
                     >
                       Empezar Ahora
@@ -246,7 +246,7 @@ const ApparelPage = () => {
                     Nombre de la Empresa
                   </label>
                   <input
-                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
+                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
                     id="company-name"
                     type="text"
                   />
@@ -260,7 +260,7 @@ const ApparelPage = () => {
                       Email
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
                       id="email"
                       type="email"
                     />
@@ -273,7 +273,7 @@ const ApparelPage = () => {
                       Teléfono
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
                       id="phone"
                       type="tel"
                     />
@@ -288,7 +288,7 @@ const ApparelPage = () => {
                       Tipo de Producto
                     </label>
                     <select
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
                       id="product-type"
                     >
                       <option>Remeras</option>
@@ -306,7 +306,7 @@ const ApparelPage = () => {
                       Cantidad Estimada
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 text-gray-900 dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-gray-900 dark:text-white"
                       id="quantity"
                       type="number"
                     />
@@ -320,13 +320,13 @@ const ApparelPage = () => {
                     Adjuntar logo (opcional)
                   </label>
                   <input
-                    className="mt-1 block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400"
+                    className="mt-1 block w-full text-sm text-zinc-600 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/10 dark:file:bg-primary/10 dark:file:text-primary-light"
                     id="logo-upload"
                     type="file"
                   />
                 </div>
                 <button
-                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer"
+                  className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors cursor-pointer"
                   type="submit"
                 >
                   Enviar Solicitud

@@ -23,12 +23,12 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
         <motion.div
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="p-6 border-2 border-blue-200 dark:border-blue-700 rounded-lg bg-blue-50 dark:bg-blue-900/20 hover:border-blue-300 dark:hover:border-blue-600 transition-all cursor-pointer"
+          className="p-6 border-2 border-primary/20 dark:border-primary-dark rounded-lg bg-primary/10 dark:bg-primary/10 hover:border-primary/30 dark:hover:border-primary-dark transition-all cursor-pointer"
           onClick={onGuestCheckout}
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-blue-100 dark:bg-blue-800 rounded-full">
-              <HiShoppingCart className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="p-3 bg-primary/10 dark:bg-primary-dark rounded-full">
+              <HiShoppingCart className="w-6 h-6 text-primary dark:text-primary-light" />
             </div>
             <div>
               <h3 className="font-semibold text-zinc-900 dark:text-zinc-100">
@@ -42,21 +42,21 @@ const CheckoutOptions: React.FC<CheckoutOptionsProps> = ({
 
           <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-primary/100 rounded-full"></div>
               <span>Proceso más rápido</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-primary/100 rounded-full"></div>
               <span>No necesitas crear cuenta</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-primary/100 rounded-full"></div>
               <span>Opción de crear cuenta después</span>
             </div>
           </div>
 
-          <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-800 rounded text-center">
-            <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+          <div className="mt-4 p-3 bg-primary/10 dark:bg-primary-dark rounded text-center">
+            <span className="text-sm font-medium text-primary-dark dark:text-primary-light">
               ✓ Recomendado para primera compra
             </span>
           </div>

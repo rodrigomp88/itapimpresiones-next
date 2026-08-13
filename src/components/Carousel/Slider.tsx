@@ -195,7 +195,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   </p>
                   {slides[current].ctaLink && (
                     <Link href={slides[current].ctaLink}>
-                      <button className="mt-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg">
+                      <button className="mt-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all shadow-lg">
                         {slides[current].ctaText || "Ver Más"}
                       </button>
                     </Link>
@@ -220,7 +220,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   </p>
                   {slides[current].ctaLink && (
                     <Link href={slides[current].ctaLink}>
-                      <button className="mt-2 px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                      <button className="mt-2 px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         {slides[current].ctaText || "Ver Más"}
                       </button>
                     </Link>
@@ -297,7 +297,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
               <button
                 key={idx}
                 onClick={() => goToSlide(idx)}
-                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                className={`h-1.5 md:h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                   idx === current
                     ? "w-6 md:w-8 bg-slate-800 dark:bg-white"
                     : "w-1.5 md:w-2 bg-slate-400 dark:bg-white/50 hover:bg-slate-500 dark:hover:bg-white/70"

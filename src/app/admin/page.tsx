@@ -1,4 +1,4 @@
-import { adminDb } from "@/firebase/admin";
+﻿import { adminDb } from "@/firebase/admin";
 import Link from "next/link";
 import TestNotificationButton from "./TestNotificationButton";
 import SystemHealth from "@/components/Admin/SystemHealth";
@@ -131,9 +131,9 @@ const AdminDashboardPage = async () => {
       title: "Ingresos del Mes",
       value: `$${stats.monthlyRevenue.toLocaleString("es-AR")}`,
       subtitle: `Mes actual`,
-      icon: <FaCalendarAlt className="text-blue-500 text-2xl" />,
-      bg: "bg-blue-100 dark:bg-blue-900/20",
-      border: "border-blue-200 dark:border-blue-800",
+      icon: <FaCalendarAlt className="text-primary text-2xl" />,
+      bg: "bg-primary/10 dark:bg-primary/10",
+      border: "border-primary/20 dark:border-primary-dark",
     },
     {
       title: "Pagos Pendientes",
@@ -215,7 +215,7 @@ const AdminDashboardPage = async () => {
                   <span
                     className={`px-2 py-1 text-xs font-medium rounded-full ${
                       status === "confirmed"
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                        ? "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light"
                         : status === "processing"
                           ? "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400"
                           : status === "shipped"
@@ -274,7 +274,7 @@ const AdminDashboardPage = async () => {
                                 ? "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
                                 : status === "refunded"
                                   ? "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400"
-                                  : "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
+                                  : "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light"
                       }`}
                     >
                       {status === "approved"
@@ -347,7 +347,7 @@ const AdminDashboardPage = async () => {
                         ? "bg-green-100 text-green-700"
                         : order.orderStatus === "pendiente"
                           ? "bg-yellow-100 text-yellow-700"
-                          : "bg-blue-100 text-blue-700"
+                          : "bg-primary/10 text-primary-dark"
                     }`}
                   >
                     {order.orderStatus || "Pendiente"}

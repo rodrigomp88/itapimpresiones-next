@@ -9,7 +9,7 @@ interface ContactFormProps {
 }
 
 const inputClasses =
-  "w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-blue-500 focus:border-blue-500 p-2 text-gray-900 dark:text-white";
+  "w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-primary focus:border-primary p-2 text-gray-900 dark:text-white";
 
 const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -244,7 +244,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
             Adjuntar archivo (opcional)
           </label>
           <input
-            className="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100 dark:file:bg-blue-900/20 dark:file:text-blue-400 cursor-pointer"
+            className="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/10 dark:file:bg-primary/10 dark:file:text-primary-light cursor-pointer"
             id="file-upload"
             name="file-upload"
             type="file"
@@ -267,7 +267,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
       )}
       <div className="sm:col-span-2">
         <motion.button
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           type="submit"
           disabled={isSubmitting}
           whileHover={{ scale: 1.02 }}

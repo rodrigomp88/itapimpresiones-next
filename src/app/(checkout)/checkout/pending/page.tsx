@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -62,11 +62,11 @@ const PendingPageContent: React.FC = () => {
             </div>
           )}
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-8">
-            <h3 className="text-blue-800 dark:text-blue-200 font-medium mb-2">
+          <div className="bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg p-4 mb-8">
+            <h3 className="text-primary-dark dark:text-primary-light font-medium mb-2">
               ¿Qué sucede ahora?
             </h3>
-            <ul className="text-blue-700 dark:text-blue-300 text-sm space-y-1 text-left">
+            <ul className="text-primary-dark dark:text-primary-light text-sm space-y-1 text-left">
               <li>• Tu banco está verificando la transacción</li>
               <li>• Esto puede tomar unos minutos</li>
               <li>• Recibirás una notificación cuando se complete</li>

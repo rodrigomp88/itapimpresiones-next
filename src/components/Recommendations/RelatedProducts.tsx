@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -131,7 +131,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
           </div>
 
           {/* Badge con contador */}
-          <div className="bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
+          <div className="bg-primary/10 dark:bg-primary/15 text-primary-dark dark:text-primary-light px-3 py-1 rounded-full text-sm font-medium">
             {currentProducts.length} productos
           </div>
         </div>
@@ -198,8 +198,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                               product.recommendation.type === "related"
                                 ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
                                 : product.recommendation.type === "upselling"
-                                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
-                                  : "bg-blue-50 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                                  ? "bg-primary/10 text-primary-dark dark:bg-primary/15 dark:text-primary-light"
+                                  : "bg-primary/10 text-primary-dark dark:bg-primary/15 dark:text-primary-light"
                             }`}
                           >
                             {product.recommendation.type === "related" &&
@@ -228,7 +228,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
 
                     {/* Content */}
                     <div className="p-4">
-                      <h4 className="font-semibold text-zinc-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      <h4 className="font-semibold text-zinc-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
                         {product.name}
                       </h4>
 
@@ -277,7 +277,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                             e.preventDefault();
                             window.location.href = `/producto/${product.slug}`;
                           }}
-                          className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
+                          className="flex items-center gap-1 px-3 py-1.5 bg-primary text-white text-sm font-medium rounded-md hover:bg-primary-dark transition-colors"
                         >
                           <HiPlus className="w-4 h-4" />
                           Ver

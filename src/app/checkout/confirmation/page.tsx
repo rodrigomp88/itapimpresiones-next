@@ -111,13 +111,13 @@ const OrderConfirmationPage: React.FC = () => {
   const getOrderStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "orden recibida":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300";
+        return "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light";
       case "confirmada":
         return "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300";
       case "en preparación":
         return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300";
       case "enviada":
-        return "bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300";
+        return "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light";
       case "entregada":
         return "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-300";
       case "cancelada":
@@ -366,25 +366,25 @@ const OrderConfirmationPage: React.FC = () => {
       </div>
 
       {/* Próximos pasos */}
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6 mb-6">
-        <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
+      <div className="bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-xl p-6 mb-6">
+        <h3 className="text-lg font-semibold text-primary-dark dark:text-primary-light mb-3">
           ¿Qué sigue?
         </h3>
-        <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+        <ul className="space-y-2 text-sm text-primary-dark dark:text-primary-light">
           <li className="flex items-start gap-2">
-            <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+            <span className="text-primary dark:text-primary-light mt-1">•</span>
             <span>Te enviaremos un email de confirmación en breve</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+            <span className="text-primary dark:text-primary-light mt-1">•</span>
             <span>El estado de tu pedido se actualizará automáticamente</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+            <span className="text-primary dark:text-primary-light mt-1">•</span>
             <span>Te contactaremos si necesitamos información adicional</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600 dark:text-blue-400 mt-1">•</span>
+            <span className="text-primary dark:text-primary-light mt-1">•</span>
             <span>Podés seguir el estado de tu pedido en "Mis Órdenes"</span>
           </li>
         </ul>

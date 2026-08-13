@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -148,7 +148,7 @@ const SearchPageContent: React.FC = () => {
                 <HiFilter className="w-4 h-4" />
                 <span>Filtros</span>
                 {Object.keys(search.filters).length > 0 && (
-                  <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="bg-primary text-white text-xs px-2 py-0.5 rounded-full">
                     {Object.keys(search.filters).length}
                   </span>
                 )}

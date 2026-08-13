@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -134,7 +134,7 @@ const Home = () => {
                   key={i}
                   className="p-8 rounded-xl bg-slate-50 dark:bg-slate-800 border hover:shadow-md transition-shadow"
                 >
-                  <span className="material-symbols-outlined text-4xl text-blue-600 mb-4 block">
+                  <span className="material-symbols-outlined text-4xl text-primary mb-4 block">
                     {icon}
                   </span>
                   <h3 className="font-bold mb-2">{title}</h3>

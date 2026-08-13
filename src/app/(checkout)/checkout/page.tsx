@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -604,11 +604,11 @@ const CheckoutPage: React.FC = () => {
                   </div>
 
                   {/* Seña (50%) */}
-                  <div className="flex justify-between text-sm bg-blue-50 dark:bg-blue-900/20 p-2 rounded">
-                    <span className="text-blue-700 dark:text-blue-300 font-medium">
+                  <div className="flex justify-between text-sm bg-primary/10 dark:bg-primary/10 p-2 rounded">
+                    <span className="text-primary-dark dark:text-primary-light font-medium">
                       Seña requerida (50%)
                     </span>
-                    <span className="text-blue-800 dark:text-blue-200 font-bold">
+                    <span className="text-primary-dark dark:text-primary-light font-bold">
                       ${depositAmount.toLocaleString("es-AR")}
                     </span>
                   </div>

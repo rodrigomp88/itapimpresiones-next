@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { CartItem } from "@/types";
@@ -108,11 +108,11 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
           </div>
 
           {/* Seña (50%) */}
-          <div className="flex justify-between text-sm bg-blue-50 dark:bg-blue-900/20 p-3 rounded">
-            <span className="text-blue-700 dark:text-blue-300 font-medium">
+          <div className="flex justify-between text-sm bg-primary/10 dark:bg-primary/10 p-3 rounded">
+            <span className="text-primary-dark dark:text-primary-light font-medium">
               Seña requerida (50%)
             </span>
-            <span className="text-blue-800 dark:text-blue-200 font-bold">
+            <span className="text-primary-dark dark:text-primary-light font-bold">
               {formatPrice(costs.depositAmount)}
             </span>
           </div>
@@ -148,14 +148,14 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
 
       {/* Estado del pedido */}
       {currentOrder && (
-        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <div className="mt-4 p-3 bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg">
           <div className="flex items-center gap-2 mb-2">
-            <HiCreditCard className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-blue-800 dark:text-blue-200 font-medium text-sm">
+            <HiCreditCard className="w-4 h-4 text-primary dark:text-primary-light" />
+            <span className="text-primary-dark dark:text-primary-light font-medium text-sm">
               Estado del pedido
             </span>
           </div>
-          <p className="text-blue-700 dark:text-blue-300 text-xs">
+          <p className="text-primary-dark dark:text-primary-light text-xs">
             Pedido: {currentOrder.orderStatus} | Pago:{" "}
             {currentOrder.paymentStatus}
           </p>

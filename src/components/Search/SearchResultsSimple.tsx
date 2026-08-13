@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -67,7 +67,7 @@ const SearchResultsSimple: React.FC<SearchResultsProps> = ({
           <p className="text-zinc-600 dark:text-zinc-400 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
           >
             Reintentar
           </button>
@@ -180,7 +180,7 @@ const SearchResultsSimple: React.FC<SearchResultsProps> = ({
           >
             {loading ? (
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-zinc-300 border-t-blue-600 rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-zinc-300 border-t-primary rounded-full animate-spin"></div>
                 <span>Cargando...</span>
               </div>
             ) : (

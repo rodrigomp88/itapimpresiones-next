@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -73,15 +73,15 @@ export default function PaymentMethodSelector({
 
       {/* Detalles de transferencia bancaria */}
       {selectedMethod === "transfer" && (
-        <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+        <div className="mt-3 p-3 bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg">
           <div className="flex items-center justify-between mb-2">
-            <p className="text-sm font-medium text-blue-800 dark:text-blue-200">
+            <p className="text-sm font-medium text-primary-dark dark:text-primary-light">
               📋 Datos para la transferencia
             </p>
             <button
               type="button"
               onClick={() => setShowTransferDetails(!showTransferDetails)}
-              className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+              className="text-xs text-primary dark:text-primary-light hover:underline"
             >
               {showTransferDetails ? "Ocultar" : "Mostrar"}
             </button>
@@ -90,40 +90,40 @@ export default function PaymentMethodSelector({
           {showTransferDetails && (
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">Banco:</span>
-                <span className="text-blue-900 dark:text-blue-100 font-medium">
+                <span className="text-primary-dark dark:text-primary-light">Banco:</span>
+                <span className="text-primary-dark dark:text-primary-light font-medium">
                   {BANK_TRANSFER_INFO.bank}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">
+                <span className="text-primary-dark dark:text-primary-light">
                   Tipo de cuenta:
                 </span>
-                <span className="text-blue-900 dark:text-blue-100 font-medium">
+                <span className="text-primary-dark dark:text-primary-light font-medium">
                   {BANK_TRANSFER_INFO.accountType}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">CBU:</span>
-                <span className="text-blue-900 dark:text-blue-100 font-mono font-medium">
+                <span className="text-primary-dark dark:text-primary-light">CBU:</span>
+                <span className="text-primary-dark dark:text-primary-light font-mono font-medium">
                   {BANK_TRANSFER_INFO.cbu}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">Alias:</span>
-                <span className="text-blue-900 dark:text-blue-100 font-medium">
+                <span className="text-primary-dark dark:text-primary-light">Alias:</span>
+                <span className="text-primary-dark dark:text-primary-light font-medium">
                   {BANK_TRANSFER_INFO.alias}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-blue-700 dark:text-blue-300">
+                <span className="text-primary-dark dark:text-primary-light">
                   Titular:
                 </span>
-                <span className="text-blue-900 dark:text-blue-100 font-medium">
+                <span className="text-primary-dark dark:text-primary-light font-medium">
                   {BANK_TRANSFER_INFO.holder}
                 </span>
               </div>
-              <p className="text-blue-600 dark:text-blue-400 mt-2 pt-2 border-t border-blue-200 dark:border-blue-700">
+              <p className="text-primary dark:text-primary-light mt-2 pt-2 border-t border-primary/20 dark:border-primary-dark">
                 ⚠️ Envianos el comprobante por WhatsApp o email para confirmar
                 el pago.
               </p>

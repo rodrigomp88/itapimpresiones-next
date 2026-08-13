@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import {
@@ -102,7 +102,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
         {hasActiveFilters && (
           <button
             onClick={clearAllFilters}
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+            className="text-sm text-primary hover:text-primary-dark dark:text-primary-light dark:hover:text-primary-light font-medium"
           >
             Limpiar todo
           </button>
@@ -116,72 +116,72 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
+            className="mb-6 p-3 bg-primary/10 dark:bg-primary/10 rounded-lg border border-primary/20 dark:border-primary-dark"
           >
-            <div className="text-sm font-medium text-blue-800 dark:text-blue-200 mb-2">
+            <div className="text-sm font-medium text-primary-dark dark:text-primary-light mb-2">
               Filtros activos:
             </div>
             <div className="flex flex-wrap gap-2">
               {filters.category && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 dark:bg-primary-dark text-primary-dark dark:text-primary-light rounded-md text-xs">
                   {filters.category}
                   <button
                     onClick={() =>
                       onFiltersChange({ ...filters, category: undefined })
                     }
-                    className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
+                    className="hover:bg-primary/20 dark:hover:bg-primary-dark rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
                   </button>
                 </span>
               )}
               {filters.priceMin !== undefined && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 dark:bg-primary-dark text-primary-dark dark:text-primary-light rounded-md text-xs">
                   Desde ${filters.priceMin.toLocaleString()}
                   <button
                     onClick={() =>
                       onFiltersChange({ ...filters, priceMin: undefined })
                     }
-                    className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
+                    className="hover:bg-primary/20 dark:hover:bg-primary-dark rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
                   </button>
                 </span>
               )}
               {filters.priceMax !== undefined && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 dark:bg-primary-dark text-primary-dark dark:text-primary-light rounded-md text-xs">
                   Hasta ${filters.priceMax.toLocaleString()}
                   <button
                     onClick={() =>
                       onFiltersChange({ ...filters, priceMax: undefined })
                     }
-                    className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
+                    className="hover:bg-primary/20 dark:hover:bg-primary-dark rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
                   </button>
                 </span>
               )}
               {filters.rating !== undefined && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 dark:bg-primary-dark text-primary-dark dark:text-primary-light rounded-md text-xs">
                   {filters.rating}+ estrellas
                   <button
                     onClick={() =>
                       onFiltersChange({ ...filters, rating: undefined })
                     }
-                    className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
+                    className="hover:bg-primary/20 dark:hover:bg-primary-dark rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
                   </button>
                 </span>
               )}
               {filters.inStock && (
-                <span className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md text-xs">
+                <span className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 dark:bg-primary-dark text-primary-dark dark:text-primary-light rounded-md text-xs">
                   En stock
                   <button
                     onClick={() =>
                       onFiltersChange({ ...filters, inStock: false })
                     }
-                    className="hover:bg-blue-200 dark:hover:bg-blue-700 rounded-full p-0.5"
+                    className="hover:bg-primary/20 dark:hover:bg-primary-dark rounded-full p-0.5"
                   >
                     <HiX className="w-3 h-3" />
                   </button>
@@ -256,7 +256,7 @@ const CategoryFilter: React.FC<{
                 category: filters.category === category ? undefined : category,
               })
             }
-            className="w-4 h-4 text-blue-600 border-zinc-300 focus:ring-blue-500"
+            className="w-4 h-4 text-primary border-zinc-300 focus:ring-primary"
           />
           <span className="text-sm text-zinc-700 dark:text-zinc-300">
             {category}
@@ -298,7 +298,7 @@ const PriceFilter: React.FC<{
             value={minPrice}
             onChange={(e) => handleMinPriceChange(e.target.value)}
             placeholder="$0"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
           />
         </div>
         <div>
@@ -310,7 +310,7 @@ const PriceFilter: React.FC<{
             value={maxPrice}
             onChange={(e) => handleMaxPriceChange(e.target.value)}
             placeholder="Sin límite"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
           />
         </div>
       </div>
@@ -365,7 +365,7 @@ const RatingFilter: React.FC<{
                 rating: filters.rating === rating ? undefined : rating,
               })
             }
-            className="w-4 h-4 text-blue-600 border-zinc-300 focus:ring-blue-500"
+            className="w-4 h-4 text-primary border-zinc-300 focus:ring-primary"
           />
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -404,7 +404,7 @@ const AvailabilityFilter: React.FC<{
               inStock: e.target.checked || undefined,
             })
           }
-          className="w-4 h-4 text-blue-600 border-zinc-300 rounded focus:ring-blue-500"
+          className="w-4 h-4 text-primary border-zinc-300 rounded focus:ring-primary"
         />
         <span className="text-sm text-zinc-700 dark:text-zinc-300">
           Solo productos en stock

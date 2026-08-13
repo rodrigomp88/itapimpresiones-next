@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { GuestOrder } from "@/hooks/useGuestCheckout";
 import { HiCheckCircle, HiShoppingBag, HiUser } from "react-icons/hi";
@@ -60,7 +60,7 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
               <span className="text-zinc-600 dark:text-zinc-400">
                 Seña pagada
               </span>
-              <span className="font-medium text-blue-600 dark:text-blue-400">
+              <span className="font-medium text-primary dark:text-primary-light">
                 ${order.depositAmount.toLocaleString("es-AR")}
               </span>
             </div>
@@ -68,11 +68,11 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
         </div>
       )}
 
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-8">
-        <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
+      <div className="bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg p-6 mb-8">
+        <h4 className="font-semibold text-primary-dark dark:text-primary-light mb-2">
           ¿Qué sigue ahora?
         </h4>
-        <ul className="text-blue-800 dark:text-blue-200 text-sm space-y-1">
+        <ul className="text-primary-dark dark:text-primary-light text-sm space-y-1">
           <li>
             • Recibirás un email de confirmación en {order?.guestUser.email}
           </li>
@@ -85,7 +85,7 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
       <div className="space-y-4">
         <button
           onClick={onContinueShopping}
-          className="w-full flex items-center justify-center rounded-lg h-12 bg-blue-600 text-white text-base font-bold hover:bg-blue-700 transition-all"
+          className="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white text-base font-bold hover:bg-primary-dark transition-all"
         >
           <HiShoppingBag className="w-5 h-5 mr-2" />
           Continuar comprando

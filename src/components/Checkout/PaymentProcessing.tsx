@@ -17,8 +17,8 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-8 shadow-sm">
       <div className="text-center mb-8">
-        <div className="mx-auto w-16 h-16 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
-          <HiCreditCard className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+        <div className="mx-auto w-16 h-16 bg-primary/10 dark:bg-primary/15 rounded-full flex items-center justify-center mb-4">
+          <HiCreditCard className="w-8 h-8 text-primary dark:text-primary-light" />
         </div>
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
           Procesar Pago
@@ -46,7 +46,7 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
               <span className="text-zinc-600 dark:text-zinc-400">
                 Seña a pagar ahora
               </span>
-              <span className="font-medium text-blue-600 dark:text-blue-400">
+              <span className="font-medium text-primary dark:text-primary-light">
                 ${order.depositAmount.toLocaleString("es-AR")}
               </span>
             </div>
@@ -64,7 +64,7 @@ const PaymentProcessing: React.FC<PaymentProcessingProps> = ({
         <button
           onClick={() => onPaymentComplete({})}
           disabled={isProcessing}
-          className="w-full flex items-center justify-center rounded-lg h-12 bg-blue-600 text-white text-base font-bold hover:bg-blue-700 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white text-base font-bold hover:bg-primary-dark transition-all disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {isProcessing ? (
             <div className="flex items-center gap-2">

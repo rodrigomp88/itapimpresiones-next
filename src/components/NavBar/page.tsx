@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -58,7 +58,7 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between whitespace-nowrap px-6 lg:px-12 py-4 max-w-[1440px] mx-auto">
           <Link href="/" className="flex items-center gap-3">
-            <div className="size-8 text-blue-600">
+            <div className="size-8 text-primary">
               <svg
                 fill="none"
                 viewBox="0 0 48 48"
@@ -88,38 +88,38 @@ const Navbar = () => {
             <div className="flex items-center gap-8">
               <Link
                 href="/"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
               >
                 Inicio
               </Link>
               <Link
                 href="/servicios"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
               >
                 Servicios
               </Link>
               <Link
                 href="/bolsas"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
               >
                 Bolsas
               </Link>
               <Link
                 href="/indumentaria"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
               >
                 Indumentaria
               </Link>
               <Link
                 href="/tienda"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
               >
                 Tienda
               </Link>
               {status === "authenticated" && (
                 <Link
                   href="/orders"
-                  className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                  className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
                 >
                   Órdenes
                 </Link>
@@ -127,7 +127,7 @@ const Navbar = () => {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 text-sm font-medium transition-colors"
+                  className="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary-light text-sm font-medium transition-colors"
                 >
                   Panel Admin
                 </Link>
@@ -136,7 +136,7 @@ const Navbar = () => {
             {status === "unauthenticated" && (
               <Link
                 href="/auth/login"
-                className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition-all shadow-sm hover:shadow-md"
+                className="flex cursor-pointer items-center justify-center rounded-full h-10 px-6 bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all shadow-sm hover:shadow-md"
               >
                 <span className="mr-2 material-symbols-outlined !text-lg">
                   person

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Order, OrderStatus } from "@/types";
@@ -63,7 +63,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
       pending:
         "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
       confirmed:
-        "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
+        "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light",
       processing:
         "bg-indigo-100 text-indigo-800 dark:bg-indigo-900/20 dark:text-indigo-400",
       shipped:
@@ -88,7 +88,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
       pending:
         "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
       processing:
-        "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
+        "bg-primary/10 text-primary-dark dark:bg-primary/10 dark:text-primary-light",
       approved:
         "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
       rejected: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400",
@@ -215,10 +215,10 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
 
       {/* Bulk Actions Bar */}
       {selectedOrders.length > 0 && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+        <div className="bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-xl p-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-blue-800 dark:text-blue-200">
+              <span className="text-sm font-medium text-primary-dark dark:text-primary-light">
                 {selectedOrders.length} órdenes seleccionadas
               </span>
             </div>
@@ -226,7 +226,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
               <select
                 value={bulkStatus}
                 onChange={(e) => setBulkStatus(e.target.value as OrderStatus)}
-                className="px-3 py-2 text-sm border border-blue-300 dark:border-blue-600 rounded-lg bg-white dark:bg-blue-800/50 text-blue-900 dark:text-blue-100"
+                className="px-3 py-2 text-sm border border-primary/30 dark:border-primary-dark rounded-lg bg-white dark:bg-primary-dark/50 text-primary-dark dark:text-primary-light"
               >
                 <option value="confirmed">Confirmar</option>
                 <option value="processing">Procesar</option>
@@ -237,7 +237,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
               <button
                 onClick={handleBulkStatusChange}
                 disabled={isProcessingBulk}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
               >
                 {isProcessingBulk ? (
                   <>
@@ -253,7 +253,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
               </button>
               <button
                 onClick={() => setSelectedOrders([])}
-                className="px-3 py-2 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors"
+                className="px-3 py-2 text-sm text-primary dark:text-primary-light hover:text-primary-dark dark:hover:text-primary-light transition-colors"
               >
                 Cancelar
               </button>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -155,12 +155,12 @@ const GuestCheckoutPage: React.FC = () => {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+            <div className="p-3 bg-primary/10 dark:bg-primary/15 rounded-full">
               {step === "checkout" && (
-                <HiShoppingCart className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <HiShoppingCart className="w-6 h-6 text-primary dark:text-primary-light" />
               )}
               {step === "payment" && (
-                <HiCreditCard className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <HiCreditCard className="w-6 h-6 text-primary dark:text-primary-light" />
               )}
               {step === "success" && (
                 <HiCheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
@@ -187,7 +187,7 @@ const GuestCheckoutPage: React.FC = () => {
             <div
               className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
                 step === "checkout"
-                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                  ? "bg-primary/10 text-primary-dark dark:bg-primary/15 dark:text-primary-light"
                   : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
               }`}
             >
@@ -206,7 +206,7 @@ const GuestCheckoutPage: React.FC = () => {
             <div
               className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium ${
                 step === "payment"
-                  ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200"
+                  ? "bg-primary/10 text-primary-dark dark:bg-primary/15 dark:text-primary-light"
                   : step === "success"
                     ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200"
                     : "bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400"
@@ -268,14 +268,14 @@ const GuestCheckoutPage: React.FC = () => {
 
         {/* Footer Info */}
         {step === "checkout" && (
-          <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+          <div className="mt-8 p-4 bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg">
             <div className="flex items-start gap-3">
-              <HiShieldCheck className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+              <HiShieldCheck className="w-5 h-5 text-primary dark:text-primary-light mt-0.5" />
               <div>
-                <p className="text-blue-800 dark:text-blue-200 font-medium text-sm mb-1">
+                <p className="text-primary-dark dark:text-primary-light font-medium text-sm mb-1">
                   Compra 100% segura
                 </p>
-                <p className="text-blue-700 dark:text-blue-300 text-xs">
+                <p className="text-primary-dark dark:text-primary-light text-xs">
                   Tus datos están protegidos. Podrás crear una cuenta después de
                   la compra si lo deseas.
                 </p>

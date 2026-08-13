@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import ContactForm from "@/components/ContactForm";
 
 const BagsPage = () => {
@@ -24,7 +24,7 @@ const BagsPage = () => {
             </div>
             <a
               href="#cotizacion"
-              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-blue-600 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-blue-700 transition-colors"
+              className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary-dark transition-colors"
             >
               <span className="truncate">Solicitar Cotización</span>
             </a>

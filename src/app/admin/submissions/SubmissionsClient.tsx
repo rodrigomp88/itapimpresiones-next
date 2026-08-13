@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -54,7 +54,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
   const getFormTypeIcon = (type: string) => {
     switch (type) {
       case "services":
-        return <MdDesignServices className="text-blue-500" />;
+        return <MdDesignServices className="text-primary" />;
       case "bags":
         return <MdShoppingBag className="text-green-500" />;
       case "apparel":
@@ -67,7 +67,7 @@ const SubmissionsClient: React.FC<SubmissionsClientProps> = ({
   const getFormTypeColor = (type: string) => {
     switch (type) {
       case "services":
-        return "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-blue-200 dark:border-blue-800";
+        return "bg-primary/10 text-primary-dark dark:bg-primary/15 dark:text-primary-light border-primary/20 dark:border-primary-dark";
       case "bags":
         return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-green-200 dark:border-green-800";
       case "apparel":

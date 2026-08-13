@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -150,7 +150,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                 className={`h-2 rounded-full ${
                   freeShippingStatus === "almost"
                     ? "bg-gradient-to-r from-orange-400 to-orange-600"
-                    : "bg-gradient-to-r from-blue-400 to-blue-600"
+                    : "bg-gradient-to-r from-primary-light to-primary"
                 }`}
                 initial={{ width: 0 }}
                 animate={{
@@ -246,7 +246,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                         value={option.id}
                         checked={selectedShipping === option.id}
                         onChange={(e) => setSelectedShipping(e.target.value)}
-                        className="w-4 h-4 text-blue-600"
+                        className="w-4 h-4 text-primary"
                       />
                       <div>
                         <div className="font-medium text-zinc-900 dark:text-white text-sm">
@@ -312,12 +312,12 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
                 value={couponInput}
                 onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                 placeholder="Código de descuento"
-                className="flex-1 px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="flex-1 px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white text-sm focus:ring-2 focus:ring-primary focus:border-primary"
               />
               <button
                 onClick={handleApplyCoupon}
                 disabled={!couponInput.trim()}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+                className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
               >
                 Aplicar
               </button>

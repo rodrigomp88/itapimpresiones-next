@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { db } from "@/firebase/config";
@@ -468,7 +468,7 @@ export default function CouponsAdminPage() {
                   <td className="px-4 py-3 text-right">
                     <button
                       onClick={() => handleEdit(coupon)}
-                      className="text-blue-600 hover:text-blue-800 mr-3 text-sm"
+                      className="text-primary hover:text-primary-dark mr-3 text-sm"
                     >
                       Editar
                     </button>

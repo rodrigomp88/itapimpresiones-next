@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
 import ProductFilter from "./Product/ProductFilter";
@@ -197,17 +197,17 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
   return (
     <div className="w-full">
       {/* Hero Banner Moderno */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-blue-600/5"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-blue-400/20 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-transparent rounded-full blur-3xl"></div>
+      <section className="relative bg-gradient-to-br from-primary/10 via-white to-primary/10 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/5"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-primary-light/20 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-primary-light/20 to-transparent rounded-full blur-3xl"></div>
 
         <div className="relative max-w-screen-xl mx-auto px-6 py-32 sm:py-40 lg:py-24 min-h-[600px] sm:min-h-[700px]">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
             <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
                 Descubre Nuestra
-                <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
                   {" "}
                   Tienda
                 </span>
@@ -254,7 +254,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                       .getElementById("product-list")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-blue-600 text-white text-sm font-semibold tracking-wide hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl active:scale-95 group"
+                  className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-sm font-semibold tracking-wide hover:bg-primary-dark shadow-lg shadow-primary/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl active:scale-95 group"
                 >
                   Explorar Productos
                   <svg
@@ -318,7 +318,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               placeholder="Buscar productos..."
               value={state.searchQuery}
               onChange={handleSearchChange}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             />
           </div>
 
