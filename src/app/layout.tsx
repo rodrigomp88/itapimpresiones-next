@@ -58,13 +58,13 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/images/brand/favicon-negro.svg",
+    shortcut: "/images/brand/favicon-144-negro.png",
+    apple: "/images/brand/favicon-144-negro.png",
     other: {
       rel: "icon",
-      url: "/favicon-32x32.png",
-      sizes: "32x32",
+      url: "/images/brand/favicon-negro.svg",
+      sizes: "any",
     },
   },
 };

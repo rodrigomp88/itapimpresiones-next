@@ -11,13 +11,15 @@ export default function CheckoutLayout({
     <section>
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <Link href="/" className="flex justify-center items-center">
-          <Image
-            src={"/images/logowhite.png"}
-            width={100}
-            height={50}
-            alt="Itap Impresiones Logo"
-            className="hidden dark:block"
-            priority
+          <img
+            src="/images/brand/logo-horizontal-fondo-claro.svg"
+            alt="ITAP Impresiones"
+            className="h-10 w-auto dark:hidden"
+          />
+          <img
+            src="/images/brand/logo-horizontal-blanco.svg"
+            alt="ITAP Impresiones"
+            className="h-10 w-auto hidden dark:block"
           />
         </Link>
       </div>

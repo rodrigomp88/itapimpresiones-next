@@ -8,25 +8,39 @@ const Footer = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12">
         <div className="flex flex-col items-center justify-center text-center gap-6">
+          <img
+            src="/images/brand/logo-horizontal.svg"
+            alt="ITAP Impresiones"
+            className="h-12 w-auto dark:hidden"
+          />
+          <img
+            src="/images/brand/logo-horizontal-blanco.svg"
+            alt="ITAP Impresiones"
+            className="h-12 w-auto hidden dark:block"
+          />
           <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
             Síguenos en nuestras redes
           </h3>
           <div className="flex gap-6">
             <a
-              className="text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors"
-              href="#"
-              aria-label="Visitar página de Facebook"
-            >
-              <span className="sr-only">Facebook</span>
-              <span className="material-symbols-outlined">public</span>
-            </a>
-            <a
-              className="text-slate-400 hover:text-slate-800 dark:hover:text-white transition-colors"
-              href="#"
+              className="text-slate-400 hover:text-primary transition-colors"
+              href="https://www.instagram.com/itapimpresiones/"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Visitar página de Instagram"
             >
               <span className="sr-only">Instagram</span>
               <span className="material-symbols-outlined">photo_camera</span>
+            </a>
+            <a
+              className="text-slate-400 hover:text-primary transition-colors"
+              href="https://www.facebook.com/itapimpresiones/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visitar página de Facebook"
+            >
+              <span className="sr-only">Facebook</span>
+              <span className="material-symbols-outlined">public</span>
             </a>
           </div>
         </div>

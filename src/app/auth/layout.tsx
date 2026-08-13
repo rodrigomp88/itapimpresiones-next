@@ -16,22 +16,15 @@ export default function AuthLayout({
             href="/"
             className="inline-block transition-transform hover:scale-105 duration-200"
           >
-            {/* Ajusta la lógica de imágenes según tu tema si es necesario, aquí muestro ambas para el ejemplo o usa la que corresponda */}
-            <Image
-              alt="Logo Itap"
+            <img
+              alt="Logo ITAP Impresiones"
               className="mx-auto h-12 w-auto dark:hidden"
-              src="/images/logoblack.png"
-              width={150}
-              height={50}
-              priority
+              src="/images/brand/logo-horizontal-fondo-claro.svg"
             />
-            <Image
-              alt="Logo Itap"
+            <img
+              alt="Logo ITAP Impresiones"
               className="mx-auto h-12 w-auto hidden dark:block"
-              src="/images/logowhite.png"
-              width={150}
-              height={50}
-              priority
+              src="/images/brand/logo-horizontal-blanco.svg"
             />
           </Link>
         </div>
