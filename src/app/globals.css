@@ -4,18 +4,33 @@
 
 /* Variables CSS — ITAP Official Design Tokens */
 :root {
+  /* Official ITAP Colors */
   --color-ocean-blue: #0185C1;
   --color-ocean-blue-dark: #016fa3;
   --color-ocean-mist: #02AE9C;
+  --color-ocean-mist-dark: #018a7c;
   --color-raspberry-red: #E01358;
   --color-raspberry-red-dark: #b80f48;
   --color-prussian-blue: #1A2333;
+  --color-prussian-blue-light: #253347;
   --color-deep-saffron: #FE900B;
+  --color-deep-saffron-dark: #d97a08;
+
+  /* Semantic Tokens */
   --color-primary: #0185C1;
   --color-primary-dark: #016fa3;
-  --color-accent: #E01358;
+  --color-secondary: #02AE9C;
+  --color-secondary-dark: #018a7c;
+  --color-cta: #E01358;
+  --color-cta-dark: #b80f48;
+  --color-text: #1A2333;
+  --color-text-light: #253347;
+  --color-accent: #FE900B;
+  --color-accent-dark: #d97a08;
   --color-background-light: #f9fafb;
   --color-background-dark: #1A2333;
+
+  /* Typography */
   --font-display: var(--font-jakarta), system-ui, sans-serif;
   color-scheme: light;
 }

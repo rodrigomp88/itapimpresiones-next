@@ -17,8 +17,8 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
   return (
     <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl p-8 shadow-sm">
       <div className="text-center mb-8">
-        <div className="mx-auto w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6">
-          <HiCheckCircle className="w-10 h-10 text-green-600 dark:text-green-400" />
+        <div className="mx-auto w-20 h-20 bg-secondary/10 dark:bg-secondary/30 rounded-full flex items-center justify-center mb-6">
+          <HiCheckCircle className="w-10 h-10 text-secondary dark:text-secondary" />
         </div>
         <h2 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
           ¡Pedido confirmado!
@@ -44,7 +44,7 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
             </div>
             <div className="flex justify-between">
               <span className="text-zinc-600 dark:text-zinc-400">Estado</span>
-              <span className="font-medium text-green-600 dark:text-green-400 capitalize">
+              <span className="font-medium text-secondary dark:text-secondary capitalize">
                 {order.orderStatus}
               </span>
             </div>
@@ -68,11 +68,11 @@ const SuccessPage: React.FC<SuccessPageProps> = ({
         </div>
       )}
 
-      <div className="bg-primary/10 dark:bg-primary/10 border border-primary/20 dark:border-primary-dark rounded-lg p-6 mb-8">
-        <h4 className="font-semibold text-primary-dark dark:text-primary-light mb-2">
+      <div className="bg-secondary/10 dark:bg-secondary/10 border border-secondary/20 dark:border-secondary-dark rounded-lg p-6 mb-8">
+        <h4 className="font-semibold text-secondary-dark dark:text-secondary-light mb-2">
           ¿Qué sigue ahora?
         </h4>
-        <ul className="text-primary-dark dark:text-primary-light text-sm space-y-1">
+        <ul className="text-secondary-dark dark:text-secondary-light text-sm space-y-1">
           <li>
             • Recibirás un email de confirmación en {order?.guestUser.email}
           </li>

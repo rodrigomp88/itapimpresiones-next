@@ -76,13 +76,13 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
     };
     return (
       colors[status] ||
-      "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+      "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400"
     );
   };
 
   const getPaymentStatusColor = (status?: string) => {
     if (!status)
-      return "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400";
+      return "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400";
 
     const colors: Record<string, string> = {
       pending:
@@ -93,14 +93,14 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
         "bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400",
       rejected: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400",
       cancelled:
-        "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400",
+        "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400",
       refunded:
         "bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-400",
       expired: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400",
     };
     return (
       colors[status] ||
-      "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+      "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400"
     );
   };
 

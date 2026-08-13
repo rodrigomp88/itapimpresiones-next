@@ -121,7 +121,7 @@ const MobileFeatured = () => {
     return (
       <section className="px-4 py-8">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-bold text-prussian-blue dark:text-white">
             Novedades Destacadas
           </h2>
           <span className="text-sm text-primary font-medium">Ver todo</span>
@@ -134,7 +134,7 @@ const MobileFeatured = () => {
   return (
     <section className="px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+        <h2 className="text-xl font-bold text-prussian-blue dark:text-white">
           Novedades Destacadas
         </h2>
         <Link
@@ -168,18 +168,18 @@ const MobileFeatured = () => {
               />
             </div>
             <div className="p-4">
-              <h3 className="font-bold text-gray-900 dark:text-white mb-1 text-sm">
+              <h3 className="font-bold text-prussian-blue dark:text-white mb-1 text-sm">
                 {product.name}
               </h3>
               <p className="text-xs text-muted-light dark:text-muted-dark line-clamp-2 mb-3">
                 {product.description}
               </p>
               <div className="flex items-center justify-between">
-                <span className="font-bold text-lg text-gray-900 dark:text-white">
+                <span className="font-bold text-lg text-cta dark:text-cta">
                   ${product.price.toLocaleString("es-AR")}
                 </span>
                 <motion.button
-                  className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
+                  className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => {

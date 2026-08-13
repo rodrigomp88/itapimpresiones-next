@@ -127,8 +127,8 @@ const AdminOrderDetailsClient: React.FC<AdminOrderDetailsClientProps> = ({
                       : order.paymentStatus === "rejected"
                         ? "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400"
                         : order.paymentStatus === "cancelled"
-                          ? "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
-                          : "bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400"
+                          ? "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400"
+                          : "bg-gray-100 text-prussian-blue-light dark:bg-gray-900/20 dark:text-gray-400"
                 }`}
               >
                 {order.paymentStatus === "approved"

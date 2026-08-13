@@ -101,7 +101,7 @@ const CartPage: React.FC = () => {
             </p>
             <Link
               href="/tienda"
-              className="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors"
+              className="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-cta text-white text-base font-bold hover:bg-cta-dark transition-colors"
             >
               Ir a la Tienda
             </Link>
@@ -171,7 +171,7 @@ const CartPage: React.FC = () => {
                             Talle: {cart.size}
                           </p>
                         )}
-                        <p className="text-primary font-bold text-lg">
+                        <p className="text-cta font-bold text-lg">
                           ${cart.price.toLocaleString("es-AR")}
                         </p>
                       </div>
@@ -350,7 +350,7 @@ const CartPage: React.FC = () => {
                   <span className="text-zinc-900 dark:text-zinc-100">
                     Total
                   </span>
-                  <span className="text-zinc-900 dark:text-zinc-100">
+                  <span className="text-cta dark:text-cta">
                     ${cartTotalAmount.toLocaleString("es-AR")}
                   </span>
                 </div>
@@ -358,7 +358,7 @@ const CartPage: React.FC = () => {
               <div className="mt-6 flex flex-col gap-3">
                 <button
                   onClick={handleCheckout}
-                  className="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white text-base font-bold hover:bg-primary/90 transition-colors"
+                  className="w-full flex items-center justify-center rounded-lg h-12 bg-cta text-white text-base font-bold hover:bg-cta-dark transition-colors"
                 >
                   Proceder al Pago
                 </button>

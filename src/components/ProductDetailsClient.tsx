@@ -273,20 +273,20 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
             {/* Info y Controles */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <h1 className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold">
+                <h1 className="text-zinc-900 dark:text-zinc-100 text-4xl font-extrabold">
                   {product.name}
                 </h1>
                 <p className="text-zinc-600 dark:text-zinc-400 text-base">
                   {product.description}
                 </p>
-                <p className="text-zinc-900 dark:text-zinc-100 text-3xl font-normal">
+                <p className="text-cta dark:text-cta text-3xl font-normal">
                   ${product.price.toLocaleString("es-AR")}
                 </p>
               </div>
 
               {product.size && (
                 <div className="flex flex-col gap-3">
-                  <h3 className="text-zinc-900 dark:text-zinc-100 text-sm font-bold">
+                  <h3 className="text-zinc-900 dark:text-zinc-100 text-sm font-semibold">
                     Talle/Tamaño
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -299,7 +299,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
 
               {/* Personalization Section */}
               <div className="bg-primary/5 dark:bg-primary/10 border-l-4 border-primary rounded p-4 flex flex-col gap-4">
-                <h3 className="text-primary text-lg font-bold">
+                <h3 className="text-primary text-lg font-semibold">
                   ¿Querés personalizar este producto?
                 </h3>
                 <p className="text-zinc-700 dark:text-zinc-300 text-sm">
@@ -318,7 +318,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
                     onClick={triggerFileInput}
-                    className="flex-1 flex items-center justify-center gap-2 rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-lg h-11 px-6 bg-cta text-white text-sm font-bold hover:bg-cta-dark transition-colors"
                   >
                     <span className="material-symbols-outlined !text-xl">
                       add_photo_alternate
@@ -389,7 +389,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                     ) : (
                       <button
                         onClick={handleAddToCart}
-                        className="w-full sm:w-auto flex-grow flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-base font-bold hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-colors"
+                        className="w-full sm:w-auto flex-grow flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-cta text-white dark:text-zinc-900 text-base font-bold hover:bg-cta-dark dark:hover:bg-cta-dark transition-colors"
                       >
                         <span className="material-symbols-outlined">
                           shopping_cart

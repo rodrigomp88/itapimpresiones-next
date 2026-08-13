@@ -126,7 +126,7 @@ const ProductItem: React.FC<Product> = ({
             {pause ? (
               <p className="font-bold text-red-500">Sin Stock</p>
             ) : (
-              <p className="text-zinc-900 dark:text-zinc-100 font-normal text-xl">
+              <p className="text-cta dark:text-cta font-normal text-xl">
                 ${price.toLocaleString("es-AR")}
               </p>
             )}
@@ -135,7 +135,7 @@ const ProductItem: React.FC<Product> = ({
 
         <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
           <motion.button
-            className="w-full flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-accent text-white text-sm font-bold hover:bg-accent-dark transition-colors cursor-pointer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

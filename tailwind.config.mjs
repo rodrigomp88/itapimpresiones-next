@@ -9,6 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        /* Official ITAP Colors */
         'ocean-blue': {
           DEFAULT: '#0185C1',
           dark: '#016fa3',
@@ -34,16 +35,28 @@ export default {
           dark: '#d97a08',
           light: '#ffa333',
         },
+        /* Semantic Aliases */
         primary: {
           DEFAULT: '#0185C1',
           dark: '#016fa3',
           light: '#02a8e8',
         },
-        accent: {
+        secondary: {
+          DEFAULT: '#02AE9C',
+          dark: '#018a7c',
+          light: '#03d4be',
+        },
+        cta: {
           DEFAULT: '#E01358',
           dark: '#b80f48',
           light: '#f02870',
         },
+        accent: {
+          DEFAULT: '#FE900B',
+          dark: '#d97a08',
+          light: '#ffa333',
+        },
+        /* Neutral Palette */
         neutral: {
           50: '#f9fafb',
           100: '#f3f4f6',

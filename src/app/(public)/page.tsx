@@ -29,7 +29,7 @@ const Home = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="font-display bg-white dark:bg-slate-900 text-slate-900 dark:text-white antialiased">
+    <div className="font-display bg-white dark:bg-slate-900 text-prussian-blue dark:text-white antialiased">
       <main className="flex-1">
         {/* Hero */}
         <section className="w-full">
@@ -40,7 +40,7 @@ const Home = () => {
         <section className="w-full py-20 bg-white dark:bg-slate-900">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-accent">
                 Novedades Destacadas
               </h2>
               <p className="text-slate-500 dark:text-slate-400 text-lg">
@@ -52,7 +52,7 @@ const Home = () => {
 
             <div className="mt-12 flex justify-center">
               <Link href="/tienda">
-                <button className="px-8 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+                <button className="px-8 py-3 bg-accent text-white rounded-lg font-semibold hover:bg-accent-dark transition-colors">
                   Ver Toda la Tienda
                 </button>
               </Link>
@@ -100,7 +100,7 @@ const Home = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
                       {item.text}
                     </p>
@@ -137,7 +137,7 @@ const Home = () => {
                   <span className="material-symbols-outlined text-4xl text-primary mb-4 block">
                     {icon}
                   </span>
-                  <h3 className="font-bold mb-2">{title}</h3>
+                  <h3 className="font-semibold mb-2">{title}</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
                     Compromiso real con cada cliente.
                   </p>

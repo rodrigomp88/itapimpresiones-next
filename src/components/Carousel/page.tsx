@@ -68,7 +68,7 @@ const Carousel: React.FC = () => {
             </p>
             <Link
               href="/tienda"
-              className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-semibold hover:bg-primary-hover transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center rounded-lg h-12 px-8 bg-cta text-white text-base font-semibold hover:bg-cta-dark transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             >
               Ver Servicios
             </Link>

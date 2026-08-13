@@ -17,7 +17,7 @@ const ApparelPage = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-gray-900/20 to-gray-900/10 z-0"></div>
                 <div className="relative z-10 flex flex-col gap-6 max-w-4xl mx-auto">
-                  <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                  <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
                     Indumentaria Personalizada <br /> para tu Empresa
                   </h1>
                   <p className="text-gray-200 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
@@ -51,7 +51,7 @@ const ApparelPage = () => {
                   chat
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 Paso 1: Contacto y Cotización
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 text-sm">
@@ -65,7 +65,7 @@ const ApparelPage = () => {
                   draw
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 Paso 2: Diseño y Aprobación
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 text-sm">
@@ -79,7 +79,7 @@ const ApparelPage = () => {
                   precision_manufacturing
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 Paso 3: Producción
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 text-sm">
@@ -93,7 +93,7 @@ const ApparelPage = () => {
                   local_shipping
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 Paso 4: Entrega
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 text-sm">
@@ -121,7 +121,7 @@ const ApparelPage = () => {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold dark:text-white">Remeras</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Remeras</h3>
               </div>
             </div>
             <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
@@ -135,7 +135,7 @@ const ApparelPage = () => {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold dark:text-white">Buzos</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Buzos</h3>
               </div>
             </div>
             <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
@@ -149,7 +149,7 @@ const ApparelPage = () => {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold dark:text-white">Gorras</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Gorras</h3>
               </div>
             </div>
             <div className="group flex flex-col overflow-hidden rounded-lg bg-white dark:bg-black shadow-md">
@@ -163,7 +163,7 @@ const ApparelPage = () => {
                 />
               </div>
               <div className="p-5">
-                <h3 className="text-lg font-bold dark:text-white">
+                <h3 className="text-lg font-semibold dark:text-white">
                   Bolsas de Friselina
                 </h3>
               </div>

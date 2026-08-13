@@ -15,10 +15,10 @@ const BagsPage = () => {
             }}
           >
             <div className="flex flex-col gap-2 text-left">
-              <h1 className="text-white text-4xl font-bold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+              <h1 className="text-white text-4xl font-extrabold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-extrabold @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                 Bolsas de Friselina Personalizadas
               </h1>
-              <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+              <h2 className="text-white text-sm font-bold leading-normal @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal">
                 Duraderas, reutilizables y perfectamente impresas con tu logo.
               </h2>
             </div>
@@ -35,7 +35,7 @@ const BagsPage = () => {
       {/* FeatureSection */}
       <div className="flex flex-col gap-10 px-4 py-10 @container text-slate-900 dark:text-white max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4">
-          <h1 className="tracking-tight text-4xl font-bold leading-tight @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight max-w-[720px]">
+          <h1 className="tracking-tight text-4xl font-extrabold leading-tight @[480px]:text-5xl @[480px]:font-extrabold @[480px]:leading-tight max-w-[720px]">
             ¿Por qué elegir nuestras bolsas?
           </h1>
           <p className="text-base font-normal leading-normal max-w-[720px] text-slate-500 dark:text-slate-400">

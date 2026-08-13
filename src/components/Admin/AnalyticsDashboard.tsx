@@ -165,7 +165,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-gray-600">{title}</p>
-            <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+            <p className="text-2xl font-bold text-prussian-blue mt-1">{value}</p>
             {change !== undefined && (
               <p
                 className={`text-sm mt-1 flex items-center ${
@@ -219,7 +219,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="text-2xl font-bold text-prussian-blue">
             Dashboard de Analytics
           </h2>
           <p className="text-gray-600 mt-1">
@@ -275,7 +275,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Productos más vendidos */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <h3 className="text-lg font-semibold text-prussian-blue mb-4">
             Productos Más Vendidos
           </h3>
           <div className="space-y-4">
@@ -291,7 +291,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-prussian-blue">
                       {product.name}
                     </p>
                     <p className="text-xs text-gray-500">
@@ -300,7 +300,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-sm font-semibold text-prussian-blue">
                     {formatCurrency(product.revenue)}
                   </p>
                   <p className="text-xs text-gray-500">
@@ -314,7 +314,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
 
         {/* Fuentes de tráfico */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <h3 className="text-lg font-semibold text-prussian-blue mb-4">
             Fuentes de Tráfico
           </h3>
           <div className="space-y-4">
@@ -325,12 +325,12 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
               >
                 <div className="flex items-center space-x-3">
                   <EyeIcon className="h-5 w-5 text-gray-400" />
-                  <span className="text-sm font-medium text-gray-900">
+                  <span className="text-sm font-medium text-prussian-blue">
                     {source.source}
                   </span>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-sm font-semibold text-prussian-blue">
                     {source.visits.toLocaleString()} visitas
                   </p>
                   <p className="text-xs text-gray-500">
@@ -346,7 +346,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
       {/* Dispositivos y tiempo real */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <h3 className="text-lg font-semibold text-prussian-blue mb-4">
             Dispositivos
           </h3>
           <div className="space-y-3">
@@ -391,7 +391,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
 
         {/* Actividad en tiempo real */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <h3 className="text-lg font-semibold text-prussian-blue mb-4">
             Actividad en Tiempo Real
           </h3>
           <div className="space-y-3">
@@ -418,7 +418,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
 
         {/* Alertas */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Alertas</h3>
+          <h3 className="text-lg font-semibold text-prussian-blue mb-4">Alertas</h3>
           <div className="space-y-3">
             <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
               <p className="text-sm text-yellow-800">

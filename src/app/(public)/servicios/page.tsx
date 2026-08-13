@@ -13,7 +13,7 @@ const ServicesPage = () => {
           <div className="container mx-auto px-6 py-20 lg:py-32">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6 text-center lg:text-left z-10">
-                <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight tracking-[-0.033em]">
+                <h1 className="text-4xl lg:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-[-0.033em]">
                   Impresión Textil Profesional: Serigrafía y DTF de Alta Calidad
                 </h1>
                 <p className="text-base font-normal leading-normal lg:text-lg text-slate-600 dark:text-slate-100">
@@ -62,7 +62,7 @@ const ServicesPage = () => {
             <div className="flex flex-col md:flex-row gap-8">
               {/* Serigrafía Feature */}
               <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <h3 className="text-2xl font-bold tracking-tight dark:text-white">
+                <h3 className="text-2xl font-semibold tracking-tight dark:text-white">
                   Serigrafía
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -93,7 +93,7 @@ const ServicesPage = () => {
               </div>
               {/* DTF Feature */}
               <div className="flex-1 flex flex-col gap-4 p-6 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-                <h3 className="text-2xl font-bold tracking-tight dark:text-white">
+                <h3 className="text-2xl font-semibold tracking-tight dark:text-white">
                   DTF (Direct to Film)
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
@@ -238,7 +238,7 @@ const ServicesPage = () => {
                   lightbulb
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 1. Envía tu idea
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
@@ -252,7 +252,7 @@ const ServicesPage = () => {
                   rate_review
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 2. Recibe tu cotización
               </h3>
               <p className="text-gray-600 dark:text-gray-300">
@@ -266,7 +266,7 @@ const ServicesPage = () => {
                   local_shipping
                 </span>
               </div>
-              <h3 className="text-lg font-bold dark:text-white">
+              <h3 className="text-lg font-semibold dark:text-white">
                 3. Producción y Entrega
               </h3>
               <p className="text-gray-600 dark:text-gray-300">

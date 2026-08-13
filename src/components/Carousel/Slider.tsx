@@ -187,7 +187,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
                 >
-                  <h2 className="text-xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold leading-tight tracking-tight text-prussian-blue dark:text-white">
                     {slides[current].heading}
                   </h2>
                   <p className="text-sm font-light text-slate-600 dark:text-gray-300 max-w-md leading-relaxed">
@@ -195,7 +195,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   </p>
                   {slides[current].ctaLink && (
                     <Link href={slides[current].ctaLink}>
-                      <button className="mt-2 px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all shadow-lg">
+                      <button className="mt-2 px-6 py-3 bg-cta text-white font-semibold rounded-lg hover:bg-cta-dark transition-all shadow-lg">
                         {slides[current].ctaText || "Ver Más"}
                       </button>
                     </Link>
@@ -212,7 +212,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
                 >
-                  <h2 className="text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white">
+                  <h2 className="text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-prussian-blue dark:text-white">
                     {slides[current].heading}
                   </h2>
                   <p className="text-lg font-light text-slate-600 dark:text-gray-300 max-w-md leading-relaxed">
@@ -220,7 +220,7 @@ const Slider: React.FC<SliderProps> = ({ slides }) => {
                   </p>
                   {slides[current].ctaLink && (
                     <Link href={slides[current].ctaLink}>
-                      <button className="mt-2 px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                      <button className="mt-2 px-8 py-3 bg-cta text-white font-semibold rounded-lg hover:bg-cta-dark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         {slides[current].ctaText || "Ver Más"}
                       </button>
                     </Link>
