@@ -67,10 +67,6 @@ export async function POST(request: NextRequest) {
       (errorObj.code === "PA_UNAUTHORIZED_RESULT_FROM_POLICIES" ||
         errorObj.message?.includes("UNAUTHORIZED"))
     ) {
-      console.log(
-        "🔧 Modo desarrollo: Usando respuesta simulada de MercadoPago"
-      );
-
       return NextResponse.json({
         preferenceId: `dev_preference_${orderId}`,
         initPoint: `https://sandbox.mercadopago.com/checkout/v1/redirect?pref_id=dev_preference_${orderId}`,

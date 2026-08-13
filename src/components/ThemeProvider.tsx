@@ -44,7 +44,6 @@ export function ThemeProvider({
   useEffect(() => {
     try {
       const stored = localStorage.getItem(storageKey);
-      console.log("ThemeProvider - Loading theme from localStorage:", stored);
       if (stored && ["light", "dark", "system"].includes(stored)) {
         setTheme(stored as Theme);
       }
@@ -56,19 +55,11 @@ export function ThemeProvider({
   // Resolver el tema actual basado en la preferencia del sistema
   useEffect(() => {
     const updateResolvedTheme = () => {
-      console.log(
-        "ThemeProvider - Updating resolved theme, current theme:",
-        theme
-      );
       if (theme === "system") {
         const systemPrefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
         const newResolvedTheme = systemPrefersDark ? "dark" : "light";
-        console.log(
-          "ThemeProvider - System preference:",
-          systemPrefersDark ? "dark" : "light"
-        );
         setResolvedTheme(newResolvedTheme);
       } else {
         setResolvedTheme(theme);
@@ -90,21 +81,17 @@ export function ThemeProvider({
   // Aplicar el tema al documento
   useEffect(() => {
     const root = document.documentElement;
-    console.log("ThemeProvider - Applying theme to document:", resolvedTheme);
 
     if (resolvedTheme === "dark") {
       root.classList.add("dark");
-      console.log("ThemeProvider - Added dark class to document");
     } else {
       root.classList.remove("dark");
-      console.log("ThemeProvider - Removed dark class from document");
     }
   }, [resolvedTheme]);
 
   // Guardar tema en localStorage
   const handleSetTheme = (newTheme: Theme) => {
     try {
-      console.log("ThemeProvider - Setting theme to:", newTheme);
       setTheme(newTheme);
       localStorage.setItem(storageKey, newTheme);
     } catch (error) {
@@ -153,19 +140,13 @@ export function ThemeToggle() {
 
   const toggleTheme = () => {
     const newTheme = resolvedTheme === "light" ? "dark" : "light";
-    console.log(
-      "ThemeToggle - Toggling theme from",
-      resolvedTheme,
-      "to",
-      newTheme
-    );
     setTheme(newTheme);
   };
 
   // Evitar hydration mismatch
   if (!mounted) {
     return (
-      <button className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors">
+      <button className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors" aria-label="Cambiar tema">
         <svg
           className="w-5 h-5"
           fill="none"

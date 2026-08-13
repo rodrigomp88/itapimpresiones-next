@@ -62,8 +62,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    console.log(`Reembolso simulado: ${refundId} - $${refundAmount}`);
-
     return NextResponse.json({
       success: true,
       refundId: refundId,

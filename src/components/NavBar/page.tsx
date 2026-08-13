@@ -183,7 +183,7 @@ const Navbar = () => {
                 </>
               )}
             </div>
-            <button onClick={toggleSidebar} className="md:hidden text-2xl z-50">
+            <button onClick={toggleSidebar} className="md:hidden text-2xl z-50" aria-label={isSidebarOpen ? "Cerrar menú" : "Abrir menú"}>
               {isSidebarOpen ? <RiCloseLine /> : <RiMenu3Fill />}
             </button>
           </div>

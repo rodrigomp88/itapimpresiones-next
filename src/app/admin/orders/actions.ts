@@ -23,7 +23,6 @@ async function deleteChatSubcollection(orderId: string) {
   });
 
   await batch.commit();
-  console.log(`Chat for order ${orderId} has been deleted.`);
 }
 
 export async function updateOrderStatusAction(
@@ -122,10 +121,6 @@ export async function updateStockOnOrderStatusChange(
               stock: newStock,
               updatedAt: Timestamp.now(),
             });
-
-            console.log(
-              `Stock updated for product ${item.id}: ${currentStock} -> ${newStock}`
-            );
           }
         }
       } catch (error) {

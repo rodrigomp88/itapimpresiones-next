@@ -82,7 +82,6 @@ export async function saveUserFCMTokenAction(token: string) {
 
     await tokenRef.set({ createdAt: new Date() }, { merge: true });
 
-    console.log("FCM Token saved for user:", session.user.id);
     return { success: true };
   } catch (error) {
     console.error("Error saving user FCM token:", error);

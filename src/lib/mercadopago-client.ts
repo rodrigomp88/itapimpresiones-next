@@ -72,9 +72,6 @@ export class MercadoPagoClient {
         // Calcular delay de reintento basado en el tipo de error
         const delay = this.getRetryDelay(categorizedError.type, attempt);
 
-        console.log(
-          `Retrying ${operationName} in ${delay}ms (attempt ${attempt + 1}/${this.maxRetries})`
-        );
         await this.delay(delay);
       }
     }
@@ -188,8 +185,6 @@ export class MercadoPagoClient {
   ): Promise<unknown> {
     // Implementación simulada de reembolso
     // TODO: Implementar con el SDK correcto de Mercado Pago
-    console.log(`Simulated refund for payment ${paymentId}:`, refundData);
-
     return {
       refundId: `refund_${paymentId}_${Date.now()}`,
       status: "completed",
@@ -244,7 +239,6 @@ export class MercadoPagoClient {
    */
   clearLogs() {
     // El logger no tiene método clearStore, solo resetear logs internos
-    console.log("MercadoPagoClient logs cleared");
   }
 }
 

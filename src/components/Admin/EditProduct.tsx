@@ -134,13 +134,14 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="edit-product-title">
       <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
-        <h2 className="text-xl font-bold mb-4">Editar Producto</h2>
+        <h2 id="edit-product-title" className="text-xl font-bold mb-4">Editar Producto</h2>
         <form key={product.id} onSubmit={handleSubmitForm}>
           <div className="space-y-4">
-            <label className="text-sm font-semibold">Nombre</label>
+            <label htmlFor="edit-name" className="text-sm font-semibold">Nombre</label>
             <input
+              id="edit-name"
               name="name"
               defaultValue={product.name}
               className="input"
@@ -154,8 +155,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-semibold">Precio</label>
+                <label htmlFor="edit-price" className="text-sm font-semibold">Precio</label>
                 <input
+                  id="edit-price"
                   name="price"
                   type="number"
                   step="0.01"
@@ -170,8 +172,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                 )}
               </div>
               <div>
-                <label className="text-sm font-semibold">Unidades Min.</label>
+                <label htmlFor="edit-unity" className="text-sm font-semibold">Unidades Min.</label>
                 <input
+                  id="edit-unity"
                   name="unity"
                   type="number"
                   defaultValue={product.unity}
@@ -186,8 +189,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               </div>
             </div>
 
-            <label className="text-sm font-semibold">Categoría</label>
+            <label htmlFor="edit-category" className="text-sm font-semibold">Categoría</label>
             <input
+              id="edit-category"
               name="category"
               defaultValue={product.category}
               className="input"
@@ -198,8 +202,9 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                 {validationErrors.category}
               </p>
             )}
-            <label className="text-sm font-semibold">Descripción</label>
+            <label htmlFor="edit-description" className="text-sm font-semibold">Descripción</label>
             <textarea
+              id="edit-description"
               name="description"
               defaultValue={product.description}
               className="input min-h-[100px]"
@@ -210,11 +215,12 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                 {validationErrors.description}
               </p>
             )}
-            <label className="text-sm font-semibold">Tamaño</label>
-            <input name="size" defaultValue={product.size} className="input" />
+            <label htmlFor="edit-size" className="text-sm font-semibold">Tamaño</label>
+            <input id="edit-size" name="size" defaultValue={product.size} className="input" />
 
-            <label className="text-sm font-semibold">Tipo Bolsa</label>
+            <label htmlFor="edit-bagType" className="text-sm font-semibold">Tipo Bolsa</label>
             <select
+              id="edit-bagType"
               name="bagType"
               defaultValue={product.bagType || ""}
               className="input"
@@ -271,11 +277,13 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
               <h3 className="font-bold mb-2">Añadir Nuevas Imágenes</h3>
               <div className="relative mb-3">
                 <input
+                  id="edit-images"
                   type="file"
                   multiple
                   accept="image/*"
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   onChange={handleNewImageChange}
+                  aria-label="Imágenes del producto"
                 />
                 <div className="btn btn-secondary w-full text-center flex items-center justify-center gap-2">
                   <FaPlus /> Seleccionar Archivos

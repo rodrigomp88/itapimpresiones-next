@@ -75,7 +75,6 @@ export async function requestNotificationPermission(): Promise<string | null> {
     });
 
     if (token) {
-      console.log("Token FCM obtenido:", token.substring(0, 20) + "...");
       return token;
     }
 
@@ -96,7 +95,6 @@ export function onForegroundMessage(
   if (!messagingInstance) return () => {};
 
   return onMessage(messagingInstance, (payload) => {
-    console.log("Mensaje en primer plano recibido:", payload);
     callback(payload);
   });
 }

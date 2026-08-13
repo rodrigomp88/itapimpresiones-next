@@ -20,16 +20,12 @@ const FirebaseMessagingProvider = () => {
         const swRegistration = await navigator.serviceWorker.register(
           "/firebase-messaging-sw.js"
         );
-        console.log("Service Worker registrado con éxito.", swRegistration);
 
         const messaging = getMessaging(app);
 
         const permission = await Notification.requestPermission();
 
         if (permission === "granted") {
-          console.log("¡Permiso concedido!");
-
-          console.log("Intentando obtener el token de FCM...");
           const currentToken = await getToken(messaging, {
             vapidKey:
               "BD3w1xu_n1dGoEQdigybHptkcejOX4Zl0VJP4h9I9_Npb0HVRgjnp57IcCCB0_8KKIW1TGr3em4Jd79LxnfmK7I",

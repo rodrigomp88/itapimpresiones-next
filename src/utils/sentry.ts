@@ -89,7 +89,6 @@ export const captureMessage = (
 // Funciรณn para trackear performance (no disponible en esta versiรณn de Sentry)
 export const startTransaction = (name: string, op: string) => {
   // Performance tracking se maneja automรกticamente por Sentry
-  console.log(`Performance transaction: ${name} (${op})`);
 };
 
 // Funciรณn para trackear navegaciรณn

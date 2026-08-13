@@ -16,7 +16,6 @@ try {
         credential: admin.credential.cert(serviceAccount),
         storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
       });
-      console.log("Firebase Admin SDK initialized successfully.");
     } else {
       console.warn(
         "FIREBASE_SERVICE_ACCOUNT_JSON not provided. Admin SDK not initialized."

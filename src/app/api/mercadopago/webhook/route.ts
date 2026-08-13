@@ -121,10 +121,6 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date(),
     });
 
-    console.log(
-      `Orden ${externalReference} actualizada: ${orderStatus} (${paymentStatus})`
-    );
-
     return NextResponse.json({
       received: true,
       orderId: externalReference,

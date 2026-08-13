@@ -19,11 +19,6 @@ const ServiceWorkerRegister: React.FC = () => {
             }
           );
 
-          console.log(
-            "Service Worker registrado exitosamente:",
-            registration.scope
-          );
-
           // Manejar actualizaciones del service worker
           registration.addEventListener("updatefound", () => {
             const newWorker = registration.installing;
@@ -34,7 +29,6 @@ const ServiceWorkerRegister: React.FC = () => {
                   navigator.serviceWorker.controller
                 ) {
                   // Nueva versión disponible
-                  console.log("Nueva versión del Service Worker disponible");
 
                   // Mostrar notificación de actualización (opcional)
                   if (
@@ -52,7 +46,6 @@ const ServiceWorkerRegister: React.FC = () => {
 
           // Escuchar cambios de controlador (cuando se activa un nuevo SW)
           navigator.serviceWorker.addEventListener("controllerchange", () => {
-            console.log("Service Worker actualizado, recargando página...");
             window.location.reload();
           });
         } catch (error) {

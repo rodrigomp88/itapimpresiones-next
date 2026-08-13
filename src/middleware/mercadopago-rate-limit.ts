@@ -197,13 +197,6 @@ export function withMercadoPagoRateLimit(
     response.headers.set(key, value);
   });
 
-  // Log de request permitida (solo en desarrollo)
-  if (process.env.NODE_ENV === "development") {
-    console.log(
-      `[RateLimit] ${operation} allowed for ${key} (${result.remaining} remaining)`
-    );
-  }
-
   return null; // Continuar con la request
 }
 

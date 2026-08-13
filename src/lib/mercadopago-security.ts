@@ -222,7 +222,6 @@ export class MercadoPagoLogger {
     };
 
     this.logs.push(log);
-    console.log(`[MercadoPago SUCCESS] ${operation}`, log);
   }
 
   logError(

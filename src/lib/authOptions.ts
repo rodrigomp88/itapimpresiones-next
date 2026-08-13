@@ -74,17 +74,11 @@ export const authOptions: AuthOptions = {
             // (Caso: Usuario registrado con contraseña intenta entrar con Google)
             try {
               const existingUser = await adminAuth.getUserByEmail(user.email!);
-              console.log(
-                `Usuario ya existe con email ${user.email} (UID: ${existingUser.uid}). Se vinculará en JWT.`
-              );
               // No hacemos nada, dejaremos que el callback JWT unifique el ID.
             } catch (emailError: unknown) {
               // 3. Si no existe ni por UID ni por Email, lo CREAMOS
               const emailErrorObj = emailError as { code?: string };
               if (emailErrorObj.code === "auth/user-not-found") {
-                console.log(
-                  `Creando nuevo usuario para Google UID: ${user.id}`
-                );
                 await adminAuth.createUser({
                   uid: user.id, // Usamos el ID de Google como UID de Firebase
                   email: user.email ?? undefined,

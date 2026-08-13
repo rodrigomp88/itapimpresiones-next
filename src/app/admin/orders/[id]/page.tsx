@@ -64,12 +64,9 @@ const AdminOrderDetailsPage = async ({ params }: PageProps) => {
   // Esperar a que se resuelva la promesa
   const { id } = await params;
 
-  console.log(`[Admin Server] Fetching order details for ID: ${id}`);
-
   const { order, messages } = await getOrderAndMessages(id);
 
   if (!order) {
-    console.log(`[Admin Server] Order with ID: ${id} not found.`);
     notFound();
   }
 

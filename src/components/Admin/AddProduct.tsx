@@ -158,13 +158,13 @@ const AddProduct = () => {
         Añadir Producto
       </button>
       {isOpen && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="add-product-title">
           <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-lg max-h-full overflow-y-auto">
-            <h2 className="text-xl font-bold mb-4">Añadir Nuevo Producto</h2>
+            <h2 id="add-product-title" className="text-xl font-bold mb-4">Añadir Nuevo Producto</h2>
             <form ref={formRef} onSubmit={handleSubmit}>
               <div className="space-y-4">
-                <label className="block text-sm font-medium">Nombre</label>
-                <input name="name" className="input" required />
+                <label htmlFor="add-name" className="block text-sm font-medium">Nombre</label>
+                <input id="add-name" name="name" className="input" required />
                 {validationErrors.name && (
                   <p className="text-red-500 text-sm mt-1">
                     {validationErrors.name}
@@ -173,8 +173,9 @@ const AddProduct = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium">Precio</label>
+                    <label htmlFor="add-price" className="block text-sm font-medium">Precio</label>
                     <input
+                      id="add-price"
                       name="price"
                       type="number"
                       step="0.01"
@@ -188,10 +189,11 @@ const AddProduct = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium">
+                    <label htmlFor="add-unity" className="block text-sm font-medium">
                       Mínimo Unidades
                     </label>
                     <input
+                      id="add-unity"
                       name="unity"
                       type="number"
                       className="input"
@@ -205,15 +207,16 @@ const AddProduct = () => {
                   </div>
                 </div>
 
-                <label className="block text-sm font-medium">Categoría</label>
-                <input name="category" className="input" required />
+                <label htmlFor="add-category" className="block text-sm font-medium">Categoría</label>
+                <input id="add-category" name="category" className="input" required />
                 {validationErrors.category && (
                   <p className="text-red-500 text-sm mt-1">
                     {validationErrors.category}
                   </p>
                 )}
-                <label className="block text-sm font-medium">Descripción</label>
+                <label htmlFor="add-description" className="block text-sm font-medium">Descripción</label>
                 <textarea
+                  id="add-description"
                   name="description"
                   className="input min-h-[100px]"
                   required
@@ -223,13 +226,13 @@ const AddProduct = () => {
                     {validationErrors.description}
                   </p>
                 )}
-                <label className="block text-sm font-medium">Tamaño</label>
-                <input name="size" className="input" />
+                <label htmlFor="add-size" className="block text-sm font-medium">Tamaño</label>
+                <input id="add-size" name="size" className="input" />
 
-                <label className="block text-sm font-medium">
+                <label htmlFor="add-bagType" className="block text-sm font-medium">
                   Tipo de Bolsa
                 </label>
-                <select name="bagType" className="input">
+                <select id="add-bagType" name="bagType" className="input">
                   <option value="">N/A</option>
                   <option value="troquel">Troquel</option>
                   <option value="manija">Manija</option>
@@ -241,11 +244,13 @@ const AddProduct = () => {
                   </h3>
                   <div className="relative mb-4">
                     <input
+                      id="add-images"
                       type="file"
                       multiple
                       accept="image/*"
                       onChange={handleImageChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      aria-label="Imágenes del producto"
                     />
                     <div className="btn btn-secondary w-full text-center py-2 border-dashed border-2">
                       + Seleccionar Imágenes
@@ -267,10 +272,11 @@ const AddProduct = () => {
                           className="object-cover rounded"
                         />
                         <div className="flex-1">
-                          <label className="text-xs text-zinc-500 mb-1 block">
+                          <label htmlFor={`add-color-${i}`} className="text-xs text-zinc-500 mb-1 block">
                             Color:
                           </label>
                           <select
+                            id={`add-color-${i}`}
                             value={img.color}
                             onChange={(e) =>
                               handleColorChange(i, e.target.value)
@@ -288,6 +294,7 @@ const AddProduct = () => {
                           type="button"
                           onClick={() => removeImage(i)}
                           className="text-red-500 p-2"
+                          aria-label="Eliminar imagen"
                         >
                           <FaTrash />
                         </button>

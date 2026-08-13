@@ -27,10 +27,6 @@ const AdminNotificationBell = () => {
         setNotifications(unreadOrders);
       },
       (error) => {
-        console.log(
-          "Admin notification listener error (likely permissions):",
-          error.code
-        );
         // Supress UI crash, just valid empty notifications
       }
     );

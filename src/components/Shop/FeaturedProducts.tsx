@@ -93,7 +93,7 @@ const FeaturedProducts = () => {
               <button
                 className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors"
                 onClick={() => {
-                  console.log("Agregar al carrito:", product.name);
+                  // TODO: Implementar agregar al carrito
                 }}
               >
                 <span className="material-icons-outlined text-sm">add</span>

@@ -217,7 +217,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                         <button
                           onClick={(e) => {
                             e.preventDefault();
-                            console.log("Add to cart:", product.name);
+                            // TODO: Implementar agregar al carrito
                           }}
                           className="bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white p-2 rounded-full shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
                         >

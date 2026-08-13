@@ -127,6 +127,7 @@ export default function NotificationPrompt({
           <button
             onClick={handleDismiss}
             className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+            aria-label="Descartar"
           >
             ✕
           </button>

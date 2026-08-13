@@ -184,7 +184,6 @@ const MobileFeatured = () => {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => {
                     // TODO: Implementar agregar al carrito
-                    console.log("Agregar al carrito:", product.name);
                   }}
                 >
                   <span className="material-icons-outlined text-sm">add</span>
