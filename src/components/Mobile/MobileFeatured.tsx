@@ -179,7 +179,7 @@ const MobileFeatured = () => {
                   ${product.price.toLocaleString("es-AR")}
                 </span>
                 <motion.button
-                  className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-accent hover:bg-accent hover:text-white transition-colors"
+                  className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-cta hover:bg-cta hover:text-white transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => {

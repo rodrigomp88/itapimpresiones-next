@@ -207,7 +207,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
             <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-prussian-blue dark:text-white leading-tight">
                 Descubre Nuestra
-                <span className="bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
+                <span className="text-primary">
                   {" "}
                   Tienda
                 </span>
