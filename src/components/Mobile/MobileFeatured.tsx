@@ -55,7 +55,7 @@ const MobileFeatured = () => {
             description: "Gorra trucker sublimada a colores, impresa en DTF.",
             images: [
               {
-                url: "/images/carousel0.png",
+                url: "/images/carousel0.webp",
                 color: "Todos",
               },
             ],
@@ -75,7 +75,7 @@ const MobileFeatured = () => {
             description: "Remeras de algodón con su logo a elección.",
             images: [
               {
-                url: "/images/carousel1.png",
+                url: "/images/carousel1.webp",
                 color: "Todos",
               },
             ],
@@ -95,7 +95,7 @@ const MobileFeatured = () => {
             description: "Bolsa ecológica reutilizable con estampado.",
             images: [
               {
-                url: "/images/carousel2.png",
+                url: "/images/carousel2.webp",
                 color: "Todos",
               },
             ],

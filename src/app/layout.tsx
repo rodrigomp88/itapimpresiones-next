@@ -127,9 +127,9 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/android-chrome-512x512.png" />
 
         {/* Preload critical above-the-fold images */}
-        <link rel="preload" as="image" href="/images/carousel0.png" />
-        <link rel="preload" as="image" href="/images/carousel1.png" />
-        <link rel="preload" as="image" href="/images/carousel3.png" />
+        <link rel="preload" as="image" href="/images/carousel0.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/images/carousel1.webp" type="image/webp" />
+        <link rel="preload" as="image" href="/images/carousel3.webp" type="image/webp" />
 
         {/* Script para evitar FOUC en cambio de tema */}
         <script

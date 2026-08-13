@@ -31,7 +31,7 @@ const PreloadResources: React.FC = () => {
       const criticalImages = [
         "/images/logoblack.png",
         "/images/logowhite.png",
-        "/images/carousel0.png",
+        "/images/carousel0.webp",
       ];
 
       criticalImages.forEach((src) => {

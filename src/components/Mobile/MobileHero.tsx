@@ -19,7 +19,7 @@ const MobileHero = () => {
                 height={256}
                 priority
                 className="relative z-10 w-full h-64 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300"
-                src="/images/carousel0.png"
+                src="/images/carousel0.webp"
               />
             </div>
             <motion.h1

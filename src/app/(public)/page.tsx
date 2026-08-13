@@ -75,17 +75,17 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  img: "/images/carousel1.png",
+                  img: "/images/carousel1.webp",
                   title: "Impresión de Remeras",
                   text: "Diseños vibrantes y duraderos en remeras de alta calidad.",
                 },
                 {
-                  img: "/images/carousel3.png",
+                  img: "/images/carousel3.webp",
                   title: "Gorras Personalizadas",
                   text: "Estilo único con bordados o estampados para tu marca.",
                 },
                 {
-                  img: "/images/carousel0.png",
+                  img: "/images/carousel0.webp",
                   title: "Indumentaria Corporativa",
                   text: "Uniformes profesionales que reflejan tu identidad.",
                 },
