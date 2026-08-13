@@ -117,7 +117,7 @@ export default function CouponInput({
         <button
           onClick={handleApplyCoupon}
           disabled={isLoading || !code.trim()}
-          className="px-4 py-2 text-sm font-medium bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 min-h-[44px] text-sm font-medium bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "..." : "Aplicar"}
         </button>

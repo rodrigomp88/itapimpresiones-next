@@ -189,7 +189,7 @@ const ApparelPage = () => {
                 height={48}
                 className="max-h-12 w-auto"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe4qQ852WcmQjkxji5Z3xGiEMqzO0RFe3t_M4mem81wX5KOgAf8bgVFGTh2sllG0jfpMPuXZos6fbHlJwwY3VZhksOai1TSzMi018jbfO8TMNZJTfeFuhEZB1cNOU48pnshpNH_JRMFJgzP3M18UH1Q3nV2VjdOPNT33x-UMvsnfs0KDKxxi9V_QSJi4Rok4Ip86blMagWFfRne4Uk9fcRUbt_rK34K9l-HihmmGRkAQtsZ5s-BtQVgU5cfjScSWLd9Uj5e97knrE"
-                alt="Logo Empresa A"
+                alt="Logo de empresa cliente"
               />
             </div>
             <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
@@ -198,7 +198,7 @@ const ApparelPage = () => {
                 height={48}
                 className="max-h-12 w-auto"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxp8TvvdzRCtTlNqc5yu0-Jujxe3TAllSDvPO8IvwUFpvgyaEGE7SeWBLxssKKOHl5sHXMQX1szrmaBKmvs59LOKzMbgNBvLOpz7fiNMt1K8CetXpm0W55ebSvWhwIqzlIpDOWJbZB2hhs8haFIdouGwC6zDhM_pXRkQeiKu5yAwgQ7q8cxJ5nSFNKoZzScIXjzBYqQTUZq1PlxnNJdHlVXN1ItdTXBsVg7Y21_0QyMX9UqY6lQKO3aU95hrEwSM3PcyPIAjSllOg"
-                alt="Logo Empresa B"
+                alt="Logo de empresa cliente"
               />
             </div>
             <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
@@ -207,7 +207,7 @@ const ApparelPage = () => {
                 height={48}
                 className="max-h-12 w-auto"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzZnfkeGDQQRH7WBGjcqZkj8dy0WjBkrKeXr90LwJWY3VActmr9G7MDrPHyDRPOslXR6BNGDTF1axQPDD7qz-SOoR9WR8yulWZNfVgBEbaQRHtEdCF9qG2jxOgaH_RY9SnTonXOMpCOllshNxdMIjMyIIauAQTCs6dj7FdbTGK_njeHKO2HavOACC0FetndVlwSzZyG__HOlLms18J4Ffs3SgDqcdhz4gkjJE9DD0i2IZh5Pt7GKlcfkAAW0No8emkzX3ZcRkK71A"
-                alt="Logo Empresa C"
+                alt="Logo de empresa cliente"
               />
             </div>
             <div className="col-span-1 flex justify-center bg-zinc-50 dark:bg-zinc-800 py-8 px-8">
@@ -216,7 +216,7 @@ const ApparelPage = () => {
                 height={48}
                 className="max-h-12 w-auto"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEZqtitHnFCLk-41Liw2Ey1c9wfZPN04bPu7FeaiVjRgUbT6I7i80VkdfLUuqTk7ygtfzWxJd1pPMGxnUQPKDacT2uWh1qJIbXSrodKLO3gVbPHRFXbuDsQiPNGPcymx1DfQ-NdIwmUMLqNXr9bx3WbBYQ2tBmZtniMU2YpAJHMPvHT7A1LDgwlvnLr8jPWnXWJAwd3XUbMCtuTPr3lE_2Cv0Nv7j3WmoXWW3fyPluMgSoFOL2LszscL08uOs5-K1GVsX-ktTd_uw"
-                alt="Logo Empresa D"
+                alt="Logo de empresa cliente"
               />
             </div>
           </div>
@@ -246,7 +246,7 @@ const ApparelPage = () => {
                     Nombre de la Empresa
                   </label>
                   <input
-                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
+                    className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm p-2 text-prussian-blue dark:text-white"
                     id="company-name"
                     type="text"
                   />
@@ -260,7 +260,7 @@ const ApparelPage = () => {
                       Email
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="email"
                       type="email"
                     />
@@ -273,7 +273,7 @@ const ApparelPage = () => {
                       Teléfono
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="phone"
                       type="tel"
                     />
@@ -288,7 +288,7 @@ const ApparelPage = () => {
                       Tipo de Producto
                     </label>
                     <select
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="product-type"
                     >
                       <option>Remeras</option>
@@ -306,7 +306,7 @@ const ApparelPage = () => {
                       Cantidad Estimada
                     </label>
                     <input
-                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-primary focus:ring-primary sm:text-sm p-2 text-prussian-blue dark:text-white"
+                      className="mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm p-2 text-prussian-blue dark:text-white"
                       id="quantity"
                       type="number"
                     />

@@ -108,6 +108,7 @@ const LoginPage = () => {
             <input
               type="email"
               placeholder="Correo electrónico"
+              aria-label="Correo electrónico"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -120,6 +121,7 @@ const LoginPage = () => {
             <input
               type="password"
               placeholder="Contraseña"
+              aria-label="Contraseña"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}

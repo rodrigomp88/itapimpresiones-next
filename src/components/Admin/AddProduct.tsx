@@ -265,7 +265,7 @@ const AddProduct = () => {
                       >
                         <Image
                           src={img.previewUrl}
-                          alt="preview"
+                          alt="Vista previa de la imagen"
                           width={64}
                           height={64}
                           unoptimized

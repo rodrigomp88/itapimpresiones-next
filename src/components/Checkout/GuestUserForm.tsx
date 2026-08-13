@@ -44,7 +44,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
         {/* Nombre y Teléfono */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
               Nombre completo *
             </label>
             <input
@@ -58,7 +58,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            <label htmlFor="phone" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
               Teléfono *
             </label>
             <input
@@ -74,7 +74,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
             Correo electrónico *
           </label>
           <input
@@ -89,7 +89,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
 
         {/* Dirección */}
         <div>
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+          <label htmlFor="address" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
             Dirección completa *
           </label>
           <input
@@ -105,7 +105,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
         {/* Ciudad y Código Postal */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            <label htmlFor="city" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
               Ciudad *
             </label>
             <input
@@ -119,7 +119,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+            <label htmlFor="postalCode" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
               Código postal *
             </label>
             <input
@@ -135,7 +135,7 @@ const GuestUserForm: React.FC<GuestUserFormProps> = ({
 
         {/* Provincia */}
         <div>
-          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+          <label htmlFor="province" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
             Provincia *
           </label>
           <select

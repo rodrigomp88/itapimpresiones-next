@@ -164,7 +164,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 setShowSuggestions(false);
                 inputRef.current?.focus();
               }}
-              className="pr-3 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
+              className="pr-3 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors min-h-[44px] min-w-[44px] flex items-center"
             >
               <HiX className="w-5 h-5" />
             </button>

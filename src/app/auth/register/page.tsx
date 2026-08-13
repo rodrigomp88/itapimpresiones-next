@@ -140,6 +140,7 @@ const RegisterPage = () => {
             <input
               type="email"
               placeholder="Correo electrónico"
+              aria-label="Correo electrónico"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -152,6 +153,7 @@ const RegisterPage = () => {
             <input
               type="password"
               placeholder="Contraseña"
+              aria-label="Contraseña"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -164,6 +166,7 @@ const RegisterPage = () => {
             <input
               type="password"
               placeholder="Repetir contraseña"
+              aria-label="Repetir contraseña"
               required
               value={repeatPassword}
               onChange={(e) => setRepeatPassword(e.target.value)}

@@ -256,7 +256,7 @@ const CategoryFilter: React.FC<{
                 category: filters.category === category ? undefined : category,
               })
             }
-            className="w-4 h-4 text-primary border-zinc-300 focus:ring-primary"
+            className="w-4 h-4 text-primary border-zinc-300 focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
           />
           <span className="text-sm text-zinc-700 dark:text-zinc-300">
             {category}
@@ -298,7 +298,7 @@ const PriceFilter: React.FC<{
             value={minPrice}
             onChange={(e) => handleMinPriceChange(e.target.value)}
             placeholder="$0"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
           />
         </div>
         <div>
@@ -310,7 +310,7 @@ const PriceFilter: React.FC<{
             value={maxPrice}
             onChange={(e) => handleMaxPriceChange(e.target.value)}
             placeholder="Sin límite"
-            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+            className="w-full px-3 py-2 text-sm border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-800 text-prussian-blue dark:text-white focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
           />
         </div>
       </div>
@@ -365,7 +365,7 @@ const RatingFilter: React.FC<{
                 rating: filters.rating === rating ? undefined : rating,
               })
             }
-            className="w-4 h-4 text-primary border-zinc-300 focus:ring-primary"
+            className="w-4 h-4 text-primary border-zinc-300 focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
           />
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
@@ -404,7 +404,7 @@ const AvailabilityFilter: React.FC<{
               inStock: e.target.checked || undefined,
             })
           }
-          className="w-4 h-4 text-primary border-zinc-300 rounded focus:ring-primary"
+          className="w-4 h-4 text-primary border-zinc-300 rounded focus:ring-2 focus:ring-primary/50 focus:ring-offset-2"
         />
         <span className="text-sm text-zinc-700 dark:text-zinc-300">
           Solo productos en stock

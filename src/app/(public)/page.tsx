@@ -7,6 +7,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import HomeBanners from "@/components/Home/HomeBanners";
 import MobileHero from "@/components/Mobile/MobileHero";
 import MobileFeatured from "@/components/Mobile/MobileFeatured";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Lazy load FeaturedProducts since it's below the fold
 const FeaturedProducts = dynamic(
@@ -48,7 +49,13 @@ const Home = () => {
               </p>
             </div>
 
-            {isMobile ? <MobileFeatured /> : <FeaturedProducts />}
+            {isMobile ? (
+              <MobileFeatured />
+            ) : (
+              <ErrorBoundary>
+                <FeaturedProducts />
+              </ErrorBoundary>
+            )}
 
             <div className="mt-12 flex justify-center">
               <Link href="/tienda">

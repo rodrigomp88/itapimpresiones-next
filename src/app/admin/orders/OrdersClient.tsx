@@ -307,7 +307,7 @@ const OrdersClient: React.FC<OrdersClientProps> = ({ initialOrders }) => {
                     type="checkbox"
                     checked={selectedOrders.includes(order.id)}
                     onChange={() => handleSelectOrder(order.id)}
-                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary-dark dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    className="w-5 h-5 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:focus:ring-primary-dark dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                 </div>
 

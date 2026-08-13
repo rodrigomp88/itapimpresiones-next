@@ -100,7 +100,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                 <button
                   key={index}
                   onClick={() => onCategoryChange(cat)}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                  className={`flex items-center gap-3 px-3 py-2 min-h-[44px] rounded-lg transition-colors ${
                     selectedCategory === cat
                       ? "bg-primary/10 dark:bg-primary/20"
                       : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
@@ -178,7 +178,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     <button
                       key={color}
                       onClick={() => onColorChange(color)}
-                      className={`w-10 h-10 rounded-full transition-all ${
+                      className={`w-11 h-11 rounded-full transition-all ${
                         colorMap[color]
                       } ${
                         selectedColor === color
@@ -207,7 +207,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     <button
                       key={type}
                       onClick={() => onBagTypeChange(type)}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors text-left ${
+                      className={`px-3 py-2 min-h-[44px] rounded-lg text-sm font-medium transition-colors text-left ${
                         selectedBagType === type
                           ? "bg-primary text-white"
                           : "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
@@ -240,7 +240,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
                     checked={selectedSize === size}
                     onChange={() => onSizeChange(size)}
                   />
-                  <div className="rounded-lg border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm font-medium text-zinc-700 dark:text-zinc-300 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-colors w-full text-center">
+                  <div className="rounded-lg border border-zinc-300 dark:border-zinc-700 px-3 py-2 min-h-[44px] text-sm font-medium text-zinc-700 dark:text-zinc-300 peer-checked:bg-primary peer-checked:text-white peer-checked:border-primary transition-colors w-full text-center">
                     {size === "Todos" ? "All" : size}
                   </div>
                 </label>
@@ -253,7 +253,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           <div className="flex flex-col gap-3">
             <label className="flex items-center gap-2 cursor-pointer">
               <input
-                className="form-checkbox h-4 w-4 rounded text-primary focus:ring-primary/50 border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 dark:checked:bg-primary"
+                className="form-checkbox h-5 w-5 rounded text-primary focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 dark:checked:bg-primary"
                 type="checkbox"
                 checked={isCustomizable}
                 onChange={(e) => onCustomizableChange(e.target.checked)}

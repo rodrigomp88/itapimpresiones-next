@@ -9,7 +9,7 @@ interface ContactFormProps {
 }
 
 const inputClasses =
-  "w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-primary focus:border-primary p-2 text-prussian-blue dark:text-white";
+  "w-full rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 p-2 text-prussian-blue dark:text-white";
 
 const ContactForm: React.FC<ContactFormProps> = ({ formType }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);

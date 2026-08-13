@@ -199,7 +199,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
                         src={state.userLogo}
                         fill
                         className="object-contain"
-                        alt="Logo Preview"
+                        alt="Vista previa del logo personalizado"
                       />
                     </div>
                   </div>

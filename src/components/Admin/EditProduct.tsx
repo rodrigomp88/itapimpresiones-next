@@ -240,7 +240,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   >
                     <Image
                       src={img.url}
-                      alt="img"
+                      alt="Imagen del producto"
                       width={48}
                       height={48}
                       unoptimized
@@ -297,7 +297,7 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onClose }) => {
                   >
                     <Image
                       src={img.preview}
-                      alt="preview"
+                      alt="Vista previa del logo"
                       width={48}
                       height={48}
                       unoptimized

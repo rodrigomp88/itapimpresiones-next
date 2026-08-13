@@ -172,7 +172,7 @@ const Navbar = () => {
                   </p>
                   <button
                     onClick={logoutUser}
-                    className="bg-cta text-white px-3 py-1 rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
+                    className="bg-cta text-white px-4 py-2 min-h-[44px] rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
                   >
                     Salir
                   </button>
@@ -308,7 +308,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     logoutUser();
                     closeSidebar();
                   }}
-                  className="bg-cta text-white px-3 py-1 rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
+                  className="bg-cta text-white px-4 py-2 min-h-[44px] rounded-md text-sm hover:bg-cta-dark transition-all cursor-pointer"
                 >
                   Salir
                 </button>

@@ -112,13 +112,13 @@ export default function NotificationPrompt({
               <button
                 onClick={handleEnableNotifications}
                 disabled={isRequesting}
-                className="px-3 py-1.5 text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
+                className="px-4 py-2 min-h-[44px] text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50"
               >
                 {isRequesting ? "Activando..." : "Activar"}
               </button>
               <button
                 onClick={handleDismiss}
-                className="px-3 py-1.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white transition-colors"
+                className="px-4 py-2 min-h-[44px] text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-prussian-blue dark:hover:text-white transition-colors"
               >
                 Ahora no
               </button>

@@ -230,7 +230,7 @@ const AnalyticsDashboard: React.FC<AnalyticsDashboardProps> = ({
           <select
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value)}
-            className="block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+            className="block rounded-md border-gray-300 shadow-sm focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 sm:text-sm"
           >
             <option value="7d">Últimos 7 días</option>
             <option value="30d">Últimos 30 días</option>
