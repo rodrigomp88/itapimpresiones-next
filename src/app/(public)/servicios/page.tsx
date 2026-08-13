@@ -13,7 +13,7 @@ const ServicesPage = () => {
           <div className="container mx-auto px-6 py-20 lg:py-32">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="flex flex-col gap-6 text-center lg:text-left z-10">
-                <h1 className="text-4xl lg:text-6xl font-black text-slate-900 dark:text-white leading-tight tracking-[-0.033em]">
+                <h1 className="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight tracking-[-0.033em]">
                   Impresión Textil Profesional: Serigrafía y DTF de Alta Calidad
                 </h1>
                 <p className="text-base font-normal leading-normal lg:text-lg text-slate-600 dark:text-slate-100">

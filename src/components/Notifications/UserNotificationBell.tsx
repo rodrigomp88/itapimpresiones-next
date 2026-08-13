@@ -81,7 +81,7 @@ const UserNotificationBell = () => {
       >
         <FaBell className="h-5 w-5 text-zinc-600 dark:text-zinc-300 hover:text-primary transition-colors" />
         {notificationCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white border border-white dark:border-black">
+          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[11px] font-bold text-white border border-white dark:border-black">
             {notificationCount}
           </span>
         )}

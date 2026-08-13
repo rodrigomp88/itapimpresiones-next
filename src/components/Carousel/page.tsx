@@ -60,7 +60,7 @@ const Carousel: React.FC = () => {
             variants={textVariants}
             className="flex flex-col items-center md:items-start text-center md:text-left space-y-6 p-6 lg:p-12"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white drop-shadow-lg">
               {sliderData[currentSlide].heading}
             </h1>
             <p className="text-lg md:text-xl font-light text-slate-100 max-w-lg leading-relaxed opacity-90">

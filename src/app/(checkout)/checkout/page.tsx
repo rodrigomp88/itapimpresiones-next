@@ -345,7 +345,7 @@ const CheckoutPage: React.FC = () => {
 
         {/* Title */}
         <div className="flex flex-wrap justify-between gap-3 pb-8">
-          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black min-w-72">
+          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold min-w-72">
             Detalles de Envío
           </p>
         </div>

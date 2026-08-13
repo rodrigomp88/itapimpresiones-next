@@ -15,7 +15,7 @@ const BagsPage = () => {
             }}
           >
             <div className="flex flex-col gap-2 text-left">
-              <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+              <h1 className="text-white text-4xl font-bold leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                 Bolsas de Friselina Personalizadas
               </h1>
               <h2 className="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
@@ -33,18 +33,18 @@ const BagsPage = () => {
       </div>
 
       {/* FeatureSection */}
-      <div className="flex flex-col gap-10 px-4 py-10 @container text-[#111418] dark:text-white max-w-screen-xl mx-auto">
+      <div className="flex flex-col gap-10 px-4 py-10 @container text-slate-900 dark:text-white max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4">
-          <h1 className="tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
+          <h1 className="tracking-tight text-4xl font-bold leading-tight @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight max-w-[720px]">
             ¿Por qué elegir nuestras bolsas?
           </h1>
-          <p className="text-base font-normal leading-normal max-w-[720px] text-[#637288] dark:text-[#aeb8c4]">
+          <p className="text-base font-normal leading-normal max-w-[720px] text-slate-500 dark:text-slate-400">
             Ofrecemos soluciones sostenibles y de alta calidad para elevar la
             visibilidad de tu marca.
           </p>
         </div>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3 p-0">
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] dark:border-[#2c3a4a] bg-white dark:bg-zinc-900 p-4 flex-col">
+          <div className="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-zinc-900 p-4 flex-col">
             <div className="text-primary">
               <span className="material-symbols-outlined text-3xl">eco</span>
             </div>
@@ -52,13 +52,13 @@ const BagsPage = () => {
               <h2 className="text-base font-bold leading-tight">
                 Material Ecológico
               </h2>
-              <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
                 Hechas de polipropileno no tejido reciclable para una elección
                 sostenible.
               </p>
             </div>
           </div>
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] dark:border-[#2c3a4a] bg-white dark:bg-zinc-900 p-4 flex-col">
+          <div className="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-zinc-900 p-4 flex-col">
             <div className="text-primary">
               <span className="material-symbols-outlined text-3xl">
                 verified
@@ -68,13 +68,13 @@ const BagsPage = () => {
               <h2 className="text-base font-bold leading-tight">
                 Calidad Duradera
               </h2>
-              <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
                 Construcción fuerte y resistente al desgarro diseñada para uso
                 repetido.
               </p>
             </div>
           </div>
-          <div className="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] dark:border-[#2c3a4a] bg-white dark:bg-zinc-900 p-4 flex-col">
+          <div className="flex flex-1 gap-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-zinc-900 p-4 flex-col">
             <div className="text-primary">
               <span className="material-symbols-outlined text-3xl">
                 palette
@@ -84,7 +84,7 @@ const BagsPage = () => {
               <h2 className="text-base font-bold leading-tight">
                 Totalmente Personalizable
               </h2>
-              <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+              <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
                 Tu logo, tus colores. Damos vida a la visión de tu marca.
               </p>
             </div>
@@ -95,7 +95,7 @@ const BagsPage = () => {
       {/* Tabs Section (Simplified for now) */}
       <div className="py-10 max-w-screen-xl mx-auto">
         <div className="pb-3">
-          <div className="flex border-b border-[#dce0e5] dark:border-[#2c3a4a] px-4 gap-8">
+          <div className="flex border-b border-slate-200 dark:border-slate-700 px-4 gap-8">
             <div className="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-[13px] pt-4 cursor-pointer">
               <p className="text-sm font-bold leading-normal tracking-[0.015em]">
                 Material y Colores
@@ -105,17 +105,17 @@ const BagsPage = () => {
           </div>
         </div>
         {/* DescriptionList */}
-        <div className="p-4 grid grid-cols-[30%_1fr] gap-x-6 text-[#111418] dark:text-white">
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#dce0e5] dark:border-t-[#2c3a4a] py-5">
-            <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+        <div className="p-4 grid grid-cols-[30%_1fr] gap-x-6 text-slate-900 dark:text-white">
+          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-5">
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
               Tipo de Tela
             </p>
             <p className="text-sm font-normal leading-normal">
               Polipropileno No Tejido (Friselina)
             </p>
           </div>
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#dce0e5] dark:border-t-[#2c3a4a] py-5">
-            <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-5">
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
               Gramaje
             </p>
             <p className="text-sm font-normal leading-normal">
@@ -123,8 +123,8 @@ const BagsPage = () => {
               flexibilidad.
             </p>
           </div>
-          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-[#dce0e5] dark:border-t-[#2c3a4a] py-5">
-            <p className="text-[#637288] dark:text-[#aeb8c4] text-sm font-normal leading-normal">
+          <div className="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-5">
+            <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
               Colores Disponibles
             </p>
             <p className="text-sm font-normal leading-normal">
@@ -136,12 +136,12 @@ const BagsPage = () => {
       </div>
 
       {/* Gallery Section */}
-      <section className="flex flex-col gap-10 px-4 py-10 text-[#111418] dark:text-white max-w-screen-xl mx-auto">
+      <section className="flex flex-col gap-10 px-4 py-10 text-slate-900 dark:text-white max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4">
-          <h2 className="tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]">
+          <h2 className="tracking-tight text-4xl font-bold leading-tight @[480px]:text-5xl @[480px]:font-bold @[480px]:leading-tight max-w-[720px]">
             Nuestro Trabajo
           </h2>
-          <p className="text-base font-normal leading-normal max-w-[720px] text-[#637288] dark:text-[#aeb8c4]">
+          <p className="text-base font-normal leading-normal max-w-[720px] text-slate-500 dark:text-slate-400">
             Ejemplos inspiradores de bolsas personalizadas que hemos creado para
             nuestros clientes.
           </p>

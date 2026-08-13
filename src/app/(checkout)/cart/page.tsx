@@ -89,7 +89,7 @@ const CartPage: React.FC = () => {
           <div className="flex flex-col items-center justify-center min-h-[50vh] text-center">
             <span
               className="material-symbols-outlined text-gray-300 dark:text-gray-600 mb-4"
-              style={{ fontSize: "80px" }}
+              style={{ fontSize: "5rem" }}
             >
               shopping_cart
             </span>
@@ -130,7 +130,7 @@ const CartPage: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap justify-between gap-3 pb-8">
-          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-black min-w-72">
+          <p className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold min-w-72">
             Tu Carrito
           </p>
         </div>

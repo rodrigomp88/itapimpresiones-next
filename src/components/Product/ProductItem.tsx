@@ -126,7 +126,7 @@ const ProductItem: React.FC<Product> = ({
             {pause ? (
               <p className="font-bold text-red-500">Sin Stock</p>
             ) : (
-              <p className="text-zinc-900 dark:text-zinc-100 font-black text-xl">
+              <p className="text-zinc-900 dark:text-zinc-100 font-normal text-xl">
                 ${price.toLocaleString("es-AR")}
               </p>
             )}

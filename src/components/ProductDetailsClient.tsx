@@ -273,13 +273,13 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
             {/* Info y Controles */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <h1 className="text-zinc-900 dark:text-zinc-100 text-4xl font-black">
+                <h1 className="text-zinc-900 dark:text-zinc-100 text-4xl font-bold">
                   {product.name}
                 </h1>
                 <p className="text-zinc-600 dark:text-zinc-400 text-base">
                   {product.description}
                 </p>
-                <p className="text-zinc-900 dark:text-zinc-100 text-3xl font-black">
+                <p className="text-zinc-900 dark:text-zinc-100 text-3xl font-normal">
                   ${product.price.toLocaleString("es-AR")}
                 </p>
               </div>

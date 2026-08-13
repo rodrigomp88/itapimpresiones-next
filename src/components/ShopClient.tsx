@@ -205,7 +205,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
         <div className="relative max-w-screen-xl mx-auto px-6 py-32 sm:py-40 lg:py-24 min-h-[600px] sm:min-h-[700px]">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center h-full">
             <div className="flex flex-col gap-6 sm:gap-8 text-center lg:text-left order-2 lg:order-1 justify-center">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 dark:text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
                 Descubre Nuestra
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {" "}
@@ -222,7 +222,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
               {/* Estadísticas - Ocultas en mobile muy pequeño */}
               <div className="hidden sm:grid sm:grid-cols-3 gap-4 lg:gap-6 pt-4">
                 <div className="text-center lg:text-left">
-                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">
                     {products.length}+
                   </div>
                   <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -230,7 +230,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                   </div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">
                     500+
                   </div>
                   <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -238,7 +238,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
                   </div>
                 </div>
                 <div className="text-center lg:text-left">
-                  <div className="text-xl lg:text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="text-xl lg:text-2xl font-bold text-slate-900 dark:text-white">
                     5★
                   </div>
                   <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
@@ -324,7 +324,7 @@ const ShopClient: React.FC<ShopClientProps> = ({ initialProducts }) => {
 
           <div className="flex flex-wrap justify-between gap-4 items-center">
             <div className="flex min-w-72 flex-col gap-2">
-              <h2 className="text-zinc-900 dark:text-zinc-100 text-2xl font-black">
+              <h2 className="text-zinc-900 dark:text-zinc-100 text-2xl font-bold">
                 Explora Nuestros Productos
               </h2>
               <p className="text-zinc-600 dark:text-zinc-400 text-base">

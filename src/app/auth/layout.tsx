@@ -8,7 +8,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-zinc-50 dark:bg-black font-sans">
+    <main className="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-zinc-50 dark:bg-black font-display">
       <div className="w-full max-w-md space-y-8">
         {/* Logo Header */}
         <div className="text-center">
