@@ -112,7 +112,7 @@ const Home = () => {
         </section>
 
         {/* Por qué elegirnos */}
-        <section className="w-full py-24 bg-white dark:bg-slate-900">
+        <section className="w-full py-20 bg-white dark:bg-slate-900">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -151,13 +151,23 @@ const Home = () => {
         <section className="w-full py-20 bg-slate-50 dark:bg-slate-950">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold mb-12">Confían en Nosotros</h2>
-            <div className="flex flex-wrap justify-center gap-12 opacity-60">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3emsY4lBNr1yqarGKV3rvx9fYmXEXxb9Yk603FobSlfS9V7zy7J4EPTVMfXD9VH7HVeT8TI6akXW_YabpF4-YY4QUNHHbb6F1_pvDPZZ1Wd1-WytYKhHi9AntYTO9YpddWyV68lEOgMeU6Nqa5IDtCYlH2aRrb1kOv8-qqfhbh6PNa6q2DU6FdSO2YQ5mQFzX7XlT_wFy9F7aAEICUxAsW3VeitKwknQIf8x9YNkzSrMHnons848u-cylZNp7AJfQFujy-ursVLM"
-                alt="Cliente"
-                width={150}
+                alt="Cliente 1"
+                width={120}
                 height={40}
+                className="object-contain"
               />
+              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-slate-400">Logo</span>
+              </div>
+              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-slate-400">Logo</span>
+              </div>
+              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-slate-400">Logo</span>
+              </div>
             </div>
           </div>
         </section>

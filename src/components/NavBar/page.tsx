@@ -80,7 +80,7 @@ const Navbar = () => {
               </svg>
             </div>
             <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
-              PrintStudio
+              ITAP Impresiones
             </h2>
           </Link>
 

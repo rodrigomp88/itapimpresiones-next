@@ -105,7 +105,7 @@ const BagsPage = () => {
           </div>
         </div>
         {/* DescriptionList */}
-        <div className="p-4 grid grid-cols-[30%_1fr] gap-x-6 text-slate-900 dark:text-white">
+        <div className="p-4 grid grid-cols-1 sm:grid-cols-[30%_1fr] gap-x-6 gap-y-4 text-slate-900 dark:text-white">
           <div className="col-span-2 grid grid-cols-subgrid border-t border-t-slate-200 dark:border-t-slate-700 py-5">
             <p className="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">
               Tipo de Tela

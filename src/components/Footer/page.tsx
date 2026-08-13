@@ -31,7 +31,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-12 border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
-          <p>© 2024 PrintStudio</p>
+          <p>© 2025 ITAP Impresiones</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a
               className="hover:text-slate-800 dark:hover:text-white transition-colors"
