@@ -68,7 +68,7 @@ const Home = () => {
                 Nuestros Servicios Principales
               </h2>
               <p className="text-slate-500 dark:text-slate-400 text-lg">
-                Descubre lo último en personalización y diseño.
+                Soluciones completas para llevar tu marca al siguiente nivel.
               </p>
             </div>
 
@@ -125,11 +125,11 @@ const Home = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                ["palette", "Calidad de Impresión"],
-                ["checkroom", "Materiales Premium"],
-                ["groups", "Asesoramiento 1 a 1"],
-                ["schedule", "Entregas Puntuales"],
-              ].map(([icon, title], i) => (
+                ["palette", "Calidad de Impresión", "Tecnología de última generación para resultados nítidos y duraderos."],
+                ["checkroom", "Materiales Premium", "Seleccionamos los mejores tejidos para garantizar comfort y resistencia."],
+                ["groups", "Asesoramiento 1 a 1", "Te acompañamos desde la idea hasta el producto final terminado."],
+                ["schedule", "Entregas Puntuales", "Cumplimos los plazos acordados porque tu negocio no puede esperar."],
+              ].map(([icon, title, desc], i) => (
                 <div
                   key={i}
                   className="p-8 rounded-xl bg-slate-50 dark:bg-slate-800 border hover:shadow-md transition-shadow"
@@ -139,7 +139,7 @@ const Home = () => {
                   </span>
                   <h3 className="font-semibold mb-2">{title}</h3>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    Compromiso real con cada cliente.
+                    {desc}
                   </p>
                 </div>
               ))}
@@ -159,15 +159,6 @@ const Home = () => {
                 height={40}
                 className="object-contain"
               />
-              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-slate-400">Logo</span>
-              </div>
-              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-slate-400">Logo</span>
-              </div>
-              <div className="w-24 h-12 bg-slate-200 dark:bg-slate-700 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-slate-400">Logo</span>
-              </div>
             </div>
           </div>
         </section>
