@@ -97,7 +97,7 @@ export default function RootLayout({
             /* Critical CSS para above-the-fold content */
             body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
             .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-            .font-display { font-family: 'Work Sans', system-ui, sans-serif; }
+            .font-display { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
 
             /* Loading states */
             .animate-spin { animation: spin 1s linear infinite; }
@@ -114,7 +114,7 @@ export default function RootLayout({
 
         {/* Fonts optimizadas */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <link

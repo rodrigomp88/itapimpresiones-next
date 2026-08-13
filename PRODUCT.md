@@ -1,5 +1,11 @@
 # ITAP Impresiones — Producto
 
+<!-- impeccable:product-schema 1 -->
+
+## Platform
+
+web
+
 ## Qué es
 
 ITAP Impresiones es una imprenta online especializada en **personalización textil e impresa**: indumentaria (remeras, buzos, gorras) y **bolsas de friselina**. La técnica insignia es la **serigrafía**, complementada con DTF y sublimado. Sin local a la calle: taller cerrado con venta por web y vendedores presenciales en Gran Mendoza.

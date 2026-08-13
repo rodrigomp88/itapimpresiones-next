@@ -5,18 +5,74 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: 'class', // Usar class strategy para modo oscuro
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#196ee6',
-          dark: '#0d47a1',
+        'ocean-blue': {
+          DEFAULT: '#0185C1',
+          dark: '#016fa3',
+          light: '#02a8e8',
         },
-        accent: '#fbc02d',
+        'ocean-mist': {
+          DEFAULT: '#02AE9C',
+          dark: '#018a7c',
+          light: '#03d4be',
+        },
+        'raspberry-red': {
+          DEFAULT: '#E01358',
+          dark: '#b80f48',
+          light: '#f02870',
+        },
+        'prussian-blue': {
+          DEFAULT: '#1A2333',
+          light: '#253347',
+          lighter: '#2c3d54',
+        },
+        'deep-saffron': {
+          DEFAULT: '#FE900B',
+          dark: '#d97a08',
+          light: '#ffa333',
+        },
+        primary: {
+          DEFAULT: '#0185C1',
+          dark: '#016fa3',
+          light: '#02a8e8',
+        },
+        accent: {
+          DEFAULT: '#E01358',
+          dark: '#b80f48',
+          light: '#f02870',
+        },
+        neutral: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+        },
       },
       fontFamily: {
-        display: ['Work Sans', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        'sm': '6px',
+        'md': '8px',
+        'lg': '12px',
+        'xl': '16px',
+      },
+      spacing: {
+        'sm': '8px',
+        'md': '16px',
+        'lg': '24px',
+        'xl': '32px',
+        '2xl': '48px',
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out',

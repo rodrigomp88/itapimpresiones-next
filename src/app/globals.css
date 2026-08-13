@@ -2,14 +2,21 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-/* Variables CSS para el tema */
+/* Variables CSS — ITAP Official Design Tokens */
 :root {
-  --color-primary: #196ee6;
-  --color-primary-dark: #0d47a1;
-  --color-accent: #fbc02d;
-  --color-background-light: #f6f7f8;
-  --color-background-dark: #111821;
-  --font-display: "Work Sans", sans-serif;
+  --color-ocean-blue: #0185C1;
+  --color-ocean-blue-dark: #016fa3;
+  --color-ocean-mist: #02AE9C;
+  --color-raspberry-red: #E01358;
+  --color-raspberry-red-dark: #b80f48;
+  --color-prussian-blue: #1A2333;
+  --color-deep-saffron: #FE900B;
+  --color-primary: #0185C1;
+  --color-primary-dark: #016fa3;
+  --color-accent: #E01358;
+  --color-background-light: #f9fafb;
+  --color-background-dark: #1A2333;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   color-scheme: light;
 }
 
@@ -31,26 +38,26 @@ html.dark {
   align-items: center;
   gap: 0.75rem;
   padding: 0.5rem 1rem;
-  background-color: #7c3aed;
+  background-color: var(--color-ocean-blue);
   color: white;
   border-radius: 0.375rem;
   cursor: pointer;
 }
 
 .btn:hover {
-  background-color: #6d28d9;
+  background-color: var(--color-ocean-blue-dark);
 }
 
 .link {
   display: inline-flex;
   align-items: center;
-  color: #7c3aed;
+  color: var(--color-ocean-blue);
   text-decoration: underline;
   cursor: pointer;
 }
 
 .link:hover {
-  color: #5b21b6;
+  color: var(--color-ocean-blue-dark);
 }
 
 .input {
@@ -152,7 +159,7 @@ select:focus-visible {
 /* Alto contraste para mejor accesibilidad */
 @media (prefers-contrast: high) {
   :root {
-    --color-primary: #0066cc;
+    --color-primary: #0185C1;
     --color-background-light: #ffffff;
     --color-background-dark: #000000;
   }
@@ -205,7 +212,7 @@ select:focus-visible {
 }
 
 .bg-secondary {
-  background-color: #9333ea;
+  background-color: var(--color-ocean-mist);
 }
 
 .text-muted-light {
@@ -241,7 +248,7 @@ select:focus-visible {
 }
 
 .bg-primary-dark {
-  background-color: #1d4ed8;
+  background-color: var(--color-ocean-blue-dark);
 }
 
 /* Safe area para dispositivos con notch */

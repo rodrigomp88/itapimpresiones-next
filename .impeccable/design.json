@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-12T21:58:00Z",
+  "title": "Design System: ITAP Impresiones",
+  "extensions": {
+    "colorMeta": {
+      "ocean-blue": {
+        "role": "primary",
+        "displayName": "Ocean Blue",
+        "canonical": "#0185C1",
+        "tonalRamp": ["#0a2a3d", "#0d3a56", "#0f4d73", "#016fa3", "#0185C1", "#33a0d6", "#66bbe6", "#99d5f2", "#cceaf9"]
+      },
+      "ocean-mist": {
+        "role": "secondary",
+        "displayName": "Ocean Mist",
+        "canonical": "#02AE9C",
+        "tonalRamp": ["#013d36", "#015a50", "#01786b", "#019687", "#02AE9C", "#35bfb0", "#68d0c4", "#9be0d8", "#cef0ec"]
+      },
+      "raspberry-red": {
+        "role": "tertiary",
+        "displayName": "Raspberry Red",
+        "canonical": "#E01358",
+        "tonalRamp": ["#4a061c", "#6b0a29", "#8c0e37", "#ad1145", "#E01358", "#e6467a", "#eb799c", "#f1acbe", "#f6dfdf"]
+      },
+      "prussian-blue": {
+        "role": "neutral",
+        "displayName": "Prussian Blue",
+        "canonical": "#1A2333",
+        "tonalRamp": ["#0a0e14", "#111821", "#1A2333", "#243044", "#2e3d55", "#384a66", "#425777", "#4c6488", "#567199"]
+      },
+      "deep-saffron": {
+        "role": "accent",
+        "displayName": "Deep Saffron",
+        "canonical": "#FE900B",
+        "tonalRamp": ["#512e03", "#7a4505", "#a35c07", "#cc7309", "#FE900B", "#fea63d", "#feb96f", "#fecc9f", "#ffdfcf"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines, títulos de máxima impacto visual." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección, estructura de página." },
+      "title": { "displayName": "Title", "purpose": "Títulos de componente, cards, modales." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido, descripciones, contenido general." },
+      "label": { "displayName": "Label", "purpose": "Botones, chips, etiquetas, navigation links." }
+    },
+    "shadows": [
+      { "name": "subtle", "value": "0 1px 2px rgba(0,0,0,0.05)", "purpose": "Cards en reposo, inputs, elementos planos." },
+      { "name": "interactive", "value": "0 4px 6px rgba(0,0,0,0.07)", "purpose": "Hover states, dropdowns." },
+      { "name": "elevated", "value": "0 10px 15px rgba(0,0,0,0.1)", "purpose": "CTAs, cards hover, modales pequeños." },
+      { "name": "overlay", "value": "0 20px 25px rgba(0,0,0,0.15)", "purpose": "Modales, sidebars, navigation fixed." },
+      { "name": "primary-glow", "value": "0 4px 14px rgba(1,133,193,0.25)", "purpose": "Focus rings, CTA primarios." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing para state transitions." },
+      { "name": "ease-spring", "value": "cubic-bezier(0.34, 1.56, 0.64, 1)", "purpose": "Hover effects, micro-interactions." },
+      { "name": "duration-fast", "value": "150ms", "purpose": "Color changes, opacity." },
+      { "name": "duration-normal", "value": "200ms", "purpose": "Transforms, shadows." },
+      { "name": "duration-slow", "value": "400ms", "purpose": "Page transitions, modales." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botón de acción principal. Ocean Blue background, white text.",
+      "html": "<button class=\"ds-btn-primary\">Agregar al carrito</button>",
+      "css": ".ds-btn-primary { background: #0185C1; color: #ffffff; padding: 12px 24px; border-radius: 12px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.025em; border: none; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 14px rgba(1,133,193,0.25); } .ds-btn-primary:hover { background: #016fa3; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(1,133,193,0.35); } .ds-btn-primary:focus-visible { outline: 2px solid #0185C1; outline-offset: 2px; }"
+    },
+    {
+      "name": "CTA Button (Purchase)",
+      "kind": "button",
+      "refersTo": "button-cta",
+      "description": "Botón de compra. Raspberry Red. Solo para acciones de purchase.",
+      "html": "<button class=\"ds-btn-cta\">Comprar ahora</button>",
+      "css": ".ds-btn-cta { background: #E01358; color: #ffffff; padding: 12px 24px; border-radius: 12px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.025em; border: none; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-cta:hover { background: #c4104d; transform: translateY(-1px); } .ds-btn-cta:focus-visible { outline: 2px solid #E01358; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Botón secundario. Fondo blanco, texto Prussian Blue, borde sutil.",
+      "html": "<button class=\"ds-btn-secondary\">Ver detalles</button>",
+      "css": ".ds-btn-secondary { background: #ffffff; color: #1A2333; padding: 12px 24px; border-radius: 12px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; border: 1px solid #e5e7eb; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: #f9fafb; border-color: #d1d5db; } .ds-btn-secondary:focus-visible { outline: 2px solid #0185C1; outline-offset: 2px; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Card de producto con imagen, título, precio y CTA.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-image\"><img src=\"/product.png\" alt=\"Producto\" /></div><div class=\"ds-card-body\"><h3 class=\"ds-card-title\">Remera Algodón</h3><p class=\"ds-card-desc\">Blanca, talla M</p><p class=\"ds-card-price\">$2.500</p><button class=\"ds-btn-primary\">Agregar al carrito</button></div></div>",
+      "css": ".ds-card { background: #ffffff; border-radius: 16px; border: 1px solid #e5e7eb; overflow: hidden; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-card:hover { box-shadow: 0 10px 15px rgba(0,0,0,0.1); transform: translateY(-4px); } .ds-card-image { height: 256px; display: flex; align-items: center; justify-content: center; background: #f9fafb; } .ds-card-image img { max-height: 100%; object-fit: contain; } .ds-card-body { padding: 24px; } .ds-card-title { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; color: #1A2333; margin: 0 0 4px; } .ds-card-desc { font-size: 0.875rem; color: #6b7280; margin: 0 0 12px; } .ds-card-price { font-weight: 900; font-size: 1.25rem; color: #1A2333; margin: 0 0 16px; }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo de texto estándar con focus ring.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Tu nombre\" />",
+      "css": ".ds-input { width: 100%; padding: 12px 16px; background: #ffffff; color: #1f2937; border: 1px solid #d1d5db; border-radius: 12px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 1rem; outline: none; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-input:focus { border-color: #0185C1; box-shadow: 0 0 0 3px rgba(1,133,193,0.2); } .ds-input::placeholder { color: #9ca3af; } .ds-input:hover { border-color: #9ca3af; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Navbar sticky con backdrop-blur. Logo, links, CTA.",
+      "html": "<nav class=\"ds-nav\"><div class=\"ds-nav-inner\"><a class=\"ds-nav-brand\" href=\"/\">ITAP</a><div class=\"ds-nav-links\"><a href=\"/tienda\">Tienda</a><a href=\"/servicios\">Servicios</a></div><button class=\"ds-btn-primary\">Ingresar</button></div></nav>",
+      "css": ".ds-nav { position: sticky; top: 0; z-index: 50; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid #f3f4f6; } .ds-nav-inner { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; } .ds-nav-brand { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.25rem; color: #1A2333; text-decoration: none; } .ds-nav-links { display: flex; gap: 24px; } .ds-nav-links a { color: #4b5563; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: color 200ms; } .ds-nav-links a:hover { color: #0185C1; }"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Badge pequeño para cantidades, estados, tags.",
+      "html": "<span class=\"ds-badge\">3</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 6px; background: #E01358; color: #ffffff; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Socio de Confianza",
+    "overview": "ITAP no es una imprenta más — es el socio creativo que acompaña al cliente desde la primera idea hasta el producto final. El sistema visual transmite cercanía sin perder profesionalismo: colores frescos de la identidad oficial, tipografía moderna y limpia, y una interfaz que invita a actuar sin intimidar.\n\nLa personalidad es profesional pero humana. No habla desde lo técnico ni desde lo frío corporativo. Habla como alguien que entiende de impresión y quiere ayudarte a materializar tu idea.",
+    "keyCharacteristics": [
+      "Colores oficiales del Manual de Identidad Visual como sistema normativo",
+      "Tipografía Plus Jakarta Sans: moderna, redondeada, cercana",
+      "Superficies limpias con profundidad sutil (sombras y blur, no gradientes agresivos)",
+      "CTAs en Raspberry Red para generar acción",
+      "Dark mode completo con Prussian Blue como base",
+      "Movimiento purposeful: hover suave, transiciones de 200ms"
+    ],
+    "rules": [
+      { "name": "The Raspberry Red Rule", "body": "El rojo Raspberry se usa solo para acciones de compra y urgencia. No es color de fondo ni de texto. Su rareza en la pantalla es lo que le da poder.", "section": "colors" },
+      { "name": "The Ocean Blue–Ocean Mist Handoff", "body": "Ocean Blue lleva la acción principal; Ocean Mist acompaña el estado de éxito o progreso. Nunca compiten en el mismo elemento.", "section": "colors" },
+      { "name": "The One Weight Rule", "body": "Un elemento nunca usa más de 2 pesos. Display+Bold para hero, Headline+Regular para secciones, Title+Regular para contenido.", "section": "typography" },
+      { "name": "The Blur-By-Default Rule", "body": "Navbar y elementos fixed usan backdrop-blur-md + fondo semi-transparente. Nunca fondo sólido opaco en elementos flotantes.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Ocean Blue for primary actions — it's the brand anchor",
+      "Do use Raspberry Red sparingly — only for purchase/urgency CTAs",
+      "Do use Plus Jakarta Sans at weight 700-800 for headings",
+      "Do apply backdrop-blur on fixed/sticky elements",
+      "Do use shadow-sm for resting cards, shadow-lg for hover states",
+      "Do maintain 8px spacing rhythm across all components",
+      "Do use Prussian Blue as the dark mode base, not pure black"
+    ],
+    "donts": [
+      "Don't use Raspberry Red for non-purchase actions — it loses power",
+      "Don't mix more than 2 font weights in a single component",
+      "Don't use gradients on buttons — keep them flat and solid",
+      "Don't apply thick borders on cards — use shadows for elevation",
+      "Don't use pure black (#000) for text — always use Prussian Blue or neutral-800",
+      "Don't nest cards inside cards — use spacing and shadows instead",
+      "Don't use bounce or elastic easing — keep transitions subtle and professional"
+    ]
+  }
+}
