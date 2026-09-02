@@ -347,6 +347,9 @@ export interface PublicStampingConfig {
  */
 export async function getPublicStampingConfig(): Promise<PublicStampingConfig | null> {
   try {
+    // stamping-config requiere auth → anonymous sign-in previo
+    const { ensureSalesAuth } = await import("@/firebase/sales");
+    await ensureSalesAuth();
     const db = getFirestore(getSalesApp());
     const snap = await getDoc(doc(db, "stamping-config", "current"));
     if (!snap.exists()) return null;

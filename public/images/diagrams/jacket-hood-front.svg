@@ -1,0 +1,23 @@
+<svg viewBox="0 0 200 200" fill="none" stroke="#71717A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 18,62 10,85 38,90" />
+  <path d="M 182,62 190,85 162,90" />
+  <path d="M 38,90 46,185 H 154 L 162,90" />
+  <path d="M 68,38 H 18 L 38,90" />
+  <path d="M 132,38 H 182 L 162,90" />
+  <path d="M 68,38 C 68,24 78,16 100,12 C 122,16 132,24 132,38" />
+  <path d="M 63,38 C 58,20 75,8 100,4 C 125,8 142,20 137,38" />
+  <path d="M 68,38 C 68,32 78,24 100,20 C 122,24 132,32 132,38" stroke-width="0.7" />
+  <path d="M 80,26 C 77,34 74,42 70,50" stroke-width="0.9" />
+  <path d="M 120,26 C 123,34 126,42 130,50" stroke-width="0.9" />
+  <circle cx="70" cy="51" r="1.5" fill="#71717A" stroke="none" />
+  <circle cx="130" cy="51" r="1.5" fill="#71717A" stroke="none" />
+  <path d="M 100,20 V 185" stroke-width="1.1" />
+  <path d="M 98,30 V 180" stroke-width="0.6" stroke-dasharray="1 3" />
+  <path d="M 102,30 V 180" stroke-width="0.6" stroke-dasharray="1 3" />
+  <path d="M 55,120 H 88 V 145 H 55 Z" stroke-width="0.9" />
+  <path d="M 145,120 H 112 V 145 H 145 Z" stroke-width="0.9" />
+  <path d="M 46,185 H 154" />
+  <path d="M 44,190 H 156" stroke-width="0.7" />
+  <path d="M 12,83 39,88" stroke-dasharray="2 2" stroke-width="0.8" />
+  <path d="M 188,83 161,88" stroke-dasharray="2 2" stroke-width="0.8" />
+</svg>
