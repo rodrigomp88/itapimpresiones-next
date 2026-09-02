@@ -19,9 +19,9 @@ export function CatalogHeader({ branding }: CatalogHeaderProps) {
         {/* Logo + back */}
         <div className="flex items-center gap-3">
           <Link
-            href="/dashboard"
+            href="/"
             className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-muted transition-colors"
-            aria-label="Volver al panel"
+            aria-label="Volver al inicio"
           >
             <ArrowLeft className="h-4 w-4 text-muted-foreground" />
           </Link>

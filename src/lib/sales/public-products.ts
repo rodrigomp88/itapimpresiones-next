@@ -329,6 +329,40 @@ export async function getPublicSettings(): Promise<SettingsValues | null> {
   }
 }
 
+import type {
+  SizeCategory,
+  Zone,
+  VisualTypeConfig,
+} from "./apparel-measures";
+
+export interface PublicStampingConfig {
+  sizeCategories: SizeCategory[];
+  zones: Zone[];
+  visualTypes: VisualTypeConfig[];
+}
+
+/**
+ * Trae stamping-config/current (configuración de zonas de estampado del
+ * cotizador interno) para que los precios del catálogo público coincidan.
+ */
+export async function getPublicStampingConfig(): Promise<PublicStampingConfig | null> {
+  try {
+    const db = getFirestore(getSalesApp());
+    const snap = await getDoc(doc(db, "stamping-config", "current"));
+    if (!snap.exists()) return null;
+    const data = snap.data() as Record<string, unknown>;
+    if (!data?.sizeCategories || !data?.zones || !data?.visualTypes) return null;
+    return {
+      sizeCategories: data.sizeCategories as SizeCategory[],
+      zones: data.zones as Zone[],
+      visualTypes: data.visualTypes as VisualTypeConfig[],
+    };
+  } catch (error) {
+    console.warn("[Sales] Error fetching stamping config:", error);
+    return null;
+  }
+}
+
 // Firestore rechaza undefined en cualquier nivel del objeto — limpiar recursivamente
 function deepCleanUndefined(obj: unknown): unknown {
   if (Array.isArray(obj)) return obj.map(deepCleanUndefined);

@@ -29,7 +29,11 @@ let _db: Firestore | null = null;
 let _storage: FirebaseStorage | null = null;
 
 try {
-  _app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+  // Buscar específicamente la app [DEFAULT] — puede existir otra instancia
+  // named (ej. "sales") que NO es la default.
+  _app =
+    getApps().find((a) => a.name === "[DEFAULT]") ??
+    initializeApp(firebaseConfig);
   _auth = getAuth(_app);
   _db = getFirestore(_app);
   _storage = getStorage(_app);
