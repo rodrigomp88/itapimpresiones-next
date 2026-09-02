@@ -578,7 +578,6 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
   padding: 2rem;
   margin-top: 2.5rem;
   background: rgba(254, 144, 11, 0.1);
-  transform: rotate(-0.75deg);
 }
 .landing-about__origin::after {
   content: "itap";
