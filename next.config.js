@@ -79,12 +79,16 @@ const nextConfig = {
 
   // Experimental features para performance
   experimental: {
-    optimizePackageImports: ['lucide-react', '@heroicons/react', 'framer-motion'],
+    // lucide-react retirado de optimizePackageImports: esa optimización
+    // desglosa los imports a la ruta interna PascalCase
+    // (dist/esm/icons/AlertCircle) que ya no existe en lucide-react 0.475
+    // (los archivos son kebab-case: alert-circle.js). Al resolver desde el
+    // bundle principal ESM, los imports nombrados funcionan y Turbopack
+    // igual hace tree-shaking.
+    optimizePackageImports: ['@heroicons/react', 'framer-motion'],
     scrollRestoration: true,
   },
 
-  // lucide-react: optimizePackageImports lo resuelve con kebab-case (dist/esm/icons/alert-circle.js).
-  // El modularizeImports manual rompía porque usaba PascalCase.
   // Compression
   compress: true,
 

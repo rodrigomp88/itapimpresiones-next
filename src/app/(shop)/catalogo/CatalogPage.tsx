@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getPublicProducts, getPublicSettings } from '@/lib/public-products';
+import { subscribePublicProducts, getPublicSettings } from '@/lib/public-products';
 import { CatalogClient } from './CatalogClient';
 import { CatalogTheme } from './CatalogTheme';
 import type { PublicProduct } from '@/lib/public-products';
@@ -15,27 +15,35 @@ export function CatalogPage() {
 
   useEffect(() => {
     let cancelled = false;
-    async function load() {
-      try {
-        const [productsResult, settingsResult] = await Promise.all([
-          getPublicProducts(200),
-          getPublicSettings(),
-        ]);
-        if (cancelled) return;
-        if (!settingsResult || !settingsResult.branding?.catalogEnabled) {
-          setError(true);
-          return;
-        }
-        setProducts(productsResult);
-        setBranding(settingsResult.branding as BrandingSettings);
-      } catch {
-        if (!cancelled) setError(true);
-      } finally {
-        if (!cancelled) setLoading(false);
+    async function loadSettings() {
+      const settingsResult = await getPublicSettings();
+      if (cancelled) return;
+      if (!settingsResult || !settingsResult.branding?.catalogEnabled) {
+        setError(true);
+        setLoading(false);
+        return;
       }
+      setBranding(settingsResult.branding as BrandingSettings);
     }
-    load();
+    loadSettings();
     return () => { cancelled = true; };
+  }, []);
+
+  // Real-time: cualquier cambio en la app se refleja al instante
+  useEffect(() => {
+    const unsub = subscribePublicProducts(
+      (prods) => {
+        setProducts(prods);
+        setLoading(false);
+      },
+      (err) => {
+        console.error(err);
+        setError(true);
+        setLoading(false);
+      },
+      300
+    );
+    return unsub;
   }, []);
 
   if (loading) {

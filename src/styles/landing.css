@@ -1552,3 +1552,87 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
   /* Hero ya tiene su propia animación — no revelar */
   #hero.section-frame { opacity: 1; transform: none; transition: none; }
 }
+
+/* ═══════════ CATÁLOGO — identidad compartida con el landing ═══════════ */
+/* Variante del hero para la página de catálogo: más compacto que el de
+   portada, mantiene el lenguaje editorial (mesh, crops, título, CTA). */
+.landing-hero--catalog {
+  min-height: auto;
+  padding: max(7rem, 12vh) clamp(1.25rem, 5vw, 4rem) 4rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.landing-hero--catalog .landing-hero__title {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  margin-bottom: 1.25rem;
+}
+
+.landing-hero--catalog .landing-block-label {
+  margin-bottom: 0;
+}
+
+/* Stats del hero del catálogo */
+.landing-hero__stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ink);
+  max-width: 56rem;
+}
+.landing-hero__stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.landing-hero__stats .stat-num {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.landing-hero__stats .stat-num::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+  background: var(--ocean);
+  border-radius: 2px;
+  vertical-align: 0.06em;
+}
+.landing-hero__stats .stat-k {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+
+/* Header del catálogo — mismo nav de la marca */
+.landing-nav--shop {
+  position: sticky;
+  top: 0;
+}
+.landing-nav--shop .landing-nav__theme {
+  position: relative;
+}
+
+/* El recuento del carrito sobre el botón usa el CTA de la marca */
+.bg-cta {
+  background-color: var(--cta);
+}
+
+@media (max-width: 640px) {
+  .landing-hero--catalog {
+    padding: max(6rem, 10vh) clamp(1.25rem, 5vw, 4rem) 3rem;
+  }
+  .landing-hero__stats {
+    gap: 1.25rem 1.75rem;
+  }
+}

@@ -4,6 +4,7 @@ import {
   query,
   where,
   getDocs,
+  onSnapshot,
   orderBy,
   limit as fbLimit,
   addDoc,
@@ -283,6 +284,63 @@ export async function getPublicProducts(
     console.error("[Sales] Error fetching public products:", error);
     return [];
   }
+}
+
+// Suscripción en tiempo real: el catálogo se actualiza al instante cuando
+// cambian productos en la app (sin necesidad de recargar la página).
+export function subscribePublicProducts(
+  onData: (products: PublicProduct[]) => void,
+  onError?: (error: unknown) => void,
+  maxProducts = 100
+): () => void {
+  const db = getFirestore(getSalesApp());
+  const seen = { apparel: [] as PublicProduct[], bags: [] as PublicProduct[] };
+
+  const emit = () => {
+    const all = [...seen.apparel, ...seen.bags].sort((a, b) => {
+      if (a.type === "bags" && b.type === "bags" && a.origen !== b.origen) {
+        return a.origen === "LOCAL" ? -1 : 1;
+      }
+      const nameA = a.type === "apparel" ? a.producto : a.nombreDisplay || a.material;
+      const nameB = b.type === "apparel" ? b.producto : b.nombreDisplay || b.material;
+      return nameA.localeCompare(nameB);
+    });
+    onData(all);
+  };
+
+  const unsubs = [
+    onSnapshot(
+      query(
+        collection(db, "products"),
+        where("estado", "in", ACTIVE_PRODUCT_STATUSES),
+        orderBy("producto"),
+        fbLimit(maxProducts)
+      ),
+      (snap) => {
+        seen.apparel = snap.docs.reduce<PublicProduct[]>((acc, d) => {
+          if (!(d.data().code || "").startsWith("BOL-"))
+            acc.push(mapApparelProduct(d));
+          return acc;
+        }, []);
+        emit();
+      },
+      onError
+    ),
+    onSnapshot(
+      query(
+        collection(db, "bag-products"),
+        where("estado", "in", ACTIVE_PRODUCT_STATUSES),
+        orderBy("material"),
+        fbLimit(maxProducts)
+      ),
+      (snap) => {
+        seen.bags = snap.docs.map(mapBagProduct);
+        emit();
+      },
+      onError
+    ),
+  ];
+  return () => unsubs.forEach((u) => u());
 }
 
 export async function getPublicProductById(
