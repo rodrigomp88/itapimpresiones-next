@@ -1,4 +1,4 @@
-import { z } from 'zod';
+﻿import { z } from 'zod';
 
 export const discountTierSchema = z.object({
   quantity: z.coerce.number().int().positive(),
@@ -15,19 +15,19 @@ export const bagDiscountTierSchema = z.object({
 export const sellerSchema = z.object({
   id: z.string().min(1, 'El ID es requerido'),
   name: z.string().min(1, 'El nombre es requerido'),
-  email: z.string().email('Email inválido').optional().or(z.literal('')),
+  email: z.string().email('Email invÃ¡lido').optional().or(z.literal('')),
   isActive: z.boolean(),
 });
 
-// Branding / Catálogo Público
+// Branding / CatÃ¡logo PÃºblico
 export const brandingSchema = z.object({
   businessName: z.string().default('Itap Impresiones'),
-  businessDescription: z.string().default('Impresiones textiles y bolsas ecológicas personalizadas'),
+  businessDescription: z.string().default('Impresiones textiles y bolsas ecolÃ³gicas personalizadas'),
   logoUrl: z.string().url().optional().or(z.literal('')),
   faviconUrl: z.string().url().optional().or(z.literal('')),
-  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#154212'),
-  secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#A8C69F'),
-  accentColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#D48C2E'),
+  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#0185C1'),
+  secondaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#02AE9C'),
+  accentColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#FE900B'),
   whatsappNumber: z.string().default(''),
   whatsappMessage: z.string().default('Hola, quiero consultar por {productName}'),
   announcementText: z.string().default(''),
@@ -35,16 +35,16 @@ export const brandingSchema = z.object({
   catalogEnabled: z.boolean().default(true),
   catalogShowPrices: z.boolean().default(false),
   sizeGuideImageUrl: z.string().url().optional().or(z.literal('')),
-  sizeGuideTitle: z.string().default('Guía de Talles'),
+  sizeGuideTitle: z.string().default('GuÃ­a de Talles'),
   instagramUrl: z.string().url().optional().or(z.literal('')),
   facebookUrl: z.string().url().optional().or(z.literal('')),
 });
 
 export const settingsSchema = z.object({
   // Macro
-  dolar: z.coerce.number().positive({ message: 'Debe ser un número positivo.' }),
-  nafta: z.coerce.number().positive({ message: 'Debe ser un número positivo.' }),
-  consumoAuto: z.coerce.number().positive({ message: 'Debe ser un número positivo.' }),
+  dolar: z.coerce.number().positive({ message: 'Debe ser un nÃºmero positivo.' }),
+  nafta: z.coerce.number().positive({ message: 'Debe ser un nÃºmero positivo.' }),
+  consumoAuto: z.coerce.number().positive({ message: 'Debe ser un nÃºmero positivo.' }),
   amortizacionAuto: z.coerce.number().min(0).max(1),
   kmRecorridoLocal: z.coerce.number().int().min(0),
   viajesAlMes: z.coerce.number().int().min(0),
@@ -67,12 +67,12 @@ export const settingsSchema = z.object({
   costoPackPremium: z.coerce.number().min(0, 'El costo no puede ser negativo.'),
   costoPackECO: z.coerce.number().min(0, 'El costo no puede ser negativo.'),
   
-  // Aplicación DTF
+  // AplicaciÃ³n DTF
   usaAplicacionDTFExterna: z.boolean(),
   costoAplicacionDTFExterna: z.coerce.number().min(0),
   costoPlancha: z.coerce.number().min(0, "El costo de la plancha no puede ser negativo."),
-  vidaUtilPlanchaMeses: z.coerce.number().int().positive("La vida útil debe ser un número entero positivo."),
-  costoEnergiaAplicacion: z.coerce.number().min(0, "El costo de energía no puede ser negativo."),
+  vidaUtilPlanchaMeses: z.coerce.number().int().positive("La vida Ãºtil debe ser un nÃºmero entero positivo."),
+  costoEnergiaAplicacion: z.coerce.number().min(0, "El costo de energÃ­a no puede ser negativo."),
   factorAplicacionDTFChica: z.coerce.number().min(0).max(1, 'Factor 0-1 (ej: 0.5 para 50%).').default(0.5),
   mermaBolsa: z.coerce.number().min(1).max(2, 'Factor de merma (ej: 1.03 para 3%).').default(1.03),
 
@@ -83,15 +83,15 @@ export const settingsSchema = z.object({
   recargoTarjeta: z.coerce.number().min(0).max(1, 'Debe ser un valor entre 0 y 1 (ej: 0.15 para 15%).'),
   objetivoMargenGlobal: z.coerce.number().min(0).max(1, 'Debe ser un valor entre 0 y 1 (ej: 0.30 para 30%).'),
 
-  // Márgenes y Comisiones - Ropa
+  // MÃ¡rgenes y Comisiones - Ropa
   margenContadoPrenda: z.coerce.number().min(0).max(1, 'Debe ser un valor entre 0 y 1 (ej: 0.30 para 30%).'),
   gananciaMinimaPrenda: z.coerce.number().min(0).max(1),
-  comisionVendedorPrenda: z.coerce.number().min(0).max(1, 'La comisión debe estar entre 0 y 1.'),
+  comisionVendedorPrenda: z.coerce.number().min(0).max(1, 'La comisiÃ³n debe estar entre 0 y 1.'),
   
-  // Márgenes y Comisiones - Bolsas
+  // MÃ¡rgenes y Comisiones - Bolsas
   margenContadoBolsa: z.coerce.number().min(0).max(1, 'Debe ser un valor entre 0 y 1 (ej: 0.30 para 30%).'),
   gananciaMinimaBolsa: z.coerce.number().min(0).max(1),
-  comisionVendedorBolsa: z.coerce.number().min(0).max(1, 'La comisión debe estar entre 0 y 1.'),
+  comisionVendedorBolsa: z.coerce.number().min(0).max(1, 'La comisiÃ³n debe estar entre 0 y 1.'),
 
   // DTF
   costoMetroLinealDTF: z.coerce.number().min(0),
@@ -99,7 +99,7 @@ export const settingsSchema = z.object({
   largoRolloDTF: z.coerce.number().positive(),
   mermaDTF: z.coerce.number().min(1),
 
-  // Serigrafía
+  // SerigrafÃ­a
   costoFijoSerigrafiaPrenda: z.coerce.number().min(0, 'El costo no puede ser negativo.'),
   coloresIncluidosSerigrafiaPrenda: z.coerce.number().int().min(1).max(8).default(2),
   factorDobleFazSerigrafiaPrenda: z.coerce.number().min(1).max(5).default(2),
@@ -110,15 +110,15 @@ export const settingsSchema = z.object({
   costoViniloPorCm2: z.coerce.number().min(0, 'El costo no puede ser negativo.').default(0.85),
   costoFijoVinilo: z.coerce.number().min(0, 'El costo fijo de vinilo no puede ser negativo.').default(500),
 
-  // Sublimación
+  // SublimaciÃ³n
   costoSublimacionPorCm2: z.coerce.number().min(0, 'El costo no puede ser negativo.').default(1.20),
-  costoFijoSublimacion: z.coerce.number().min(0, 'El costo fijo de sublimación no puede ser negativo.').default(800),
+  costoFijoSublimacion: z.coerce.number().min(0, 'El costo fijo de sublimaciÃ³n no puede ser negativo.').default(800),
 
   // Bordado
   costoBordadoBase: z.coerce.number().min(0, 'El costo base de bordado no puede ser negativo.').default(2500),
   costoBordadoPorPunto: z.coerce.number().min(0, 'El costo por punto no puede ser negativo.').default(0.05),
-  puntosPorMinuto: z.coerce.number().int().positive('Debe ser un número entero positivo.').default(800),
-  velocidadBordado: z.coerce.number().int().positive('Debe ser un número entero positivo.').default(800),
+  puntosPorMinuto: z.coerce.number().int().positive('Debe ser un nÃºmero entero positivo.').default(800),
+  velocidadBordado: z.coerce.number().int().positive('Debe ser un nÃºmero entero positivo.').default(800),
 
   // Transfer
   costoTransferPorCm2: z.coerce.number().min(0, 'El costo no puede ser negativo.').default(0.95),
@@ -137,7 +137,7 @@ export const settingsSchema = z.object({
   descuentosBolsa: z.array(bagDiscountTierSchema).default([]),
   descuentosBolsaHabilitados: z.boolean().default(false),
 
-  // Mínimos de Cantidad por Producto y Técnica
+  // MÃ­nimos de Cantidad por Producto y TÃ©cnica
   minimosCantidad: z.object({
     indumentaria: z.object({
       serigrafia: z.coerce.number().int().min(1).default(5),
@@ -160,7 +160,7 @@ export const settingsSchema = z.object({
   descuentoCompetitivo: z.coerce.number().min(0, 'El descuento no puede ser negativo.').default(1000),
   costoDobleFazSerigrafiaBolsa: z.coerce.number().min(0, 'El costo no puede ser negativo.').default(50),
 
-  // Terminaciones (costos por terminación, se suman por producto)
+  // Terminaciones (costos por terminaciÃ³n, se suman por producto)
   costoEtiquetado: z.coerce.number().min(0).default(0),
   costoDoblado: z.coerce.number().min(0).default(0),
   costoEmbolsado: z.coerce.number().min(0).default(0),
@@ -172,12 +172,12 @@ export const settingsSchema = z.object({
   autoNotifyEnabled: z.boolean().default(false),
 
   // Condiciones de Pago
-  paymentConditions: z.string().optional().default('Transf. Bancaria, Mercado Pago, Efectivo. Se requiere 50% de seña para confirmar el pedido.'),
+  paymentConditions: z.string().optional().default('Transf. Bancaria, Mercado Pago, Efectivo. Se requiere 50% de seÃ±a para confirmar el pedido.'),
 
   // Presupuesto
   presupuestoValidoDias: z.coerce.number().int().min(1).max(90).default(7),
 
-  // Branding / Catálogo Público
+  // Branding / CatÃ¡logo PÃºblico
   branding: brandingSchema.prefault({}),
 });
 
@@ -210,7 +210,7 @@ export const defaultSettings: SettingsValues = {
   costoPackPremium: 1050,
   costoPackECO: 150,
   
-  // Aplicación DTF
+  // AplicaciÃ³n DTF
   usaAplicacionDTFExterna: true,
   costoAplicacionDTFExterna: 1000,
   costoPlancha: 600000,
@@ -225,12 +225,12 @@ export const defaultSettings: SettingsValues = {
   recargoTarjeta: 0.15,
   objetivoMargenGlobal: 0.30,
   
-  // Márgenes y Comisiones - Ropa
+  // MÃ¡rgenes y Comisiones - Ropa
   margenContadoPrenda: 0.43,
   gananciaMinimaPrenda: 0.15, 
   comisionVendedorPrenda: 0.16,
 
-  // Márgenes y Comisiones - Bolsas
+  // MÃ¡rgenes y Comisiones - Bolsas
   margenContadoBolsa: 0.3,
   gananciaMinimaBolsa: 0.1,
   comisionVendedorBolsa: 0.10,
@@ -241,7 +241,7 @@ export const defaultSettings: SettingsValues = {
   largoRolloDTF: 100,
   mermaDTF: 1.4,
   
-  // Serigrafía
+  // SerigrafÃ­a
   costoFijoSerigrafiaPrenda: 1500,
   coloresIncluidosSerigrafiaPrenda: 2,
   factorDobleFazSerigrafiaPrenda: 2,
@@ -252,7 +252,7 @@ export const defaultSettings: SettingsValues = {
   costoViniloPorCm2: 0.85,
   costoFijoVinilo: 500,
 
-  // Sublimación
+  // SublimaciÃ³n
   costoSublimacionPorCm2: 1.20,
   costoFijoSublimacion: 800,
 
@@ -279,7 +279,7 @@ export const defaultSettings: SettingsValues = {
   descuentosBolsa: [],
   descuentosBolsaHabilitados: false,
 
-  // Mínimos de Cantidad
+  // MÃ­nimos de Cantidad
   minimosCantidad: {
     indumentaria: { serigrafia: 5, dtf: 1, sublimado: 1, sinImpresion: 1 },
     bolsas: { serigrafia: 100, dtf: 10, sublimado: 10, sinImpresion: 1 },
@@ -301,20 +301,20 @@ export const defaultSettings: SettingsValues = {
   autoNotifyEnabled: false,
 
   // Condiciones de Pago
-  paymentConditions: 'Transf. Bancaria, Mercado Pago, Efectivo. Se requiere 50% de seña para confirmar el pedido.',
+  paymentConditions: 'Transf. Bancaria, Mercado Pago, Efectivo. Se requiere 50% de seÃ±a para confirmar el pedido.',
 
   // Presupuesto
   presupuestoValidoDias: 7,
 
-  // Branding / Catálogo Público
+  // Branding / CatÃ¡logo PÃºblico
   branding: {
     businessName: 'Itap Impresiones',
-    businessDescription: 'Impresiones textiles y bolsas ecológicas personalizadas',
+    businessDescription: 'Impresiones textiles y bolsas ecolÃ³gicas personalizadas',
     logoUrl: '',
     faviconUrl: '',
-    primaryColor: '#154212',
-    secondaryColor: '#A8C69F',
-    accentColor: '#D48C2E',
+    primaryColor: '#0185C1',
+    secondaryColor: '#02AE9C',
+    accentColor: '#FE900B',
     whatsappNumber: '',
     whatsappMessage: 'Hola, quiero consultar por {productName}',
     announcementText: '',
@@ -322,7 +322,7 @@ export const defaultSettings: SettingsValues = {
     catalogEnabled: true,
     catalogShowPrices: false,
     sizeGuideImageUrl: '',
-    sizeGuideTitle: 'Guía de Talles',
+    sizeGuideTitle: 'GuÃ­a de Talles',
     instagramUrl: '',
     facebookUrl: '',
   },

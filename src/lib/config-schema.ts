@@ -1,1 +1,1 @@
-export * from "./sales/config-schema";
+﻿export * from "./sales/config-schema";
