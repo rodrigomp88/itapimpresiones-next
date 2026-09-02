@@ -148,7 +148,7 @@ export async function editProductAction(productId: string, formData: FormData) {
 
   revalidatePath("/admin/products");
   revalidatePath(`/producto/${updatedData.slug}`);
-  revalidatePath("/tienda");
+  revalidatePath("/buscar");
   return { success: true };
 }
 
@@ -162,7 +162,7 @@ export async function deleteProductAction(
     return { success: false, error: "No se pudo eliminar el producto." };
   }
   revalidatePath("/admin/products");
-  revalidatePath("/tienda");
+  revalidatePath("/buscar");
   return { success: true };
 }
 

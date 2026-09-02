@@ -100,7 +100,7 @@ const CartPage: React.FC = () => {
               Agrega productos para comenzar tu compra
             </p>
             <Link
-              href="/tienda"
+              href="/"
               className="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-cta text-white text-base font-bold hover:bg-cta-dark transition-colors"
             >
               Ir a la Tienda
@@ -363,7 +363,7 @@ const CartPage: React.FC = () => {
                   Proceder al Pago
                 </button>
                 <Link
-                  href="/tienda"
+                  href="/"
                   className="w-full flex items-center justify-center rounded-lg h-12 bg-zinc-50 dark:bg-zinc-700/50 text-prussian-blue dark:text-zinc-100 text-base font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors"
                 >
                   Continuar Comprando

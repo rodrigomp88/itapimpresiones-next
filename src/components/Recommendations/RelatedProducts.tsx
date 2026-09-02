@@ -304,7 +304,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
         {currentProducts.length >= maxProducts && (
           <div className="mt-6 text-center">
             <Link
-              href={`/tienda?category=${currentProduct.category}`}
+              href="/#catalogo"
               className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
             >
               <span>

@@ -35,13 +35,13 @@ export default function AuthLayout({
         {/* Footer Link */}
         <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
           <Link
-            href="/tienda"
+            href="/"
             className="group font-medium text-primary hover:text-primary/80 transition-colors duration-200 flex items-center justify-center gap-2"
           >
             <span className="group-hover:-translate-x-1 transition-transform duration-200">
               &larr;
             </span>
-            Volver a la tienda
+            Volver al inicio
           </Link>
         </p>
       </div>

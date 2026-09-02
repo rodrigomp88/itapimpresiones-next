@@ -39,7 +39,7 @@ const fallbackProducts: Product[] = [
     name: "Bolsa Friselina Standard",
     slug: "bolsa-friselina-standard",
     price: 800,
-    images: [{ url: "/images/carousel0.webp", color: "Blanco" }],
+    images: [{ url: "/images/brand/logo-horizontal-negro.svg", color: "Blanco" }],
     pause: false,
     unity: 1,
     size: "30x40",
@@ -203,7 +203,7 @@ export async function generateMetadata({
             ]
           : [
               {
-                url: `${baseUrl}/images/logoblack.png`,
+                url: `${baseUrl}/images/brand/logo-horizontal-negro.svg`,
                 width: 1200,
                 height: 630,
                 alt: "Itap Impresiones",

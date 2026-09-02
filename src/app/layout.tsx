@@ -4,16 +4,11 @@ import "./globals.css";
 
 import Providers from "./providers";
 import SessionHandler from "../components/SessionHandler";
-import ServiceWorkerRegister from "../components/ServiceWorkerRegister";
-import PWAInstaller from "../components/PWAInstaller";
-import MobileNavigationWrapper from "../components/Mobile/MobileNavigationWrapper";
 
 import { initSentry } from "../utils/sentry";
 
-// Inicializar Sentry
 initSentry();
 
-// Self-host Plus Jakarta Sans via next/font (eliminates external requests)
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -23,26 +18,26 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
+  title: "ITAP Impresiones — Serigrafía, DTF y sublimado en Mendoza",
   description:
-    "Servicio de impresiones en bolsas, gorras, remeras, buzos con impresiones perzonalizadas de tu nogocio o empresa y más. Calidad y diseño para tu marca.",
+    "Serigrafía, DTF y sublimado sobre indumentaria y friselina en Guaymallén, Mendoza. Remeras, buzos, gorras y bolsas impresas a pedido.",
 
-  metadataBase: new URL("https://itapimpresiones.vercel.app"),
+  metadataBase: new URL("https://itapimpresiones.com"),
 
   manifest: "/manifest.json",
 
   openGraph: {
-    title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
+    title: "ITAP Impresiones — Serigrafía, DTF y sublimado en Mendoza",
     description:
-      "Servicio de impresiones en bolsas, gorras, remeras, buzos con impresiones perzonalizadas de tu nogocio o empresa y más. Calidad y diseño para tu marca.",
-    url: "https://itapimpresiones.vercel.app",
-    siteName: "Itap Impresiones",
+      "Serigrafía, DTF y sublimado sobre indumentaria y friselina en Guaymallén, Mendoza. Remeras, buzos, gorras y bolsas impresas a pedido.",
+    url: "https://itapimpresiones.com",
+    siteName: "ITAP Impresiones",
     images: [
       {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Logo y eslogan de Itap Impresiones",
+        alt: "ITAP Impresiones — Serigrafía, DTF y sublimado en Mendoza",
       },
     ],
     locale: "es_AR",
@@ -51,9 +46,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Itap Impresiones - Soluciones Gráficas y Personalizadas",
+    title: "ITAP Impresiones — Serigrafía, DTF y sublimado en Mendoza",
     description:
-      "Servicio de impresiones en bolsas, gorras, buzos con impresiones perzonalizadas de tu nogocio o empresa y más. Calidad y diseño para tu marca.",
+      "Serigrafía, DTF y sublimado sobre indumentaria y friselina en Guaymallén, Mendoza.",
     images: ["/opengraph-image.png"],
   },
 
@@ -76,101 +71,132 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning className={jakarta.variable}>
-      <head>
-        {/* Preconnects para Firebase */}
-        <link
-          rel="preconnect"
-          href="https://www.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://firestore.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://firebaseinstallations.googleapis.com"
-        />
-
-        {/* DNS prefetch para recursos externos */}
-        <link rel="dns-prefetch" href="//www.gstatic.com" />
-
-        {/* Critical CSS inlining para mejor FCP */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-            /* Critical CSS para above-the-fold content */
-            body { margin: 0; font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif; }
-            .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
-            /* Loading states */
-            .animate-spin { animation: spin 1s linear infinite; }
-            @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-            /* Critical layout */
-            .min-h-screen { min-height: 100vh; }
-            .flex { display: flex; }
-            .items-center { align-items: center; }
-            .justify-center { justify-content: center; }
-          `,
-          }}
-        />
-
-        {/* Material Symbols - loaded async */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
-          rel="stylesheet"
-        />
-
-        {/* Preload critical resources */}
-        <link rel="modulepreload" href="/_next/static/chunks/webpack.js" />
-        <link rel="preload" as="image" href="/android-chrome-512x512.png" />
-
-        {/* Preload critical above-the-fold images */}
-        <link rel="preload" as="image" href="/images/carousel0.webp" type="image/webp" />
-        <link rel="preload" as="image" href="/images/carousel1.webp" type="image/webp" />
-        <link rel="preload" as="image" href="/images/carousel3.webp" type="image/webp" />
-
-        {/* Script para evitar FOUC en cambio de tema */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (function() {
-              try {
-                var theme = localStorage.getItem('itap-theme');
-                if (theme === 'dark') {
-                  document.documentElement.classList.add('dark');
-                } else if (theme === 'system') {
-                  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.classList.add('dark');
-                  }
-                }
-              } catch (e) {}
-            })();
-          `,
-          }}
-        />
-      </head>
       <body
-        className={`antialiased bg-white dark:bg-black text-slate-800 dark:text-slate-200`}
+        className="antialiased bg-white text-prussian-blue"
         suppressHydrationWarning
       >
-        {/* Main content landmark */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("itap-theme");if(!t){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";}document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`,
+          }}
+        />
         <div id="main-content">
           <Providers>
             <SessionHandler />
-            <ServiceWorkerRegister />
-            <PWAInstaller />
             {children}
-
-            {/* Navegación móvil - solo visible en dispositivos móviles */}
-            <MobileNavigationWrapper />
-
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
                 __html: JSON.stringify({
                   "@context": "https://schema.org",
-                  "@type": "Organization",
-                  url: "https://itapimpresiones.vercel.app",
-                  logo: "https://itapimpresiones.vercel.app/android-chrome-512x512.png",
+                  "@graph": [
+                    {
+                      "@type": "Organization",
+                      "@id": "https://itapimpresiones.com/#organization",
+                      "name": "ITAP Impresiones",
+                      "url": "https://itapimpresiones.com",
+                      "logo": {
+                        "@type": "ImageObject",
+                        "url": "https://itapimpresiones.com/images/brand/logo-horizontal-negro.svg",
+                        "width": 300,
+                        "height": 60,
+                      },
+                      "email": "itapimpresiones@gmail.com",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Guaymallén",
+                        "addressRegion": "Mendoza",
+                        "addressCountry": "AR",
+                      },
+                    },
+                    {
+                      "@type": "WebPage",
+                      "@id": "https://itapimpresiones.com/#webpage",
+                      "url": "https://itapimpresiones.com",
+                      "name": "ITAP Impresiones — Serigrafía, DTF y sublimado en Mendoza",
+                      "isPartOf": {
+                        "@id": "https://itapimpresiones.com/#organization",
+                      },
+                      "description":
+                        "Serigrafía, DTF y sublimado sobre indumentaria y friselina en Guaymallén, Mendoza.",
+                      "inLanguage": "es-AR",
+                    },
+                    {
+                      "@type": "LocalBusiness",
+                      "@id": "https://itapimpresiones.com/#localbusiness",
+                      "name": "ITAP Impresiones",
+                      "description":
+                        "Serigrafía, DTF y sublimado sobre indumentaria y friselina en Guaymallén, Mendoza.",
+                      "url": "https://itapimpresiones.com",
+                      "image": "https://itapimpresiones.com/images/og-image.png",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Guaymallén",
+                        "addressRegion": "Mendoza",
+                        "addressCountry": "AR",
+                      },
+                      "areaServed": {
+                        "@type": "City",
+                        "name": "Gran Mendoza",
+                      },
+                      "openingHoursSpecification": [
+                        {
+                          "@type": "OpeningHoursSpecification",
+                          "dayOfWeek": [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                          ],
+                          "opens": "09:00",
+                          "closes": "18:00",
+                        },
+                      ],
+                      "priceRange": "$$",
+                      "hasOfferCatalog": {
+                        "@type": "OfferCatalog",
+                        "name": "Servicios de impresión",
+                        "itemListElement": [
+                          {
+                            "@type": "Offer",
+                            "itemOffered": {
+                              "@type": "Service",
+                              "name": "Serigrafía sobre indumentaria",
+                            },
+                          },
+                          {
+                            "@type": "Offer",
+                            "itemOffered": {
+                              "@type": "Service",
+                              "name": "DTF transfer por film",
+                            },
+                          },
+                          {
+                            "@type": "Offer",
+                            "itemOffered": {
+                              "@type": "Service",
+                              "name": "Sublimado sobre poliéster",
+                            },
+                          },
+                          {
+                            "@type": "Offer",
+                            "itemOffered": {
+                              "@type": "Service",
+                              "name": "Indumentaria de trabajo",
+                            },
+                          },
+                          {
+                            "@type": "Offer",
+                            "itemOffered": {
+                              "@type": "Service",
+                              "name": "Bolsas de friselina personalizadas",
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 }),
               }}
             />

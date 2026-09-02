@@ -22,11 +22,9 @@ import {
   FaTrash,
   FaPlus,
   FaImage,
-  FaCloudDownloadAlt,
 } from "react-icons/fa";
 import Image from "next/image";
 import Notiflix from "notiflix";
-import { sliderData } from "@/components/Carousel/data";
 
 const AdminDesignPage = () => {
   const [banners, setBanners] = useState<Banner[]>([]);
@@ -79,34 +77,6 @@ const AdminDesignPage = () => {
     setCustomUrl("");
     setCtaText("");
     setImageFile(null);
-  };
-
-  const handleLoadDefaults = async () => {
-    Notiflix.Confirm.show(
-      "Cargar Banners por Defecto",
-      "¿Estás seguro? Esto agregará los 4 banners originales a la base de datos.",
-      "Sí, cargar",
-      "Cancelar",
-      async () => {
-        try {
-          setLoading(true);
-          const batchPromises = sliderData.map((slide) => {
-            return addDoc(collection(db, "banners"), {
-              ...slide,
-              createdAt: serverTimestamp(),
-            });
-          });
-          await Promise.all(batchPromises);
-          Notiflix.Notify.success("Banners por defecto cargados");
-          fetchBanners();
-        } catch (error) {
-          console.error("Error loading defaults:", error);
-          Notiflix.Notify.failure("Error al cargar defaults");
-        } finally {
-          setLoading(false);
-        }
-      }
-    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -194,15 +164,6 @@ const AdminDesignPage = () => {
           <FaPlus />
           <span>Agregar Banner</span>
         </button>
-        {banners.length === 0 && (
-          <button
-            onClick={handleLoadDefaults}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors font-medium border border-gray-300"
-          >
-            <FaCloudDownloadAlt />
-            <span>Cargar Defaults</span>
-          </button>
-        )}
       </div>
 
       {/* Banners Grid */}
@@ -345,21 +306,11 @@ const AdminDesignPage = () => {
                       }}
                       className="w-full px-3 py-2 border border-zinc-300 dark:border-zinc-600 rounded-lg bg-white dark:bg-zinc-900 text-prussian-blue dark:text-white"
                     >
-                      <option value="/tienda">Tienda (General)</option>
-                      <option value="/tienda?category=Remeras">
-                        Tienda - Remeras
-                      </option>
-                      <option value="/tienda?category=Buzos">
-                        Tienda - Buzos
-                      </option>
-                      <option value="/tienda?category=Gorras">
-                        Tienda - Gorras
-                      </option>
-                      <option value="/tienda?category=Bolsas">
-                        Tienda - Bolsas
-                      </option>
-                      <option value="/servicios">Servicios</option>
-                      <option value="/contacto">Contacto</option>
+                      <option value="/">Inicio</option>
+                      <option value="/#catalogo">Catálogo</option>
+                      <option value="/#tecnicas">Técnicas</option>
+                      <option value="/#nosotros">Nosotros</option>
+                      <option value="/#contacto">Contacto</option>
                       <option value="custom">Otro (URL Personalizada)</option>
                     </select>
                     {ctaLinkType === "custom" && (

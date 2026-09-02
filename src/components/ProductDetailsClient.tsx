@@ -149,7 +149,7 @@ const ProductDetailsClient: React.FC<ProductDetailsClientProps> = ({
             <span className="text-zinc-600 dark:text-zinc-400 text-sm">/</span>
             <Link
               className="text-zinc-600 dark:text-zinc-400 text-sm font-medium hover:text-primary"
-              href="/tienda"
+              href="/#catalogo"
             >
               Tienda
             </Link>

@@ -33,11 +33,47 @@
   /* Typography */
   --font-display: var(--font-jakarta), system-ui, sans-serif;
   color-scheme: light;
+
+  /* Landing — tokens del nuevo diseño (tinta) */
+  --font: var(--font-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --bg: #ffffff;
+  --text: #1a2333;
+  --ocean: #0185c1;
+  --mist: #02ae9c;
+  --cta: #e01358;
+  --saffron: #fe900b;
+  --ink: rgba(26, 35, 51, 0.12);
+  --trace: rgba(26, 35, 51, 0.35);
+  --nav-bg: rgba(255, 255, 255, 0.94);
+  --on-mist: #1a2333;
+  --focus: #0066A3;
 }
 
 /* Dark mode */
 :root.dark {
   color-scheme: dark;
+}
+
+/* Tema del landing — el toggle escribe data-theme en <html> */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0e1621;
+  --text: #f2f5f8;
+  --ink: rgba(242, 245, 248, 0.12);
+  --trace: rgba(242, 245, 248, 0.2);
+  --nav-bg: rgba(14, 22, 33, 0.94);
+  --mist: #03C4A4;
+  --on-mist: #0e1621;
+}
+
+html[data-theme] {
+  background-color: var(--bg);
+}
+
+html[data-theme] body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
 }
 
 html {

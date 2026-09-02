@@ -221,28 +221,28 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   Categorías
                 </div>
                 <Link
-                  href="/tienda?category=Remeras"
+                  href="/#catalogo"
                   onClick={() => setShowSuggestions(false)}
                   className="block w-full text-left px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-zinc-700 dark:text-zinc-300"
                 >
                   Remeras
                 </Link>
                 <Link
-                  href="/tienda?category=Bolsas"
+                  href="/#catalogo"
                   onClick={() => setShowSuggestions(false)}
                   className="block w-full text-left px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-zinc-700 dark:text-zinc-300"
                 >
                   Bolsas
                 </Link>
                 <Link
-                  href="/tienda?category=Gorras"
+                  href="/#catalogo"
                   onClick={() => setShowSuggestions(false)}
                   className="block w-full text-left px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-zinc-700 dark:text-zinc-300"
                 >
                   Gorras
                 </Link>
                 <Link
-                  href="/tienda?category=Buzos"
+                  href="/#catalogo"
                   onClick={() => setShowSuggestions(false)}
                   className="block w-full text-left px-4 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-zinc-700 dark:text-zinc-300"
                 >

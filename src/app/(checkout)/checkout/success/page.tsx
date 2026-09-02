@@ -115,7 +115,7 @@ const SuccessPageContent: React.FC = () => {
               Ver Mis Órdenes
             </Link>
             <Link
-              href="/tienda"
+              href="/"
               className="inline-flex items-center justify-center px-6 py-3 border border-zinc-300 dark:border-zinc-600 text-base font-medium rounded-lg text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
             >
               Continuar Comprando
