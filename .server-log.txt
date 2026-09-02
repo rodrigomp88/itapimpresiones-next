@@ -1,0 +1,7 @@
+   ▲ Next.js 16.0.8
+   - Local:         http://localhost:3210
+   - Network:       http://192.168.1.38:3210
+
+ ✓ Starting...
+ ✓ Ready in 256ms
+FIREBASE_SERVICE_ACCOUNT_JSON not provided. Admin SDK not initialized.

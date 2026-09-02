@@ -72,10 +72,10 @@ export default function Landing() {
             ["Catálogo", "#catalogo"],
             ["Proceso", "#proceso"],
             ["Contacto", "#contacto"],
-            ["Tienda", "/tienda"],
+            ["Tienda", "/catalogo"],
           ].map(([label, href]) => (
             <li key={href}>
-              <a href={href} onClick={closeMenu} className={href === "/tienda" ? "landing-nav__shop" : undefined}>
+              <a href={href} onClick={closeMenu} className={href === "/catalogo" ? "landing-nav__shop" : undefined}>
                 {label}
               </a>
             </li>
@@ -138,8 +138,8 @@ export default function Landing() {
             <a href="#contacto" className="landing-btn landing-btn--solid">
               Cotizar
             </a>
-            <a href="/tienda" className="landing-btn landing-btn--ghost">
-              Tienda
+            <a href="/catalogo" className="landing-btn landing-btn--ghost">
+              Catálogo
             </a>
           </div>
         </div>

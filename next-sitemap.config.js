@@ -15,22 +15,7 @@ module.exports = {
     // Por ahora, paths estáticos basados en las rutas existentes
     const staticPaths = [
       {
-        loc: '/bolsas',
-        changefreq: 'weekly',
-        priority: 0.8,
-      },
-      {
-        loc: '/indumentaria',
-        changefreq: 'weekly',
-        priority: 0.8,
-      },
-      {
-        loc: '/servicios',
-        changefreq: 'weekly',
-        priority: 0.8,
-      },
-      {
-        loc: '/tienda',
+        loc: '/catalogo',
         changefreq: 'daily',
         priority: 0.9,
       },
