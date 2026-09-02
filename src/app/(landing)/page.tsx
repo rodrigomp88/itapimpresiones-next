@@ -402,6 +402,114 @@ export default function Landing() {
             <p className="landing-cat__foot">Desde 100 u. · Envío a todo el país</p>
           </div>
         </div>
+
+        <div className="landing-cat__cta-wrap">
+          <Link href="/catalogo" className="landing-btn landing-btn--solid">
+            Ver catálogo completo
+          </Link>
+        </div>
+      </section>
+
+      {/* ═══════════ TRABAJOS (PORTFOLIO) ═══════════ */}
+      <section
+        className="landing-portfolio section-frame"
+        id="trabajos"
+        data-num="04b"
+      >
+        <div className="landing-portfolio__head">
+          <p className="landing-block-label">Trabajos</p>
+          <h2 className="landing-block-title">
+            Lo que
+            <br />
+            <span className="out">sale</span> del taller
+          </h2>
+        </div>
+
+        <div className="landing-portfolio__grid">
+          <div className="landing-portfolio__item landing-portfolio__item--wide">
+            <div className="landing-portfolio__bg landing-portfolio__bg--remeras" />
+            <div className="landing-portfolio__ph" aria-hidden="true">
+              Próximamente
+            </div>
+            <div className="landing-portfolio__content">
+              <div className="landing-portfolio__label landing-portfolio__label--white">
+                Serigrafía · 200 u
+              </div>
+              <h3 className="landing-portfolio__name landing-portfolio__name--white">
+                Remeras evento corporativo
+              </h3>
+              <div className="landing-portfolio__spec landing-portfolio__spec--white">
+                2 tintas · algodón 180g · base blanca
+              </div>
+            </div>
+          </div>
+
+          <div className="landing-portfolio__item">
+            <div className="landing-portfolio__bg landing-portfolio__bg--bolsas" />
+            <div className="landing-portfolio__ph" aria-hidden="true">
+              Próximamente
+            </div>
+            <div className="landing-portfolio__content">
+              <div className="landing-portfolio__label landing-portfolio__label--saffron">
+                Friselina · 150 u
+              </div>
+              <h3 className="landing-portfolio__name">Bolsas boutique</h3>
+              <div className="landing-portfolio__spec">
+                1 tinta · asas planas · 35×45 cm
+              </div>
+            </div>
+          </div>
+
+          <div className="landing-portfolio__item">
+            <div className="landing-portfolio__bg landing-portfolio__bg--buzos" />
+            <div className="landing-portfolio__ph" aria-hidden="true">
+              Próximamente
+            </div>
+            <div className="landing-portfolio__content">
+              <div className="landing-portfolio__label landing-portfolio__label--white">
+                DTF · 50 u
+              </div>
+              <h3 className="landing-portfolio__name landing-portfolio__name--white">
+                Buzos equipo de fútbol
+              </h3>
+              <div className="landing-portfolio__spec landing-portfolio__spec--white">
+                Fotografía · poly-fleece · negro
+              </div>
+            </div>
+          </div>
+
+          <div className="landing-portfolio__item">
+            <div className="landing-portfolio__bg landing-portfolio__bg--gorras" />
+            <div className="landing-portfolio__ph" aria-hidden="true">
+              Próximamente
+            </div>
+            <div className="landing-portfolio__content">
+              <div className="landing-portfolio__label landing-portfolio__label--mist">
+                Serigrafía · 80 u
+              </div>
+              <h3 className="landing-portfolio__name">Gorras comercio</h3>
+              <div className="landing-portfolio__spec">
+                1 tinta · panel frontal · navy
+              </div>
+            </div>
+          </div>
+
+          <div className="landing-portfolio__item">
+            <div className="landing-portfolio__bg landing-portfolio__bg--camperas" />
+            <div className="landing-portfolio__ph" aria-hidden="true">
+              Próximamente
+            </div>
+            <div className="landing-portfolio__content">
+              <div className="landing-portfolio__label landing-portfolio__label--cta">
+                DTF · 30 u
+              </div>
+              <h3 className="landing-portfolio__name">Camperas delivery</h3>
+              <div className="landing-portfolio__spec">
+                Logo completo · tela lisa · personalización total
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ═══════════ PROCESO ═══════════ */}
@@ -522,6 +630,68 @@ export default function Landing() {
             no se usa. <b>Duran más, se imprimen mejor y tu cliente las vuelve
             a usar.</b> No es solo packaging: es una decisión.
           </p>
+        </div>
+      </section>
+
+      {/* ═══════════ OPINIONES (SOCIAL PROOF) ═══════════ */}
+      <section
+        className="landing-social"
+        id="opiniones"
+      >
+        <div className="landing-social__head">
+          <p className="landing-block-label">Opiniones</p>
+          <h2 className="landing-block-title">
+            Lo que dicen
+            <br />
+            quienes <span className="out">piden</span>
+          </h2>
+        </div>
+
+        <div className="landing-social__grid">
+          <div className="landing-social__card">
+            <p className="landing-social__quote">
+              Pedimos 200 remeras con DTF para el evento y quedaron exactamente
+              como las habíamos imaginado. La atención al detalle fue
+              impresionante.
+            </p>
+            <div className="landing-social__author">
+              <h3 className="landing-social__name">Martín López</h3>
+              <span className="landing-social__role">
+                Organizador de eventos · Mendoza
+              </span>
+            </div>
+            <span className="landing-social__tag">DTF</span>
+          </div>
+
+          <div className="landing-social__card">
+            <p className="landing-social__quote">
+              Llevamos dos años con ITAP haciendo los uniformes del taller. La
+              serigrafía no se despega ni después de mil lavadas. Oficio de
+              verdad.
+            </p>
+            <div className="landing-social__author">
+              <h3 className="landing-social__name">Carolina Ruiz</h3>
+              <span className="landing-social__role">
+                Taller mecánico · Guaymallén
+              </span>
+            </div>
+            <span className="landing-social__tag">Serigrafía</span>
+          </div>
+
+          <div className="landing-social__card">
+            <p className="landing-social__quote">
+              Las bolsas de friselina que nos hicieron son parte de la
+              identidad del local. Cada clienta se lleva una y nos pregunta de
+              dónde son.
+            </p>
+            <div className="landing-social__author">
+              <h3 className="landing-social__name">Florencia García</h3>
+              <span className="landing-social__role">
+                Boutique de ropa · Capital
+              </span>
+            </div>
+            <span className="landing-social__tag">Friselina</span>
+          </div>
         </div>
       </section>
 

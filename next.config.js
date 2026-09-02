@@ -83,13 +83,8 @@ const nextConfig = {
     scrollRestoration: true,
   },
 
-  // Modularize imports para tree shaking más agresivo
-  modularizeImports: {
-    'lucide-react': {
-      transform: 'lucide-react/dist/esm/icons/{{member}}',
-    },
-  },
-
+  // lucide-react: optimizePackageImports lo resuelve con kebab-case (dist/esm/icons/alert-circle.js).
+  // El modularizeImports manual rompía porque usaba PascalCase.
   // Compression
   compress: true,
 

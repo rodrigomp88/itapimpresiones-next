@@ -513,8 +513,12 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
 }
 
 /* ✦ B-editorial: giant ghost section number bleeding off the grid */
+/* overflow:hidden recorta el número fantasma dentro de la sección:
+   evita que con los offsets negativos (right:/left:) expanda el ancho
+   del documento y genere scroll horizontal en móvil (causa raíz). */
 [data-num] {
   position: relative;
+  overflow: hidden;
 }
 [data-num]::before {
   content: attr(data-num);
@@ -790,6 +794,12 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
 .landing-cat {
   padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem);
 }
+.landing-cat__cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
 .landing-cat__head {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -888,6 +898,184 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
   font-size: 0.8125rem;
   opacity: 0.6;
   margin-top: 1rem;
+}
+
+/* ── Portfolio / Trabajos ── */
+.landing-portfolio {
+  padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+.landing-portfolio__head {
+  margin-bottom: 3rem;
+}
+.landing-portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+.landing-portfolio__item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+.landing-portfolio__item:hover {
+  border-color: var(--ocean);
+}
+.landing-portfolio__item--wide {
+  grid-column: span 2;
+  aspect-ratio: 16 / 9;
+}
+.landing-portfolio__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.landing-portfolio__bg--remeras,
+.landing-portfolio__bg--bolsas,
+.landing-portfolio__bg--buzos,
+.landing-portfolio__bg--gorras,
+.landing-portfolio__bg--camperas {
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--ink),
+    var(--ink) 6px,
+    transparent 6px,
+    transparent 18px
+  );
+  opacity: 0.6;
+}
+.landing-portfolio__ph {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--trace);
+  background: rgba(255, 255, 255, 0.04);
+}
+.landing-portfolio__content {
+  position: relative;
+  z-index: 2;
+}
+.landing-portfolio__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.landing-portfolio__label--ocean {
+  color: var(--ocean);
+}
+.landing-portfolio__label--saffron {
+  color: var(--saffron);
+}
+.landing-portfolio__label--white {
+  color: #fff;
+}
+.landing-portfolio__label--mist {
+  color: var(--mist);
+}
+.landing-portfolio__label--cta {
+  color: var(--ocean);
+}
+.landing-portfolio__name {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  display: block;
+}
+.landing-portfolio__name--white {
+  color: #fff;
+}
+.landing-portfolio__spec {
+  font-size: 0.8125rem;
+  opacity: 0.6;
+  margin-top: 0.4rem;
+}
+.landing-portfolio__spec--white {
+  color: #fff;
+}
+
+/* ── Social proof / Opiniones ── */
+.landing-social {
+  padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+}
+.landing-social__head {
+  margin-bottom: 3rem;
+}
+.landing-social__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2rem;
+}
+.landing-social__card {
+  border: 1px solid var(--ink);
+  padding: 2rem;
+  position: relative;
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.landing-social__card:hover {
+  border-color: var(--ocean);
+  box-shadow: 0 8px 24px rgba(1, 133, 193, 0.08);
+}
+.landing-social__quote {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  font-style: italic;
+  color: var(--text);
+  opacity: 0.82;
+  margin-bottom: 1.5rem;
+}
+.landing-social__quote::before {
+  content: "\201C";
+}
+.landing-social__quote::after {
+  content: "\201D";
+}
+.landing-social__author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.landing-social__name {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  display: block;
+}
+.landing-social__role {
+  font-size: 0.8125rem;
+  opacity: 0.55;
+}
+.landing-social__tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--mist);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(2, 174, 156, 0.3);
+  transition: background 0.2s, color 0.2s;
+}
+.landing-social__card:hover .landing-social__tag {
+  background: var(--mist);
+  color: var(--on-mist);
 }
 
 /* ── Process ── */
@@ -1220,8 +1408,21 @@ html[data-theme="dark"] .landing-nav__theme .ico-moon {
   .landing-env__inner {
     max-width: 100%;
   }
+  .landing-portfolio__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .landing-portfolio__item--wide {
+    grid-column: span 2;
+  }
 }
 @media (max-width: 560px) {
+  .landing-portfolio__grid {
+    grid-template-columns: 1fr;
+  }
+  .landing-portfolio__item--wide {
+    grid-column: span 1;
+    aspect-ratio: 4 / 3;
+  }
   .landing-hero__title {
     font-size: 2.6rem;
     letter-spacing: -0.03em;

@@ -1,6 +1,80 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @variant dark (&:where(.dark, .dark *));
+
+/* Tokens estilo shadcn (catálogo portado de la app) mapeados a la paleta ITAP */
+:root {
+  --background: #ffffff;
+  --foreground: #1a2333;
+  --card: #ffffff;
+  --card-foreground: #1a2333;
+  --popover: #ffffff;
+  --popover-foreground: #1a2333;
+  --primary: #0185c1;
+  --primary-foreground: #ffffff;
+  --secondary: #02ae9c;
+  --secondary-foreground: #ffffff;
+  --muted: #f2f5f8;
+  --muted-foreground: #5b6b7f;
+  --accent: #fe900b;
+  --accent-foreground: #1a2333;
+  --destructive: #e01358;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #0185c1;
+  --radius: 0.75rem;
+}
+
+html[data-theme="dark"],
+.dark {
+  --background: #0e1621;
+  --foreground: #f2f5f8;
+  --card: #132030;
+  --card-foreground: #f2f5f8;
+  --popover: #132030;
+  --popover-foreground: #f2f5f8;
+  --primary: #02a8e8;
+  --primary-foreground: #ffffff;
+  --secondary: #03d4be;
+  --secondary-foreground: #0e1621;
+  --muted: #1c2c40;
+  --muted-foreground: #8fa2b5;
+  --accent: #ffa333;
+  --accent-foreground: #0e1621;
+  --destructive: #f02870;
+  --destructive-foreground: #ffffff;
+  --border: #26374d;
+  --input: #26374d;
+  --ring: #02a8e8;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
 
 /* Variables CSS — ITAP Official Design Tokens */
 :root {
@@ -74,10 +148,17 @@ html[data-theme] body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 html {
   background-color: white;
+  /* Bloqueo de scroll horizontal: clip como refuerzo (no crea contexto
+     de scroll, a diferencia de hidden), con hidden de fallback. */
+  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 html.dark {
