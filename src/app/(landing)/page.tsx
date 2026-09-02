@@ -32,6 +32,27 @@ export default function Landing() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  // Scroll reveal — IntersectionObserver
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+
+    document.querySelectorAll('.section-frame').forEach((el) => {
+      if (el.id !== 'hero') observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="landing">
       {/* ═══════════ NAV ═══════════ */}
